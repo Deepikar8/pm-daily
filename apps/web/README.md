@@ -40,3 +40,13 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## Cloudflare resource IDs
+
+Before first deploy, run:
+
+```bash
+wrangler d1 create pm-daily               # → copy database_id into wrangler.toml
+wrangler kv namespace create pm-daily-kv  # → copy id into wrangler.toml
+wrangler vectorize create lennys_metadata --dimensions=1024 --metric=cosine
+```

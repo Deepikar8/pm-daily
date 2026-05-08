@@ -1,0 +1,29 @@
+name = "pm-daily"
+compatibility_date = "2026-05-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".svelte-kit/cloudflare"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pm-daily"
+database_id = "REPLACE_WITH_D1_ID"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "REPLACE_WITH_KV_ID"
+
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "lennys_metadata"
+
+[[durable_objects.bindings]]
+name = "QUIZ_SESSION"
+class_name = "QuizSession"
+script_name = "pm-daily"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["QuizSession"]
+
+[triggers]
+crons = ["* * * * *"]
