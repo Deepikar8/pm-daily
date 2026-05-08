@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PM Daily — UI Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --paper:#FAF7F0; --paper-warm:#F2EDDF; --paper-deep:#EDE5D0;
+    --ink:#1B1A18; --ink-soft:#2C2A26; --ink-mute:#5A5246;
+    --rule:#D8D2C2; --rule-light:#E8E2D0;
+    --muted:#7A7363; --muted-deep:#574F40;
+    --accent:#A8311E; --accent-deep:#7C2114; --accent-soft:#C84A36;
+    --ok:#1F5C2E; --ok-soft:#2A7A40;
+  }
+  html,body{background:var(--paper);color:var(--ink);}
+  body{font-family:'DM Sans',sans-serif; font-feature-settings:"ss01","cv11"; -webkit-font-smoothing:antialiased;}
+  .serif{font-family:'Fraunces',serif;}
+  .body-serif{font-family:'Fraunces',serif; font-variation-settings:'opsz' 14,'SOFT' 50;}
+  .display{font-family:'Fraunces',serif; font-variation-settings:'opsz' 144,'SOFT' 0; letter-spacing:-0.022em;}
+  .display-italic{font-family:'Fraunces',serif; font-style:italic; font-variation-settings:'opsz' 144,'SOFT' 30; letter-spacing:-0.018em;}
+  .mono{font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;}
+  .smallcaps{font-feature-settings:"smcp","c2sc"; letter-spacing:0.14em; text-transform:lowercase;}
+  .smallcaps-up{letter-spacing:0.18em; text-transform:uppercase;}
+  .rule{border-color:var(--rule);}
+  .rule-light{border-color:var(--rule-light);}
+  .accent{color:var(--accent);}
+  .accent-deep{color:var(--accent-deep);}
+  .text-mute{color:var(--muted);}
+  .text-ink-soft{color:var(--ink-soft);}
+  .bg-paper{background:var(--paper);}
+  .bg-paper-warm{background:var(--paper-warm);}
+  .bg-accent{background:var(--accent);}
+  .bg-ink{background:var(--ink);}
+  .pull-quote{
+    font-family:'Fraunces',serif; font-style:italic;
+    font-variation-settings:'opsz' 144,'SOFT' 30;
+    letter-spacing:-0.018em; line-height:1.05;
+  }
+  .digest-body{
+    font-family:'Fraunces',serif;
+    font-variation-settings:'opsz' 14,'SOFT' 50;
+    font-size:1.1rem; line-height:1.65; color:var(--ink-soft);
+  }
+  .digest-body p+p{margin-top:1rem;}
+  .digest-body em{font-style:italic;}
+  .pill{border:1px solid var(--rule); border-radius:999px;}
+  .underline-grow{position:relative;}
+  .underline-grow::after{content:""; position:absolute; left:0; right:0; bottom:-2px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease;}
+  .underline-grow:hover::after{transform:scaleX(1);}
+  /* fancy radio for quiz options */
+  .opt{display:grid; grid-template-columns:auto 1fr; gap:1.25rem; padding:1.1rem 1.25rem; border:1px solid var(--rule); border-radius:6px; background:var(--paper); cursor:pointer; transition:all .18s ease; position:relative;}
+  .opt:hover{border-color:var(--ink); transform:translateX(2px);}
+  .opt .key{font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--muted); padding-top:.15rem;}
+  .opt .text{font-family:'Fraunces',serif; font-variation-settings:'opsz' 14,'SOFT' 50; font-size:1.05rem; line-height:1.55; color:var(--ink-soft);}
+  .opt.selected{border-color:var(--accent); background:var(--paper-warm);}
+  .opt.selected .key{color:var(--accent);}
+  .opt.correct{border-color:var(--ok); background:#F2F6F0;}
+  .opt.correct .key{color:var(--ok);}
+  .opt.wrong{border-color:var(--accent); background:#FAEEE9;}
+  .opt.wrong .key{color:var(--accent);}
+  /* progress bar */
+  .progress{height:1px; background:var(--rule); position:relative;}
+  .progress > i{display:block; height:100%; background:var(--accent); transition:width .4s ease;}
+  /* viewport frame */
+  .viewport{
+    background:var(--paper);
+    border:1px solid var(--rule);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 1px 0 0 rgba(27,26,24,.04), 0 30px 60px -30px rgba(27,26,24,.18);
+  }
+  .vp-bar{display:flex; gap:.45rem; align-items:center; padding:.7rem 1rem; border-bottom:1px solid var(--rule); background:var(--paper-warm);}
+  .vp-bar .dot{width:10px; height:10px; border-radius:999px; background:var(--rule); display:inline-block;}
+  .vp-bar .url{margin-left:1.2rem; color:var(--muted); font-size:.78rem; font-family:'JetBrains Mono',monospace;}
+  .grain{position:relative;}
+  .grain::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .03 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply; opacity:.7;
+  }
+  /* page index sticky */
+  .nav-anchor{display:flex; gap:1rem; flex-wrap:wrap; padding:1rem 1.25rem; background:var(--paper-warm); border:1px solid var(--rule); border-radius:8px;}
+  .nav-anchor a{font-family:'DM Sans'; font-size:.78rem; letter-spacing:.04em; color:var(--ink-soft);}
+  .nav-anchor a:hover{color:var(--accent);}
+  /* leaderboard row */
+  .lb-row{display:grid; grid-template-columns:48px 1fr 90px 90px 60px; align-items:center; padding:.75rem 1rem; border-bottom:1px solid var(--rule-light); font-family:'JetBrains Mono',monospace; font-size:.92rem;}
+  .lb-row .name{font-family:'DM Sans'; font-size:.95rem; color:var(--ink-soft);}
+  .lb-row .num{color:var(--ink); text-align:right;}
+  .lb-row.you{background:linear-gradient(90deg, var(--paper-warm) 0%, var(--paper) 60%); border-left:2px solid var(--accent);}
+  .lb-row.you .name{color:var(--accent-deep); font-weight:600;}
+  /* keyboard hint */
+  kbd{font-family:'JetBrains Mono',monospace; font-size:.7rem; padding:.05rem .35rem; border:1px solid var(--rule); border-bottom-width:2px; border-radius:4px; color:var(--muted); background:var(--paper);}
+  /* CTA */
+  .btn-primary{display:inline-flex; align-items:center; gap:.6rem; padding:.85rem 1.4rem; background:var(--accent); color:#FAF7F0; font-family:'DM Sans'; font-weight:500; letter-spacing:.01em; border-radius:4px; transition:background .2s;}
+  .btn-primary:hover{background:var(--accent-deep);}
+  .btn-ghost{display:inline-flex; align-items:center; gap:.6rem; padding:.7rem 1.1rem; border:1px solid var(--rule); color:var(--ink-soft); font-family:'DM Sans'; font-size:.92rem; border-radius:4px; transition:border .2s, color .2s;}
+  .btn-ghost:hover{border-color:var(--ink); color:var(--ink);}
+  /* link with arrow */
+  .arrow-link{font-family:'DM Sans'; color:var(--accent); display:inline-flex; align-items:center; gap:.35rem;}
+  .arrow-link:hover{color:var(--accent-deep);}
+  /* fade in */
+  .fade-in > *{opacity:0; transform:translateY(8px); animation:rise .6s ease forwards;}
+  .fade-in > *:nth-child(1){animation-delay:.05s;}
+  .fade-in > *:nth-child(2){animation-delay:.18s;}
+  .fade-in > *:nth-child(3){animation-delay:.32s;}
+  .fade-in > *:nth-child(4){animation-delay:.46s;}
+  .fade-in > *:nth-child(5){animation-delay:.6s;}
+  .fade-in > *:nth-child(6){animation-delay:.74s;}
+  @keyframes rise{to{opacity:1; transform:none;}}
+  /* takeaway hero */
+  .takeaway{
+    font-family:'Fraunces',serif; font-style:italic;
+    font-variation-settings:'opsz' 144,'SOFT' 30;
+    font-size:clamp(2rem, 4.2vw, 3.4rem); line-height:1.05; letter-spacing:-0.02em;
+    color:var(--ink); position:relative; padding-left:1.6rem;
+  }
+  .takeaway::before{content:""; position:absolute; left:0; top:.4em; bottom:.4em; width:2px; background:var(--accent);}
+  /* tiny indicator */
+  .streak-pill{display:inline-flex; align-items:baseline; gap:.4rem; font-family:'JetBrains Mono',monospace; font-size:.78rem; letter-spacing:.02em; color:var(--ink-soft);}
+  .streak-pill span.flame{color:var(--accent); font-size:.9em;}
+  /* divider with text */
+  .divider-text{display:flex; align-items:center; gap:1rem; color:var(--muted);}
+  .divider-text::before, .divider-text::after{content:""; flex:1; height:1px; background:var(--rule);}
+  /* section frame */
+  .frame-label{font-family:'DM Sans'; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:.6rem;}
+</style>
+</head>
+<body class="grain">
+
+<!-- ============== INDEX ============== -->
+<header class="max-w-5xl mx-auto px-6 pt-16 pb-10">
+  <div class="flex items-baseline justify-between border-b rule pb-6">
+    <div class="flex items-baseline gap-4">
+      <span class="display text-3xl">PM Daily</span>
+      <span class="smallcaps-up text-xs accent">UI / UX Mockups</span>
+    </div>
+    <span class="mono text-xs text-mute">Vol. I · Issue 001 · 2026-05-08</span>
+  </div>
+  <p class="display text-4xl mt-8 max-w-3xl leading-tight">
+    A daily learning ritual for product managers — distilled from one operator at a time.
+  </p>
+  <p class="text-mute max-w-2xl mt-4 text-[0.95rem] leading-relaxed">
+    Five screens of the v1 web app. Editorial broadsheet aesthetic — type-led, image-light, paper background, oxblood ink. The pm_takeaway is the visual hero on every result screen.
+  </p>
+  <nav class="nav-anchor mt-8">
+    <a href="#today" class="underline-grow">01 — Today</a>
+    <a href="#question" class="underline-grow">02 — Quiz Question</a>
+    <a href="#result" class="underline-grow">03 — Result Panel</a>
+    <a href="#summary" class="underline-grow">04 — Final Summary</a>
+    <a href="#leaderboard" class="underline-grow">05 — Leaderboard</a>
+  </nav>
+</header>
+
+<!-- ============== 01 — TODAY ============== -->
+<section id="today" class="max-w-5xl mx-auto px-6 py-12">
+  <p class="frame-label">01 — Today &nbsp;·&nbsp; <span class="mono text-mute">/today</span></p>
+  <div class="viewport">
+    <div class="vp-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">pmdaily.app/today</span>
+    </div>
+
+    <!-- Masthead -->
+    <div class="px-10 pt-8 pb-5 border-b rule flex items-baseline justify-between">
+      <div class="flex items-baseline gap-3">
+        <span class="display text-xl">PM Daily</span>
+        <span class="smallcaps-up text-[10px] text-mute">Day 187 · Friday</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <span class="streak-pill"><span class="flame">●</span> 12-day streak</span>
+        <span class="mono text-xs text-mute">Aditi M.</span>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="px-10 pt-12 pb-8 fade-in">
+      <p class="smallcaps-up text-[11px] accent">Operator of the day</p>
+      <h1 class="display mt-4" style="font-size:clamp(2.4rem, 5vw, 4.2rem); line-height:0.98;">
+        Cat Wu on shipping speed
+      </h1>
+      <p class="display-italic mt-3 text-2xl text-ink-soft" style="line-height:1.15;">
+        How Anthropic compresses six-month timelines to a week.
+      </p>
+      <p class="smallcaps-up text-[10px] text-mute mt-6">
+        Interview &nbsp;·&nbsp; Cat Wu, Anthropic &nbsp;·&nbsp; April 26 &nbsp;·&nbsp; <span class="mono">5 min</span>
+      </p>
+    </div>
+
+    <!-- Grid: digest + sidebar -->
+    <div class="px-10 pb-12 grid grid-cols-12 gap-10">
+      <!-- digest -->
+      <article class="col-span-8 digest-body">
+        <p>
+          Cat Wu, Head of Product for Claude Code, argues the PM role is being rewritten in real time by AI-native engineering velocity. Six-month feature timelines have dropped to one week — sometimes one day. The traditional PM toolkit (multi-quarter roadmap alignment, partner-team coordination, detailed PRDs) is now the bottleneck, not the cure.
+        </p>
+        <p>
+          Her response is twofold: build <em>concept corners</em> — small product surfaces where one engineer can ship end-to-end weekly without coordination overhead — and hire engineers with strong product taste rather than additional PMs to do the speccing for them.
+        </p>
+
+        <blockquote class="pull-quote my-10 text-3xl text-ink" style="font-size:1.95rem; line-height:1.15;">
+          “We want to remove every single barrier to shipping things.”
+        </blockquote>
+
+        <p>
+          The argument cuts across role definitions. <em>“All the roles are merging,”</em> Wu says. <em>“PMs are doing some engineering work, engineers are doing PM work, designers are PMing and also landing code.”</em> On her team, the highest-leverage hire isn't another PM — it's an engineer with product taste, capable of going from a piece of user feedback on Twitter to a shipped product by Friday with almost no PM involvement.
+        </p>
+        <p>
+          That has implications for what a PM should actually <em>do</em> all day. Wu's framing: the PM's question is no longer how to align quarterly roadmaps. It's how to maximize what today's model already does well, before it gets superseded.
+        </p>
+      </article>
+
+      <!-- sidebar -->
+      <aside class="col-span-4 space-y-8">
+        <div>
+          <p class="smallcaps-up text-[10px] accent mb-4">Three takeaways</p>
+          <ol class="space-y-4 mono text-[0.85rem] leading-relaxed text-ink-soft">
+            <li class="flex gap-3"><span class="text-mute">01</span><span style="font-family:'Fraunces'; font-variation-settings:'opsz' 14;" class="text-[1rem] leading-snug">Remove every barrier to shipping is the operating principle, not a slogan.</span></li>
+            <li class="flex gap-3"><span class="text-mute">02</span><span style="font-family:'Fraunces'; font-variation-settings:'opsz' 14;" class="text-[1rem] leading-snug">The PM bottleneck is coordination overhead, not capacity.</span></li>
+            <li class="flex gap-3"><span class="text-mute">03</span><span style="font-family:'Fraunces'; font-variation-settings:'opsz' 14;" class="text-[1rem] leading-snug">Develop product taste by using AI products yourself, every day.</span></li>
+          </ol>
+        </div>
+
+        <div class="border-t rule pt-6">
+          <p class="smallcaps-up text-[10px] text-mute mb-3">Source</p>
+          <p class="serif text-base leading-snug">
+            How Anthropic's product team moves faster than anyone else
+          </p>
+          <p class="text-mute text-xs mt-2 mono">Cat Wu (Anthropic) · Apr 26, 2026</p>
+          <a href="#" class="arrow-link mt-3 text-sm underline-grow">Listen on Lenny's Podcast →</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- CTA strip -->
+    <div class="border-t rule px-10 py-8 flex items-center justify-between bg-paper-warm">
+      <div>
+        <p class="display text-xl leading-tight">Ready to apply this?</p>
+        <p class="text-mute text-sm mt-1">Five questions. Average <span class="mono">2 min 14 sec</span>.</p>
+      </div>
+      <a href="#question" class="btn-primary">Take today's quiz <span aria-hidden>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 02 — QUIZ QUESTION ============== -->
+<section id="question" class="max-w-5xl mx-auto px-6 py-12">
+  <p class="frame-label">02 — Quiz Question &nbsp;·&nbsp; <span class="mono text-mute">/quiz</span></p>
+  <div class="viewport">
+    <div class="vp-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">pmdaily.app/quiz</span>
+    </div>
+
+    <!-- Top bar -->
+    <div class="px-10 pt-8 pb-6 border-b rule flex items-baseline justify-between">
+      <div class="flex items-baseline gap-4">
+        <span class="display text-lg">PM Daily</span>
+        <span class="smallcaps-up text-[10px] text-mute">Cat Wu &nbsp;/&nbsp; Day 187</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <span class="mono text-xs text-mute">02:14</span>
+        <span class="mono text-xs text-ink">Q3 / 5</span>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress mx-10 mt-0"><i style="width:60%"></i></div>
+
+    <!-- Question -->
+    <div class="px-10 pt-10 pb-12 max-w-3xl mx-auto fade-in">
+      <p class="smallcaps-up text-[11px] accent mb-5">Apply the framework</p>
+
+      <h2 class="display text-3xl leading-tight">
+        You're a PM at a 100-person AI startup.
+      </h2>
+      <p class="digest-body mt-5">
+        You've spent the last month preparing a 9-month roadmap built around the model capabilities your team <em>expects</em> to ship by Q3. Cat Wu argues PMs should be the right amount of AGI-pilled — neither under nor over.
+      </p>
+      <p class="display text-xl mt-8 mb-5">
+        Tomorrow morning, the most aligned move is —
+      </p>
+
+      <div class="space-y-3">
+        <label class="opt">
+          <span class="key">A</span>
+          <span class="text">Deliver the 9-month plan as scoped — long-term planning is your job.</span>
+        </label>
+        <label class="opt selected">
+          <span class="key">B</span>
+          <span class="text">Scrap the 9-month plan; replace it with a 6-week plan that maximizes what today's model already does well, shipping iteratively.</span>
+        </label>
+        <label class="opt">
+          <span class="key">C</span>
+          <span class="text">Add contingency caveats to each 9-month milestone.</span>
+        </label>
+        <label class="opt">
+          <span class="key">D</span>
+          <span class="text">Deliver the plan to leadership but tell engineering to ignore it.</span>
+        </label>
+      </div>
+
+      <div class="flex items-center justify-between mt-10">
+        <p class="text-xs text-mute">
+          Use <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd> to select &nbsp;·&nbsp; <kbd>↵</kbd> to submit
+        </p>
+        <button class="btn-primary">Submit answer</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 03 — RESULT PANEL ============== -->
+<section id="result" class="max-w-5xl mx-auto px-6 py-12">
+  <p class="frame-label">03 — Result Panel &nbsp;·&nbsp; <span class="mono text-mute">/quiz (after submit)</span></p>
+  <div class="viewport">
+    <div class="vp-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">pmdaily.app/quiz</span>
+    </div>
+
+    <div class="px-10 pt-8 pb-6 border-b rule flex items-baseline justify-between">
+      <div class="flex items-baseline gap-4">
+        <span class="display text-lg">PM Daily</span>
+        <span class="smallcaps-up text-[10px] text-mute">Cat Wu &nbsp;/&nbsp; Day 187</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <span class="mono text-xs text-mute">02:31</span>
+        <span class="mono text-xs text-ink">Q3 / 5</span>
+      </div>
+    </div>
+    <div class="progress mx-10 mt-0"><i style="width:60%"></i></div>
+
+    <div class="px-10 pt-12 pb-12 max-w-3xl mx-auto fade-in">
+
+      <!-- TAKEAWAY HERO -->
+      <p class="smallcaps-up text-[11px] accent mb-6">This week —</p>
+      <h2 class="takeaway">
+        Scrap your forward-looking roadmap. Plan only what today's model can already do well.
+      </h2>
+
+      <!-- correctness -->
+      <div class="mt-10 flex items-baseline gap-3">
+        <span class="mono text-sm" style="color:var(--ok);">✓</span>
+        <span class="serif text-lg">Correct.</span>
+        <span class="text-mute text-sm ml-2">The answer was <span class="mono">B</span>.</span>
+      </div>
+
+      <!-- explanation -->
+      <p class="digest-body mt-5 max-w-2xl">
+        Cat Wu argues PMs should be the right amount of AGI-pilled — building for the model you have, not the model you'll have. Future-proofing roadmaps assumes a level of model stability that AI-native products don't have.
+      </p>
+
+      <!-- citation pull-quote -->
+      <div class="mt-10 pl-6 border-l-2" style="border-color:var(--rule);">
+        <p class="display-italic text-xl text-ink-soft" style="line-height:1.3;">
+          “It is very hard to be the right amount of AGI-pilled. It's very easy to build the product for the super AGI strong model. The hard thing is figuring out for the current model, how do you elicit the maximum capability?”
+        </p>
+        <p class="smallcaps-up text-[10px] text-mute mt-3">
+          Cat Wu &nbsp;·&nbsp; <a class="accent underline-grow" href="#">Listen on Lenny's Podcast →</a>
+        </p>
+      </div>
+
+      <div class="flex items-center justify-between mt-12 pt-6 border-t rule-light">
+        <p class="text-xs text-mute mono">02:31 elapsed</p>
+        <button class="btn-primary">Next question <span aria-hidden>→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 04 — FINAL SUMMARY ============== -->
+<section id="summary" class="max-w-5xl mx-auto px-6 py-12">
+  <p class="frame-label">04 — Final Summary &nbsp;·&nbsp; <span class="mono text-mute">/quiz/done</span></p>
+  <div class="viewport">
+    <div class="vp-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">pmdaily.app/quiz/done</span>
+    </div>
+
+    <div class="px-10 pt-8 pb-6 border-b rule flex items-baseline justify-between">
+      <div class="flex items-baseline gap-4">
+        <span class="display text-lg">PM Daily</span>
+        <span class="smallcaps-up text-[10px] text-mute">Day 187 complete</span>
+      </div>
+      <span class="streak-pill"><span class="flame">●</span> 13-day streak</span>
+    </div>
+
+    <!-- score banner -->
+    <div class="px-10 pt-12 pb-10 grid grid-cols-12 gap-8 items-end border-b rule fade-in">
+      <div class="col-span-7">
+        <p class="smallcaps-up text-[11px] accent">Today's score</p>
+        <div class="flex items-baseline gap-6 mt-3">
+          <span class="display" style="font-size:6rem; line-height:1; font-variation-settings:'opsz' 144,'SOFT' 0;">4<span class="text-mute">/5</span></span>
+          <div class="space-y-2 pb-2">
+            <p class="mono text-sm text-mute">Time &nbsp;<span class="text-ink">02:14</span></p>
+            <p class="mono text-sm text-mute">Points &nbsp;<span class="text-ink">128</span></p>
+            <p class="mono text-sm text-mute">Streak ×<span class="text-ink">1.20</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-5 border-l rule pl-8">
+        <p class="smallcaps-up text-[10px] text-mute">Leaderboard</p>
+        <p class="display text-3xl mt-2">#23 <span class="mono text-base accent">↑4</span></p>
+        <p class="text-mute text-sm mt-1">this week · among 1,247 PMs</p>
+        <a href="#leaderboard" class="arrow-link mt-3 text-sm underline-grow">See leaderboard →</a>
+      </div>
+    </div>
+
+    <!-- five takeaways -->
+    <div class="px-10 pt-12 pb-12">
+      <p class="smallcaps-up text-[11px] accent">Five takeaways from today</p>
+      <p class="display-italic text-xl text-mute mt-2">Save these somewhere you'll reread on Monday.</p>
+
+      <ol class="mt-10 space-y-10 max-w-3xl">
+        <li class="grid grid-cols-12 gap-6 items-start">
+          <span class="col-span-1 mono text-sm text-mute pt-3">01</span>
+          <p class="col-span-11 display-italic text-2xl text-ink leading-tight" style="font-size:1.55rem;">
+            Scrap your forward-looking roadmap. Plan only what today's model can already do well.
+          </p>
+        </li>
+        <li class="grid grid-cols-12 gap-6 items-start">
+          <span class="col-span-1 mono text-sm text-mute pt-3">02</span>
+          <p class="col-span-11 display-italic text-2xl text-ink leading-tight" style="font-size:1.55rem;">
+            If your team won't start work until you've written a detailed PRD, you are the bottleneck. Make the PRD optional this week.
+          </p>
+        </li>
+        <li class="grid grid-cols-12 gap-6 items-start">
+          <span class="col-span-1 mono text-sm text-mute pt-3">03</span>
+          <p class="col-span-11 display-italic text-2xl text-ink leading-tight" style="font-size:1.55rem;">
+            Product taste isn't a framework. Use 5–10 AI products yourself every day this week.
+          </p>
+        </li>
+        <li class="grid grid-cols-12 gap-6 items-start">
+          <span class="col-span-1 mono text-sm text-mute pt-3">04</span>
+          <p class="col-span-11 display-italic text-2xl text-ink leading-tight" style="font-size:1.55rem;">
+            If you can't recall the last time you used your own product as a user this week, you're operating on second-hand information.
+          </p>
+        </li>
+        <li class="grid grid-cols-12 gap-6 items-start">
+          <span class="col-span-1 mono text-sm text-mute pt-3">05</span>
+          <p class="col-span-11 display-italic text-2xl text-ink leading-tight" style="font-size:1.55rem;">
+            You don't need to break your whole org. Find one surface where you can model the new way this week.
+          </p>
+        </li>
+      </ol>
+
+      <!-- share card -->
+      <div class="mt-14 pt-10 border-t rule">
+        <p class="smallcaps-up text-[10px] text-mute mb-4">Share</p>
+        <div class="border rule rounded-lg p-6 max-w-xl bg-paper-warm">
+          <p class="display text-xl">PM Daily — Day 187</p>
+          <p class="text-mute text-sm mt-1 mono">Cat Wu on shipping speed</p>
+          <p class="display-italic text-2xl mt-4 text-ink leading-tight" style="font-size:1.4rem;">
+            “Scrap your forward-looking roadmap.”
+          </p>
+          <div class="flex items-center justify-between mt-6 pt-4 border-t rule-light">
+            <p class="mono text-sm">4 / 5 in 2:14</p>
+            <p class="text-xs text-mute">pmdaily.app</p>
+          </div>
+        </div>
+        <div class="flex gap-2 mt-4">
+          <button class="btn-ghost text-sm">Copy link</button>
+          <button class="btn-ghost text-sm">Share to X</button>
+          <button class="btn-ghost text-sm">Download card</button>
+        </div>
+      </div>
+
+      <!-- footer cta -->
+      <div class="flex items-baseline justify-between mt-14 pt-8 border-t rule">
+        <p class="text-mute text-sm">Tomorrow's session at <span class="mono text-ink">08:00</span> your local time.</p>
+        <a href="#leaderboard" class="arrow-link text-sm underline-grow">View leaderboard →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 05 — LEADERBOARD ============== -->
+<section id="leaderboard" class="max-w-5xl mx-auto px-6 py-12 mb-24">
+  <p class="frame-label">05 — Leaderboard &nbsp;·&nbsp; <span class="mono text-mute">/leaderboard</span></p>
+  <div class="viewport">
+    <div class="vp-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">pmdaily.app/leaderboard</span>
+    </div>
+
+    <div class="px-10 pt-8 pb-6 border-b rule flex items-baseline justify-between">
+      <div class="flex items-baseline gap-4">
+        <span class="display text-lg">PM Daily</span>
+        <span class="smallcaps-up text-[10px] text-mute">Leaderboard</span>
+      </div>
+      <span class="streak-pill"><span class="flame">●</span> 13-day streak · Aditi M.</span>
+    </div>
+
+    <!-- header -->
+    <div class="px-10 pt-12 pb-6 grid grid-cols-12 items-end border-b rule">
+      <div class="col-span-8">
+        <p class="smallcaps-up text-[11px] accent">Standings</p>
+        <h1 class="display text-5xl mt-3 leading-none">Week 19</h1>
+        <p class="display-italic text-xl text-mute mt-2">May 5 — May 11 &nbsp;·&nbsp; 1,247 PMs · resets Monday at 00:00 UTC</p>
+      </div>
+      <div class="col-span-4 flex justify-end items-baseline gap-6">
+        <a class="serif text-base accent underline-grow" href="#">This week</a>
+        <a class="serif text-base text-mute underline-grow" href="#">All time</a>
+      </div>
+    </div>
+
+    <!-- column headers -->
+    <div class="lb-row text-mute mono" style="font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; border-bottom:1px solid var(--rule);">
+      <span>#</span><span class="name">Name</span><span class="num">Streak</span><span class="num">Points</span><span class="num">7-Day</span>
+    </div>
+
+    <!-- top rows -->
+    <div>
+      <div class="lb-row">
+        <span class="accent-deep" style="font-weight:600;">01</span>
+        <span class="name">Aditi M.</span>
+        <span class="num">🔥 32</span>
+        <span class="num">1,847</span>
+        <span class="num text-mute">7/7</span>
+      </div>
+      <div class="lb-row">
+        <span>02</span>
+        <span class="name">Priya R.</span>
+        <span class="num">🔥 12</span>
+        <span class="num">1,612</span>
+        <span class="num text-mute">6/7</span>
+      </div>
+      <div class="lb-row">
+        <span>03</span>
+        <span class="name">Marcus W.</span>
+        <span class="num">🔥 4</span>
+        <span class="num">1,455</span>
+        <span class="num text-mute">5/7</span>
+      </div>
+      <div class="lb-row">
+        <span>04</span>
+        <span class="name">Sasha N.</span>
+        <span class="num">🔥 9</span>
+        <span class="num">1,402</span>
+        <span class="num text-mute">5/7</span>
+      </div>
+      <div class="lb-row">
+        <span>05</span>
+        <span class="name">Daniel K.</span>
+        <span class="num">🔥 21</span>
+        <span class="num">1,389</span>
+        <span class="num text-mute">7/7</span>
+      </div>
+      <div class="lb-row">
+        <span>06</span>
+        <span class="name">Yuki H.</span>
+        <span class="num">🔥 7</span>
+        <span class="num">1,344</span>
+        <span class="num text-mute">6/7</span>
+      </div>
+
+      <!-- divider before user -->
+      <div class="px-10 py-3 divider-text smallcaps-up text-[10px] mono" style="border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); background:var(--paper-warm);">
+        Your rank
+      </div>
+
+      <div class="lb-row">
+        <span>21</span>
+        <span class="name">Maria O.</span>
+        <span class="num">🔥 5</span>
+        <span class="num">1,162</span>
+        <span class="num text-mute">5/7</span>
+      </div>
+      <div class="lb-row">
+        <span>22</span>
+        <span class="name">Tom B.</span>
+        <span class="num">🔥 3</span>
+        <span class="num">1,148</span>
+        <span class="num text-mute">4/7</span>
+      </div>
+      <div class="lb-row you">
+        <span class="accent-deep" style="font-weight:600;">23</span>
+        <span class="name">You · Aditi M.</span>
+        <span class="num">🔥 13</span>
+        <span class="num">1,124</span>
+        <span class="num text-mute">4/7</span>
+      </div>
+      <div class="lb-row">
+        <span>24</span>
+        <span class="name">Sam T.</span>
+        <span class="num">🔥 8</span>
+        <span class="num">1,098</span>
+        <span class="num text-mute">5/7</span>
+      </div>
+      <div class="lb-row">
+        <span>25</span>
+        <span class="name">Riya D.</span>
+        <span class="num">🔥 11</span>
+        <span class="num">1,073</span>
+        <span class="num text-mute">5/7</span>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="border-t rule px-10 py-6 flex items-baseline justify-between bg-paper-warm">
+      <p class="text-xs text-mute">Updated <span class="mono">2 min ago</span> &nbsp;·&nbsp; ranks recompute every minute.</p>
+      <a class="arrow-link text-sm underline-grow" href="#">See full top 50 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="max-w-5xl mx-auto px-6 pb-20 border-t rule pt-10">
+  <div class="flex items-baseline justify-between">
+    <p class="display text-xl">PM Daily</p>
+    <p class="mono text-xs text-mute">© 2026 · UI Mockups · v1</p>
+  </div>
+  <p class="text-mute text-sm mt-3 max-w-2xl">
+    Type stack: <span class="mono">Fraunces</span> (display, digest, takeaways) · <span class="mono">DM Sans</span> (chrome, buttons) · <span class="mono">JetBrains Mono</span> (numerals).
+    Color: paper <span class="mono">#FAF7F0</span>, ink <span class="mono">#1B1A18</span>, rule <span class="mono">#D8D2C2</span>, oxblood <span class="mono">#A8311E</span>.
+  </p>
+</footer>
+
+</body>
+</html>

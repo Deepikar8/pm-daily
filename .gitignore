@@ -1,0 +1,12 @@
+node_modules
+.svelte-kit
+build
+.wrangler
+.dev.vars
+.env
+.env.local
+*.log
+.DS_Store
+playwright-report
+test-results
+coverage
