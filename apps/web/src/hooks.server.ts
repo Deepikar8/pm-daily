@@ -8,6 +8,12 @@ import { getDb } from "$lib/server/db/client";
 // script — Cloudflare looks for the export by name on the worker module.
 export { QuizSession } from "$lib/durable-objects/quiz-session";
 
+// Re-export the cron entrypoint so the post-build patcher in
+// svelte.config.js can wire it into the Cloudflare worker's `scheduled`
+// hook. Cloudflare invokes `scheduled(event, env, ctx)` on the same
+// module that exports `default` (the fetch handler).
+export { runCron } from "$lib/server/cron";
+
 export const handle: Handle = async ({ event, resolve }) => {
   const env = event.platform?.env;
   if (!env) {
