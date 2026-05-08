@@ -14,7 +14,10 @@ export type AuthArgs = {
 };
 
 export function createAuth(args: AuthArgs) {
-  const resend = new Resend(args.resendApiKey);
+  // Resend's constructor throws if the API key is missing/empty, so only
+  // instantiate it when we actually have a key. Local dev with a blank
+  // RESEND_API_KEY will fall back to logging the magic link.
+  const resend = args.resendApiKey ? new Resend(args.resendApiKey) : null;
 
   const socialProviders =
     args.googleClientId && args.googleClientSecret
@@ -26,8 +29,16 @@ export function createAuth(args: AuthArgs) {
         }
       : undefined;
 
+  // Better Auth requires a non-trivial secret; if `.dev.vars` is missing or
+  // ships an empty/short value, fall back to a stable dev-only secret so the
+  // server can still boot. Production must always supply a real secret.
+  const secret =
+    args.secret && args.secret.length >= 32
+      ? args.secret
+      : "dev-only-fallback-secret-do-not-use-in-prod-32chars";
+
   return betterAuth({
-    secret: args.secret,
+    secret,
     baseURL: args.baseURL,
     database: drizzleAdapter(args.db, { provider: "sqlite" }),
     emailAndPassword: { enabled: false },
@@ -47,7 +58,7 @@ export function createAuth(args: AuthArgs) {
     plugins: [
       magicLink({
         sendMagicLink: async ({ email, url }) => {
-          if (!args.resendApiKey) {
+          if (!resend) {
             console.log("[dev] magic link for", email, "->", url);
             return;
           }

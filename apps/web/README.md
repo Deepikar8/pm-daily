@@ -41,6 +41,25 @@ You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
 
+## Local development
+
+```bash
+cd apps/web
+pnpm install
+pnpm exec wrangler d1 migrations apply pm-daily --local   # one-time
+pnpm dev                                                   # starts at :5173
+curl -X POST http://localhost:5173/api/_dev/seed           # seeds today's content
+```
+
+Then open `http://localhost:5173/` to see the landing page. Sign-in flows
+require `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` and `RESEND_API_KEY`
+in `apps/web/.dev.vars` — see `.env.example`. With an empty `RESEND_API_KEY`,
+magic links are logged to the dev server console instead of sent.
+
+The seed endpoint defaults to today's UTC date; pass
+`?date=YYYY-MM-DD` to seed a specific day if a matching JSON file exists
+under `content/`.
+
 ## Cloudflare resource IDs
 
 Before first deploy, run:
