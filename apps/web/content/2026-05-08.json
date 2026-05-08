@@ -1,0 +1,153 @@
+{
+  "date": "2026-05-08",
+  "headline": "Madhavan on the four monetization mistakes",
+  "theme_pillar": "pricing",
+  "digest_md": "Madhavan Ramanujam, partner at Simon-Kucher and author of *Monetizing Innovation*, argues that the four most expensive PM mistakes happen before a single feature ships. He calls them feature shock, minivation, hidden gem, and underpricing — the silent four. The most common, by far, is feature shock: building features no one will pay for. Eighty percent of features ship without a willingness-to-pay conversation. The cost isn't the wasted build; it's the opportunity cost of what you didn't build instead.\n\nHis prescription is a sequence of conversations PMs systematically skip. The willingness-to-pay conversation belongs in the first 90 days of building, alongside problem validation — not after PMF. Asking *would you pay?* and *how much?* early reframes everything: what to scope, what to cut, how to package.\n\nOnce you're packaging, Madhavan offers leader-filler-killer as the framework most teams misuse. Leaders are the standout features that drive purchase decisions. Killers are table-stakes — features whose absence kills the deal, but whose presence isn't a reason to buy. Fillers are nice-to-haves. Most teams over-invest in killers and under-invest in leaders.\n\nTier design is where the framework usually breaks down. Most companies design tiers around feature counts — *Tier 1 has 8, Tier 2 has 14*. Madhavan's view: tiers should map to *who buys them*, not *what's in them*. Solo founder, growing team, enterprise — the tier names should answer \"who buys this?\" If you can't answer it, the tiers are mis-designed.\n\nFinally — how to raise prices on existing customers without churn. The single biggest predictor of low churn isn't notice. It isn't grandfathering. It isn't an annual prepay alternative. It's pairing the increase with a meaningful product improvement. Customers don't resent paying more for more. They resent paying more for the same.",
+  "takeaways": [
+    "Have the willingness-to-pay conversation in the first 90 days, not after PMF.",
+    "Most teams over-invest in killers and under-invest in leaders. Audit your roadmap accordingly.",
+    "Tier names should answer \"who buys this?\" — solo founder, growing team, enterprise.",
+    "When raising prices on existing customers, ship a product improvement the same week."
+  ],
+  "source": {
+    "filename": "podcasts/madhavan-ramanujam.md",
+    "title": "Monetization, pricing, and packaging",
+    "byline": "Madhavan Ramanujam",
+    "type": "podcast",
+    "date": "2026-04-30",
+    "source_url": "https://www.lennyspodcast.com/madhavan-ramanujam",
+    "search_url": "https://www.lennyspodcast.com/?q=Madhavan+Ramanujam"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "feature-shock-wtp",
+      "archetype": "apply",
+      "scenario_md": "You're a PM at a 60-person SaaS preparing your next quarter's roadmap. Five features compete for slots — each backed by interview research showing customers say they want them. Per Madhavan's view on feature shock, before scoping any of them tomorrow morning, you should —",
+      "options": [
+        { "key": "A", "text": "Build the smallest two as fast experiments and measure usage." },
+        { "key": "B", "text": "Ask ten of those same customers what they'd pay for each feature." },
+        { "key": "C", "text": "Run a competitive teardown of how rivals price similar features." },
+        { "key": "D", "text": "Trust the interviews — qualitative signal is enough at this stage." }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Feature shock isn't about building bad features — it's about building features no one will pay for. The WTP conversation, not the interest conversation, is the gate.",
+      "pm_takeaway": "This week: pick the top item on next quarter's roadmap and ask 10 prospective buyers what they'd pay for it before scoping a single line of code.",
+      "citation": {
+        "filename": "podcasts/madhavan-ramanujam.md",
+        "title": "Monetization, pricing, and packaging",
+        "byline": "Madhavan Ramanujam",
+        "type": "podcast",
+        "date": "2026-04-30",
+        "source_url": "https://www.lennyspodcast.com/madhavan-ramanujam",
+        "search_url": "https://www.lennyspodcast.com/?q=Madhavan+Ramanujam",
+        "quote_excerpt": "Feature shock is the silent killer: 80%+ of features ship without anyone validating willingness-to-pay.",
+        "timestamp": "12:40"
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "wtp-90-days",
+      "archetype": "diagnose",
+      "scenario_md": "You're four months into building a B2B AI product. You have an MVP in early access and 12 design partners giving feedback. Your team wants to wait until product-market fit before talking pricing. Per Madhavan, tomorrow morning you should —",
+      "options": [
+        { "key": "A", "text": "Wait — until you have PMF, you're guessing about value." },
+        { "key": "B", "text": "Start the willingness-to-pay conversation now, alongside your design-partner work." },
+        { "key": "C", "text": "Pick a number based on what competitors charge, and adjust later." },
+        { "key": "D", "text": "Charge nothing until 100 paying customers — gather usage data first." }
+      ],
+      "correct_key": "B",
+      "explanation_md": "WTP belongs in the first 90 days — alongside problem validation, not after PMF. Asking \"would you pay?\" early reframes everything you build.",
+      "pm_takeaway": "This week: if your product hasn't had a WTP conversation in its first 90 days, schedule one with three design partners before Friday.",
+      "citation": {
+        "filename": "podcasts/madhavan-ramanujam.md",
+        "title": "Monetization, pricing, and packaging",
+        "byline": "Madhavan Ramanujam",
+        "type": "podcast",
+        "date": "2026-04-30",
+        "source_url": "https://www.lennyspodcast.com/madhavan-ramanujam",
+        "search_url": "https://www.lennyspodcast.com/?q=Madhavan+Ramanujam",
+        "quote_excerpt": "WTP belongs in the first 90 days, alongside problem validation. Waiting for PMF means you've already over-built.",
+        "timestamp": "24:15"
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "leader-filler-killer",
+      "archetype": "pick",
+      "scenario_md": "You're packaging your product into three tiers and you've inventoried 24 features. Per Madhavan's leader-filler-killer framework, the first sort to make tomorrow morning is —",
+      "options": [
+        { "key": "A", "text": "Group by build cost — cheapest in basic, expensive in enterprise." },
+        { "key": "B", "text": "Group by usage frequency — most-used in basic, niche in premium." },
+        { "key": "C", "text": "Label each feature leader, filler, or killer — then pack each tier around the leaders." },
+        { "key": "D", "text": "Group by competitor parity — match your tiers to your closest competitor." }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Killers are table-stakes — their absence kills deals; their presence doesn't drive purchase. Leaders drive purchase. Most teams over-invest in killers and under-invest in leaders.",
+      "pm_takeaway": "This week: take your current pricing tiers and label every feature leader / filler / killer. Most teams find they over-invest in killers and under-invest in leaders.",
+      "citation": {
+        "filename": "podcasts/madhavan-ramanujam.md",
+        "title": "Monetization, pricing, and packaging",
+        "byline": "Madhavan Ramanujam",
+        "type": "podcast",
+        "date": "2026-04-30",
+        "source_url": "https://www.lennyspodcast.com/madhavan-ramanujam",
+        "search_url": "https://www.lennyspodcast.com/?q=Madhavan+Ramanujam",
+        "quote_excerpt": "Killers are table-stakes. Leaders are the differentiators that drive purchase. Most teams over-invest in killers and under-invest in leaders.",
+        "timestamp": "38:50"
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "tier-design-segments",
+      "archetype": "spot",
+      "scenario_md": "You're auditing your company's pricing tiers. Tier 1 has 8 features, Tier 2 has 14, Tier 3 has 22 — neatly stacking. Marketing is happy; sales hits quota. Per Madhavan's framing, the missing step in this design is —",
+      "options": [
+        { "key": "A", "text": "There's no annual prepay discount option." },
+        { "key": "B", "text": "The middle tier is priced too close to the top tier." },
+        { "key": "C", "text": "The tiers map to feature counts, not customer segments — \"who buys this tier?\" isn't answered." },
+        { "key": "D", "text": "There aren't enough tiers — most B2B benefits from 4–5 tiers." }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Tiers should map to who the customer is, not what features exist. The right question is \"who buys this tier?\" Feature-based tiering produces incoherent packaging.",
+      "pm_takeaway": "This week: name each of your tiers after the customer who buys it (solo founder / growing team / enterprise). If you can't, your tiers are mis-designed.",
+      "citation": {
+        "filename": "podcasts/madhavan-ramanujam.md",
+        "title": "Monetization, pricing, and packaging",
+        "byline": "Madhavan Ramanujam",
+        "type": "podcast",
+        "date": "2026-04-30",
+        "source_url": "https://www.lennyspodcast.com/madhavan-ramanujam",
+        "search_url": "https://www.lennyspodcast.com/?q=Madhavan+Ramanujam",
+        "quote_excerpt": "Tiers should map to who the customer is, not what features exist. The right question is \"who buys this tier?\"",
+        "timestamp": "52:20"
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "price-rise-with-value",
+      "archetype": "apply",
+      "scenario_md": "You need to raise prices 15% on existing customers. Your CFO wants it done this quarter. Tomorrow morning, the move with the lowest churn risk is —",
+      "options": [
+        { "key": "A", "text": "Give 90+ days advance notice and grandfather your most loyal customers." },
+        { "key": "B", "text": "Ship a meaningful product improvement the same week as the increase." },
+        { "key": "C", "text": "Offer an annual prepay discount as the alternative — let customers self-select." },
+        { "key": "D", "text": "Quietly migrate new customers to the new price; leave existing customers alone." }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Price increases stick when paired with new value. Customers don't resent paying more for more — they resent paying more for the same.",
+      "pm_takeaway": "This week: if you're planning a price rise, line up one shippable product improvement to release the same week customers see the new price.",
+      "citation": {
+        "filename": "podcasts/madhavan-ramanujam.md",
+        "title": "Monetization, pricing, and packaging",
+        "byline": "Madhavan Ramanujam",
+        "type": "podcast",
+        "date": "2026-04-30",
+        "source_url": "https://www.lennyspodcast.com/madhavan-ramanujam",
+        "search_url": "https://www.lennyspodcast.com/?q=Madhavan+Ramanujam",
+        "quote_excerpt": "Customers don't resent paying more for more. They resent paying more for the same.",
+        "timestamp": "1:08:30"
+      }
+    }
+  ]
+}
