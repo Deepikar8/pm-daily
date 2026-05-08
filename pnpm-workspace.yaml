@@ -1,3 +1,5 @@
 packages:
   - "apps/*"
   - "scripts"
+allowBuilds:
+  esbuild: true
