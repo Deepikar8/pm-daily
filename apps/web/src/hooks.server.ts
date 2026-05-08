@@ -2,6 +2,12 @@ import type { Handle } from "@sveltejs/kit";
 import { createAuth } from "$lib/server/auth/better-auth";
 import { getDb } from "$lib/server/db/client";
 
+// Re-export the Durable Object class from the worker bundle so that
+// adapter-cloudflare picks it up alongside the SvelteKit handler.
+// `wrangler.toml` references `class_name = "QuizSession"` on the same
+// script — Cloudflare looks for the export by name on the worker module.
+export { QuizSession } from "$lib/durable-objects/quiz-session";
+
 export const handle: Handle = async ({ event, resolve }) => {
   const env = event.platform?.env;
   if (!env) {
