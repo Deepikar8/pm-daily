@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PM Daily — palette options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400..900;9..144,1,400..900&family=DM+Sans:opsz,wght@9..40,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBF7F0;
+    --paper-warm: #FBF1DC;
+    --paper-fill: #F0E8D4;
+    --paper-cream: #FFE8C2;
+    --ink: #2A1810;
+    --ink-soft: #5C4634;
+    --ink-mute: #8B7355;
+    --accent: #D2691E;
+    --accent-deep: #8B4513;
+    --gold: #E8B04B;
+    --ok: #5A8A3A;
+    --wrong: #B84A2A;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+  .mono  { font-family: 'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .smallcaps { letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; font-size: 10px; }
+
+  header.page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px 16px;
+    border-bottom: 1px solid var(--paper-fill);
+  }
+  header.page h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 8px 0 4px;
+  }
+  header.page p {
+    color: var(--ink-soft);
+    font-size: 14px;
+    max-width: 720px;
+    margin: 0;
+  }
+
+  /* grid of palette columns */
+  .grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+
+  .panel {
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 4px 4px 0 var(--ink-soft);
+  }
+  .panel header {
+    padding: 12px 14px;
+    border-bottom: 2px solid var(--ink);
+    background: var(--paper-warm);
+  }
+  .panel header .opt {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .panel header .sub {
+    color: var(--ink-mute);
+    font-size: 11px;
+    margin-top: 2px;
+  }
+  .panel header .swatches {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .panel header .swatches .sw {
+    width: 18px; height: 18px;
+    border: 1px solid var(--ink);
+    border-radius: 3px;
+  }
+  .body {
+    padding: 14px;
+    font-size: 13px;
+    background: #fff;
+  }
+
+  /* leaderboard slice */
+  .lb-row {
+    display: grid;
+    grid-template-columns: 24px 28px 1fr 32px 40px;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--paper-fill);
+  }
+  .lb-row:last-child { border-bottom: none; }
+  .lb-row .rank { font-family: 'Fraunces', serif; font-weight: 800; font-size: 14px; }
+  .lb-row .av {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1.5px solid var(--ink);
+    color: #fff; font-weight: 700; font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Sans';
+  }
+  .lb-row .name { font-family: 'Fraunces', serif; font-size: 13px; font-weight: 700; }
+  .lb-row .streak { font-family: 'JetBrains Mono'; font-size: 11px; }
+  .lb-row .pts { font-family: 'JetBrains Mono'; font-size: 12px; font-weight: 600; text-align: right; }
+  .lb-row.you { background: linear-gradient(90deg, var(--paper-cream) 0, transparent 80%); border-left: 3px solid var(--accent); padding-left: 8px; margin-left: -8px; }
+
+  /* heatmap row */
+  .heatmap {
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    gap: 3px;
+    margin: 12px 0 6px;
+  }
+  .heatmap div {
+    aspect-ratio: 1;
+    border: 1px solid var(--ink);
+    border-radius: 3px;
+  }
+
+  /* stat card */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .stat {
+    padding: 6px 8px;
+    border: 1.5px solid var(--ink);
+    border-radius: 6px;
+  }
+  .stat-l { font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
+  .stat-v { font-family: 'Fraunces', serif; font-weight: 800; font-size: 16px; line-height: 1; margin-top: 2px; font-variant-numeric: tabular-nums; }
+
+  /* segmented control */
+  .seg {
+    display: flex; gap: 4px;
+    padding: 3px;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    margin-top: 12px;
+  }
+  .seg button {
+    flex: 1;
+    padding: 6px 4px;
+    background: transparent;
+    border: none;
+    font-family: 'DM Sans';
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .seg button.active { background: var(--ink); color: var(--paper); }
+
+  /* CTA */
+  .cta {
+    margin-top: 14px;
+    background: var(--accent);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+
+  .legend {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 9px;
+    color: var(--ink-mute);
+  }
+  .legend .swc {
+    width: 10px; height: 10px;
+    border: 1.5px solid var(--ink);
+    border-radius: 3px;
+  }
+
+  .verdict {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--paper-warm);
+    border: 1px dashed var(--ink-mute);
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .verdict strong { color: var(--ink); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="page">
+  <p class="smallcaps" style="color: var(--accent);">Decision needed · five-way comparison</p>
+  <h1>Palette options for the design-review feedback.</h1>
+  <p>The review flagged the UI as feeling "all orange/brown." Below are five directions to address it. Same components in each panel — leaderboard slice, 14-day heatmap, stat cards, segmented control, primary CTA — so you can read intent across them. The accent (oxblood <span class="mono" style="color: #D2691E;">#D2691E</span>) stays the CTA in every option; what changes is the supporting palette around it.</p>
+</header>
+
+<div class="grid">
+
+<!-- ============ A — Current ============ -->
+<div class="panel">
+  <header>
+    <p class="smallcaps" style="color: var(--ink-mute);">Option A</p>
+    <p class="opt">Status quo</p>
+    <p class="sub">All warm: oxblood + browns + cream. Baseline.</p>
+    <div class="swatches">
+      <span class="sw" style="background: #FBF7F0;"></span>
+      <span class="sw" style="background: #FBF1DC;"></span>
+      <span class="sw" style="background: #D2691E;"></span>
+      <span class="sw" style="background: #8B4513;"></span>
+      <span class="sw" style="background: #2A1810;"></span>
+    </div>
+  </header>
+  <div class="body">
+    <div class="lb-row">
+      <span class="rank">1</span>
+      <span class="av" style="background: #CC5500;">A</span>
+      <span class="name">Aditi M.</span>
+      <span class="streak">🔥32</span>
+      <span class="pts">1847</span>
+    </div>
+    <div class="lb-row">
+      <span class="rank">2</span>
+      <span class="av" style="background: #8B4513;">P</span>
+      <span class="name">Priya R.</span>
+      <span class="streak">🔥12</span>
+      <span class="pts">1612</span>
+    </div>
+    <div class="lb-row you">
+      <span class="rank" style="color: #8B4513;">23</span>
+      <span class="av" style="background: #A0522D;">Y</span>
+      <span class="name">You</span>
+      <span class="streak">🔥13</span>
+      <span class="pts">1124</span>
+    </div>
+    <div class="heatmap">
+      <div style="background: #F0E8D4;"></div>
+      <div style="background: #F0E8D4;"></div>
+      <div style="background: #F5C9A4;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #F5C9A4;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #A0522D;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+    </div>
+    <div class="legend">
+      <span>Less</span>
+      <span class="swc" style="background: #F0E8D4;"></span>
+      <span class="swc" style="background: #F5C9A4;"></span>
+      <span class="swc" style="background: #E8B04B;"></span>
+      <span class="swc" style="background: #A0522D;"></span>
+      <span class="swc" style="background: #5A8A3A;"></span>
+      <span>5/5</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-l">Streak</div><div class="stat-v">47d</div></div>
+      <div class="stat"><div class="stat-l">Points</div><div class="stat-v">1847</div></div>
+    </div>
+    <div class="seg">
+      <button class="active">This week</button>
+      <button style="color: #8B7355;">All-time</button>
+    </div>
+    <div class="cta">Take today's quiz →</div>
+    <div class="verdict">
+      <strong>What it is:</strong> the canonical Lenny's-Newsletter-meets-Duolingo direction we locked in.
+      <strong>What review flagged:</strong> reads as one-note. CTA orange, brown avatars, brown rank, brown you-row, brown segmented — too much same.
+    </div>
+  </div>
+</div>
+
+<!-- ============ B — Teal secondary (the plan's pick) ============ -->
+<div class="panel">
+  <header>
+    <p class="smallcaps" style="color: #2F6F73;">Option B · plan</p>
+    <p class="opt">Teal secondary</p>
+    <p class="sub">Cool teal family for non-CTA surfaces.</p>
+    <div class="swatches">
+      <span class="sw" style="background: #FBF7F0;"></span>
+      <span class="sw" style="background: #DDEDEC;"></span>
+      <span class="sw" style="background: #2F6F73;"></span>
+      <span class="sw" style="background: #D2691E;"></span>
+      <span class="sw" style="background: #2A1810;"></span>
+    </div>
+  </header>
+  <div class="body">
+    <div class="lb-row">
+      <span class="rank">1</span>
+      <span class="av" style="background: #2F6F73;">A</span>
+      <span class="name">Aditi M.</span>
+      <span class="streak">🔥32</span>
+      <span class="pts">1847</span>
+    </div>
+    <div class="lb-row">
+      <span class="rank">2</span>
+      <span class="av" style="background: #8B4513;">P</span>
+      <span class="name">Priya R.</span>
+      <span class="streak">🔥12</span>
+      <span class="pts">1612</span>
+    </div>
+    <div class="lb-row you">
+      <span class="rank" style="color: #2F6F73;">23</span>
+      <span class="av" style="background: #5E8F92;">Y</span>
+      <span class="name">You</span>
+      <span class="streak">🔥13</span>
+      <span class="pts">1124</span>
+    </div>
+    <div class="heatmap">
+      <div style="background: #DDEDEC;"></div>
+      <div style="background: #DDEDEC;"></div>
+      <div style="background: #F0E8D4;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #F0E8D4;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #D2691E;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+    </div>
+    <div class="legend">
+      <span>Less</span>
+      <span class="swc" style="background: #DDEDEC;"></span>
+      <span class="swc" style="background: #F0E8D4;"></span>
+      <span class="swc" style="background: #E8B04B;"></span>
+      <span class="swc" style="background: #D2691E;"></span>
+      <span class="swc" style="background: #5A8A3A;"></span>
+      <span>5/5</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-l">Streak</div><div class="stat-v">47d</div></div>
+      <div class="stat"><div class="stat-l">Points</div><div class="stat-v">1847</div></div>
+    </div>
+    <div class="seg">
+      <button class="active">This week</button>
+      <button style="color: #17484B;">All-time</button>
+    </div>
+    <div class="cta">Take today's quiz →</div>
+    <div class="verdict">
+      <strong>Reads as:</strong> editorial + a SaaS-ish data layer. Cleanest separation between brand (orange) and data (teal). <strong>Risk:</strong> teal is the most generic startup choice; pulls toward "Notion / Stripe" and away from "Lenny's editorial."
+    </div>
+  </div>
+</div>
+
+<!-- ============ C — Newspaper ink-blue ============ -->
+<div class="panel">
+  <header>
+    <p class="smallcaps" style="color: #1B3A4F;">Option C · recommended</p>
+    <p class="opt">Newspaper ink-blue</p>
+    <p class="sub">Deep ink-blue + dusty cream. Editorial.</p>
+    <div class="swatches">
+      <span class="sw" style="background: #FBF7F0;"></span>
+      <span class="sw" style="background: #E5E0D2;"></span>
+      <span class="sw" style="background: #1B3A4F;"></span>
+      <span class="sw" style="background: #D2691E;"></span>
+      <span class="sw" style="background: #2A1810;"></span>
+    </div>
+  </header>
+  <div class="body">
+    <div class="lb-row">
+      <span class="rank">1</span>
+      <span class="av" style="background: #1B3A4F;">A</span>
+      <span class="name">Aditi M.</span>
+      <span class="streak">🔥32</span>
+      <span class="pts">1847</span>
+    </div>
+    <div class="lb-row">
+      <span class="rank">2</span>
+      <span class="av" style="background: #8B4513;">P</span>
+      <span class="name">Priya R.</span>
+      <span class="streak">🔥12</span>
+      <span class="pts">1612</span>
+    </div>
+    <div class="lb-row you">
+      <span class="rank" style="color: #1B3A4F;">23</span>
+      <span class="av" style="background: #4A6678;">Y</span>
+      <span class="name">You</span>
+      <span class="streak">🔥13</span>
+      <span class="pts">1124</span>
+    </div>
+    <div class="heatmap">
+      <div style="background: #E5E0D2;"></div>
+      <div style="background: #E5E0D2;"></div>
+      <div style="background: #C9CDC0;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #C9CDC0;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #D2691E;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+    </div>
+    <div class="legend">
+      <span>Less</span>
+      <span class="swc" style="background: #E5E0D2;"></span>
+      <span class="swc" style="background: #C9CDC0;"></span>
+      <span class="swc" style="background: #E8B04B;"></span>
+      <span class="swc" style="background: #D2691E;"></span>
+      <span class="swc" style="background: #5A8A3A;"></span>
+      <span>5/5</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-l">Streak</div><div class="stat-v">47d</div></div>
+      <div class="stat"><div class="stat-l">Points</div><div class="stat-v">1847</div></div>
+    </div>
+    <div class="seg">
+      <button class="active">This week</button>
+      <button style="color: #1B3A4F;">All-time</button>
+    </div>
+    <div class="cta">Take today's quiz →</div>
+    <div class="verdict">
+      <strong>Reads as:</strong> a real newspaper — warm paper, deep blue ink, oxblood used like a printer's red mark for emphasis. <strong>Why I like it:</strong> stays editorial; blue + orange is a real complementary pair that reads "designed" not "decorated." Avatars get genuine variety without losing brand.
+    </div>
+  </div>
+</div>
+
+<!-- ============ D — Sage green secondary ============ -->
+<div class="panel">
+  <header>
+    <p class="smallcaps" style="color: #5A8A3A;">Option D</p>
+    <p class="opt">Sage secondary</p>
+    <p class="sub">Muted green for utility. Garden / earthy.</p>
+    <div class="swatches">
+      <span class="sw" style="background: #FBF7F0;"></span>
+      <span class="sw" style="background: #DDE5CF;"></span>
+      <span class="sw" style="background: #5A7A3A;"></span>
+      <span class="sw" style="background: #D2691E;"></span>
+      <span class="sw" style="background: #2A1810;"></span>
+    </div>
+  </header>
+  <div class="body">
+    <div class="lb-row">
+      <span class="rank">1</span>
+      <span class="av" style="background: #5A7A3A;">A</span>
+      <span class="name">Aditi M.</span>
+      <span class="streak">🔥32</span>
+      <span class="pts">1847</span>
+    </div>
+    <div class="lb-row">
+      <span class="rank">2</span>
+      <span class="av" style="background: #8B4513;">P</span>
+      <span class="name">Priya R.</span>
+      <span class="streak">🔥12</span>
+      <span class="pts">1612</span>
+    </div>
+    <div class="lb-row you">
+      <span class="rank" style="color: #5A7A3A;">23</span>
+      <span class="av" style="background: #7A8B5C;">Y</span>
+      <span class="name">You</span>
+      <span class="streak">🔥13</span>
+      <span class="pts">1124</span>
+    </div>
+    <div class="heatmap">
+      <div style="background: #DDE5CF;"></div>
+      <div style="background: #DDE5CF;"></div>
+      <div style="background: #F0E8D4;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #F0E8D4;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #D2691E;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+    </div>
+    <div class="legend">
+      <span>Less</span>
+      <span class="swc" style="background: #DDE5CF;"></span>
+      <span class="swc" style="background: #F0E8D4;"></span>
+      <span class="swc" style="background: #E8B04B;"></span>
+      <span class="swc" style="background: #D2691E;"></span>
+      <span class="swc" style="background: #5A8A3A;"></span>
+      <span>5/5</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-l">Streak</div><div class="stat-v">47d</div></div>
+      <div class="stat"><div class="stat-l">Points</div><div class="stat-v">1847</div></div>
+    </div>
+    <div class="seg">
+      <button class="active">This week</button>
+      <button style="color: #5A7A3A;">All-time</button>
+    </div>
+    <div class="cta">Take today's quiz →</div>
+    <div class="verdict">
+      <strong>Reads as:</strong> warm-earthy. Green sits comfortably with paper and brown. <strong>Risk:</strong> green is also our "correct" indicator (<span class="mono" style="color: #5A8A3A;">#5A8A3A</span>) — overloading it as utility AND correctness muddies signal. Could be fixed by retiring green-for-correct (use a check icon + text), but that's a downstream change.
+    </div>
+  </div>
+</div>
+
+<!-- ============ E — Warm-only, expanded ============ -->
+<div class="panel">
+  <header>
+    <p class="smallcaps" style="color: var(--ink-mute);">Option E</p>
+    <p class="opt">Warm-only, expanded</p>
+    <p class="sub">No new hue — more shades within warm.</p>
+    <div class="swatches">
+      <span class="sw" style="background: #FBF7F0;"></span>
+      <span class="sw" style="background: #C19A6B;"></span>
+      <span class="sw" style="background: #B86A4D;"></span>
+      <span class="sw" style="background: #D2691E;"></span>
+      <span class="sw" style="background: #2A1810;"></span>
+    </div>
+  </header>
+  <div class="body">
+    <div class="lb-row">
+      <span class="rank">1</span>
+      <span class="av" style="background: #B86A4D;">A</span>
+      <span class="name">Aditi M.</span>
+      <span class="streak">🔥32</span>
+      <span class="pts">1847</span>
+    </div>
+    <div class="lb-row">
+      <span class="rank">2</span>
+      <span class="av" style="background: #C19A6B;">P</span>
+      <span class="name">Priya R.</span>
+      <span class="streak">🔥12</span>
+      <span class="pts">1612</span>
+    </div>
+    <div class="lb-row you">
+      <span class="rank" style="color: #B86A4D;">23</span>
+      <span class="av" style="background: #876B58;">Y</span>
+      <span class="name">You</span>
+      <span class="streak">🔥13</span>
+      <span class="pts">1124</span>
+    </div>
+    <div class="heatmap">
+      <div style="background: #F0E8D4;"></div>
+      <div style="background: #F0E8D4;"></div>
+      <div style="background: #E8DBC4;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #E8DBC4;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #E8B04B;"></div>
+      <div style="background: #D2691E;"></div>
+      <div style="background: #5A8A3A;"></div>
+      <div style="background: #5A8A3A;"></div>
+    </div>
+    <div class="legend">
+      <span>Less</span>
+      <span class="swc" style="background: #F0E8D4;"></span>
+      <span class="swc" style="background: #E8DBC4;"></span>
+      <span class="swc" style="background: #E8B04B;"></span>
+      <span class="swc" style="background: #D2691E;"></span>
+      <span class="swc" style="background: #5A8A3A;"></span>
+      <span>5/5</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-l">Streak</div><div class="stat-v">47d</div></div>
+      <div class="stat"><div class="stat-l">Points</div><div class="stat-v">1847</div></div>
+    </div>
+    <div class="seg">
+      <button class="active">This week</button>
+      <button style="color: #876B58;">All-time</button>
+    </div>
+    <div class="cta">Take today's quiz →</div>
+    <div class="verdict">
+      <strong>Reads as:</strong> still monochrome warm — but with more legitimate variety (terracotta, sand, taupe, oxblood). <strong>What it doesn't fix:</strong> the underlying complaint that *all* the surfaces share a hue family. If the design reviewer's read was "this product feels narrow," this option doesn't move the needle.
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- side-by-side compact comparison -->
+<section style="max-width: 1400px; margin: 24px auto; padding: 24px; border-top: 1px solid var(--paper-fill);">
+  <p class="smallcaps" style="color: var(--accent);">Decision frame</p>
+  <h2 class="serif" style="font-size: 26px; font-weight: 800; margin: 6px 0 14px; letter-spacing: -0.01em;">What are you optimizing for?</h2>
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 1200px;">
+    <div style="border-left: 3px solid var(--accent); padding: 4px 0 4px 14px;">
+      <p class="serif" style="font-size: 16px; font-weight: 700; margin: 0;">Editorial brand fit</p>
+      <p style="margin: 4px 0 0; color: var(--ink-soft); font-size: 13px; line-height: 1.5;">If the canonical reference (warm paper, oxblood, Fraunces serif) is sacred, <strong>C (newspaper ink-blue)</strong> is the only option that diversifies *while* leaning further into editorial. Blue ink + warm paper is a real print archetype.</p>
+    </div>
+    <div style="border-left: 3px solid #2F6F73; padding: 4px 0 4px 14px;">
+      <p class="serif" style="font-size: 16px; font-weight: 700; margin: 0;">Pragmatic data UI separation</p>
+      <p style="margin: 4px 0 0; color: var(--ink-soft); font-size: 13px; line-height: 1.5;"><strong>B (teal)</strong> gives the cleanest "brand vs data" channel split. Standard SaaS playbook. Accepts that PM Daily becomes more like Linear/Notion in feel, less like Stratechery.</p>
+    </div>
+    <div style="border-left: 3px solid #5A7A3A; padding: 4px 0 4px 14px;">
+      <p class="serif" style="font-size: 16px; font-weight: 700; margin: 0;">Earthy warmth, no tonal shift</p>
+      <p style="margin: 4px 0 0; color: var(--ink-soft); font-size: 13px; line-height: 1.5;"><strong>D (sage)</strong> matches paper/wood feel. Conflicts with our "correct = green" semantic; needs a downstream change to retire green-for-correct.</p>
+    </div>
+    <div style="border-left: 3px solid var(--ink-mute); padding: 4px 0 4px 14px;">
+      <p class="serif" style="font-size: 16px; font-weight: 700; margin: 0;">Stay-the-course minimum</p>
+      <p style="margin: 4px 0 0; color: var(--ink-soft); font-size: 13px; line-height: 1.5;"><strong>E (expanded warm)</strong> adds more shades within warm. Cheapest change. Probably doesn't satisfy the reviewer's underlying point about the palette feeling narrow.</p>
+    </div>
+  </div>
+
+  <p class="serif" style="font-size: 14px; font-style: italic; color: var(--ink-soft); max-width: 720px; margin-top: 22px;">
+    My read: <strong style="color: var(--ink); font-style: normal;">C is the cleanest editorial answer. B is the pragmatic SaaS answer.</strong> Both are defensible; A and E aren't real fixes; D requires retiring green-for-correct first.
+  </p>
+</section>
+
+</body>
+</html>
