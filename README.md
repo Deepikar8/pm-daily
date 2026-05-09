@@ -33,6 +33,10 @@ The flow: land → read today's digest → take 5 questions → see takeaways �
 </tr>
 </table>
 
+## Submission writeup
+
+For judges: **[`docs/submission.md`](docs/submission.md)** — half-page abstract covering the problem, what's novel, sponsor-track relevance, the two-AI build process, and how to evaluate (three paths, fastest first).
+
 ## Repository layout
 
 - `apps/web` — SvelteKit web app on Cloudflare Workers (D1, KV, Durable Objects, cron)
