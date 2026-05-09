@@ -121,8 +121,8 @@
 
     <!-- All rows (post-podium when scope=weekly, full list when scope=allTime) -->
     <div>
-      {#each display.rows as p, i}
-        {@const rank = display.rowRankOffset + i}
+      {#each display.rows as p}
+        {@const rank = p.rank}
         <div class="flex items-center gap-3 px-5 py-3.5 border-b border-paper-fill last:border-b-0">
           <div class="serif w-8 text-center text-[17px] font-extrabold text-ink-mute">{rank}</div>
           <div class="w-9 h-9 rounded-full text-paper flex items-center justify-center sans font-bold text-sm border-2 border-ink flex-shrink-0"

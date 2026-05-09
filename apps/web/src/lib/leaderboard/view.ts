@@ -9,6 +9,9 @@ export type LeaderboardDisplayRow = {
   totalAttempts?: number;
 };
 
+/** A row plus its 1-indexed rank in the original ordering. */
+export type RankedLeaderboardRow = LeaderboardDisplayRow & { rank: number };
+
 export function getLeaderboardDisplay(args: {
   rows: LeaderboardDisplayRow[];
   scope: LeaderboardScope;
@@ -17,8 +20,7 @@ export function getLeaderboardDisplay(args: {
   podium: LeaderboardDisplayRow[];
   pinned: LeaderboardDisplayRow | null;
   pinnedRank: number | null;
-  rows: LeaderboardDisplayRow[];
-  rowRankOffset: number;
+  rows: RankedLeaderboardRow[];
 } {
   const { rows, scope, currentUserId } = args;
   const myIndex = currentUserId ? rows.findIndex((row) => row.userId === currentUserId) : -1;
@@ -31,7 +33,13 @@ export function getLeaderboardDisplay(args: {
     myIndex >= 0 && scope === "weekly" && !userIsOnPodium ? rows[myIndex] : null;
   const podium = hasPodium ? [rows[1], rows[0], rows[2]] : [];
   const listStart = hasPodium ? 3 : 0;
-  const visibleRows = rows
+
+  // Carry each row's rank explicitly so filtering out the pinned user
+  // doesn't break rank display. (e.g. with 2 users and the current
+  // user pinned at rank 1, the remaining user must render as rank 2,
+  // not rank 1.)
+  const rankedRows: RankedLeaderboardRow[] = rows
+    .map((row, idx) => ({ ...row, rank: idx + 1 }))
     .slice(listStart)
     .filter((row) => !pinned || row.userId !== pinned.userId);
 
@@ -39,7 +47,6 @@ export function getLeaderboardDisplay(args: {
     podium,
     pinned,
     pinnedRank: myIndex >= 0 ? myIndex + 1 : null,
-    rows: visibleRows,
-    rowRankOffset: listStart + 1,
+    rows: rankedRows,
   };
 }

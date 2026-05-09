@@ -18,6 +18,7 @@ describe("getLeaderboardDisplay", () => {
 
     expect(display.podium).toEqual([]);
     expect(display.rows.map((row) => row.userId)).toEqual(["u1", "u2"]);
+    expect(display.rows.map((row) => row.rank)).toEqual([1, 2]);
   });
 
   it("uses podium plus rows after rank three for larger weekly boards", () => {
@@ -29,6 +30,7 @@ describe("getLeaderboardDisplay", () => {
 
     expect(display.podium.map((row) => row.userId)).toEqual(["u2", "u1", "u3"]);
     expect(display.rows.map((row) => row.userId)).toEqual(["u4"]);
+    expect(display.rows.map((row) => row.rank)).toEqual([4]);
   });
 
   it("does not duplicate the pinned current user in the rendered rows", () => {
@@ -40,6 +42,41 @@ describe("getLeaderboardDisplay", () => {
 
     expect(display.pinned?.userId).toBe("u4");
     expect(display.rows.map((row) => row.userId)).not.toContain("u4");
+  });
+
+  it("preserves correct ranks after pinning out the current user (2-user board)", () => {
+    // Regression test for the "both users at #1" bug. With 2 users and
+    // the current user (u1, rank 1) pinned, the remaining user must
+    // render as rank 2 — not rank 1 from a naive offset+index calc.
+    const display = getLeaderboardDisplay({
+      rows: rows.slice(0, 2),
+      scope: "weekly",
+      currentUserId: "u1",
+    });
+
+    expect(display.pinned?.userId).toBe("u1");
+    expect(display.pinnedRank).toBe(1);
+    expect(display.rows).toHaveLength(1);
+    expect(display.rows[0].userId).toBe("u2");
+    expect(display.rows[0].rank).toBe(2);
+  });
+
+  it("preserves correct ranks for users below a pinned mid-list user", () => {
+    // Pinned user at rank 3 (out of 4); rows 1, 2, 4 should keep their
+    // original ranks 1, 2, 4 — not be renumbered consecutively.
+    const display = getLeaderboardDisplay({
+      rows,
+      scope: "weekly",
+      currentUserId: "u3",
+    });
+
+    // u3 is in the podium (rank 3), so pinned is suppressed
+    expect(display.pinned).toBeNull();
+    expect(display.pinnedRank).toBe(3);
+    // Only rows[3:] (= u4) appear in the regular list, with rank 4
+    expect(display.rows.map((r) => ({ id: r.userId, rank: r.rank }))).toEqual([
+      { id: "u4", rank: 4 },
+    ]);
   });
 
   it("does not pin the user separately when they are already on the podium", () => {
@@ -67,7 +104,11 @@ describe("getLeaderboardDisplay", () => {
 
     expect(display.podium).toEqual([]);
     expect(display.pinned).toBeNull();
-    expect(display.rows.map((row) => row.userId)).toEqual(["u1", "u2", "u3", "u4"]);
-    expect(display.rowRankOffset).toBe(1);
+    expect(display.rows.map((row) => ({ id: row.userId, rank: row.rank }))).toEqual([
+      { id: "u1", rank: 1 },
+      { id: "u2", rank: 2 },
+      { id: "u3", rank: 3 },
+      { id: "u4", rank: 4 },
+    ]);
   });
 });
