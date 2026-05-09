@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Trophy, Crown, TrendingUp, Users } from "lucide-svelte";
+  import { Trophy, Crown, TrendingUp, Users, ArrowRight } from "lucide-svelte";
   let { data } = $props();
   type Scope = "weekly" | "allTime";
   let scope = $state<Scope>("weekly");
@@ -145,11 +145,17 @@
     </div>
 
     {#if activeBoard.length === 0}
-      <div class="px-5 py-12 text-center">
-        <Trophy size={32} class="text-ink-mute mx-auto mb-3" />
-        <p class="serif italic text-ink-soft">
+      <div class="px-5 py-10 text-center">
+        <Trophy size={32} class="text-secondary mx-auto mb-3" />
+        <p class="serif italic text-ink-soft mb-4">
           No standings yet — be the first to play today.
         </p>
+        <a
+          href="/quiz"
+          class="sans btn-press inline-flex items-center justify-center gap-2 bg-accent text-paper border-2 border-ink rounded-2xl px-5 py-3 text-[14px] font-bold shadow-brut no-underline"
+        >
+          Take today's quiz <ArrowRight size={15} />
+        </a>
       </div>
     {/if}
   </div>

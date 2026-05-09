@@ -21,3 +21,10 @@ test("home mobile keeps primary content in the first viewport", async ({ page })
   await expect(page.getByRole("heading", { name: /Five questions a day, sourced from Lenny's Podcast\./ })).toBeVisible();
   await expect(page.getByText(/Today's question|Sample question/i)).toBeVisible();
 });
+
+test("leaderboard empty state offers a next action", async ({ page }) => {
+  await page.goto("/leaderboard");
+
+  await expect(page.getByText(/No standings yet/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /Take today's quiz/i })).toBeVisible();
+});
