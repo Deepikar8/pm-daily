@@ -48,16 +48,16 @@
   </div>
 
   <!-- 4-column stat grid -->
-  <div class="grid grid-cols-4 gap-2 mb-5">
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
     {#each [
       { label: "Total points", val: data.stats.totalPoints.toLocaleString() },
       { label: "This week", val: data.stats.weeklyPoints.toLocaleString() },
       { label: "Weekly rank", val: data.stats.weeklyRank ? `#${data.stats.weeklyRank}` : "—" },
       { label: "Sessions", val: data.stats.totalAttempts.toString() },
     ] as s}
-      <div class="bg-white border-2 border-ink rounded-xl px-3 py-3 shadow-brut-deep">
-        <div class="sans text-[9px] font-bold tracking-widest uppercase text-ink-mute mb-1">{s.label}</div>
-        <div class="serif text-xl font-extrabold leading-none mono">{s.val}</div>
+      <div class="bg-white border-2 border-ink rounded-xl px-3 py-3 shadow-brut-deep min-h-[74px]">
+        <div class="sans text-[9px] font-bold tracking-widest uppercase text-ink-mute mb-1 leading-tight">{s.label}</div>
+        <div class="serif text-xl font-extrabold leading-none mono break-words">{s.val}</div>
       </div>
     {/each}
   </div>
