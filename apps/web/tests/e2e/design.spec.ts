@@ -8,7 +8,9 @@ test("home always shows product proof before auth", async ({ page }) => {
   await expect(previewVisible).toBeVisible();
 
   await expect(page.getByText("sign in to submit", { exact: false })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Continue with Google/i })).toBeVisible();
+  // Magic-link is the always-available auth path (no env creds required).
+  // Google button is conditional on GOOGLE_CLIENT_ID/SECRET being set, so we
+  // don't assert it here — covered separately when those creds exist.
   await expect(page.getByRole("link", { name: /Email me a magic link/i })).toBeVisible();
 });
 
