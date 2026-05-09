@@ -20,17 +20,20 @@ distilled from Lenny Rachitsky's podcast and newsletter archive.
 
 SvelteKit 2 (Svelte 5 runes mode) · Tailwind v3 · Drizzle ORM · Better Auth (magic link + Google OAuth) · Lucide icons · Cloudflare Workers + D1 + KV + Durable Objects + cron · Vitest + Playwright
 
-## Source material
+## License + source material
+
+Code in this repository is MIT-licensed — see [`LICENSE`](LICENSE).
 
 Quiz questions, digests, and takeaways are derivative summaries
 generated from Lenny Rachitsky's archive (podcasts and newsletter
 posts). Original sources retain their rights; this repository contains
 no full episodes or full posts. Excerpt quotations used in question
 citations are short (≤280 characters) and attributable, with direct
-links back to the original.
+links back to the original. See [`NOTICE`](NOTICE) for the full
+source-material clarification.
 
 This is a personal hackathon submission and is not officially
-affiliated with Lenny's Newsletter.
+affiliated with Lenny's Newsletter, Lenny's Podcast, or Lenny Rachitsky.
 
 ## Local development
 

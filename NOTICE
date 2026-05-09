@@ -1,0 +1,38 @@
+PM Daily — third-party source material notice
+
+The MIT license in `LICENSE` covers the code in this repository:
+SvelteKit components, Cloudflare Worker setup, Drizzle schema, Better
+Auth integration, Claude prompts, scoring/streak logic, Durable Object
+classes, build tooling, and so on.
+
+The MIT license does NOT grant additional rights to the underlying
+source material that this software summarizes.
+
+================================================================
+Lenny Rachitsky's archive
+================================================================
+
+This software is a hackathon submission that distills publicly-released
+podcast episodes and newsletter posts from Lenny Rachitsky's archive
+into short summaries, key takeaways, and applied-judgment quiz
+questions. Original episodes and posts are © Lenny Rachitsky and the
+respective guests/authors; their underlying rights are retained by them.
+
+Quotations stored in this repository (e.g. citation `quote_excerpt`
+fields in daily content JSON files) are short excerpts of ≤280
+characters used for attribution purposes alongside direct links back
+to the original source. No full episode transcripts or full newsletter
+posts are reproduced in this repository or its deployed runtime.
+
+This project is a personal hackathon submission and is not officially
+affiliated with, endorsed by, or sponsored by Lenny's Newsletter,
+Lenny's Podcast, or Lenny Rachitsky.
+
+================================================================
+Forks and derivatives
+================================================================
+
+If you fork or adapt this project in ways that involve republishing or
+redistributing substantial portions of the underlying source material,
+you are responsible for obtaining appropriate permissions from the
+original rightsholders. The MIT-licensed code carries no such grant.
