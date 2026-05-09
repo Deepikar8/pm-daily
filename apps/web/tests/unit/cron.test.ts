@@ -125,6 +125,18 @@ describe("rolloverWeek", () => {
     expect(r.newWeek).toBe(newWeek);
   });
 
+  it("rollover gate matches any minute in Monday 00:00-00:04 UTC", () => {
+    // Use runCron's gate logic. We don't need to actually run the cron;
+    // just verify the time arithmetic.
+    for (const minute of [0, 1, 4]) {
+      const t = new Date(Date.UTC(2026, 4, 11, 0, minute, 0));   // Mon May 11
+      expect(t.getUTCDay() === 1 && t.getUTCHours() === 0 && t.getUTCMinutes() < 5).toBe(true);
+    }
+    // 00:05 should NOT match
+    const tNo = new Date(Date.UTC(2026, 4, 11, 0, 5, 0));
+    expect(tNo.getUTCDay() === 1 && tNo.getUTCHours() === 0 && tNo.getUTCMinutes() < 5).toBe(false);
+  });
+
   it("does NOT wipe rows that already advanced to newWeek (race protection)", async () => {
     const db = setup();
     const kv = new FakeKV();

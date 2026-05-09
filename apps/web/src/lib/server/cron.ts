@@ -36,9 +36,11 @@ export async function runCron(
   // submitted recently and an in-process recompute hasn't already fired.
   await recomputeLeaderboard(env);
 
-  // 2) Weekly rollover gate: Monday (UTC dow=1), 00:00 UTC.
+  // 2) Weekly rollover gate: Monday 00:00–00:04 UTC: catch the first cron tick
+  // of the new week. Idempotency: rolloverWeek's UPDATE is scoped to
+  // weekKey=previousWeek, so subsequent ticks within the window are no-ops.
   const t = new Date(event.scheduledTime);
-  if (t.getUTCDay() === 1 && t.getUTCHours() === 0 && t.getUTCMinutes() === 0) {
+  if (t.getUTCDay() === 1 && t.getUTCHours() === 0 && t.getUTCMinutes() < 5) {
     await rolloverWeek(env, event.scheduledTime);
   }
 }

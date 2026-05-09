@@ -34,7 +34,7 @@ tag = "v1"
 new_sqlite_classes = ["QuizSession"]
 
 [triggers]
-crons = ["* * * * *"]
+crons = ["*/5 * * * *"]
 
 [observability]
 enabled = true
