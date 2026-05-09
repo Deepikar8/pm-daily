@@ -5,6 +5,12 @@ distilled from Lenny Rachitsky's podcast and newsletter archive.
 
 **Live:** https://pm-daily.avalanche05.workers.dev
 
+## Demo
+
+![60-second demo](docs/demo.gif)
+
+Full-quality MP4: [`docs/demo.mp4`](docs/demo.mp4) · Live app: https://pm-daily.avalanche05.workers.dev
+
 ## Screens
 
 The flow: land → read today's digest → take 5 questions → see takeaways → climb the leaderboard.

@@ -10,3 +10,4 @@ build
 playwright-report
 test-results
 coverage
+docs/_video-raw/
