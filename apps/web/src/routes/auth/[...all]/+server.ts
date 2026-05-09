@@ -1,5 +1,6 @@
 import type { RequestHandler } from "./$types";
 import { createAuth } from "$lib/server/auth/better-auth";
+import { resolveAuthBaseURL } from "$lib/server/auth/config";
 import { getDb } from "$lib/server/db/client";
 
 const handler: RequestHandler = async ({ request, platform }) => {
@@ -10,7 +11,7 @@ const handler: RequestHandler = async ({ request, platform }) => {
   const auth = createAuth({
     db: getDb(env.DB),
     secret: env.BETTER_AUTH_SECRET,
-    baseURL: env.BETTER_AUTH_URL,
+    baseURL: resolveAuthBaseURL(request.url, env.BETTER_AUTH_URL),
     googleClientId: env.GOOGLE_CLIENT_ID,
     googleClientSecret: env.GOOGLE_CLIENT_SECRET,
     resendApiKey: env.RESEND_API_KEY,

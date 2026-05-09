@@ -3,6 +3,7 @@ import { magicLink } from "better-auth/plugins";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { Resend } from "resend";
 import type { DB } from "../db/client";
+import { isGoogleAuthEnabled } from "./config";
 
 export type AuthArgs = {
   db: DB;
@@ -24,11 +25,11 @@ export function createAuth(args: AuthArgs) {
   const resend = args.resendApiKey ? new Resend(args.resendApiKey) : null;
 
   const socialProviders =
-    args.googleClientId && args.googleClientSecret
+    isGoogleAuthEnabled(args.googleClientId, args.googleClientSecret)
       ? {
           google: {
-            clientId: args.googleClientId,
-            clientSecret: args.googleClientSecret,
+            clientId: args.googleClientId!,
+            clientSecret: args.googleClientSecret!,
           },
         }
       : undefined;

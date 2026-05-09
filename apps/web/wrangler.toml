@@ -9,6 +9,9 @@ directory = ".svelte-kit/cloudflare"
 binding = "ASSETS"
 # Avoid serving _worker.js as a static file
 not_found_handling = "single-page-application"
+# SvelteKit routes must execute in the Worker for SSR, auth redirects, and
+# server load functions. Keep hashed static assets on the direct asset path.
+run_worker_first = ["/*", "!/_app/*", "!/robots.txt"]
 
 [[d1_databases]]
 binding = "DB"
