@@ -20,6 +20,8 @@ import { ulid } from "ulid";
 const esc = (s: string) => s.replace(/'/g, "''");
 const jsonEsc = (o: unknown) => esc(JSON.stringify(o));
 
+const overrideDate = process.argv.find((a) => a.startsWith("--date="))?.split("=")[1];
+
 const CONTENT_PATH = "./content/2026-05-08.json";
 const OUT_DIR = "./.tmp";
 const SQL_OUT = `${OUT_DIR}/seed-2026-05-08.sql`;
@@ -61,8 +63,13 @@ type DailyJson = {
 };
 
 const j: DailyJson = JSON.parse(readFileSync(CONTENT_PATH, "utf-8"));
+const targetDate = overrideDate ?? j.date;
 
 mkdirSync(OUT_DIR, { recursive: true });
+
+const SQL_OUT_FINAL = `${OUT_DIR}/seed-${targetDate}.sql`;
+const DIGEST_OUT_FINAL = `${OUT_DIR}/digest-${targetDate}.json`;
+const QUESTIONS_OUT_FINAL = `${OUT_DIR}/questions-${targetDate}.json`;
 
 const now = Date.now();
 const sql: string[] = [];
@@ -71,7 +78,7 @@ sql.push(
   `INSERT OR REPLACE INTO daily_sessions
   (date, headline, theme_pillar, digest_md, takeaways_json, source_json, published_at)
 VALUES
-  ('${esc(j.date)}', '${esc(j.headline)}', '${esc(j.theme_pillar)}',
+  ('${esc(targetDate)}', '${esc(j.headline)}', '${esc(j.theme_pillar)}',
    '${esc(j.digest_md)}', '${jsonEsc(j.takeaways)}', '${jsonEsc(j.source)}', ${now});`,
 );
 
@@ -83,7 +90,7 @@ for (const q of j.questions) {
     `INSERT OR REPLACE INTO daily_questions
     (id, date, position, idea_id, archetype, scenario_md, options_json, correct_key, explanation_md, pm_takeaway, citation_json)
   VALUES
-    ('${id}', '${esc(j.date)}', ${q.position},
+    ('${id}', '${esc(targetDate)}', ${q.position},
      '${esc(q.idea_id)}', '${esc(q.archetype)}', '${esc(q.scenario_md)}',
      '${jsonEsc(q.options)}', '${esc(q.correct_key)}',
      '${esc(q.explanation_md)}', '${esc(q.pm_takeaway)}',
@@ -91,7 +98,7 @@ for (const q of j.questions) {
   );
 }
 
-writeFileSync(SQL_OUT, sql.join("\n"));
+writeFileSync(SQL_OUT_FINAL, sql.join("\n"));
 
 // Build KV payloads. Strip correct_key, explanation_md, pm_takeaway from
 // questions (they're only revealed server-side after answer submission).
@@ -106,19 +113,24 @@ const safeQuestions = j.questions.map((q) => ({
 }));
 
 writeFileSync(
-  DIGEST_OUT,
+  DIGEST_OUT_FINAL,
   JSON.stringify({
-    date: j.date,
+    date: targetDate,
     headline: j.headline,
     digest_md: j.digest_md,
     takeaways: j.takeaways,
     source: j.source,
   }),
 );
-writeFileSync(QUESTIONS_OUT, JSON.stringify(safeQuestions));
+writeFileSync(QUESTIONS_OUT_FINAL, JSON.stringify(safeQuestions));
 
 console.log(`Wrote ${sql.length} SQL statements + 2 KV payloads.`);
-console.log(`  SQL:       ${SQL_OUT}`);
-console.log(`  digest:    ${DIGEST_OUT}`);
-console.log(`  questions: ${QUESTIONS_OUT}`);
+console.log(`  SQL:       ${SQL_OUT_FINAL}`);
+console.log(`  digest:    ${DIGEST_OUT_FINAL}`);
+console.log(`  questions: ${QUESTIONS_OUT_FINAL}`);
 console.log(`Question IDs: ${JSON.stringify(questionIds)}`);
+
+console.log("\nNext: run these commands");
+console.log(`  pnpm exec wrangler d1 execute pm-daily --remote --file=./.tmp/seed-${targetDate}.sql`);
+console.log(`  pnpm exec wrangler kv key put --binding=KV --remote "today:digest:${targetDate}" --path=./.tmp/digest-${targetDate}.json`);
+console.log(`  pnpm exec wrangler kv key put --binding=KV --remote "today:questions:${targetDate}" --path=./.tmp/questions-${targetDate}.json`);
