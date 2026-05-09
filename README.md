@@ -5,6 +5,28 @@ distilled from Lenny Rachitsky's podcast and newsletter archive.
 
 **Live:** https://pm-daily.avalanche05.workers.dev
 
+## Screens
+
+The flow: land → read today's digest → take 5 questions → see takeaways → climb the leaderboard.
+
+<table>
+<tr>
+<td width="50%"><strong>Landing</strong> — anonymous preview question, sign-in CTAs<br/><img src="docs/screenshots/01-landing-mobile.png" alt="Landing page" /></td>
+<td width="50%"><strong>Today's digest</strong> — operator headline, 5-min read, takeaways<br/><img src="docs/screenshots/04-today-mobile.png" alt="Today digest" /></td>
+</tr>
+<tr>
+<td><strong>Quiz</strong> — first-person scenario, four options<br/><img src="docs/screenshots/05-quiz-mobile.png" alt="Quiz question" /></td>
+<td><strong>Result panel</strong> — pm_takeaway as the visual hero<br/><img src="docs/screenshots/06-quiz-result-takeaway-mobile.png" alt="Quiz result" /></td>
+</tr>
+<tr>
+<td><strong>Final summary</strong> — score, time, rank, streak, recap<br/><img src="docs/screenshots/07-results-mobile.png" alt="Final summary" /></td>
+<td><strong>Leaderboard</strong> — weekly + all-time, podium for top 3<br/><img src="docs/screenshots/08-leaderboard-mobile.png" alt="Leaderboard" /></td>
+</tr>
+<tr>
+<td colspan="2" align="center"><strong>Profile</strong> — streak hero, 14-day heatmap, recent sessions, GDPR controls<br/><img src="docs/screenshots/09-profile-mobile.png" alt="Profile" width="50%" /></td>
+</tr>
+</table>
+
 ## Repository layout
 
 - `apps/web` — SvelteKit web app on Cloudflare Workers (D1, KV, Durable Objects, cron)
