@@ -6,7 +6,7 @@ pages_build_output_dir = ".svelte-kit/cloudflare"
 [[d1_databases]]
 binding = "DB"
 database_name = "pm-daily"
-database_id = "REPLACE_WITH_D1_ID"
+database_id = "4ed77142-3bd9-4a1b-9378-e8b527266066"
 migrations_dir = "src/lib/server/db/migrations"
 
 [[kv_namespaces]]
