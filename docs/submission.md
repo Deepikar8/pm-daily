@@ -172,6 +172,33 @@ doesn't solve out of the box).
 
 ---
 
+## Pipeline trace (verifiable AI engine)
+
+The four-pass content pipeline is fully specced + prompted but not yet
+running unattended in CI (the GitHub Action plan exists; the MCP-in-CI
+credential path is unresolved — Risk #2 in the spec). To prove the
+engine works without claiming automation we don't have, the
+[`docs/pipeline-demo/cat-wu-2026-04-23/`](./pipeline-demo/cat-wu-2026-04-23/)
+directory contains an end-to-end trace for one real source (Cat Wu's
+shipping-speed episode, with five real MCP excerpts captured during
+the spec session):
+
+| File | What |
+|---|---|
+| [`00-source.md`](./pipeline-demo/cat-wu-2026-04-23/00-source.md) | Source metadata + 5 verbatim MCP excerpts (the only ground truth) |
+| [`10-pass-0-thesis-brief.json`](./pipeline-demo/cat-wu-2026-04-23/10-pass-0-thesis-brief.json) | Pass 0 thesis brief: 7 distinct ideas + central tension |
+| [`20-pass-1-generate.json`](./pipeline-demo/cat-wu-2026-04-23/20-pass-1-generate.json) | Pass 1: 7 candidate questions distributed across the brief |
+| [`30-pass-2-review.json`](./pipeline-demo/cat-wu-2026-04-23/30-pass-2-review.json) | Pass 2 self-review: keep 5, drop 2 (one for PM-agency violation, one for citation drift) |
+| [`40-pass-3-validation.md`](./pipeline-demo/cat-wu-2026-04-23/40-pass-3-validation.md) | Pass 3 programmatic validation: schema, length, **citation literal-match via MCP re-fetch**, setup-leak, coverage breadth — including one synthetic citation-drift retry |
+| [`99-final-content.json`](./pipeline-demo/cat-wu-2026-04-23/99-final-content.json) | The shipped JSON ready for D1+KV seed |
+
+Cheapest verification: open `00-source.md` and `99-final-content.json`
+side-by-side; every `citation.quote_excerpt` in the final JSON must
+appear verbatim in the source excerpts. If you find one that doesn't,
+the literal-match validator failed and there's a bug.
+
+---
+
 ## How to evaluate (three paths, fastest first)
 
 1. **Live, ~30 seconds:** open the live URL, see the landing with the

@@ -37,6 +37,8 @@ The flow: land → read today's digest → take 5 questions → see takeaways �
 
 For judges: **[`docs/submission.md`](docs/submission.md)** — half-page abstract covering the problem, what's novel, sponsor-track relevance, the two-AI build process, and how to evaluate (three paths, fastest first).
 
+End-to-end **AI pipeline trace** for a real Cat Wu episode (Pass 0 thesis brief → Pass 1 overgenerate 7 → Pass 2 self-review keep 5 → Pass 3 programmatic citation literal-match → final shipped JSON, including one synthetic citation-drift retry): **[`docs/pipeline-demo/cat-wu-2026-04-23/`](docs/pipeline-demo/cat-wu-2026-04-23/)**.
+
 ## Repository layout
 
 - `apps/web` — SvelteKit web app on Cloudflare Workers (D1, KV, Durable Objects, cron)

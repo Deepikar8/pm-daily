@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "pass": "0 — thesis brief",
+    "purpose": "Map the source's distinct ideas + central tension BEFORE writing any questions. Forces breadth — without this step, Claude concentrates on the single most quotable framework and misses the broader argument.",
+    "prompt_file": "prompts/question-generation/pass-0-thesis-brief.md",
+    "system_prompt": "prompts/question-generation/system.md",
+    "model": "claude-opus-4-7"
+  },
+
+  "central_tension": "Cat Wu argues against the traditional PM toolkit (multi-quarter roadmaps, partner-team alignment, detailed PRDs, hiring more PMs) and in favor of an AI-native PM mode: speed, product taste, end-to-end engineering ownership, and removing every barrier to shipping. The PM either adapts the role around iteration speed and taste, or becomes the bottleneck.",
+
+  "ideas": [
+    {
+      "id": "agi-pilled-calibration",
+      "title": "AGI-pilled calibration",
+      "summary": "PMs should build for the model they have today, not the hypothetical future model. Eliciting maximum capability from current models is the harder, higher-leverage skill.",
+      "supporting_passage": "I think it is very hard to be the right amount of AGI-pilled. It's very easy to build the product for the super AGI strong model. The hard thing is figuring out for the current model, how do you elicit the maximum capability?",
+      "framework_strength": "central"
+    },
+    {
+      "id": "barrier-removal",
+      "title": "Remove every barrier to shipping",
+      "summary": "The operating principle isn't process optimization — it's barrier elimination. Six-month feature timelines compressed to one week (sometimes one day) by removing coordination overhead.",
+      "supporting_passage": "We want to remove every single barrier to shipping things. The timelines for a lot of our product features have gone down from six month to one month and sometimes to even one day.",
+      "framework_strength": "central"
+    },
+    {
+      "id": "pm-toolkit-obsolescence",
+      "title": "PM toolkit obsolescence",
+      "summary": "The hard truth: many PMs are 'approaching it very incorrectly.' The traditional toolkit (multi-quarter roadmap alignment, detailed PRDs, partner coordination) was built for a slower world and is now the bottleneck, not the lever.",
+      "supporting_passage": "You're interviewing hundreds of PMs and you just keep feeling like they're approaching it very incorrectly.",
+      "framework_strength": "central"
+    },
+    {
+      "id": "developing-product-taste",
+      "title": "Product taste as the rare PM skill",
+      "summary": "As code becomes cheap to write, deciding *what* to write becomes the differentiator. Product taste is rare, and Anthropic will hire anyone who has demonstrated it strongly.",
+      "supporting_passage": "I think product taste is still a very rare skill to have, and we'll pretty much hire anyone who we feel has demonstrated this strongly.",
+      "framework_strength": "central"
+    },
+    {
+      "id": "role-merging",
+      "title": "Roles are merging",
+      "summary": "PMs do engineering work; engineers do PM work; designers ship code. The clean role boundaries that defined the previous era of product development are collapsing.",
+      "supporting_passage": "I think all of the roles are merging. PMs are doing some engineering work, engineers are doing PM work, designers are PMing and also landing code.",
+      "framework_strength": "secondary"
+    },
+    {
+      "id": "concept-corners",
+      "title": "Concept corners",
+      "summary": "Carve out a small product surface where one engineer (or PM) can take an idea from inception to user hands within a week — without multi-quarter roadmap alignment.",
+      "supporting_passage": "as a PM, there should be less emphasis on making sure that you're aligning your multi-quarter roadmaps with your partner teams and more emphasis on, okay, how can we figure out the fastest way to get something out the door?",
+      "framework_strength": "secondary"
+    },
+    {
+      "id": "end-to-end-ownership",
+      "title": "End-to-end engineer ownership",
+      "summary": "On Anthropic's team, engineers go from user feedback on Twitter to a shipped product by week's end with almost no PM involvement. This is the most efficient way to ship.",
+      "supporting_passage": "There are many engineers on our team who are fully able to end to end go from see user feedback on Twitter through to ship a product at the end of the week with almost no product involvement.",
+      "framework_strength": "secondary"
+    }
+  ],
+
+  "_notes_to_pass_1": [
+    "Seven distinct ideas spanning four central + three secondary. Coverage requirement (Pass 1): generate 7 candidate questions distributed across these idea_ids; max 2 questions per idea; Pass 2 keeps 5 covering at least 4 distinct ideas.",
+    "Central tension is the through-line: every kept question should let a PM detect 'old toolkit vs AI-native PM' from the question framing alone."
+  ]
+}
