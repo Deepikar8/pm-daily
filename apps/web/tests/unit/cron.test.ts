@@ -105,4 +105,45 @@ describe("rolloverWeek", () => {
     const archive = await db.select().from(schema.weeklyArchive).all();
     expect(archive).toHaveLength(1); // still 1 — no duplicate
   });
+
+  it("uses provided scheduledTime, not wall clock", async () => {
+    const db = setup();
+    const kv = new FakeKV();
+    // Pretend the cron fires at Monday May 11 2026 00:00:00 UTC, late
+    const scheduledTime = Date.UTC(2026, 4, 11, 0, 0, 0); // Mon May 11
+    const previousWeek = "2026-W19"; // ISO week containing May 4-10 2026
+    const newWeek = "2026-W20"; // ISO week containing May 11-17 2026
+    await seed(db as any, [
+      { id: "u1", weeklyPoints: 100, weekKey: previousWeek },
+      { id: "u2", weeklyPoints: 200, weekKey: previousWeek },
+    ]);
+    const r = await rolloverWeek(
+      { DB: db as any, KV: kv } as any,
+      scheduledTime,
+    );
+    expect(r.previousWeek).toBe(previousWeek);
+    expect(r.newWeek).toBe(newWeek);
+  });
+
+  it("does NOT wipe rows that already advanced to newWeek (race protection)", async () => {
+    const db = setup();
+    const kv = new FakeKV();
+    const scheduledTime = Date.UTC(2026, 4, 11, 0, 0, 0);
+    const previousWeek = "2026-W19";
+    const newWeek = "2026-W20";
+    await seed(db as any, [
+      { id: "uOld", weeklyPoints: 100, weekKey: previousWeek }, // gets reset
+      { id: "uRaceWinner", weeklyPoints: 25, weekKey: newWeek }, // already on new week — DO NOT TOUCH
+    ]);
+    await rolloverWeek({ DB: db as any, KV: kv } as any, scheduledTime);
+
+    const stats = await db.select().from(schema.userStats).all();
+    const old = stats.find((s) => s.userId === "uOld")!;
+    const race = stats.find((s) => s.userId === "uRaceWinner")!;
+    expect(old.weeklyPoints).toBe(0);
+    expect(old.weekKey).toBe(newWeek);
+    // Critical: race winner's NEW points must survive
+    expect(race.weeklyPoints).toBe(25);
+    expect(race.weekKey).toBe(newWeek);
+  });
 });

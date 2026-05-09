@@ -51,7 +51,11 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
   if (!initRes.ok) {
     return { date, missing: true as const };
   }
-  const state = await initRes.json();
+  const state = (await initRes.json()) as {
+    currentIndex?: number;
+    startedAt?: number;
+    [k: string]: unknown;
+  };
 
   return { date, missing: false as const, questions, state };
 };

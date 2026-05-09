@@ -1,4 +1,4 @@
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { recomputeLeaderboard, _resetDebounce } from "./leaderboard/recompute";
 import { getDb, type DB } from "./db/client";
 import * as schema from "./db/schema";
@@ -39,17 +39,19 @@ export async function runCron(
   // 2) Weekly rollover gate: Monday (UTC dow=1), 00:00 UTC.
   const t = new Date(event.scheduledTime);
   if (t.getUTCDay() === 1 && t.getUTCHours() === 0 && t.getUTCMinutes() === 0) {
-    await rolloverWeek(env);
+    await rolloverWeek(env, event.scheduledTime);
   }
 }
 
 export async function rolloverWeek(
   env: Env,
+  scheduledTime: number = Date.now(),
 ): Promise<{ archived: number; previousWeek: string; newWeek: string }> {
   const db = asDrizzle(env.DB);
-  // The week we're rolling out of is the ISO week of "yesterday" (24h ago).
-  const previousWeek = isoWeekKey("UTC", new Date(Date.now() - 86_400_000));
-  const newWeek = isoWeekKey("UTC");
+  // Derive both week keys from the cron's scheduled instant, not wall clock,
+  // so delayed deliveries / replays compute against the trigger time.
+  const previousWeek = isoWeekKey("UTC", new Date(scheduledTime - 86_400_000));
+  const newWeek = isoWeekKey("UTC", new Date(scheduledTime));
 
   // Snapshot current weeklyPoints into weekly_archive
   const rows = await db
@@ -80,13 +82,17 @@ export async function rolloverWeek(
     rank++;
   }
 
-  // Reset everyone to the new week with zero weekly points
+  // Reset rows still on previousWeek to the new week with zero weekly points.
+  // Scoped via WHERE so a quiz submitted between the cron firing and this
+  // UPDATE running (which advanced the user's weekKey to newWeek with fresh
+  // points) is preserved. Rows on older/stale week keys self-heal on next attempt.
   await db
     .update(schema.userStats)
     .set({
       weeklyPoints: 0,
       weekKey: newWeek,
     })
+    .where(eq(schema.userStats.weekKey, previousWeek))
     .run();
 
   // Force-recompute the leaderboard so the public KV reflects the reset
