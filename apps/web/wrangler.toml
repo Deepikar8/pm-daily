@@ -1,7 +1,14 @@
 name = "pm-daily"
+main = ".svelte-kit/cloudflare/_worker.js"
 compatibility_date = "2026-05-01"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".svelte-kit/cloudflare"
+
+# Static assets served directly by the runtime
+[assets]
+directory = ".svelte-kit/cloudflare"
+binding = "ASSETS"
+# Avoid serving _worker.js as a static file
+not_found_handling = "single-page-application"
 
 [[d1_databases]]
 binding = "DB"
@@ -20,11 +27,14 @@ index_name = "lennys_metadata"
 [[durable_objects.bindings]]
 name = "QUIZ_SESSION"
 class_name = "QuizSession"
-script_name = "pm-daily"
+# script_name omitted: DO lives in this same Worker
 
 [[migrations]]
 tag = "v1"
-new_classes = ["QuizSession"]
+new_sqlite_classes = ["QuizSession"]
 
 [triggers]
 crons = ["* * * * *"]
+
+[observability]
+enabled = true
