@@ -1,17 +1,16 @@
 <script lang="ts">
   import { Trophy, Crown, TrendingUp, Users, ArrowRight } from "lucide-svelte";
+  import { getLeaderboardDisplay, type LeaderboardScope } from "$lib/leaderboard/view";
   let { data } = $props();
-  type Scope = "weekly" | "allTime";
-  let scope = $state<Scope>("weekly");
+  let scope = $state<LeaderboardScope>("weekly");
   let activeBoard = $derived(scope === "weekly" ? data.weekly.rows : data.allTime.rows);
-  // Find current user's position so we can render the pinned "you" row
-  let myIndex = $derived(
-    data.currentUserId
-      ? activeBoard.findIndex((r) => r.userId === data.currentUserId)
-      : -1
+  let display = $derived(
+    getLeaderboardDisplay({
+      rows: activeBoard,
+      scope,
+      currentUserId: data.currentUserId,
+    })
   );
-  let topThree = $derived(activeBoard.slice(0, 3));
-  let restRows = $derived(activeBoard.slice(3));
 
   function avatarBg(i: number) {
     const palette = ["#2F6F73", "#8B4513", "#5A8A3A", "#A0522D", "#17484B", "#8B7355"];
@@ -45,7 +44,7 @@
 
   <!-- Toggle -->
   <div class="flex gap-1.5 mb-4 bg-paper-fill p-1 rounded-xl border-2 border-ink">
-    {#each [{ id: "weekly" as Scope, label: "This week", Icon: Users }, { id: "allTime" as Scope, label: "All-time", Icon: TrendingUp }] as opt}
+    {#each [{ id: "weekly" as LeaderboardScope, label: "This week", Icon: Users }, { id: "allTime" as LeaderboardScope, label: "All-time", Icon: TrendingUp }] as opt}
       <button
         onclick={() => (scope = opt.id)}
         class="sans flex-1 py-2.5 rounded-lg text-[13px] font-bold flex items-center justify-center gap-1.5 transition-colors {scope === opt.id ? 'bg-ink text-paper' : 'text-secondary-deep hover:text-ink'}"
@@ -58,13 +57,13 @@
   <div class="bg-white rounded-2xl border-2 border-ink shadow-brut-accent-lg overflow-hidden">
 
     <!-- Podium (top 3) -->
-    {#if topThree.length >= 3}
+    {#if display.podium.length >= 3}
       <div class="px-5 py-6 bg-paper-warm border-b-2 border-ink">
         <div class="flex justify-center items-end gap-3 mx-auto" style="max-width: 420px;">
-          {#each [topThree[1], topThree[0], topThree[2]] as p, i}
+          {#each display.podium as p, i}
             {@const heights = ["72px", "100px", "60px"]}
             {@const colors = ["#8B7355", "#CC5500", "#A0522D"]}
-            {@const rank = p === topThree[0] ? 1 : p === topThree[1] ? 2 : 3}
+            {@const rank = i === 1 ? 1 : i === 0 ? 2 : 3}
             <div class="flex-1 text-center">
               <div
                 class="w-[46px] h-[46px] mx-auto mb-1.5 rounded-full text-paper flex items-center justify-center sans font-bold text-base relative"
@@ -95,11 +94,11 @@
     {/if}
 
     <!-- Pinned current-user row (only if user is on the board, scope=weekly) -->
-    {#if myIndex >= 0 && scope === "weekly"}
-      {@const me = activeBoard[myIndex]}
+    {#if display.pinned && display.pinnedRank}
+      {@const me = display.pinned}
       <div class="relative px-5 py-3.5 bg-paper-cream border-b-2 border-ink flex items-center gap-3">
         <span class="absolute left-0 top-0 bottom-0 w-1 bg-accent"></span>
-        <div class="serif w-8 text-center text-[17px] font-extrabold text-accent">#{myIndex + 1}</div>
+        <div class="serif w-8 text-center text-[17px] font-extrabold text-accent">#{display.pinnedRank}</div>
         <div class="w-9 h-9 rounded-full text-paper flex items-center justify-center sans font-bold text-sm border-2 border-ink flex-shrink-0"
              style="background-color: #8B4513">
           {(me.displayName ?? "?")[0]}
@@ -122,8 +121,8 @@
 
     <!-- All rows (post-podium when scope=weekly, full list when scope=allTime) -->
     <div>
-      {#each scope === "weekly" ? restRows : activeBoard as p, i}
-        {@const rank = (scope === "weekly" ? 4 : 1) + i}
+      {#each display.rows as p, i}
+        {@const rank = display.rowRankOffset + i}
         <div class="flex items-center gap-3 px-5 py-3.5 border-b border-paper-fill last:border-b-0">
           <div class="serif w-8 text-center text-[17px] font-extrabold text-ink-mute">{rank}</div>
           <div class="w-9 h-9 rounded-full text-paper flex items-center justify-center sans font-bold text-sm border-2 border-ink flex-shrink-0"
