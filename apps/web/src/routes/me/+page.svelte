@@ -5,8 +5,8 @@
   function fmtDate(iso: string) {
     return new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric" });
   }
-  // Heatmap palette: gray (missed) → cream → orange → brown → olive
-  const heatColors = ["#F0E8D4", "#F5C9A4", "#E8B04B", "#A0522D", "#8B4513", "#5A8A3A"];
+  // Heatmap palette: pale teal (missed) → cream → orange → brown → olive
+  const heatColors = ["#DDEDEC", "#F0E8D4", "#E8B04B", "#D2691E", "#8B4513", "#5A8A3A"];
   function heatColor(score: number | null): string {
     if (score === null) return heatColors[0];
     return heatColors[Math.min(Math.max(score, 1), 5)];

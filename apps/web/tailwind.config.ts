@@ -7,6 +7,16 @@ export default {
         paper: { DEFAULT: "#FBF7F0", warm: "#FBF1DC", fill: "#F0E8D4", cream: "#FFE8C2" },
         ink:   { DEFAULT: "#2A1810", soft: "#5C4634", mute: "#8B7355" },
         accent:{ DEFAULT: "#D2691E", deep: "#8B4513", tertiary: "#A0522D" },
+        secondary: {
+          DEFAULT: "#2F6F73",
+          soft: "#5E8F92",
+          fill: "#DDEDEC",
+          deep: "#17484B",
+        },
+        neutral: {
+          line: "#D8CEC0",
+          panel: "#F7F2EA",
+        },
         ok:    "#5A8A3A",
         wrong: "#B84A2A",
         gold:  "#E8B04B",

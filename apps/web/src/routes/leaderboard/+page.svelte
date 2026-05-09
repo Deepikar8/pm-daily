@@ -14,7 +14,7 @@
   let restRows = $derived(activeBoard.slice(3));
 
   function avatarBg(i: number) {
-    const palette = ["#CC5500", "#A0522D", "#8B4513", "#D2691E", "#5C4634", "#8B7355"];
+    const palette = ["#2F6F73", "#8B4513", "#5A8A3A", "#A0522D", "#17484B", "#8B7355"];
     return palette[i % palette.length];
   }
 </script>
@@ -48,7 +48,7 @@
     {#each [{ id: "weekly" as Scope, label: "This week", Icon: Users }, { id: "allTime" as Scope, label: "All-time", Icon: TrendingUp }] as opt}
       <button
         onclick={() => (scope = opt.id)}
-        class="sans flex-1 py-2.5 rounded-lg text-[13px] font-bold flex items-center justify-center gap-1.5 transition-colors {scope === opt.id ? 'bg-ink text-paper' : 'text-ink-soft hover:text-ink'}"
+        class="sans flex-1 py-2.5 rounded-lg text-[13px] font-bold flex items-center justify-center gap-1.5 transition-colors {scope === opt.id ? 'bg-ink text-paper' : 'text-secondary-deep hover:text-ink'}"
       >
         <opt.Icon size={14} /> {opt.label}
       </button>
