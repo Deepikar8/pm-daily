@@ -21,7 +21,8 @@ describe("D1 schema", () => {
     db.insert(users).values({
       id: "01HXYZ", email: "a@b.com", displayName: "Test",
       timezone: "America/Los_Angeles",
-      createdAt: Date.now(), lastActiveAt: Date.now(),
+      createdAt: new Date(), updatedAt: new Date(),
+      lastActiveAt: Date.now(),
     }).run();
     const rows = db.select().from(users).all();
     expect(rows).toHaveLength(1);

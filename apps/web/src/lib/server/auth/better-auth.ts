@@ -44,11 +44,19 @@ export function createAuth(args: AuthArgs) {
   return betterAuth({
     secret,
     baseURL: args.baseURL,
+    basePath: "/auth",                     // route handler lives at /auth/[...all]
     database: drizzleAdapter(args.db, { provider: "sqlite" }),
     emailAndPassword: { enabled: false },
     user: {
+      // Our table is `users` (plural) and we store the user's name in
+      // `display_name` instead of Better Auth's default `name` column.
+      // Map both via the user config so the drizzle adapter targets our
+      // existing schema.
+      modelName: "users",
+      fields: {
+        name: "displayName",
+      },
       additionalFields: {
-        displayName: { type: "string", required: false },
         company: { type: "string", required: false },
         role: { type: "string", required: false },
         timezone: { type: "string", required: false },

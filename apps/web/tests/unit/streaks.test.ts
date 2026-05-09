@@ -22,7 +22,9 @@ function setupDb() {
 async function seedUser(db: ReturnType<typeof setupDb>, id: string) {
   await db.insert(schema.users).values({
     id, email: `${id}@x.com`, displayName: id,
-    timezone: "UTC", createdAt: Date.now(), lastActiveAt: Date.now(),
+    timezone: "UTC",
+    createdAt: new Date(), updatedAt: new Date(),
+    lastActiveAt: Date.now(),
   }).run();
 }
 

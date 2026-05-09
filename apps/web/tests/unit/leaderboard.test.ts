@@ -35,7 +35,9 @@ async function seedUserStats(
   for (const u of users) {
     await db.insert(schema.users).values({
       id: u.id, email: `${u.id}@x.com`, displayName: u.displayName,
-      timezone: "UTC", createdAt: Date.now(), lastActiveAt: Date.now(),
+      timezone: "UTC",
+      createdAt: new Date(), updatedAt: new Date(),
+      lastActiveAt: Date.now(),
       deletedAt: u.deleted ? Date.now() : null,
     }).run();
     await db.insert(schema.userStats).values({
@@ -88,7 +90,8 @@ describe("recomputeLeaderboard", () => {
     // Add another user
     await db.insert(schema.users).values({
       id: "u2", email: "u2@x.com", displayName: "B", timezone: "UTC",
-      createdAt: Date.now(), lastActiveAt: Date.now(),
+      createdAt: new Date(), updatedAt: new Date(),
+      lastActiveAt: Date.now(),
     }).run();
     await db.insert(schema.userStats).values({
       userId: "u2", currentStreak: 1, bestStreak: 1, lastAttemptDate: "2026-05-08",

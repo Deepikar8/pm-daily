@@ -3,11 +3,17 @@ import { sqliteTable, text, integer, real, primaryKey, unique } from "drizzle-or
 export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
   email: text("email").unique().notNull(),
+  // Better Auth's drizzle adapter passes Date objects for date-typed
+  // columns. Mark the columns Better Auth manages with `timestamp_ms`
+  // mode so Drizzle serialises Date → integer milliseconds for D1.
+  emailVerified: integer("email_verified", { mode: "boolean" }).notNull().default(false),
+  image: text("image"),
   displayName: text("display_name").notNull(),
   company: text("company"),
   role: text("role"),
   timezone: text("timezone").notNull(),
-  createdAt: integer("created_at").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
   lastActiveAt: integer("last_active_at").notNull(),
   termsAcceptedAt: integer("terms_accepted_at"),
   termsVersion: text("terms_version"),
@@ -103,15 +109,18 @@ export const weeklyArchive = sqliteTable(
 );
 
 // ---- Better Auth tables (the adapter requires these) ----
+// Date-typed columns use `timestamp_ms` mode because Better Auth's drizzle
+// adapter passes Date objects for them; Drizzle serialises Date → integer ms
+// for SQLite/D1 only when the column declares the timestamp mode.
 export const session = sqliteTable("session", {
   id: text("id").primaryKey(),
   userId: text("user_id").notNull().references(() => users.id),
-  expiresAt: integer("expires_at").notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
   token: text("token").notNull(),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
-  createdAt: integer("created_at").notNull(),
-  updatedAt: integer("updated_at").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 });
 
 export const account = sqliteTable("account", {
@@ -123,18 +132,18 @@ export const account = sqliteTable("account", {
   accessToken: text("access_token"),
   refreshToken: text("refresh_token"),
   idToken: text("id_token"),
-  accessTokenExpiresAt: integer("access_token_expires_at"),
-  refreshTokenExpiresAt: integer("refresh_token_expires_at"),
+  accessTokenExpiresAt: integer("access_token_expires_at", { mode: "timestamp_ms" }),
+  refreshTokenExpiresAt: integer("refresh_token_expires_at", { mode: "timestamp_ms" }),
   scope: text("scope"),
-  createdAt: integer("created_at").notNull(),
-  updatedAt: integer("updated_at").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 });
 
 export const verification = sqliteTable("verification", {
   id: text("id").primaryKey(),
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),
-  expiresAt: integer("expires_at").notNull(),
-  createdAt: integer("created_at"),
-  updatedAt: integer("updated_at"),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }),
 });

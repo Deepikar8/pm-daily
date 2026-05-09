@@ -42,7 +42,8 @@ async function seed(
         email: `${u.id}@x.com`,
         displayName: u.id,
         timezone: "UTC",
-        createdAt: Date.now(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
         lastActiveAt: Date.now(),
       })
       .run();
