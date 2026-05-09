@@ -54,7 +54,7 @@
   </main>
 {:else if data.content}
   {@const c = data.content}
-  <main class="max-w-2xl mx-auto px-6 py-10">
+  <main class="max-w-2xl mx-auto px-6 py-7 sm:py-10">
     <!-- Operator-of-the-day pill -->
     <div class="sans inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-accent bg-paper-cream border-2 border-accent rounded-full px-3.5 py-1.5 mb-4">
       <Sparkles size={12} />
@@ -62,7 +62,7 @@
     </div>
 
     <!-- Headline + italic angle (single line until v1.5 adds an angle field) -->
-    <h1 class="serif text-[44px] font-extrabold leading-[1] tracking-tight mt-1 mb-3">
+    <h1 class="serif text-[34px] sm:text-[44px] font-extrabold leading-[1.03] tracking-tight mt-1 mb-3">
       {c.headline}.
     </h1>
 
@@ -77,8 +77,13 @@
       <span class="inline-flex items-center gap-1"><Clock size={11} /> 5 min read</span>
     </div>
 
+    <a href="/quiz"
+       class="sans block text-center text-[12px] font-semibold text-accent underline underline-offset-4 mb-5 sm:hidden">
+      Skip to today's quiz →
+    </a>
+
     {#if pullQuoteText}
-      <blockquote class="serif text-[26px] italic leading-[1.25] text-ink my-7 pl-5 border-l-[3px] border-accent font-medium tracking-tight">
+      <blockquote class="serif text-[21px] sm:text-[26px] italic leading-[1.28] text-ink my-6 sm:my-7 pl-5 border-l-[3px] border-accent font-medium tracking-tight">
         &ldquo;{pullQuoteText}&rdquo;
       </blockquote>
     {/if}
