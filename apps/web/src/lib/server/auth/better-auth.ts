@@ -47,6 +47,34 @@ export function createAuth(args: AuthArgs) {
     basePath: "/auth",                     // route handler lives at /auth/[...all]
     database: drizzleAdapter(args.db, { provider: "sqlite" }),
     emailAndPassword: { enabled: false },
+    // Magic-link sign-ups never pass `name`/`timezone`/`lastActiveAt`, but
+    // the Drizzle schema requires `display_name`, `timezone`, and
+    // `last_active_at` to be NOT NULL. Without this hook the verify step's
+    // INSERT into `users` fails (surfacing as a 404/redirect on the user's
+    // magic-link click). Populate safe defaults here; onboarding will let
+    // the user override displayName/timezone afterwards.
+    databaseHooks: {
+      user: {
+        create: {
+          before: async (user) => {
+            const data: Record<string, unknown> = { ...user };
+            const name = data.name;
+            if (typeof name !== "string" || !name.trim()) {
+              const email = typeof data.email === "string" ? data.email : "";
+              const prefix = email.split("@")[0];
+              data.name = prefix && prefix.trim() ? prefix : "Anonymous PM";
+            }
+            if (!data.timezone) data.timezone = "UTC";
+            // `last_active_at` is declared as `integer` without
+            // `timestamp_ms` mode, so Drizzle won't auto-convert a
+            // Date here — pass milliseconds directly to match the
+            // `additionalFields.lastActiveAt: number` shape.
+            if (!data.lastActiveAt) data.lastActiveAt = Date.now();
+            return { data: data as typeof user };
+          },
+        },
+      },
+    },
     user: {
       // Our table is `users` (plural) and we store the user's name in
       // `display_name` instead of Better Auth's default `name` column.
