@@ -11,6 +11,10 @@ export type AuthArgs = {
   googleClientId?: string;
   googleClientSecret?: string;
   resendApiKey: string;
+  // Sender for the magic-link email. Default is Resend's verified
+  // `onboarding@resend.dev` so a fresh Resend account works out of
+  // the box. Override with a verified custom domain when ready.
+  emailFrom?: string;
 };
 
 export function createAuth(args: AuthArgs) {
@@ -63,7 +67,7 @@ export function createAuth(args: AuthArgs) {
             return;
           }
           await resend.emails.send({
-            from: "PM Daily <noreply@pmdaily.app>",
+            from: args.emailFrom || "PM Daily <onboarding@resend.dev>",
             to: email,
             subject: "Sign in to PM Daily",
             html: `<p>Click to sign in: <a href="${url}">${url}</a></p>
