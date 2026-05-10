@@ -90,7 +90,7 @@
   <div class="flex flex-col gap-3 mb-5">
     <a href="/demo"
        onclick={() => track("demo_start", { source: "landing" })}
-       class="sans btn-press w-full bg-paper-warm text-ink border-2 border-ink rounded-2xl py-4 text-[15px] font-bold shadow-brut-lg flex items-center justify-center gap-2 no-underline">
+       class="sans btn-press w-full bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[15px] font-bold shadow-brut-accent-lg flex items-center justify-center gap-2 no-underline">
       <Sparkles size={16} /> {brandCopy.demoCta}
     </a>
     {#if data.googleEnabled}
@@ -109,7 +109,7 @@
       {/if}
     {/if}
     <a href="/signin/email"
-       class="sans btn-press w-full bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[15px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline">
+       class="sans btn-press w-full bg-transparent text-ink-soft border-2 border-ink rounded-2xl py-4 text-[15px] font-bold flex items-center justify-center gap-2 no-underline">
       <Calendar size={16} /> Email me a magic link
     </a>
   </div>
