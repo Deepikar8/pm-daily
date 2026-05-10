@@ -10,6 +10,7 @@
   } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
   import { resultShareText } from "$lib/brand/share";
+  import { track } from "$lib/analytics/client";
   let { data } = $props();
   let shareState = $state<"idle" | "copied" | "error">("idle");
 
@@ -30,10 +31,12 @@
           text,
           url: data.shareUrl,
         });
+        track("result_share", { source: "quiz_done", method: "native" });
         return;
       }
       await navigator.clipboard.writeText(`${text} ${data.shareUrl}`);
       shareState = "copied";
+      track("result_share", { source: "quiz_done", method: "clipboard" });
     } catch {
       shareState = "error";
     }

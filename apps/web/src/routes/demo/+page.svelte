@@ -2,6 +2,7 @@
   import { ArrowRight, CheckCircle2, Dumbbell, XCircle } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
   import MascotCoach from "$lib/components/MascotCoach.svelte";
+  import { track } from "$lib/analytics/client";
 
   let { data } = $props();
   const question = $derived(data.question);
@@ -21,6 +22,7 @@
   function submit() {
     if (!selectedKey) return;
     submitted = true;
+    track("demo_submit", { selectedKey, correct: isCorrect });
   }
 </script>
 

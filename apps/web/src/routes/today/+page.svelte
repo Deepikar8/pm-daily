@@ -2,6 +2,7 @@
   import { marked } from "marked";
   import { Sparkles, Headphones, Clock, Play, BookOpen, ArrowRight } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
+  import { track } from "$lib/analytics/client";
 
   let { data } = $props();
 
@@ -89,7 +90,7 @@
         <div class="serif text-xl font-bold leading-tight text-ink">Apply this today.</div>
         <div class="sans text-[13px] text-ink-soft mt-0.5">Five calls. One attempt.</div>
       </div>
-      <a href="/quiz" class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
+      <a href="/quiz" onclick={() => track("today_start", { source: "today_top_cta" })} class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
         {brandCopy.takeRepCta} <ArrowRight size={16} />
       </a>
     </div>

@@ -2,6 +2,7 @@
   import { Sparkles, Calendar, Users } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
   import MascotCoach from "$lib/components/MascotCoach.svelte";
+  import { track } from "$lib/analytics/client";
   let { data } = $props();
   const preview = $derived(data.previewQuestion);
   let pendingGoogle = $state(false);
@@ -82,6 +83,7 @@
 
   <div class="flex flex-col gap-3 mb-5">
     <a href="/demo"
+       onclick={() => track("demo_start", { source: "landing" })}
        class="sans btn-press w-full bg-paper-warm text-ink border-2 border-ink rounded-2xl py-4 text-[15px] font-bold shadow-brut-lg flex items-center justify-center gap-2 no-underline">
       <Sparkles size={16} /> {brandCopy.demoCta}
     </a>

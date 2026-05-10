@@ -2,6 +2,7 @@
   import { Check, Dumbbell, Share2, Trophy, X as XIcon } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
   import { resultShareText } from "$lib/brand/share";
+  import { track } from "$lib/analytics/client";
 
   let { data } = $props();
   let copied = $state(false);
@@ -17,6 +18,7 @@
     });
     await navigator.clipboard.writeText(`${text} ${window.location.href}`);
     copied = true;
+    track("result_share", { source: "public_share_page", method: "clipboard" });
   }
 </script>
 
