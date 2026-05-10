@@ -1,10 +1,13 @@
 <script lang="ts">
-  import { Sparkles, Headphones, Clock, Play, ArrowRight } from "lucide-svelte";
+  import { marked } from "marked";
+  import { Sparkles, Headphones, Play, ArrowRight } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
   import { track } from "$lib/analytics/client";
   import MascotCoach from "$lib/components/MascotCoach.svelte";
 
   let { data } = $props();
+
+  marked.setOptions({ breaks: false, gfm: true });
 
   let formattedDate = $derived(
     data.date
@@ -63,8 +66,6 @@
       <span>{c.source.byline}</span>
       <span>·</span>
       <span>{publishedDate}</span>
-      <span>·</span>
-      <span class="inline-flex items-center gap-1"><Clock size={11} /> 5 min read</span>
     </div>
 
     <a href="/quiz"
@@ -84,7 +85,7 @@
       </a>
     </div>
 
-    <!-- Source primer -->
+    <!-- Podcast recap -->
     <section class="bg-white rounded-2xl border-2 border-ink shadow-brut-deep overflow-hidden mb-8">
       <div class="px-5 py-4.5 flex items-start gap-3.5" style="padding: 18px 20px;">
         <div class="w-[54px] h-[54px] rounded-xl border-2 border-ink flex-shrink-0 flex items-center justify-center relative overflow-hidden grain"
@@ -93,20 +94,24 @@
         </div>
         <div class="flex-1 min-w-0">
           <div class="sans text-[10px] font-bold tracking-[0.14em] uppercase text-accent mb-1">
-            Start with the source
+            Podcast recap
           </div>
           <h2 class="serif text-[19px] font-extrabold leading-tight text-ink">
             {c.source.title}
           </h2>
           <p class="sans text-[13px] leading-[1.5] text-ink-soft mt-2">
-            Today’s challenge is based on Lenny’s conversation with {c.source.byline}. Jump to the original “We discuss” section for context, then use the takeaways below to make the call.
+            Today’s challenge is based on Lenny’s conversation with {c.source.byline}. Start from the original episode or newsletter, then use the takeaways below to make the call.
           </p>
         </div>
       </div>
       <div class="px-5 py-3 border-t border-paper-fill flex gap-2 flex-wrap" style="padding: 12px 20px;">
         <a href={sourceHref}
            class="sans inline-flex items-center gap-1.5 bg-ink text-paper rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline">
-          <Play size={12} fill="currentColor" /> Open “We discuss”
+          <Play size={12} fill="currentColor" /> Listen to podcast
+        </a>
+        <a href={c.source.search_url}
+           class="sans inline-flex items-center gap-1.5 bg-transparent text-ink border border-ink rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline">
+          Read newsletter
         </a>
       </div>
     </section>
@@ -126,28 +131,14 @@
       </ol>
     </div>
 
-    <!-- Source card -->
-    <div class="bg-white rounded-2xl border-2 border-ink shadow-brut-deep overflow-hidden mb-6">
-      <div class="px-5 py-4.5 flex items-center gap-3.5" style="padding: 18px 20px;">
-        <div class="w-[54px] h-[54px] rounded-xl border-2 border-ink flex-shrink-0 flex items-center justify-center relative overflow-hidden grain"
-             style="background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%);">
-          <Headphones size={22} class="text-paper relative" />
-        </div>
-        <div class="flex-1 min-w-0">
-          <div class="sans text-[10px] font-bold tracking-[0.14em] uppercase text-accent mb-0.5">
-            Source &nbsp;·&nbsp; {c.source.type === "podcast" ? "podcast" : "newsletter"}
-          </div>
-          <div class="serif text-[15px] font-bold leading-tight">{c.source.title}</div>
-          <div class="sans text-xs text-ink-mute mt-0.5">with {c.source.byline}</div>
-        </div>
-      </div>
-      <div class="px-5 py-3 border-t border-paper-fill flex gap-2 flex-wrap" style="padding: 12px 20px;">
-        <a href={sourceHref}
-           class="sans inline-flex items-center gap-1.5 bg-ink text-paper rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline">
-          <Play size={12} fill="currentColor" /> {c.source.type === "podcast" ? "Listen on Lenny's Podcast" : "Read on Lenny's Newsletter"}
-        </a>
-      </div>
-    </div>
+    <details class="bg-paper-cream border-2 border-ink rounded-2xl px-5 py-4 mb-6">
+      <summary class="sans cursor-pointer text-[12px] font-bold tracking-[0.12em] uppercase text-accent">
+        Quick summary
+      </summary>
+      <article class="serif text-[16px] leading-[1.58] text-ink mt-4 prose-pmd">
+        {@html marked(c.digest_md ?? "")}
+      </article>
+    </details>
 
     <!-- Bottom CTA strip -->
     <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap">
@@ -162,3 +153,15 @@
 
   </main>
 {/if}
+
+<style>
+  :global(.prose-pmd p) {
+    margin: 0 0 14px 0;
+  }
+  :global(.prose-pmd p:last-child) {
+    margin-bottom: 0;
+  }
+  :global(.prose-pmd em) {
+    font-style: italic;
+  }
+</style>
