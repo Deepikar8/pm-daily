@@ -3,6 +3,7 @@
   import { Sparkles, Headphones, Clock, Play, BookOpen, ArrowRight } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
   import { track } from "$lib/analytics/client";
+  import MascotCoach from "$lib/components/MascotCoach.svelte";
 
   let { data } = $props();
 
@@ -86,6 +87,7 @@
 
     <!-- CTA strip -->
     <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap mb-6">
+      <MascotCoach size="sm" />
       <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
         <div class="serif text-xl font-bold leading-tight text-ink">Apply this today.</div>
         <div class="sans text-[13px] text-ink-soft mt-0.5">Five calls. One attempt.</div>
@@ -148,6 +150,17 @@
           </a>
         {/if}
       </div>
+    </div>
+
+    <!-- Bottom CTA strip -->
+    <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap">
+      <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
+        <div class="serif text-xl font-bold leading-tight text-ink">Ready for the rep?</div>
+        <div class="sans text-[13px] text-ink-soft mt-0.5">Make the call while the lesson is fresh.</div>
+      </div>
+      <a href="/quiz" onclick={() => track("today_start", { source: "today_bottom_cta" })} class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
+        {brandCopy.takeRepCta} <ArrowRight size={16} />
+      </a>
     </div>
 
   </main>
