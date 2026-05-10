@@ -80,17 +80,8 @@
       {c.headline}.
     </h1>
 
-    <!-- Byline strip -->
-    <div class="sans text-[10px] font-bold tracking-[0.18em] uppercase text-ink-mute border-y border-paper-fill py-2.5 my-5 flex flex-wrap gap-3.5 items-center">
-      <span class="text-accent">{c.source.type === "podcast" ? "Interview" : "Newsletter"}</span>
-      <span>·</span>
-      <span>{c.source.byline}</span>
-      <span>·</span>
-      <span>{publishedDate}</span>
-    </div>
-
     <a href="/quiz"
-       class="sans block text-center text-[12px] font-semibold text-accent underline underline-offset-4 mb-5 sm:hidden">
+       class="sans block text-center text-[12px] font-semibold text-accent underline underline-offset-4 my-5 sm:hidden">
       Skip to today’s rep →
     </a>
 
@@ -115,6 +106,13 @@
         <div class="flex-1 min-w-0">
           <div class="sans text-[10px] font-bold tracking-[0.14em] uppercase text-accent mb-1">
             Podcast recap
+          </div>
+          <div class="sans text-[10px] font-bold tracking-[0.16em] uppercase text-ink-mute mb-2 flex flex-wrap gap-2 items-center">
+            <span>{c.source.type === "podcast" ? "Interview" : "Newsletter"}</span>
+            <span>·</span>
+            <span>{c.source.byline}</span>
+            <span>·</span>
+            <span>{publishedDate}</span>
           </div>
           <h2 class="serif text-[19px] font-extrabold leading-tight text-ink">
             {c.source.title}
