@@ -7,6 +7,7 @@
     BookOpen,
     Check,
     X as XIcon,
+    Calendar,
   } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
   import { resultShareText } from "$lib/brand/share";
@@ -144,6 +145,23 @@
       </div>
     </div>
   </div>
+
+  <a
+    href="/api/calendar.ics"
+    download
+    class="sans flex items-center justify-between px-4 py-3.5 bg-paper-warm border-2 border-dashed border-ink-mute rounded-xl no-underline text-ink mb-4"
+  >
+    <span class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
+        <Calendar size={16} class="text-paper" />
+      </span>
+      <span>
+        <span class="block text-[13px] font-bold">Get tomorrow’s challenge on your calendar</span>
+        <span class="block text-[11px] text-ink-mute">Recurring 8am-local reminder</span>
+      </span>
+    </span>
+    <span class="text-[12px] font-bold text-accent">Add</span>
+  </a>
 
   <!-- Streak card -->
   <div

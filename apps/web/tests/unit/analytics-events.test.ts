@@ -6,6 +6,7 @@ describe("analytics events", () => {
     expect(analyticsEvents).toEqual([
       "demo_start",
       "demo_submit",
+      "landing_question_submit",
       "today_start",
       "result_share",
     ]);

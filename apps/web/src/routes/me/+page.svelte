@@ -127,14 +127,14 @@
     {#each [
       { label: "Display name", val: data.user.displayName, action: "Edit" },
       { label: "Timezone", val: data.user.timezone, action: "Edit" },
-      { label: "Calendar invite", val: "Re-download to update timezone", action: "Download .ics" },
+      { label: "Daily reminder", val: "Add Product Gym to your calendar", action: "Download .ics" },
     ] as s, i}
       <div class="flex items-center justify-between px-5 py-3.5 {i < 2 ? 'border-b border-paper-fill' : ''}">
         <div>
           <div class="sans text-[11px] font-bold tracking-wider uppercase text-ink-mute mb-0.5">{s.label}</div>
           <div class="serif text-sm font-semibold text-ink">{s.val}</div>
         </div>
-        {#if s.label === "Calendar invite"}
+        {#if s.label === "Daily reminder"}
           <a href="/api/calendar.ics" download class="sans bg-transparent border-[1.5px] border-ink rounded-lg px-3 py-1.5 text-xs font-bold text-ink no-underline">{s.action}</a>
         {:else}
           <span class="sans text-[11px] text-ink-mute">Editable after launch</span>

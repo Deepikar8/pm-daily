@@ -1,6 +1,7 @@
 export const analyticsEvents = [
   "demo_start",
   "demo_submit",
+  "landing_question_submit",
   "today_start",
   "result_share",
 ] as const;

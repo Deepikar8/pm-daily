@@ -121,7 +121,7 @@
         <Calendar size={16} class="text-paper" />
       </span>
       <span>
-        <span class="block text-[13px] font-bold">Add to your calendar</span>
+        <span class="block text-[13px] font-bold">Add Product Gym to your calendar</span>
         <span class="block text-[11px] text-ink-mute">Recurring 8am-local · the only reminder we send</span>
       </span>
     </span>

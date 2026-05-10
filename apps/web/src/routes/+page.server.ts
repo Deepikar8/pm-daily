@@ -14,6 +14,10 @@ const fallbackPreviewQuestion = {
     { key: "C", text: "Whether paid ads can increase top-of-funnel volume" },
     { key: "D", text: "Whether the team should add more notification channels" },
   ],
+  correct_key: "A",
+  explanation_md:
+    "The strongest signal is not more traffic. It is whether the invited teammate reaches the same value moment that caused the original user to invite them.",
+  pm_takeaway: "Follow the activation chain, not the loudest metric.",
 };
 
 const launchProof = "A daily product judgment rep sourced from expert product conversations.";
@@ -44,6 +48,6 @@ export const load: PageServerLoad = async ({ platform }) => {
     };
   }
   const qs = JSON.parse(cached) as Array<any>;
-  const q = qs.length ? qs[Math.floor(Math.random() * qs.length)] : fallbackPreviewQuestion;
+  const q = qs.length ? qs[0] : fallbackPreviewQuestion;
   return { previewQuestion: q, todayDate: date, googleEnabled, isFallback: qs.length === 0, launchProof };
 };

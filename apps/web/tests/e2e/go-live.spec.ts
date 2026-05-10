@@ -7,13 +7,16 @@ test("landing page does not show fake usage claims", async ({ page }) => {
   await expect(page.getByText(/daily product judgment rep/i)).toBeVisible();
 });
 
-test("public users can try one sample rep before sign-in", async ({ page }) => {
+test("public users can answer one landing question before sign-in", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: /try today’s sample/i }).click();
 
-  await expect(page).toHaveURL(/\/demo/);
-  await expect(page.getByText("Sample rep", { exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Make the decision/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^A / })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^D / })).toBeVisible();
+  await page.getByRole("button", { name: /^A / }).click();
+  await page.getByRole("button", { name: /check my decision/i }).click();
+
+  await expect(page.getByText(/want the full challenge/i)).toBeVisible();
+  await expect(page.getByText(/sign in to answer all 5/i)).toBeVisible();
 });
 
 test("public users can read today's lesson before sign-in", async ({ page }) => {
