@@ -48,11 +48,8 @@
 {:else if data.content}
   {@const c = data.content}
   <main class="max-w-2xl mx-auto px-6 py-7 sm:py-10">
-    <div class="text-center mb-7">
-      <h1 class="serif text-[46px] sm:text-[52px] font-extrabold leading-[0.96] tracking-tight mt-3 mb-3">
-        {brandCopy.appName}
-      </h1>
-      <p class="serif italic text-xl text-ink-soft leading-tight">
+    <div class="text-center mb-5">
+      <p class="serif italic text-xl sm:text-2xl text-ink-soft leading-tight">
         {brandCopy.tagline}
       </p>
     </div>
