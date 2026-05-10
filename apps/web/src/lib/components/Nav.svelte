@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import { Calendar, Trophy, Users, Coffee } from "lucide-svelte";
+  import { Calendar, Trophy, Users } from "lucide-svelte";
   import { brandCopy, navLabels } from "$lib/brand/product-gym";
 
   type Tab = { href: string; label: string; matches: (path: string) => boolean };
@@ -32,14 +32,13 @@
   <div class="max-w-2xl mx-auto flex items-center justify-between px-6 py-3">
     <a href="/today" class="flex items-center gap-2.5 no-underline">
       <span
-        class="w-9 h-9 rounded-xl bg-accent border-2 border-ink shadow-brut-sm flex items-center justify-center flex-shrink-0"
+        class="w-9 h-9 rounded-xl bg-accent border-2 border-ink shadow-brut-sm flex items-center justify-center flex-shrink-0 serif text-[14px] font-extrabold text-paper tracking-tight"
         style="transform: rotate(-3deg);"
       >
-        <Coffee size={18} class="text-paper" />
+        PG
       </span>
       <span class="leading-tight">
         <span class="block serif text-lg font-extrabold leading-none tracking-tight text-ink">{brandCopy.appName}</span>
-        <span class="block sans text-[9px] text-ink-mute uppercase tracking-[0.14em] mt-0.5">Daily product reps</span>
       </span>
     </a>
   </div>
