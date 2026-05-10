@@ -14,7 +14,7 @@
     "byline": "Cat Wu",
     "type": "podcast",
     "date": "2026-04-23",
-    "search_url": "https://www.lennyspodcast.com/?q=Cat+Wu+Anthropic"
+    "search_url": "https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves"
   },
   "questions": [
     {
@@ -37,7 +37,7 @@
         "byline": "Cat Wu",
         "type": "podcast",
         "date": "2026-04-23",
-        "search_url": "https://www.lennyspodcast.com/?q=Cat+Wu+Anthropic",
+        "search_url": "https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves",
         "quote_excerpt": "I think it is very hard to be the right amount of AGI-pilled. It's very easy to build the product for the super AGI strong model. The hard thing is figuring out for the current model, how do you elicit the maximum capability?",
         "timestamp": "00:00"
       }
@@ -62,7 +62,7 @@
         "byline": "Cat Wu",
         "type": "podcast",
         "date": "2026-04-23",
-        "search_url": "https://www.lennyspodcast.com/?q=Cat+Wu+Anthropic",
+        "search_url": "https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves",
         "quote_excerpt": "You're interviewing hundreds of PMs and you just keep feeling like they're approaching it very incorrectly.",
         "timestamp": "00:27"
       }
@@ -87,7 +87,7 @@
         "byline": "Cat Wu",
         "type": "podcast",
         "date": "2026-04-23",
-        "search_url": "https://www.lennyspodcast.com/?q=Cat+Wu+Anthropic",
+        "search_url": "https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves",
         "quote_excerpt": "I think product taste is still a very rare skill to have, and we'll pretty much hire anyone who we feel has demonstrated this strongly.",
         "timestamp": "17:05"
       }
@@ -112,7 +112,7 @@
         "byline": "Cat Wu",
         "type": "podcast",
         "date": "2026-04-23",
-        "search_url": "https://www.lennyspodcast.com/?q=Cat+Wu+Anthropic",
+        "search_url": "https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves",
         "quote_excerpt": "We want to remove every single barrier to shipping things. The timelines for a lot of our product features have gone down from six month to one month and sometimes to even one day.",
         "timestamp": "00:17"
       }
@@ -137,7 +137,7 @@
         "byline": "Cat Wu",
         "type": "podcast",
         "date": "2026-04-23",
-        "search_url": "https://www.lennyspodcast.com/?q=Cat+Wu+Anthropic",
+        "search_url": "https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves",
         "quote_excerpt": "There are many engineers on our team who are fully able to end to end go from see user feedback on Twitter through to ship a product at the end of the week with almost no product involvement.",
         "timestamp": "16:35"
       }

@@ -41,4 +41,13 @@ describe("launch content runway", () => {
       }
     }
   });
+
+  it("does not use unsupported lennyspodcast query URLs", () => {
+    const files = readdirSync("content").filter((file) => /^\d{4}-\d{2}-\d{2}\.json$/.test(file));
+
+    for (const file of files) {
+      const raw = readFileSync(join("content", file), "utf8");
+      expect(raw).not.toContain("https://www.lennyspodcast.com/?q=");
+    }
+  });
 });
