@@ -98,7 +98,7 @@
   </div>
 
   <p class="sans text-center text-xs text-ink-mute mb-5 flex justify-center items-center gap-5 flex-wrap">
-    <span class="flex items-center gap-1.5"><Users size={13} class="text-accent" /> Daily session · 4,247 PMs played</span>
+    <span class="flex items-center gap-1.5"><Users size={13} class="text-accent" /> {data.launchProof}</span>
   </p>
 
   <div class="border-t border-paper-fill pt-4 text-center">

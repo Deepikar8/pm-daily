@@ -17,6 +17,8 @@ const fallbackPreviewQuestion = {
   ],
 };
 
+const launchProof = "A daily product judgment rep sourced from expert product conversations.";
+
 export const load: PageServerLoad = async ({ locals, platform }) => {
   if (locals.user) throw redirect(302, "/today");
   if (!platform?.env) {
@@ -25,6 +27,7 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
       todayDate: new Date().toISOString().slice(0, 10),
       googleEnabled: false,
       isFallback: true,
+      launchProof,
     };
   }
   const googleEnabled = isGoogleAuthEnabled(
@@ -39,9 +42,10 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
       todayDate: date,
       googleEnabled,
       isFallback: true,
+      launchProof,
     };
   }
   const qs = JSON.parse(cached) as Array<any>;
   const q = qs.length ? qs[Math.floor(Math.random() * qs.length)] : fallbackPreviewQuestion;
-  return { previewQuestion: q, todayDate: date, googleEnabled, isFallback: qs.length === 0 };
+  return { previewQuestion: q, todayDate: date, googleEnabled, isFallback: qs.length === 0, launchProof };
 };

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ChevronRight, Calendar } from "lucide-svelte";
+  import { Calendar } from "lucide-svelte";
   let { data } = $props();
   function fmtTime(s: number) { return `${Math.floor(s/60)}:${(s%60).toString().padStart(2,"0")}`; }
   function fmtDate(iso: string) {
@@ -90,7 +90,7 @@
       Recent sessions
     </div>
     {#each data.recent as r, i}
-      <div class="flex items-center gap-3.5 px-5 py-3 cursor-pointer {i < data.recent.length - 1 ? 'border-b border-paper-fill' : ''}">
+      <div class="flex items-center gap-3.5 px-5 py-3 {i < data.recent.length - 1 ? 'border-b border-paper-fill' : ''}">
         <div class="serif w-11 text-[13px] font-bold text-ink-mute mono">{fmtDate(r.date)}</div>
         <div class="flex-1 min-w-0">
           <div class="serif text-[15px] font-bold leading-tight text-ink truncate">{r.headline || "Today's session"}</div>
@@ -102,7 +102,6 @@
           {/each}
         </div>
         <div class="sans text-xs text-ink-soft mono min-w-9 text-right">{fmtTime(r.totalSeconds)}</div>
-        <ChevronRight size={14} class="text-ink-mute" />
       </div>
     {/each}
     {#if data.recent.length === 0}
@@ -126,7 +125,7 @@
         {#if s.label === "Calendar invite"}
           <a href="/api/calendar.ics" download class="sans bg-transparent border-[1.5px] border-ink rounded-lg px-3 py-1.5 text-xs font-bold text-ink no-underline">{s.action}</a>
         {:else}
-          <button class="sans bg-transparent border-[1.5px] border-ink rounded-lg px-3 py-1.5 text-xs font-bold text-ink">{s.action}</button>
+          <span class="sans text-[11px] text-ink-mute">Editable after launch</span>
         {/if}
       </div>
     {/each}
