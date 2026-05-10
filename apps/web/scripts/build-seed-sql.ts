@@ -21,12 +21,15 @@ const esc = (s: string) => s.replace(/'/g, "''");
 const jsonEsc = (o: unknown) => esc(JSON.stringify(o));
 
 const overrideDate = process.argv.find((a) => a.startsWith("--date="))?.split("=")[1];
+// --content=<path> lets you point at any content file. If only --date is
+// given, default to content/<date>.json (the natural mapping). Falling back
+// further still resolves the legacy file so older invocations don't break.
+const overrideContent = process.argv.find((a) => a.startsWith("--content="))?.split("=")[1];
 
-const CONTENT_PATH = "./content/2026-05-08.json";
+const CONTENT_PATH =
+  overrideContent ??
+  (overrideDate ? `./content/${overrideDate}.json` : "./content/2026-05-08.json");
 const OUT_DIR = "./.tmp";
-const SQL_OUT = `${OUT_DIR}/seed-2026-05-08.sql`;
-const DIGEST_OUT = `${OUT_DIR}/digest.json`;
-const QUESTIONS_OUT = `${OUT_DIR}/questions.json`;
 
 type Citation = {
   filename: string;
