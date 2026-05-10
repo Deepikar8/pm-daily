@@ -49,24 +49,12 @@
   {@const c = data.content}
   <main class="max-w-2xl mx-auto px-6 py-7 sm:py-10">
     <div class="text-center mb-7">
-      <div class="flex items-center justify-center gap-3 mb-4">
-        <MascotCoach size="sm" />
-        <p class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-accent">
-          Daily product training
-        </p>
-      </div>
       <h1 class="serif text-[46px] sm:text-[52px] font-extrabold leading-[0.96] tracking-tight mt-3 mb-3">
         {brandCopy.appName}
       </h1>
       <p class="serif italic text-xl text-ink-soft leading-tight">
         {brandCopy.tagline}
       </p>
-      <div class="mt-3 flex items-center justify-center gap-2">
-        <Sparkles size={14} class="text-accent" />
-        <p class="sans text-[14px] text-ink-soft leading-relaxed">
-          {brandCopy.landingSupport}
-        </p>
-      </div>
     </div>
 
     <!-- Operator-of-the-day pill -->
