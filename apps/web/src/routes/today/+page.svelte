@@ -1,15 +1,10 @@
 <script lang="ts">
-  import { marked } from "marked";
-  import { Sparkles, Headphones, Clock, Play, BookOpen, ArrowRight } from "lucide-svelte";
+  import { Sparkles, Headphones, Clock, Play, ArrowRight } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
   import { track } from "$lib/analytics/client";
   import MascotCoach from "$lib/components/MascotCoach.svelte";
 
   let { data } = $props();
-
-  // Configure marked for safe-ish rendering. We control the content (LLM
-  // pipeline output) so we don't need full sanitization in v1.
-  marked.setOptions({ breaks: false, gfm: true });
 
   let formattedDate = $derived(
     data.date
@@ -31,16 +26,8 @@
       : ""
   );
 
-  // For decorative pull quote: take the first sentence of the first
-  // digest paragraph. (Server-side digest_md is the source of truth;
-  // we synthesize the pull quote client-side until v1.5 adds a dedicated
-  // pullQuote field.)
-  let pullQuoteText = $derived(
-    data.content?.digest_md
-      ? (
-          data.content.digest_md.split(/\n\n/)[0].split(/(?<=[.!?])\s/)[0] ?? ""
-        ).replace(/\*([^*]+)\*/g, "$1")
-      : ""
+  let sourceHref = $derived(
+    data.content?.source?.source_url || data.content?.source?.search_url || ""
   );
 </script>
 
@@ -97,16 +84,32 @@
       </a>
     </div>
 
-    {#if pullQuoteText}
-      <blockquote class="serif text-[21px] sm:text-[26px] italic leading-[1.28] text-ink my-6 sm:my-7 pl-5 border-l-[3px] border-accent font-medium tracking-tight">
-        &ldquo;{pullQuoteText}&rdquo;
-      </blockquote>
-    {/if}
-
-    <!-- Digest body -->
-    <article class="serif text-[17px] leading-[1.65] text-ink prose-pmd">
-      {@html marked(c.digest_md ?? "")}
-    </article>
+    <!-- Source primer -->
+    <section class="bg-white rounded-2xl border-2 border-ink shadow-brut-deep overflow-hidden mb-8">
+      <div class="px-5 py-4.5 flex items-start gap-3.5" style="padding: 18px 20px;">
+        <div class="w-[54px] h-[54px] rounded-xl border-2 border-ink flex-shrink-0 flex items-center justify-center relative overflow-hidden grain"
+             style="background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%);">
+          <Headphones size={22} class="text-paper relative" />
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="sans text-[10px] font-bold tracking-[0.14em] uppercase text-accent mb-1">
+            Start with the source
+          </div>
+          <h2 class="serif text-[19px] font-extrabold leading-tight text-ink">
+            {c.source.title}
+          </h2>
+          <p class="sans text-[13px] leading-[1.5] text-ink-soft mt-2">
+            Today’s challenge is based on Lenny’s conversation with {c.source.byline}. Jump to the original “We discuss” section for context, then use the takeaways below to make the call.
+          </p>
+        </div>
+      </div>
+      <div class="px-5 py-3 border-t border-paper-fill flex gap-2 flex-wrap" style="padding: 12px 20px;">
+        <a href={sourceHref}
+           class="sans inline-flex items-center gap-1.5 bg-ink text-paper rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline">
+          <Play size={12} fill="currentColor" /> Open “We discuss”
+        </a>
+      </div>
+    </section>
 
     <!-- Takeaways -->
     <div class="mt-9 mb-7">
@@ -139,16 +142,10 @@
         </div>
       </div>
       <div class="px-5 py-3 border-t border-paper-fill flex gap-2 flex-wrap" style="padding: 12px 20px;">
-        <a href={c.source.source_url || c.source.search_url}
+        <a href={sourceHref}
            class="sans inline-flex items-center gap-1.5 bg-ink text-paper rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline">
           <Play size={12} fill="currentColor" /> {c.source.type === "podcast" ? "Listen on Lenny's Podcast" : "Read on Lenny's Newsletter"}
         </a>
-        {#if c.source.type === "podcast"}
-          <a href={c.source.search_url}
-             class="sans inline-flex items-center gap-1.5 bg-transparent text-ink border border-ink rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline">
-            <BookOpen size={12} /> Read transcript
-          </a>
-        {/if}
       </div>
     </div>
 
@@ -165,16 +162,3 @@
 
   </main>
 {/if}
-
-<style>
-  /* Tighten paragraph spacing in marked-rendered prose */
-  :global(.prose-pmd p) {
-    margin: 0 0 18px 0;
-  }
-  :global(.prose-pmd p:last-child) {
-    margin-bottom: 0;
-  }
-  :global(.prose-pmd em) {
-    font-style: italic;
-  }
-</style>
