@@ -5,14 +5,33 @@
   import { track } from "$lib/analytics/client";
   let { data } = $props();
   const preview = $derived(data.previewQuestion);
+  const todayContent = $derived(data.todayContent);
+  const operatorDate = $derived(
+    todayContent?.source?.date
+      ? new Date(`${todayContent.source.date}T00:00:00Z`).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          timeZone: "UTC",
+        })
+      : null
+  );
   let pendingGoogle = $state(false);
   let googleError = $state<string | null>(null);
   let selectedKey = $state<string | null>(null);
   let submitted = $state(false);
+  let revealData = $state<{
+    correct_key: string;
+    explanation_md: string;
+    pm_takeaway: string;
+  } | null>(null);
+  let revealError = $state<string | null>(null);
+  let revealing = $state(false);
   const selectedOption = $derived(
     preview.options.find((option: { key: string }) => option.key === selectedKey)
   );
-  const isCorrect = $derived(submitted && selectedKey === preview.correct_key);
+  const reveal = $derived(revealData ?? preview);
+  const isCorrect = $derived(submitted && !!reveal.correct_key && selectedKey === reveal.correct_key);
 
   async function signInWithGoogle() {
     pendingGoogle = true;
@@ -46,10 +65,44 @@
     selectedKey = key;
   }
 
-  function submitDecision() {
+  async function submitDecision() {
     if (!selectedKey) return;
     submitted = true;
-    track("landing_question_submit", { selectedKey, correct: isCorrect });
+    revealError = null;
+
+    if (preview.correct_key) {
+      revealData = {
+        correct_key: preview.correct_key,
+        explanation_md: preview.explanation_md,
+        pm_takeaway: preview.pm_takeaway,
+      };
+      track("landing_question_submit", { selectedKey, correct: selectedKey === preview.correct_key });
+      return;
+    }
+
+    revealing = true;
+    try {
+      const res = await fetch("/api/landing/reveal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          date: data.todayDate,
+          position: preview.position ?? 1,
+          selectedKey,
+        }),
+      });
+      if (!res.ok) throw new Error("reveal failed");
+      revealData = await res.json();
+      track("landing_question_submit", {
+        selectedKey,
+        correct: selectedKey === revealData?.correct_key,
+      });
+    } catch {
+      revealError = "Couldn't load the coaching note. You can still continue to the full challenge.";
+      track("landing_question_submit", { selectedKey, correct: null });
+    } finally {
+      revealing = false;
+    }
   }
 </script>
 
@@ -79,6 +132,36 @@
     </div>
   </div>
 
+  <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-4 mb-5 shadow-brut">
+    <p class="sans text-[11px] font-bold tracking-[0.12em] uppercase text-accent mb-2">
+      Operator of the day
+    </p>
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h2 class="serif text-[23px] font-bold leading-tight tracking-tight text-ink">
+          {todayContent.source.byline}
+        </h2>
+        <p class="sans text-[13px] text-ink-soft leading-relaxed mt-1">
+          {todayContent.headline}
+        </p>
+      </div>
+      <div class="sans text-[11px] text-ink-mute text-right flex-shrink-0 pt-1">
+        <div class="capitalize">{todayContent.source.type}</div>
+        {#if operatorDate}
+          <div>{operatorDate}</div>
+        {/if}
+      </div>
+    </div>
+    <a
+      href={todayContent.source.source_url ?? todayContent.source.search_url}
+      target="_blank"
+      rel="noreferrer"
+      class="sans inline-flex text-[12px] font-bold text-ink underline mt-3"
+    >
+      Listen to the source
+    </a>
+  </div>
+
   <div class="bg-white rounded-2xl border-2 border-ink shadow-brut-accent-lg overflow-hidden mb-6">
     <div class="px-5 py-3.5 bg-paper-warm border-b-2 border-ink flex items-center justify-between">
       <span class="sans text-[11px] font-bold tracking-[0.12em] uppercase text-ink-soft">
@@ -93,7 +176,7 @@
       <div class="flex flex-col gap-2.5">
         {#each preview.options as opt}
           {@const active = selectedKey === opt.key}
-          {@const correct = submitted && opt.key === preview.correct_key}
+          {@const correct = submitted && opt.key === reveal.correct_key}
           {@const wrong = submitted && active && !correct}
           <button
             type="button"
@@ -132,14 +215,20 @@
       {:else}
         <div class="mt-5 border-2 border-ink rounded-2xl bg-paper-warm px-4 py-4">
           <p class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-accent mb-2">
-            {isCorrect ? "Good decision" : "Training note"}
+            {revealing ? "Checking decision" : isCorrect ? "Good decision" : "Training note"}
           </p>
-          <p class="serif text-[17px] leading-[1.45] text-ink mb-3">
-            {preview.explanation_md}
-          </p>
-          <p class="sans text-sm font-bold text-ink">
-            {preview.pm_takeaway}
-          </p>
+          {#if revealing}
+            <p class="serif text-[17px] leading-[1.45] text-ink">Loading your coaching note...</p>
+          {:else if revealError}
+            <p class="serif text-[17px] leading-[1.45] text-ink">{revealError}</p>
+          {:else}
+            <p class="serif text-[17px] leading-[1.45] text-ink mb-3">
+              {reveal.explanation_md}
+            </p>
+            <p class="sans text-sm font-bold text-ink">
+              {reveal.pm_takeaway}
+            </p>
+          {/if}
         </div>
       {/if}
     </div>

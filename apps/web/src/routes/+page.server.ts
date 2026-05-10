@@ -20,6 +20,17 @@ const fallbackPreviewQuestion = {
   pm_takeaway: "Follow the activation chain, not the loudest metric.",
 };
 
+const fallbackTodayContent = {
+  headline: "Cat Wu on shipping speed: how Anthropic compresses six-month timelines to a week",
+  source: {
+    title: "How Anthropic's product team moves faster than anyone else",
+    byline: "Cat Wu",
+    type: "podcast",
+    date: "2026-04-23",
+    search_url: "https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves",
+  },
+};
+
 const launchProof = "A daily product judgment rep sourced from expert product conversations.";
 
 export const load: PageServerLoad = async ({ platform }) => {
@@ -27,6 +38,7 @@ export const load: PageServerLoad = async ({ platform }) => {
     return {
       previewQuestion: fallbackPreviewQuestion,
       todayDate: new Date().toISOString().slice(0, 10),
+      todayContent: fallbackTodayContent,
       googleEnabled: false,
       isFallback: true,
       launchProof,
@@ -37,11 +49,16 @@ export const load: PageServerLoad = async ({ platform }) => {
     platform.env.GOOGLE_CLIENT_SECRET,
   );
   const date = formatInTimeZone(new Date(), "UTC", "yyyy-MM-dd");
-  const cached = await platform.env.KV.get(kvKeys.todayQuestions(date));
+  const [cached, digest] = await Promise.all([
+    platform.env.KV.get(kvKeys.todayQuestions(date)),
+    platform.env.KV.get(kvKeys.todayDigest(date)),
+  ]);
+  const todayContent = digest ? JSON.parse(digest) : fallbackTodayContent;
   if (!cached) {
     return {
       previewQuestion: fallbackPreviewQuestion,
       todayDate: date,
+      todayContent,
       googleEnabled,
       isFallback: true,
       launchProof,
@@ -49,5 +66,12 @@ export const load: PageServerLoad = async ({ platform }) => {
   }
   const qs = JSON.parse(cached) as Array<any>;
   const q = qs.length ? qs[0] : fallbackPreviewQuestion;
-  return { previewQuestion: q, todayDate: date, googleEnabled, isFallback: qs.length === 0, launchProof };
+  return {
+    previewQuestion: q,
+    todayDate: date,
+    todayContent,
+    googleEnabled,
+    isFallback: qs.length === 0,
+    launchProof,
+  };
 };
