@@ -11,13 +11,14 @@
   import { brandCopy } from "$lib/brand/product-gym";
   import { resultShareText } from "$lib/brand/share";
   import { track } from "$lib/analytics/client";
-  let { data } = $props();
+  let { data }: { data: any } = $props();
   let shareState = $state<"idle" | "copied" | "error">("idle");
 
   function fmtTime(s: number) {
     return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
   }
   async function shareResult() {
+    if (data.mode === "practice") return;
     const text = resultShareText({
       correct: data.attempt.totalCorrect,
       date: data.date,
@@ -102,6 +103,44 @@
         <div class="serif text-[40px] font-extrabold leading-none">
           {data.rank ? `#${data.rank}` : "—"}
         </div>
+      </div>
+    </div>
+  </div>
+
+  {#if data.mode === "late"}
+    <div class="bg-paper-cream border-2 border-ink rounded-2xl p-4 mb-4">
+      <div class="sans text-[11px] font-bold tracking-widest uppercase text-accent mb-1">
+        Saved to your history
+      </div>
+      <p class="sans text-[13px] text-ink-soft m-0">
+        Late challenges help you catch up, but only same-day attempts count toward streaks and leaderboard.
+      </p>
+    </div>
+  {:else if data.mode === "practice"}
+    <div class="bg-paper-cream border-2 border-ink rounded-2xl p-4 mb-4">
+      <div class="sans text-[11px] font-bold tracking-widest uppercase text-accent mb-1">
+        Practice replay
+      </div>
+      <p class="sans text-[13px] text-ink-soft m-0">
+        Practice replays do not change your score, streak, or leaderboard rank.
+      </p>
+    </div>
+  {/if}
+
+  <div class="bg-white rounded-2xl border-2 border-ink p-4 mb-4">
+    <div class="sans text-[11px] font-bold tracking-widest uppercase text-ink-mute mb-3">
+      How your score was calculated
+    </div>
+    <div class="grid grid-cols-2 gap-2 sans text-sm">
+      <div>Correct</div>
+      <div class="text-right mono">{data.scoreBreakdown.basePoints} pts</div>
+      <div>Speed bonus</div>
+      <div class="text-right mono">+{data.scoreBreakdown.speedBonus}</div>
+      <div>Streak</div>
+      <div class="text-right mono">{data.scoreBreakdown.streakMultiplier.toFixed(2)}x</div>
+      <div class="font-bold">Total</div>
+      <div class="text-right mono font-bold">
+        {data.scoreBreakdown.leaderboardEligible ? `${data.scoreBreakdown.totalPoints} pts` : "No leaderboard points"}
       </div>
     </div>
   </div>
@@ -198,18 +237,26 @@
   <!-- CTA row -->
   <div class="flex gap-2.5">
     <a
+      href={`/quiz/${data.date}?mode=practice`}
+      class="sans btn-press flex-1 bg-paper-warm text-ink border-2 border-ink rounded-2xl py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline"
+    >
+      Replay as practice
+    </a>
+    <a
       href="/leaderboard"
       class="sans btn-press flex-1 bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline"
     >
       <Trophy size={15} /> See Arena
     </a>
-    <button
-      type="button"
-      onclick={shareResult}
-      class="sans btn-press bg-white text-ink border-2 border-ink rounded-2xl px-5 py-4 text-[14px] font-bold shadow-brut flex items-center gap-2"
-    >
-      <Share2 size={15} /> {shareState === "copied" ? "Copied" : "Share"}
-    </button>
+    {#if data.mode !== "practice"}
+      <button
+        type="button"
+        onclick={shareResult}
+        class="sans btn-press bg-white text-ink border-2 border-ink rounded-2xl px-5 py-4 text-[14px] font-bold shadow-brut flex items-center gap-2"
+      >
+        <Share2 size={15} /> {shareState === "copied" ? "Copied" : "Share"}
+      </button>
+    {/if}
   </div>
   {#if shareState === "error"}
     <p class="sans text-xs text-wrong text-center mt-3">

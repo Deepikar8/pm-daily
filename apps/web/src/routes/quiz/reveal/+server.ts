@@ -3,6 +3,7 @@ import { getDb } from "$lib/server/db/client";
 import { dailyQuestions } from "$lib/server/db/schema";
 import { and, eq } from "drizzle-orm";
 import { localDate } from "$lib/server/timezone/helpers";
+import { quizSessionName } from "$lib/server/quiz/session";
 
 /**
  * Returns correct_key + explanation + takeaway + quote_excerpt for a single
@@ -15,11 +16,14 @@ export const GET: RequestHandler = async ({ url, locals, platform }) => {
   if (!platform?.env) return new Response("platform unavailable", { status: 500 });
   const env = platform.env;
   const date = url.searchParams.get("date") ?? localDate(locals.user.timezone ?? "UTC");
+  const sessionId = url.searchParams.get("sessionId") ?? "default";
   const position = parseInt(url.searchParams.get("position") ?? "0", 10);
   if (!position || !date) return new Response("bad request", { status: 400 });
 
   // Verify the user has submitted this position via the DO
-  const stub = env.QUIZ_SESSION.get(env.QUIZ_SESSION.idFromName(`${locals.user.id}:${date}`));
+  const stub = env.QUIZ_SESSION.get(
+    env.QUIZ_SESSION.idFromName(quizSessionName({ userId: locals.user.id, date, sessionId })),
+  );
   const stateRes = await stub.fetch("https://do/state");
   const state = (await stateRes.json()) as
     | { uninitialized: true }

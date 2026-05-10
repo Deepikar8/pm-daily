@@ -71,9 +71,20 @@
     </div>
     <div class="grid grid-cols-14 gap-1" style="grid-template-columns: repeat(14, minmax(0, 1fr));">
       {#each data.heatmap as h}
-        <div title={h.score ? `${h.score}/5` : "missed"}
-             class="aspect-square border-[1.5px] border-ink rounded"
-             style="background-color: {heatColor(h.score)};"></div>
+        {#if h.available}
+          <a
+            href={h.href}
+            title={h.score ? `${h.score}/5` : "Missed · available as late challenge"}
+            class="block aspect-square border-[1.5px] border-ink rounded"
+            style="background-color: {heatColor(h.score)};"
+          ></a>
+        {:else}
+          <div
+            title="not available"
+            class="aspect-square border-[1.5px] border-ink rounded opacity-40"
+            style="background-color: {heatColor(h.score)};"
+          ></div>
+        {/if}
       {/each}
     </div>
     <div class="flex items-center gap-1.5 mt-2.5 text-[10px] text-ink-mute sans">
@@ -91,7 +102,7 @@
       Recent sessions
     </div>
     {#each data.recent as r, i}
-      <div class="flex items-center gap-3.5 px-5 py-3 {i < data.recent.length - 1 ? 'border-b border-paper-fill' : ''}">
+      <a href={`/quiz/${r.date}/done`} class="flex items-center gap-3.5 px-5 py-3 no-underline text-ink {i < data.recent.length - 1 ? 'border-b border-paper-fill' : ''}">
         <div class="serif w-11 text-[13px] font-bold text-ink-mute mono">{fmtDate(r.date)}</div>
         <div class="flex-1 min-w-0">
           <div class="serif text-[15px] font-bold leading-tight text-ink truncate">{r.headline || "Today's session"}</div>
@@ -103,7 +114,7 @@
           {/each}
         </div>
         <div class="sans text-xs text-ink-soft mono min-w-9 text-right">{fmtTime(r.totalSeconds)}</div>
-      </div>
+      </a>
     {/each}
     {#if data.recent.length === 0}
       <div class="py-8 text-center serif italic text-ink-soft">No sessions yet.</div>

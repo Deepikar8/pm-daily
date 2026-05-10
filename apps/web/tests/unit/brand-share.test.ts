@@ -4,7 +4,7 @@ import { resultShareText } from "../../src/lib/brand/share";
 describe("result sharing copy", () => {
   it("uses Product Gym and the score", () => {
     expect(resultShareText({ correct: 4, date: "2026-05-13" })).toBe(
-      "Product Gym: 4/5 on 2026-05-13. Daily reps for sharper product judgment.",
+      "Product Gym: 4/5 on 2026-05-13. One daily challenge to sharpen your product instincts.",
     );
   });
 

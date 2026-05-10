@@ -37,11 +37,22 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
     .all();
 
   const byDate = new Map(recentAttempts.map((a) => [a.date, a]));
-  const heatmap: { date: string; score: number | null }[] = [];
+  const availableSessions = await db.select({
+    date: dailySessions.date,
+  }).from(dailySessions)
+    .where(gte(dailySessions.date, since))
+    .all();
+  const availableDates = new Set(availableSessions.map((s) => s.date));
+  const heatmap: { date: string; score: number | null; href: string; available: boolean }[] = [];
   for (let i = 13; i >= 0; i--) {
     const d = new Date(Date.now() - i * 86_400_000).toISOString().slice(0, 10);
     const a = byDate.get(d);
-    heatmap.push({ date: d, score: a?.totalCorrect ?? null });
+    heatmap.push({
+      date: d,
+      score: a?.totalCorrect ?? null,
+      href: a ? `/quiz/${d}/done` : `/quiz/${d}`,
+      available: availableDates.has(d),
+    });
   }
 
   // Last 5 attempts overall (not just last 14d)

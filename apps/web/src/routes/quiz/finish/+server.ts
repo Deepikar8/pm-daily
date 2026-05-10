@@ -6,6 +6,8 @@ import { score } from "$lib/server/scoring/score";
 import { applyAttemptToStats } from "$lib/server/scoring/streaks";
 import { recomputeLeaderboard } from "$lib/server/leaderboard/recompute";
 import { localDate } from "$lib/server/timezone/helpers";
+import { compareIsoDate } from "$lib/server/quiz/date";
+import { quizSessionName } from "$lib/server/quiz/session";
 import { ulid } from "ulid";
 
 /**
@@ -24,12 +26,22 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
   if (!locals.user) return new Response("unauth", { status: 401 });
   if (!platform?.env) return new Response("platform unavailable", { status: 500 });
   const env = platform.env;
-  const body = (await request.json().catch(() => ({}))) as { date?: string };
+  const body = (await request.json().catch(() => ({}))) as {
+    date?: string;
+    mode?: "scored_today" | "late" | "practice";
+    sessionId?: string;
+  };
   const tz = locals.user.timezone ?? "UTC";
-  const date = body.date ?? localDate(tz);
+  const today = localDate(tz);
+  const date = body.date ?? today;
+  const mode = body.mode ?? (compareIsoDate(date, today) < 0 ? "late" : "scored_today");
 
   // Finalize the DO
-  const stub = env.QUIZ_SESSION.get(env.QUIZ_SESSION.idFromName(`${locals.user.id}:${date}`));
+  const stub = env.QUIZ_SESSION.get(
+    env.QUIZ_SESSION.idFromName(
+      quizSessionName({ userId: locals.user.id, date, sessionId: body.sessionId }),
+    ),
+  );
   const finalRes = await stub.fetch("https://do/finalize", { method: "POST" });
   if (!finalRes.ok) {
     return new Response("could not finalize quiz", { status: 400 });
@@ -88,8 +100,23 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
   const { basePoints, speedBonus, streakMultiplier, totalPoints } = score({
     correctCount: totalCorrect,
     seconds: totalSeconds,
-    streak: currentStreak,
+    streak: mode === "practice" ? 0 : currentStreak,
   });
+
+  if (mode === "practice") {
+    return Response.json({
+      attemptId: null,
+      date,
+      mode,
+      totalCorrect,
+      totalSeconds,
+      totalPoints: 0,
+      basePoints,
+      speedBonus,
+      streakMultiplier: 1,
+      leaderboardEligible: false,
+    });
+  }
 
   const attemptId = state.attemptId ?? ulid();
   await db
@@ -126,22 +153,28 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
       .run();
   }
 
-  await applyAttemptToStats({
-    db,
-    userId: locals.user.id,
-    date,
-    points: totalPoints,
-    timezone: tz,
-  });
-  await recomputeLeaderboard(env);
+  const leaderboardEligible = mode === "scored_today" && compareIsoDate(date, today) === 0;
+  if (leaderboardEligible) {
+    await applyAttemptToStats({
+      db,
+      userId: locals.user.id,
+      date,
+      points: totalPoints,
+      timezone: tz,
+    });
+    await recomputeLeaderboard(env);
+  }
 
   return Response.json({
     attemptId,
+    date,
+    mode,
     totalCorrect,
     totalSeconds,
     totalPoints,
     basePoints,
     speedBonus,
     streakMultiplier,
+    leaderboardEligible,
   });
 };

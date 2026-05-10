@@ -4,7 +4,7 @@
   import ResultPanel from "$lib/components/ResultPanel.svelte";
   import { brandCopy } from "$lib/brand/product-gym";
 
-  let { data } = $props();
+  let { data }: { data: any } = $props();
 
   type Question = {
     position: number;
@@ -61,12 +61,13 @@
           position: q.position,
           selectedKey: selected,
           date: data.date,
+          sessionId: data.sessionId,
         }),
       });
       if (!res.ok) throw new Error("submit failed");
       // Reveal: ask the server for the correct key + explanation for THIS question
       const rev = await fetch(
-        `/quiz/reveal?date=${encodeURIComponent(data.date)}&position=${q.position}`,
+        `/quiz/reveal?date=${encodeURIComponent(data.date)}&position=${q.position}&sessionId=${encodeURIComponent(data.sessionId ?? "default")}`,
       );
       if (!rev.ok) throw new Error("reveal failed");
       const r = (await rev.json()) as Reveal;
@@ -93,11 +94,14 @@
       const res = await fetch("/quiz/finish", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ date: data.date }),
+        body: JSON.stringify({ date: data.date, mode: data.mode, sessionId: data.sessionId }),
       });
       pending = false;
       if (res.ok) {
-        await goto("/quiz/done");
+        const practiceQuery = data.mode === "practice"
+          ? `?mode=practice&sessionId=${encodeURIComponent(data.sessionId ?? "default")}`
+          : "";
+        await goto(`/quiz/${data.date}/done${practiceQuery}`);
       }
     }
   }
@@ -122,6 +126,22 @@
   {@const q = questions[currentIndex]}
   <main class="max-w-2xl mx-auto px-6 py-8">
     <!-- Progress + timer header -->
+    {#if data.mode === "practice"}
+      <div class="bg-paper-cream border-2 border-ink rounded-xl px-3 py-2 mb-4">
+        <div class="sans text-[11px] font-bold uppercase text-accent">Practice replay</div>
+        <div class="sans text-[12px] text-ink-soft mt-0.5">
+          Practice replays do not change your score, streak, or leaderboard rank.
+        </div>
+      </div>
+    {:else if data.mode === "late"}
+      <div class="bg-paper-cream border-2 border-ink rounded-xl px-3 py-2 mb-4">
+        <div class="sans text-[11px] font-bold uppercase text-accent">Late challenge</div>
+        <div class="sans text-[12px] text-ink-soft mt-0.5">
+          This saves to your history, but won’t change your streak or leaderboard rank.
+        </div>
+      </div>
+    {/if}
+
     <div class="flex justify-between items-center mb-2">
       <span class="sans text-xs font-bold tracking-widest uppercase text-ink-mute">
         Decision {currentIndex + 1} of {questions.length}
