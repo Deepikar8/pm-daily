@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Sparkles, Calendar, Users } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
+  import MascotCoach from "$lib/components/MascotCoach.svelte";
   let { data } = $props();
   const preview = $derived(data.previewQuestion);
   let pendingGoogle = $state(false);
@@ -46,9 +47,12 @@
     <h1 class="serif text-[44px] font-extrabold leading-[1] tracking-tight mt-3 mb-3">
       Train your product judgment with one daily rep.
     </h1>
-    <p class="serif italic text-lg text-ink-soft">
-      Make the call. Learn the lesson. Climb the Arena.
-    </p>
+    <div class="flex items-center justify-center gap-3">
+      <p class="serif italic text-lg text-ink-soft">
+        Make the call. Learn the lesson. Climb the Arena.
+      </p>
+      <MascotCoach size="sm" />
+    </div>
   </div>
 
   <div class="bg-white rounded-2xl border-2 border-ink shadow-brut-accent-lg overflow-hidden mb-6">

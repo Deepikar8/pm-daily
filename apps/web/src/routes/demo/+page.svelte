@@ -1,6 +1,7 @@
 <script lang="ts">
   import { ArrowRight, CheckCircle2, Dumbbell, XCircle } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
+  import MascotCoach from "$lib/components/MascotCoach.svelte";
 
   let { data } = $props();
   const question = $derived(data.question);
@@ -33,12 +34,17 @@
     Sample rep
   </div>
 
-  <h1 class="serif text-[34px] sm:text-[44px] font-extrabold leading-[1.03] tracking-tight mb-3">
-    Make the call.
-  </h1>
-  <p class="serif italic text-lg text-ink-soft mb-6">
-    One product judgment rep. No account needed.
-  </p>
+  <div class="flex items-end justify-between gap-4 mb-6">
+    <div class="min-w-0">
+      <h1 class="serif text-[34px] sm:text-[44px] font-extrabold leading-[1.03] tracking-tight mb-3">
+        Make the call.
+      </h1>
+      <p class="serif italic text-lg text-ink-soft">
+        One product judgment rep. No account needed.
+      </p>
+    </div>
+    <MascotCoach size="md" />
+  </div>
 
   <section class="bg-white rounded-2xl border-2 border-ink shadow-brut-accent-lg overflow-hidden">
     <div class="px-5 py-3.5 bg-paper-warm border-b-2 border-ink flex items-center justify-between gap-3">
