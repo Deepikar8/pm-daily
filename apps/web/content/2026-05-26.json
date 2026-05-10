@@ -1,0 +1,228 @@
+{
+  "date": "2026-05-26",
+  "headline": "Jeanne Grosser on world-class GTM: 80% buy to avoid pain, and your buying journey is the product",
+  "theme_pillar": "go-to-market",
+  "digest_md": "Jeanne DeWitt Grosser — built Stripe's early sales team, now COO at Vercel running marketing, sales, customer success, revenue ops, and field engineering — argues that the GTM playbook PMs grew up with is mismatched to how enterprise customers actually buy, and is becoming critical to get right because *'with AI, you have 10 players pursuing the same market opportunity and so your ability to actually bring the product to market to differentiate yourself from the competition has become more strategically important than it was previously.'*\n\nThe central reframes:\n\n- **80% buy to avoid pain or reduce risk** — not to chase upside. *'We all love to talk about the art of the possible, everything we're going to enable in the future, but that's often really a sale that's going to resonate with another founder. For everybody else, particularly enterprises, you're avoiding the risk of not making your revenue target next quarter.'* PMs writing pitches in vision-mode are selling to themselves.\n- **GTM is a product.** *'We buy a lot of things because of how we feel about them. The experience that you have of being sold to will increasingly actually differentiate a company and drive buying decisions if products are only different at the merchant.'* The buying journey is the surface to design.\n- **The litmus test for sales hires.** Grosser tells her sales team: *'If you are an account executive in my org and I put you in front of 10 engineers at our company, it should take them 10 minutes to figure out you aren't a product manager.'* Translation: sellers who can't speak credibly to the technical buyer don't belong in the room.\n- **The GTM engineer is rising.** New role; she says it's already enabling her team to operate 10x faster.\n- **Sales-time allocation.** For 20 years, sellers have spent 30-40% of their time with customers. Agents and AI take the rote, hopefully shifting sellers to 70% of time on actual customer interaction.\n\nFor a mid-level PM: this is week-by-week practice. Stop pitching upside; pitch reduced risk. Treat your launch's buying journey like a feature surface. Write your next pitch deck so an engineer-buyer can actually use it.",
+  "takeaways": [
+    "Audit your next launch pitch this week. If it leads with 'imagine if...' — rewrite it to lead with 'here's the risk you avoid by deploying this' for the enterprise buyer.",
+    "Treat your buying journey as a product surface. Map the steps a customer takes from first touch to value, and identify the worst step. Fix one this quarter.",
+    "Bring an engineer-credible AE to your next customer call instead of pre-briefing them on basics. The 10-minute test is a real bar; if your sales partner can't pass it, that's signal.",
+    "Don't outsource GTM to marketing. The PMs who own product launch + buying journey + sales enablement are the ones who'll be 10x ahead in an AI-saturated market."
+  ],
+  "source": {
+    "filename": "podcasts/jeanne-grosser.md",
+    "title": "What world-class GTM looks like in 2026 | Jeanne DeWitt Grosser (Vercel, Stripe, Google)",
+    "byline": "Jeanne DeWitt Grosser",
+    "type": "podcast",
+    "date": "2025-11-30",
+    "source_url": "https://www.youtube.com/watch?v=RmnWHz8HD74",
+    "search_url": "https://www.lennyspodcast.com/?q=Jeanne+Grosser+world-class+GTM"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "avoid-pain-reduce-risk",
+      "archetype": "spot",
+      "scenario_md": "You're presenting a launch deck for your enterprise AI feature to a Fortune 500 prospect Friday. Your draft opens: 'Imagine an analyst team that never sleeps. Reports written in seconds. The art of the possible.' Your sales partner — newer, pulled from another product — says it looks great.\n\nPer Grosser, the missing reframe before Friday is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Add benchmarks against competitor AI features in slide 2.",
+          "role": "adjacent"
+        },
+        {
+          "key": "B",
+          "text": "Tighten the deck to 8 slides; enterprise buyers don't read 20.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "Lead with the risk this enterprise avoids — missing the next-quarter revenue target — not the upside vision.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "Add three customer logos and a case study to validate the vision.",
+          "role": "mistake"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Grosser's frame: 80% of customers buy to avoid pain or reduce risk — vision-led pitches resonate with founders, not enterprise buyers. The week-of fix is to rewrite the opening to anchor on the risk the buyer is avoiding by deploying, not the upside they could capture.",
+      "pm_takeaway": "Before sending any enterprise pitch this week, change the opening sentence to 'here's the risk you reduce' rather than 'here's what becomes possible.' Test it on one prospect.",
+      "citation": {
+        "filename": "podcasts/jeanne-grosser.md",
+        "title": "What world-class GTM looks like in 2026 | Jeanne DeWitt Grosser (Vercel, Stripe, Google)",
+        "byline": "Jeanne DeWitt Grosser",
+        "type": "podcast",
+        "date": "2025-11-30",
+        "source_url": "https://www.youtube.com/watch?v=RmnWHz8HD74",
+        "search_url": "https://www.lennyspodcast.com/?q=Jeanne+Grosser+world-class+GTM",
+        "quote_excerpt": "80% of customers buy to avoid pain or reduce risk as opposed to increased upside, which is a good thing for startup founders to understand."
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "gtm-as-a-product",
+      "archetype": "translate",
+      "scenario_md": "Your launch is on track but the customer's first-touch experience is splintered: marketing's signup form, a sales-rep email two days later, an onboarding doc with stale screenshots. Your VP says 'fine for now, we'll fix it next quarter.' You disagree.\n\nThe response that best translates Grosser's 'GTM as a product' framing for your week is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Defer to next quarter; product launches are the right priority now.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Map the customer's first-touch-to-value journey as a single product surface, identify the worst step, and ship one fix before launch.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Hand the buying-journey audit to marketing and request a project plan.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Update the onboarding doc screenshots; it's the cheapest fix.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Grosser's frame is that the buying journey is itself a product — what customers feel during the sale increasingly differentiates the company. The PM lever is to treat that journey as a designable surface, not a marketing chore — map it, find the worst step, ship a fix.",
+      "pm_takeaway": "This week, walk your product's buying journey end-to-end as if you were a new prospect. Document the worst step. Add one fix to your next sprint.",
+      "citation": {
+        "filename": "podcasts/jeanne-grosser.md",
+        "title": "What world-class GTM looks like in 2026 | Jeanne DeWitt Grosser (Vercel, Stripe, Google)",
+        "byline": "Jeanne DeWitt Grosser",
+        "type": "podcast",
+        "date": "2025-11-30",
+        "source_url": "https://www.youtube.com/watch?v=RmnWHz8HD74",
+        "search_url": "https://www.lennyspodcast.com/?q=Jeanne+Grosser+world-class+GTM",
+        "quote_excerpt": "The experience that you have of being sold to will increasingly actually differentiate a company and drive buying decisions if products are only different at the merchant. And so then you really want to create a customer buying journey that feels like very unique experiences."
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "sales-team-as-engineers",
+      "archetype": "diagnose",
+      "scenario_md": "You're prepping for a discovery call with a developer-tools prospect. The AE assigned has a strong consumer-SaaS background but mostly relies on you to handle technical questions. The prospect's CTO will be in the room. You're not sure whether to flag it.\n\nPer Grosser's litmus test, the most accurate diagnosis is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Healthy split — AEs handle relationship, PMs handle technical depth. That's the model.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "If the engineering audience can spot in 10 minutes that your AE isn't credible, that's a sales-staffing failure — flag it before the call.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Brief the AE on the top 5 technical questions tonight; the gap is fixable in one prep session.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Skip the AE entirely — run the discovery call yourself.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Grosser's litmus test: an AE in front of 10 engineers should take them 10 minutes to figure out the AE isn't a PM. A consumer-SaaS AE handling a CTO discovery is a staffing mismatch the PM should escalate, not paper over with a one-night brief.",
+      "pm_takeaway": "Before your next technical discovery call, assess if your sales partner passes the 10-minute test. If not, flag it to your sales leader before the call — staffing is their decision, not yours, but the signal is yours to give.",
+      "citation": {
+        "filename": "podcasts/jeanne-grosser.md",
+        "title": "What world-class GTM looks like in 2026 | Jeanne DeWitt Grosser (Vercel, Stripe, Google)",
+        "byline": "Jeanne DeWitt Grosser",
+        "type": "podcast",
+        "date": "2025-11-30",
+        "source_url": "https://www.youtube.com/watch?v=RmnWHz8HD74",
+        "search_url": "https://www.lennyspodcast.com/?q=Jeanne+Grosser+world-class+GTM",
+        "quote_excerpt": "The litmus test I have always given my sales team is if you are an account executive in my org and I put you in front of 10 engineers at our company, it should take them 10 minutes to figure out you aren't a product manager."
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "ai-intensifies-gtm-importance",
+      "archetype": "apply",
+      "scenario_md": "Your AI feature is one of nine similar features shipping across your category in the next 60 days. Your CEO assumes the product itself will differentiate. Your team's GTM plan is a press release, a blog post, and a newsletter. You have one sprint to influence the plan before launch.\n\nApplying Grosser's framing on AI-era GTM, the move you make is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Push for $X paid acquisition spend to outspend the 8 competitors.",
+          "role": "adjacent"
+        },
+        {
+          "key": "B",
+          "text": "Invest in feature depth this sprint — better product is the only durable differentiator.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "Propose a three-stage GTM plan — risk-led pitch, designed buying journey, technical-credible sales motion — and own writing it yourself.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "Move the launch date earlier to be first to market.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Grosser's frame: when 10 AI players pursue the same opportunity, GTM differentiation becomes more strategically important than the product itself. The PM-agency move is to take ownership of writing a structured GTM plan — not assume product wins, not outspend, not race the calendar.",
+      "pm_takeaway": "Before your next AI launch, draft a one-page GTM plan with three sections — pitch (risk-led), buying journey (mapped), sales motion (technical-credible). Bring it to your manager.",
+      "citation": {
+        "filename": "podcasts/jeanne-grosser.md",
+        "title": "What world-class GTM looks like in 2026 | Jeanne DeWitt Grosser (Vercel, Stripe, Google)",
+        "byline": "Jeanne DeWitt Grosser",
+        "type": "podcast",
+        "date": "2025-11-30",
+        "source_url": "https://www.youtube.com/watch?v=RmnWHz8HD74",
+        "search_url": "https://www.lennyspodcast.com/?q=Jeanne+Grosser+world-class+GTM",
+        "quote_excerpt": "With AI, it's just intensified because you have 10 players pursuing the same market opportunity and so your ability to actually bring the product to market to differentiate yourself from the competition has become more strategically important than it was previously."
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "sales-time-allocation",
+      "archetype": "pick",
+      "scenario_md": "Your sales team partners report spending 35% of their time on rote prep — research, follow-up emails, CRM hygiene — and 65% on meetings, internal syncs, and admin. They want your help making the next launch land. Four candidate moves you could push for:\n\n1. Build a one-pager 'pre-call brief' template they can use before discovery calls.\n2. Champion an AI agent for prospect research and follow-up; reroute saved time to customer interaction.\n3. Run a sales training on the new feature.\n4. Add a Slack channel for fast PM-to-sales Q&A.\n\nPer Grosser's framing, the highest-leverage pick is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Option 1 — pre-call briefs are immediately useful.",
+          "role": "half_truth"
+        },
+        {
+          "key": "B",
+          "text": "Option 3 — feature training is the standard PM contribution.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "Option 4 — the Slack channel removes friction for sales.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Option 2 — agents take rote work; sellers shift to 70% customer time, the structural unlock.",
+          "role": "correct"
+        }
+      ],
+      "correct_key": "D",
+      "explanation_md": "Grosser's framing: sellers have spent 30-40% of time with customers for 20 years; the structural unlock is offloading rote work to agents and getting sellers to 70% customer time. Pre-call briefs, training, and Slack channels improve the existing inefficient state — the agent move changes it.",
+      "pm_takeaway": "This week, identify one rote sales task on your team's launch that an agent could take. Champion it to your sales leader — name the hours saved and the customer-time it unlocks.",
+      "citation": {
+        "filename": "podcasts/jeanne-grosser.md",
+        "title": "What world-class GTM looks like in 2026 | Jeanne DeWitt Grosser (Vercel, Stripe, Google)",
+        "byline": "Jeanne DeWitt Grosser",
+        "type": "podcast",
+        "date": "2025-11-30",
+        "source_url": "https://www.youtube.com/watch?v=RmnWHz8HD74",
+        "search_url": "https://www.lennyspodcast.com/?q=Jeanne+Grosser+world-class+GTM",
+        "quote_excerpt": "for the 20 years I've been in sales, it's always been somewhere around 30% to 40%. So the minority of time is actually talking to other humans and I think we're getting to a point where with layering in agents, ideally we finally get salespeople to a point where they're actually spending 70% of their time interacting with humans"
+      }
+    }
+  ]
+}

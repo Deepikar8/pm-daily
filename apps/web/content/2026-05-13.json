@@ -1,0 +1,228 @@
+{
+  "date": "2026-05-13",
+  "headline": "Hamel Husain & Shreya Shankar on AI evals: ground them in your product's actual failures, not fashionable metrics",
+  "theme_pillar": "ai-product",
+  "digest_md": "Hamel Husain and Shreya Shankar argue that most AI eval dashboards are theater. Teams reach for ready-made metrics like 'hallucination' or 'toxicity' because they sound rigorous, but those scores rarely correlate with the actual problems users face. The result: pretty dashboards that nobody trusts and that don't drive shipping decisions.\n\nTheir alternative is a three-phase process. **Phase 1** is *error analysis*: ground your evals in reality by appointing a single principal domain expert (often the PM) as the 'benevolent dictator' on quality. Arm them with ~100 representative user interactions, sampled randomly at first, and have them do *open coding* — free-form pass/fail critiques detailed enough that a brand-new employee could understand them. The output is a prioritized list of your product's most common failure modes.\n\n**Phase 2** is building the eval suite. Each prioritized failure mode gets the right tool: code-based evaluators for objective, rule-based checks ('does the output contain a user ID?'), and LLM-as-a-judge for subjective qualities like tone or reasoning quality. Don't pick the tool first; pick the failure mode first, then the tool.\n\n**Phase 3** is operationalizing — making the suite a flywheel that catches regressions before they ship and feeds back into product improvement. The throughline: evals are a process, not a dashboard. They're the PM's domain, not a thing you outsource to ML engineers.",
+  "takeaways": [
+    "Don't start with 'hallucination' or 'toxicity' — those metrics rarely match your users' actual problems. Start with 100 traces and a domain expert reading them.",
+    "If you are the PM on an AI product, you are probably the principal domain expert. Stop waiting for someone else to define quality.",
+    "Code-based evaluators for objective rules; LLM-as-a-judge only for subjective qualities. Pick the failure mode first, the tool second.",
+    "An eval suite that doesn't catch regressions before they ship isn't a flywheel — it's a vanity dashboard."
+  ],
+  "source": {
+    "filename": "newsletters/building-eval-systems-that-improve-your-ai-product.md",
+    "title": "Building eval systems that improve your AI product",
+    "byline": "Hamel Husain & Shreya Shankar",
+    "type": "newsletter",
+    "date": "2025-09-09",
+    "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+    "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "ground-evals-in-reality",
+      "archetype": "spot",
+      "scenario_md": "You inherited an AI customer-support assistant. Your predecessor set up a dashboard tracking 'hallucination rate' and 'toxicity score' from an off-the-shelf eval library. Both numbers look fine, but support escalations keep climbing and your CX lead says replies feel 'off.' You have an hour tomorrow morning to start fixing this.\n\nThe most aligned first move is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Pull a random sample of about 100 recent traces and read them yourself, writing pass/fail critiques on each.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Tighten the existing thresholds on hallucination and toxicity to make the dashboard more sensitive.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "Ask engineering to add a third off-the-shelf metric — relevance — to round out the dashboard.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Schedule a stakeholder review to align on which metrics matter most before changing anything.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Husain and Shankar argue ready-made metrics like hallucination and toxicity often don't correlate with real user problems; you can't know what to measure until you systematically read how your product fails in context. Error analysis on ~100 sampled traces is the grounding step.",
+      "pm_takeaway": "This week: block two hours, pull 100 random traces from your AI product, and write a pass/fail critique on each before you touch any dashboard.",
+      "citation": {
+        "filename": "newsletters/building-eval-systems-that-improve-your-ai-product.md",
+        "title": "Building eval systems that improve your AI product",
+        "byline": "Hamel Husain & Shreya Shankar",
+        "type": "newsletter",
+        "date": "2025-09-09",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
+        "quote_excerpt": "fashionable metrics like “hallucination” or “toxicity.” This approach often leads to tracking scores that don’t correlate with the actual problems your users face with your product. You cannot know what to measure until you systematically find out how your product fails"
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "principal-domain-expert",
+      "archetype": "diagnose",
+      "scenario_md": "Your team is building an AI assistant for small-business tax filing. Quality reviews have stalled because three people — you (the PM), an outside CPA consultant, and a senior engineer — keep disagreeing on what counts as a 'fail.' Annotation throughput has dropped to a trickle. You're a 4-person product team in a 60-person company.\n\nYou would best apply Husain & Shankar's framing by —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bring in two more annotators so the majority vote breaks ties faster.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Write a longer rubric that all three reviewers must follow exactly to converge their judgments.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "Pause annotation and ship a user-survey to let customers vote on quality directly.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Designate one person — most likely the CPA — as the single arbiter of quality and route all disputed cases to them.",
+          "role": "correct"
+        }
+      ],
+      "correct_key": "D",
+      "explanation_md": "For small to mid-size companies, Husain and Shankar recommend a single 'benevolent dictator' principal domain expert as the arbiter of quality — usually the person with the deepest domain knowledge — to eliminate annotation conflicts and decision paralysis.",
+      "pm_takeaway": "Pick the one person on or near your team with the deepest domain expertise and make them the sole quality arbiter on disputed traces this week.",
+      "citation": {
+        "filename": "newsletters/building-eval-systems-that-improve-your-ai-product.md",
+        "title": "Building eval systems that improve your AI product",
+        "byline": "Hamel Husain & Shreya Shankar",
+        "type": "newsletter",
+        "date": "2025-09-09",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
+        "quote_excerpt": "Appointing a single expert, sometimes called a “benevolent dictator,” provides a consistent and deeply informed signal, which eliminates annotation conflicts and prevents the paralysis that can come from having too many cooks in the kitchen."
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "open-coding",
+      "archetype": "apply",
+      "scenario_md": "You're sitting down to do error analysis on your AI legal-summarizer. You have 100 sampled traces and an open Google Sheet. A teammate suggests you just mark each row 'pass' or 'fail' so you can move fast.\n\nFollowing Husain & Shankar's open-coding approach, your critique on each trace should be —",
+      "options": [
+        {
+          "key": "A",
+          "text": "A single tag from a fixed taxonomy of failure types you defined upfront.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Just the pass/fail judgment plus a 1-5 quality score — speed matters more than detail.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "A free-form written critique detailed enough that a brand-new employee could understand the judgment.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "A side-by-side comparison against the previous model version's output for that trace.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Open coding is free-form journaling on each trace, with the heuristic that the critique should be detailed enough for a brand-new employee — or for use as a few-shot prompt for an LLM judge later. Being too terse is a common mistake that loses the structure you'll need in Phase 2.",
+      "pm_takeaway": "When you sit down with traces this week, write paragraphs, not tags. Imagine onboarding a new hire who has to make the same call.",
+      "citation": {
+        "filename": "newsletters/building-eval-systems-that-improve-your-ai-product.md",
+        "title": "Building eval systems that improve your AI product",
+        "byline": "Hamel Husain & Shreya Shankar",
+        "type": "newsletter",
+        "date": "2025-09-09",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
+        "quote_excerpt": "**As a heuristic, the critique should be detailed enough** for a brand-new employee at your company to understand it. Or, if this is more helpful, **so that you can use it in a few-shot prompt for an LLM judge**.Being too terse is a common mistake."
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "code-vs-judge",
+      "archetype": "pick",
+      "scenario_md": "You finished error analysis on your AI scheduling assistant. Your prioritized failure list:\n\n1. Output sometimes omits the meeting's user_id field\n2. Tone occasionally feels curt for VIP attendees\n3. Suggested times sometimes fall outside the user's stated working hours\n4. Reasoning chain sometimes contradicts itself across turns\n\nFollowing Husain & Shankar, which failure most clearly calls for a code-based evaluator (not LLM-as-a-judge)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Failure 2 — tone for VIPs.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Failure 1 — missing user_id.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Failure 4 — reasoning self-consistency across turns.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Failure 3 — suggested times outside working hours.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Husain and Shankar's split: objective, rule-based failures get code-based evaluators (deterministic, cheap, fast); subjective qualities like tone or reasoning need LLM-as-a-judge. 'Does the output contain a user ID?' is the canonical example of a code check.",
+      "pm_takeaway": "Before you ask engineering to wire up an LLM judge, walk down your failure list and circle every one that a unit test could check. Those are free wins.",
+      "citation": {
+        "filename": "newsletters/building-eval-systems-that-improve-your-ai-product.md",
+        "title": "Building eval systems that improve your AI product",
+        "byline": "Hamel Husain & Shreya Shankar",
+        "type": "newsletter",
+        "date": "2025-09-09",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
+        "quote_excerpt": "For objective failures, use **code-based evaluators**. These are simple checks written as code, like assertions in a unit test. They are fast, cheap, and deterministic, making them perfect for verifying things like whether an output is valid JSON"
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "operationalize-flywheel",
+      "archetype": "translate",
+      "scenario_md": "You shipped a small eval suite three weeks ago: 4 code checks and 2 LLM-as-a-judge graders. Your team uses them as a launch checklist before each deploy. A senior engineer calls them 'a nice safety net.' Quality scores are flat.\n\nPer Husain & Shankar's framing, the gap in your current setup is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Connect failing eval results back to a recurring error-analysis review that prioritizes the next product changes.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Add more LLM judges so subjective failures get fuller coverage.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "Replace LLM judges with stronger reasoning models to get higher-fidelity scores.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Add a public leaderboard of eval scores per engineer to drive accountability.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Husain and Shankar distinguish *evaluator* (a tool) from *evaluation system* (a process). The flywheel is the loop: evals catch failures, those failures feed back into product improvement, and the prioritized failure list drives the next sprint — not just a launch gate.",
+      "pm_takeaway": "Add a recurring 30-minute weekly slot where you review failing eval cases and turn the top one into a backlog item. Otherwise your suite is a checklist, not a flywheel.",
+      "citation": {
+        "filename": "newsletters/building-eval-systems-that-improve-your-ai-product.md",
+        "title": "Building eval systems that improve your AI product",
+        "byline": "Hamel Husain & Shreya Shankar",
+        "type": "newsletter",
+        "date": "2025-09-09",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
+        "quote_excerpt": "Having a suite of trusted evaluators is a major milestone, but it is not the end goal. An evaluator is a tool; a system of evaluation is a process. The final phase is to build a process that creates a flywheel, using your evals to drive continuous product improvement."
+      }
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "date": "2026-05-16",
+  "headline": "Jason Cohen on stalled growth: fix churn first or none of the rest matters",
+  "theme_pillar": "growth",
+  "digest_md": "Jason Cohen — four-time founder, two-time unicorn (WP Engine), prolific investor — argues that when growth stalls, most teams reach for the wrong lever. They tune the bottom of the funnel ('let's flog AdWords') when the problem is upstream. His diagnostic is a *strict-order* sequence of five questions: fix the first one that's broken before touching anything else, because the order encodes which problem makes the others irrelevant.\n\n**Question 1: Are customers leaving?** Logo churn is the worst problem because it's irreversible — once they're gone, nothing you do reaches them. It also correlates with negative reviews and word-of-mouth damage. Reaching the customer through the gauntlet (find you, not bounce, hit pricing, buy) was already improbable; if they then leave, that's a five-alarm fire.\n\n**Question 2: Are your prices wrong?** Most products have prices that were guessed once and never revisited. Cohen's reliable observation: raise prices, signups usually don't change. Buyers at scale read $2/month or even $100/month as 'can't be good enough.'\n\n**Question 3: Is NRR (net revenue retention) covering the gap?** If existing customers expand fast enough, churn at the edges matters less. NRR is the single number that tells you whether your installed base is itself a growth engine.\n\n**Question 4: Are your channels saturated?** You can't rely on marketing forever. Adding one feature and pumping AdWords harder is not a strategy — it's a stall.\n\n**Question 5: Do you actually need to grow?** 'If you're not growing, you're dying' is sometimes investor pressure, not gospel. Ask whether the right answer for your stage and shape is to optimize, not expand.\n\nThe whole framework is order-sensitive: solving question 4 while question 1 is broken just buys you faster customer churn.",
+  "takeaways": [
+    "Diagnose growth stalls in order: churn → pricing → NRR → channels → 'do we need to'. The first broken one is the one that matters.",
+    "Logo churn is the worst problem because there's nothing you can do once it happens. Treat it as the priority diagnosis, not a 'fix later' task.",
+    "Most prices were guessed once. Test a price increase — signups usually don't move, and you've been leaving money on the table.",
+    "Don't try to outrun a churn problem with paid acquisition. You'll spend more to put customers in a leaky bucket."
+  ],
+  "source": {
+    "filename": "podcasts/jason-cohen.md",
+    "title": "5 questions to ask when your product stops growing | Jason Cohen (2x unicorn founder)",
+    "byline": "Jason Cohen",
+    "type": "podcast",
+    "date": "2026-01-25",
+    "source_url": "https://www.youtube.com/watch?v=8xLquwfx6p0",
+    "search_url": "https://www.lennyspodcast.com/?q=Jason+Cohen+stops+growing"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "diagnose-in-order",
+      "archetype": "pick",
+      "scenario_md": "Your B2B SaaS product's MRR growth has flattened for two quarters. You have one focused week to diagnose. Your data:\n\n- Logo churn: 4% monthly (up from 2% a year ago)\n- Pricing: $19/seat, unchanged for 3 years\n- NRR: 95%\n- Channels: paid search CAC up 60%; SEO flat\n\nFollowing Cohen's framework, which question do you investigate *first*?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Customer churn — logo churn doubled, and it's the upstream problem that makes the others moot if unfixed.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Pricing — $19/seat unchanged for 3 years is the loudest red flag.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "Channels — rising CAC is the most actionable lever this quarter.",
+          "role": "mistake"
+        },
+        {
+          "key": "D",
+          "text": "NRR — 95% means existing customers aren't expanding; that's the structural issue.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Cohen's diagnostic is order-sensitive: customer churn comes first because it's irreversible and because lower-funnel fixes can't compensate for a leaky bucket. With logo churn doubling, every other problem on this list is downstream of that one.",
+      "pm_takeaway": "Tomorrow, before you touch CAC or pricing, schedule 5 cancellation interviews this week. Fix the leak before refilling the bucket.",
+      "citation": {
+        "filename": "podcasts/jason-cohen.md",
+        "title": "5 questions to ask when your product stops growing | Jason Cohen (2x unicorn founder)",
+        "byline": "Jason Cohen",
+        "type": "podcast",
+        "date": "2026-01-25",
+        "source_url": "https://www.youtube.com/watch?v=8xLquwfx6p0",
+        "search_url": "https://www.lennyspodcast.com/?q=Jason+Cohen+stops+growing",
+        "quote_excerpt": "there's a series of questions that I asked to diagnose why is growth slowing in this order, because it's one of these things where the first one that's a problem, if you don't fix that, it doesn't matter if you fix one of the ones below."
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "churn-irreversibility",
+      "archetype": "diagnose",
+      "scenario_md": "You're a PM on a horizontal SaaS product. Your VP of Growth Slacks you: 'Churn is at 5% but that's manageable — let's focus on doubling top-of-funnel signups next quarter.' You're tempted to agree because acquisition gives you cleaner OKR wins.\n\nPer Cohen's framing, the most accurate read on the VP's plan is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Reasonable — pouring water into a bucket faster than it leaks still grows the bucket.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Reasonable for one quarter as a stopgap, but only if churn work also runs in parallel.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "A category mistake — churned customers are gone for good and damage the brand on the way out; doubling signups can't reach them.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "Reasonable — channel-mix optimization is more efficient than late-stage retention work.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Cohen's argument is that churn is the worst problem precisely because it's irreversible — there's nothing you can do about it once it happens — and it correlates with negative reviews and social damage that depress future acquisition too. Top-of-funnel cannot rescue a churn-driven plateau.",
+      "pm_takeaway": "If your team's plan is 'fix growth by adding signups while churn stays flat', push back this week. Bring Cohen's irreversibility argument to your next planning meeting.",
+      "citation": {
+        "filename": "podcasts/jason-cohen.md",
+        "title": "5 questions to ask when your product stops growing | Jason Cohen (2x unicorn founder)",
+        "byline": "Jason Cohen",
+        "type": "podcast",
+        "date": "2026-01-25",
+        "source_url": "https://www.youtube.com/watch?v=8xLquwfx6p0",
+        "search_url": "https://www.lennyspodcast.com/?q=Jason+Cohen+stops+growing",
+        "quote_excerpt": "And it's the worst problem for a couple reasons. One is there's nothing you can do about it once it happens. They're gone. There's no saving them, increasing their revenue. There's nothing in the future you can do."
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "prices-were-guessed",
+      "archetype": "apply",
+      "scenario_md": "Your developer-tool product has charged $9/month per user since launch 3 years ago. Churn is fine (1.5% monthly). Signups are healthy. NRR is 105%. Growth is flattening anyway. Your CEO asks what to try.\n\nThe most Cohen-aligned move tomorrow is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Add three new features to justify a future price hike in 6 months.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Raise prices on new signups to a tested higher tier and watch what happens to conversion.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Run a formal 6-month pricing study with a consultant before any change.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Add a freemium tier to drive top-of-funnel volume.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Cohen's pricing observation: when prices were guessed once and never revisited, raising them rarely moves signups — and at scale, very low prices read as 'can't be good enough.' Test the increase on new signups before sweeping it across the base.",
+      "pm_takeaway": "This week, push for a small live pricing test on new signups — even just 20% of traffic. Stop assuming your guess from launch is still right.",
+      "citation": {
+        "filename": "podcasts/jason-cohen.md",
+        "title": "5 questions to ask when your product stops growing | Jason Cohen (2x unicorn founder)",
+        "byline": "Jason Cohen",
+        "type": "podcast",
+        "date": "2026-01-25",
+        "source_url": "https://www.youtube.com/watch?v=8xLquwfx6p0",
+        "search_url": "https://www.lennyspodcast.com/?q=Jason+Cohen+stops+growing",
+        "quote_excerpt": "Your prices are way too low because you just guessed and you haven't changed them. What often happens is you raise prices and signups don't change."
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "channel-saturation",
+      "archetype": "spot",
+      "scenario_md": "Your team's last three quarters: shipped two small features, scaled paid search budget by 3×, and ran two LinkedIn ad experiments. CAC has crept up each quarter and the latest ROAS is below threshold. Your VP wants to ship one more 'quick feature' and double down on AdWords next quarter.\n\nPer Cohen, the biggest blind spot in this plan is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Feature scope is too thin — you need a multi-month build, not a quick feature.",
+          "role": "adjacent"
+        },
+        {
+          "key": "B",
+          "text": "LinkedIn experiments weren't measured well enough; tighter attribution would unlock the channel.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "Feature ROI is the wrong frame; the team should hire a head of growth.",
+          "role": "mistake"
+        },
+        {
+          "key": "D",
+          "text": "It's the exact pattern Cohen flags: 'adding one little feature and then hoping we can flog AdWords' — that's not a growth plan.",
+          "role": "correct"
+        }
+      ],
+      "correct_key": "D",
+      "explanation_md": "Cohen's channel-saturation point is structural: you cannot rely on marketing forever, and tacking a small feature onto more paid spend is a tell that the team has run out of organic levers. The fix is finding which channels are saturated vs. which are still under-exploited, not pumping the saturated ones harder.",
+      "pm_takeaway": "Ask your growth lead this week: 'Which channel is saturated? Which one are we not yet running?' If they can't answer, that's your next investigation.",
+      "citation": {
+        "filename": "podcasts/jason-cohen.md",
+        "title": "5 questions to ask when your product stops growing | Jason Cohen (2x unicorn founder)",
+        "byline": "Jason Cohen",
+        "type": "podcast",
+        "date": "2026-01-25",
+        "source_url": "https://www.youtube.com/watch?v=8xLquwfx6p0",
+        "search_url": "https://www.lennyspodcast.com/?q=Jason+Cohen+stops+growing",
+        "quote_excerpt": "Do you know right now which channels are saturated and which aren't? You can't just rely on marketing forever. Just adding one little feature and then hoping we can flog AdWords is not going to work."
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "nrr-covers-the-gap",
+      "archetype": "translate",
+      "scenario_md": "Your usage-based AI product has logo churn at 6% but NRR at 135% — heavy users keep expanding consumption. Your CEO frames the choice as 'we need to fix churn' versus 'we should pour into expansion sales.' You have one quarter of focus to allocate.\n\nThe most Cohen-aligned framing for the *order* of work is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Diagnose 6% logo churn first; high NRR can mask reputation damage and a lower-tier customer hemorrhage that will cap expansion later.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "All-in on expansion — NRR > 100% means churn is mathematically irrelevant.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "Defer both; first run a pricing test since prices are likely the upstream issue.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "All-in on churn — Cohen's order says churn is always question 1 regardless of NRR.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Cohen treats churn as question 1 not because pricing/NRR don't matter, but because churned customers are gone, talk publicly, and cap your future addressable base. Strong NRR can mask the leak; treating it as cover means you'll find out at scale, when it's harder to fix.",
+      "pm_takeaway": "If your NRR is hiding a logo-churn problem, run cancellation interviews this week. Don't wait until expansion plateaus to discover the leak.",
+      "citation": {
+        "filename": "podcasts/jason-cohen.md",
+        "title": "5 questions to ask when your product stops growing | Jason Cohen (2x unicorn founder)",
+        "byline": "Jason Cohen",
+        "type": "podcast",
+        "date": "2026-01-25",
+        "source_url": "https://www.youtube.com/watch?v=8xLquwfx6p0",
+        "search_url": "https://www.lennyspodcast.com/?q=Jason+Cohen+stops+growing",
+        "quote_excerpt": "of course, the metric here is NRR, net revenue retention, and the way that's computed is you say what is the revenue of customers right now? So existing customers, existing whatever, just the whole total, and then one year from now, what if that remains?"
+      }
+    }
+  ]
+}

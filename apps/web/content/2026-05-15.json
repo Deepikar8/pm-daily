@@ -1,0 +1,228 @@
+{
+  "date": "2026-05-15",
+  "headline": "David Placek on naming: descriptive is not safe, it's how you lose",
+  "theme_pillar": "design",
+  "digest_md": "David Placek has spent 40+ years naming products at Lexicon Branding — Swiffer, Sonos, BlackBerry, Azure, Pentium, Vercel, Windsurf, Impossible Foods. His central argument is that most teams treat naming as a low-stakes administrative task — *delegated to junior staff or tackled in group brainstorming sessions* — and the cost is enormous. The right name is a competitive advantage no one can take away from you; the safe-feeling descriptive name leaves you indistinguishable in a crowded market.\n\nHis three-pillar framework: **(1) Build for trust** — the marketplace moves so fast now that a name must generate momentum early or fail. **(2) Communicate an original idea — never describe.** Anyone can describe what a company does; that name will have a thousand similar names swirling around it. Google, Pentium, and Navan beat Infoseek-style naming because they signal a new idea. **(3) Be accessible** — the brain doesn't remember complexity, so familiar components and clean sound patterns matter (Azure's 'z' creates a strong signal; '-zure' lands like 'sure').\n\nFor PMs naming features and surfaces, the trap is the same as for founders naming companies: descriptive names *feel* responsible because they're easy to defend in a stakeholder meeting. Placek's argument is that the responsibility is misallocated — descriptive names underperform precisely because they're indistinguishable, and indistinguishable products lose the discovery battle. The PM-level translation: when you name your next launch, treat the name as a strategic decision, not a documentation decision.",
+  "takeaways": [
+    "Descriptive feels safe; it's actually the riskiest move. 'Microsoft Cloud Services' was rejected as 'a dumb idea' before Azure shipped — the original name won.",
+    "If a stakeholder defends a name with 'people will know what it does', that's a warning sign, not validation. A thousand competitors will sound the same.",
+    "Sound matters. Read your candidate names out loud. The phonetics of Azure aren't accidental.",
+    "Stop running group naming brainstorms hoping a winner emerges. The right name is a strategic call, not a vote."
+  ],
+  "source": {
+    "filename": "newsletters/how-to-find-the-perfect-name.md",
+    "title": "How to find the perfect name",
+    "byline": "David Placek",
+    "type": "newsletter",
+    "date": "2025-09-02",
+    "source_url": "https://www.lennysnewsletter.com/p/how-to-find-the-perfect-name",
+    "search_url": "https://www.lennysnewsletter.com/?q=David+Placek+naming"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "never-describe",
+      "archetype": "spot",
+      "scenario_md": "You're naming a new feature on your B2B platform: an AI assistant that drafts customer responses inside your support tool. Your team's shortlist:\n\n- Smart Reply Assistant\n- Response AI\n- Reply Studio\n- Lumen\n\nTwo stakeholders prefer 'Smart Reply Assistant' because 'people will instantly know what it does.' Per Placek's framing, your most aligned argument back is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Descriptive names are clear but produce a thousand interchangeable competitors; the goal is signaling a new idea, not documenting a feature.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Descriptive names are fine for B2B since enterprise buyers value clarity over creativity.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "We should A/B test all four with users and let data decide.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Descriptive names are good for the MVP; we can rebrand once the feature has traction.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Placek's second pillar is 'Communicate an original idea. Never describe.' Descriptive names like Infoseek are boring and live in a sea of clones; invented or surprising names like Google or Pentium signal something new is happening, which is the actual goal of a name.",
+      "pm_takeaway": "On your next feature launch, kill any candidate name that *just describes* the feature. If a competitor could ship the same name tomorrow, it's not yours.",
+      "citation": {
+        "filename": "newsletters/how-to-find-the-perfect-name.md",
+        "title": "How to find the perfect name",
+        "byline": "David Placek",
+        "type": "newsletter",
+        "date": "2025-09-02",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-find-the-perfect-name",
+        "search_url": "https://www.lennysnewsletter.com/?q=David+Placek+naming",
+        "quote_excerpt": "Anyone can describe what a company does. For example, Infoseek is descriptive and one-dimensional. A name like that is boring and likely to have a thousand similar names swirling around in the competitive landscape."
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "naming-as-strategic-not-clerical",
+      "archetype": "diagnose",
+      "scenario_md": "You're a PM championing a new product surface launching in 6 weeks. Naming was assigned to a marketing intern, who ran an open Slack brainstorm with 30 people and is now narrowing it to two finalists by emoji vote. You're feeling vaguely uneasy about it but the launch date is tight.\n\nPer Placek, the most accurate diagnosis of the *process* is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Reasonable use of cross-functional input under launch pressure; the emoji vote is a fast tiebreaker.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "A solid bottoms-up process, but the candidate pool should be narrowed to 5 before voting.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "The exact failure pattern Placek warns against: delegated to junior staff, decided by group brainstorm — the path to a forgettable name.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "A legal-risk problem; the real fix is running trademark searches earlier in the funnel.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Placek explicitly names two failure patterns: naming delegated to junior staff, and naming decided by group brainstorming sessions. Together they produce solid-performing names rather than breakthrough ones. The fix isn't a better vote — it's reclaiming the decision as strategic.",
+      "pm_takeaway": "Tomorrow morning, if a feature you care about is being named by Slack vote, claim ownership of the call. It's a strategic decision, not a polling problem.",
+      "citation": {
+        "filename": "newsletters/how-to-find-the-perfect-name.md",
+        "title": "How to find the perfect name",
+        "byline": "David Placek",
+        "type": "newsletter",
+        "date": "2025-09-02",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-find-the-perfect-name",
+        "search_url": "https://www.lennysnewsletter.com/?q=David+Placek+naming",
+        "quote_excerpt": "It's one of the highest-stakes parts of building a brand, yet it's too often delegated to junior staff or tackled in group brainstorming sessions."
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "build-for-trust",
+      "archetype": "apply",
+      "scenario_md": "You're naming a new financial-planning AI feature for a banking app. Your CEO insists on 'CashGenius' to convey power and capability. Customer interviews you ran show users describe their concerns about the feature primarily as 'I don't know if I can trust it with real money.'\n\nThe most Placek-aligned move tomorrow is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ship CashGenius — bold names build buzz, and the CEO has the call.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Run a poll of beta users between CashGenius and three alternatives.",
+          "role": "adjacent"
+        },
+        {
+          "key": "C",
+          "text": "Keep CashGenius but add 'Trusted' as a tagline to soften it.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Bring the customer-trust finding to the CEO and propose names whose sound and feel signal calm and reliability, not raw power.",
+          "role": "correct"
+        }
+      ],
+      "correct_key": "D",
+      "explanation_md": "Placek's first pillar is 'Build for trust' — a name must generate momentum early, and trust is the key factor in momentum. When customer research surfaces a trust concern, the name is a strategic lever, not a branding flourish; matching the name's tone to the trust signal users need is the move.",
+      "pm_takeaway": "Before the next naming meeting, write down the one emotion users need to feel from the name. Bring that to the CEO with your candidate list.",
+      "citation": {
+        "filename": "newsletters/how-to-find-the-perfect-name.md",
+        "title": "How to find the perfect name",
+        "byline": "David Placek",
+        "type": "newsletter",
+        "date": "2025-09-02",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-find-the-perfect-name",
+        "search_url": "https://www.lennysnewsletter.com/?q=David+Placek+naming",
+        "quote_excerpt": "The marketplace is moving so fast now that a new brand must gain momentum early or it will fail. Trust is a key factor in momentum."
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "sound-and-accessibility",
+      "archetype": "pick",
+      "scenario_md": "You have four serious candidates for a new dashboard product launching to enterprise admins:\n\n1. Velocitech\n2. Atlas\n3. Throughputly\n4. CompliancePulse\n\nWhich best satisfies Placek's accessibility pillar — easy for the brain to process, familiar components, clean sound — while still signaling something distinct?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Throughputly — describes what the product does in a single word.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Atlas — short, familiar word, strong sound, used as a fresh signal in a new context.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Velocitech — combines two industry-relevant roots into one tech-forward name.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "CompliancePulse — anchors the category and adds rhythm via 'Pulse.'",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Placek's third pillar: the brain doesn't remember complexity. Familiar components and clean sound win. Atlas is a recognized word being repurposed (like Outback for Subaru) — easy to process, distinctive in context. The other three either describe (Throughputly, CompliancePulse) or stack roots awkwardly (Velocitech).",
+      "pm_takeaway": "When you compare candidate names this week, read each out loud. If your tongue trips, your customer's memory will too.",
+      "citation": {
+        "filename": "newsletters/how-to-find-the-perfect-name.md",
+        "title": "How to find the perfect name",
+        "byline": "David Placek",
+        "type": "newsletter",
+        "date": "2025-09-02",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-find-the-perfect-name",
+        "search_url": "https://www.lennysnewsletter.com/?q=David+Placek+naming",
+        "quote_excerpt": "The human brain doesn't like complexity—or remember it very well. Make sure your name is easy to process and contains familiar components. We used the simple and familiar geographic term \"Outback\" to create Subaru's most successful brand to date."
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "name-as-flexibility",
+      "archetype": "translate",
+      "scenario_md": "Your team named its product 'TripActions' two years ago. The roadmap now adds expense management, virtual cards, and is exploring lending. The name *only* describes travel. Your CEO is leaning toward keeping it because 'rebrands are expensive and customers are used to it.'\n\nThe argument that best translates Placek's framing for your CEO is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "A descriptive name caps your category; Navan-style originality creates room to grow — and TripActions's rebrand correlated with $150M to $500M in revenue.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Customers don't care about names; the rebrand cost outweighs the marginal lift.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "Add a sub-brand for each new line so the parent name stays familiar.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Run a 6-month customer survey before deciding.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Placek uses the TripActions → Navan rebrand as the canonical example: a descriptive name limits the company's growth into new categories, and an original, flexible name unlocks expansion. Sub-branding under a category-bound parent is a half-measure that keeps the ceiling.",
+      "pm_takeaway": "If your product is expanding beyond what its name describes, raise the rebrand conversation now — don't wait for it to become an obvious blocker.",
+      "citation": {
+        "filename": "newsletters/how-to-find-the-perfect-name.md",
+        "title": "How to find the perfect name",
+        "byline": "David Placek",
+        "type": "newsletter",
+        "date": "2025-09-02",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-find-the-perfect-name",
+        "search_url": "https://www.lennysnewsletter.com/?q=David+Placek+naming",
+        "quote_excerpt": "TripActions is another example of a very descriptive name. As the company grew and developed an expense platform as well, TripActions no longer worked even descriptively. We created Navan, a palindrome that links to travel (\"navigation\") but offers the originality"
+      }
+    }
+  ]
+}

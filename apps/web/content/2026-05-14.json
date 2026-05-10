@@ -1,0 +1,222 @@
+{
+  "date": "2026-05-14",
+  "headline": "Nikhyl Singhal on the PM career split: information movers are dinosaurs; builders are entering a renaissance",
+  "theme_pillar": "career",
+  "digest_md": "Nikhyl Singhal — longtime Meta and Google product exec, four-time founder, and operator of the Skip Community for CPOs — argues that the PM career is splitting. Two years ago, the day of a senior PM was largely *moving information* — running alignment meetings, summarizing decisions, brokering between functions, writing PRDs that translated leadership intent into engineering work. That role, he says flatly, *'is essentially going to become a dinosaur.'*\n\nThe other half is having the time of their lives. PMs who *love building* — who can prototype, ship, test their instincts directly with customers — are seeing record compensation, more offers than ever, and a renaissance of agency. Singhal's prediction for the next 12-24 months: companies will shed tens of thousands of staff and rehire much smaller, AI-first teams. *'If you don't love building stuff, you're in trouble.'*\n\nWhat to do about it: increase pace ('the next two years requires a lot of fire in the belly'), and be willing to reinvent yourself even when reinvention feels exhausting and unnecessary. His diagnostic exercise: color-code every meeting on your calendar green/yellow/red for a week. Most stuck PMs are mostly yellow and red. Builders are mostly green and yellow.\n\nThe deepest barrier, he says, isn't the new tools — it's psychology. PMs who reached senior levels under the old model have the most to lose by reinventing, and so they don't. The advice: have the courage to operate as if your current way of working is already obsolete, before the org tells you it is.",
+  "takeaways": [
+    "The 'information mover' PM job — alignment meetings, PRD-as-translation, status doc updates — is being eliminated. If that's most of your week, the role you have is leaving.",
+    "Builders win this cycle. Spend time tomorrow morning prototyping with AI tools yourself, not delegating prototyping to engineering.",
+    "Run the green/yellow/red calendar audit this week. If most of your meetings aren't green, you have data that your role has drifted, not a gut feeling.",
+    "The deepest barrier to career reinvention is that you worked hard to get here. Recognize it, then reinvent anyway — the senior PMs who don't will be the ones cut."
+  ],
+  "source": {
+    "filename": "podcasts/nikhyl-singhal-2.md",
+    "title": "Why half of product managers are in trouble | Nikhyl Singhal (Meta, Google)",
+    "byline": "Nikhyl Singhal",
+    "type": "podcast",
+    "date": "2026-04-19",
+    "search_url": "https://www.lennyspodcast.com/?q=Nikhyl+Singhal"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "information-mover-dinosaur",
+      "archetype": "diagnose",
+      "scenario_md": "You're a senior PM, 6 years in. A typical Tuesday: an exec sync where you summarize last week's launch, a 1:1 where you relay a leadership decision to your tech lead, a PRD review where you reconcile design and eng feedback, and an afternoon spent updating a roadmap doc for stakeholders. You feel productive and well-respected.\n\nPer Nikhyl Singhal's framing, the most accurate diagnosis of *your current role* is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Healthy senior-PM execution — alignment work is the highest-leverage activity at scale.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Solid execution that just needs better prioritization to make room for strategy.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "An 'information mover' day; the role Singhal predicts will become a dinosaur in this cycle.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "A symptom of org dysfunction; the right fix is to push leadership for fewer stakeholder syncs.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Singhal's central tension is between *information movers* (PRDs, alignment, summarizing, brokering) and *builders* (prototyping, shipping, testing instincts with customers). A Tuesday spent entirely on translation work is the dinosaur path, not high-leverage senior execution.",
+      "pm_takeaway": "Tomorrow, look at your calendar. If 80%+ of your meetings are translation/alignment with no time you actually build something, your role is the one being eliminated.",
+      "citation": {
+        "filename": "podcasts/nikhyl-singhal-2.md",
+        "title": "Why half of product managers are in trouble | Nikhyl Singhal (Meta, Google)",
+        "byline": "Nikhyl Singhal",
+        "type": "podcast",
+        "date": "2026-04-19",
+        "search_url": "https://www.lennyspodcast.com/?q=Nikhyl+Singhal",
+        "quote_excerpt": "If you talk to product leaders three years ago, their day was largely moving information. The information mover is essentially going to become a dinosaur."
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "calendar-audit",
+      "archetype": "apply",
+      "scenario_md": "You read Singhal's color-code exercise and want to actually run it on yourself this week.\n\nApplied correctly, the exercise is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tag each meeting green / yellow / red for a week, then read the chart to see if you're in build mode or stuck mode.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Tag each meeting with the team it serves; cancel meetings for teams not on this quarter's roadmap.",
+          "role": "adjacent"
+        },
+        {
+          "key": "C",
+          "text": "Score each meeting 1-5 on importance; cut the bottom third next week.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Move all alignment meetings to a single day to protect maker time.",
+          "role": "mistake"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Singhal's diagnostic is specifically about feeling, not importance: green = energized/building, red = drained/stuck. The point is to expose to yourself whether your current week is mostly yellow/red (stuck PMs) or green/yellow (builders), not to optimize a calendar.",
+      "pm_takeaway": "Block 5 minutes at the end of every day this week to color-code your meetings. Look at the chart on Friday and act on what you see.",
+      "citation": {
+        "filename": "podcasts/nikhyl-singhal-2.md",
+        "title": "Why half of product managers are in trouble | Nikhyl Singhal (Meta, Google)",
+        "byline": "Nikhyl Singhal",
+        "type": "podcast",
+        "date": "2026-04-19",
+        "search_url": "https://www.lennyspodcast.com/?q=Nikhyl+Singhal",
+        "quote_excerpt": "If you put green, yellow, and red next to the meetings you had and did that for a week and then we looked at the color chart, I'll bet you the vast majority of PMs that are in a product organization, they show mostly yellow and red."
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "reinvention-resistance",
+      "archetype": "spot",
+      "scenario_md": "You're a Group PM at a 2,000-person company. You earned your role over six years through strong execution under the old playbook: thorough PRDs, careful stakeholder alignment, defensible analytics. Your manager said your last review was 'best on the team.' You've read three articles about AI-native PMs this week and felt vaguely uneasy, then dismissed it.\n\nPer Singhal, the most honest read on your dismissal is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "It's healthy skepticism — strong performers should not chase every trend.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Your review confirms your playbook works; the unease is just industry noise.",
+          "role": "adjacent"
+        },
+        {
+          "key": "C",
+          "text": "You're partly right to wait; reinvention only matters if leadership signals a strategy shift.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "You have the most to lose by reinventing and the strongest incentive to dismiss the signal — exactly Singhal's reluctance trap.",
+          "role": "correct"
+        }
+      ],
+      "correct_key": "D",
+      "explanation_md": "Singhal's point is that the strongest performers under the old model have the *least* incentive to reinvent — and that's the trap. The very signals that say 'you're winning' are the ones that protect you from noticing the game has changed.",
+      "pm_takeaway": "If your last review was glowing under the old playbook, that's a reason to start reinventing this week, not a reason to wait.",
+      "citation": {
+        "filename": "podcasts/nikhyl-singhal-2.md",
+        "title": "Why half of product managers are in trouble | Nikhyl Singhal (Meta, Google)",
+        "byline": "Nikhyl Singhal",
+        "type": "podcast",
+        "date": "2026-04-19",
+        "search_url": "https://www.lennyspodcast.com/?q=Nikhyl+Singhal",
+        "quote_excerpt": "the weaker you are, the more excited you are about changing. \"Hey, what I'm doing isn't working, might as well change it.\" But if you're really good, you have no incentive to change, and perhaps even your employer sees you're doing great"
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "builder-renaissance",
+      "archetype": "pick",
+      "scenario_md": "You have one extra hour in your week to invest in your own career — your manager isn't watching. Four ways you could spend it:\n\n1. Read a long-form essay on AI strategy from a top CPO.\n2. Take a peer-coaching call with another senior PM about navigating your org.\n3. Open Cursor or Lovable and build a working prototype of one feature on your roadmap, end to end.\n4. Update your LinkedIn and quietly take one recruiter call.\n\nPer Singhal's renaissance framing, the highest-leverage option is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Option 1 — strategic reading.",
+          "role": "half_truth"
+        },
+        {
+          "key": "B",
+          "text": "Option 3 — build a working prototype end to end.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Option 2 — peer coaching call.",
+          "role": "mistake"
+        },
+        {
+          "key": "D",
+          "text": "Option 4 — recruiter call.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Singhal's renaissance framing is specifically about a direct connection between PM ideas and customers — being able to test product instincts yourself rather than relying on others. Reading and networking matter, but they don't move you out of information-mover behavior; building does.",
+      "pm_takeaway": "This week, spend one hour shipping a working prototype yourself with AI tools — not specifying it for someone else to build.",
+      "citation": {
+        "filename": "podcasts/nikhyl-singhal-2.md",
+        "title": "Why half of product managers are in trouble | Nikhyl Singhal (Meta, Google)",
+        "byline": "Nikhyl Singhal",
+        "type": "podcast",
+        "date": "2026-04-19",
+        "search_url": "https://www.lennyspodcast.com/?q=Nikhyl+Singhal",
+        "quote_excerpt": "There's much more of a direct connection to their ideas and their ability to test and connect their product instincts to their customers. In many ways, this is a complete renaissance for the product industry."
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "pace-fire-belly",
+      "archetype": "translate",
+      "scenario_md": "Your CEO sends a Slack: 'I want our PMs to operate with more urgency next quarter.' Your peer PMs respond by adding daily standups, tighter sprint planning, and more frequent OKR check-ins. You're considering doing the same.\n\nThe response that best translates Singhal's 'fire in the belly' framing for *your own* week is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Add 30 minutes each morning to use AI tools yourself and ship something tangible — a prototype, a test, a demo — before any meeting.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Match your peers — add the standups and check-ins so you're seen moving fast.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "Push back on the CEO's message; urgency without strategy is busywork.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Run a team retro on velocity and propose a 30% sprint scope cut.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Singhal's pace argument is about personal output, not process theater. Adding meetings is the information-mover response; producing tangible artifacts yourself, daily, is the builder translation of 'fire in the belly.'",
+      "pm_takeaway": "Pick one tangible thing you will personally produce every morning this week — a prototype, a demo video, a test — before any sync.",
+      "citation": {
+        "filename": "podcasts/nikhyl-singhal-2.md",
+        "title": "Why half of product managers are in trouble | Nikhyl Singhal (Meta, Google)",
+        "byline": "Nikhyl Singhal",
+        "type": "podcast",
+        "date": "2026-04-19",
+        "search_url": "https://www.lennyspodcast.com/?q=Nikhyl+Singhal",
+        "quote_excerpt": "You have to find the ability to increase pace. You got to find that reserve. The next two years requires a lot of fire in the belly."
+      }
+    }
+  ]
+}

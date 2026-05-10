@@ -1,0 +1,228 @@
+{
+  "date": "2026-05-22",
+  "headline": "Stewart Butterfield on building products people love: stop adding, start subtracting",
+  "theme_pillar": "product-design",
+  "digest_md": "Stewart Butterfield — founder of Flickr and Slack — argues that the PM disease is *additive* design. We add features past the point they help, perform elaborate work-like rituals that look productive, and forget that users only ever wanted five things from us in the first place.\n\nHis mental models stack up:\n\n- **Utility curves.** Effort-vs-value is an S-curve. Most teams keep grinding on the flat top — the part where another month of polish moves the user not at all — while the steep part of someone *else's* curve goes untouched.\n- **The owner's delusion.** When you visit someone else's restaurant website, you want the address, hours, phone, menu, and reservation link. When you build *your* restaurant's website, you build a slow-loading hero photo and an unclickable phone number. Owners forget what users actually need from them.\n- **Hyper-realistic work-like activities.** *'This is actually a fake bit of work, and it's so subtle that I'll do it. Our board members will do it. Every executive will do it.'* Setting up the dashboard for the meeting that won't change a decision. Updating the doc no one reads. Subtle, exhausting, and corrosive.\n- **Don't make users think.** Slack's craft obsession was about removing micro-decisions, not adding them.\n- **We don't sell saddles here.** Stop describing features. Describe the experience the user actually wants.\n- **Taste as edge.** *'Most people don't have good taste and don't invest.'* Your margin is your competitor's opportunity — the reverse is also true.\n- **Limitless opportunities shame.** *'If you can't see almost limitless opportunities to improve, then you shouldn't be designing the product.'* The product you ship today should embarrass you slightly.\n\nThe PM-week version: notice when you're performing work, not doing it. Cut features past the utility curve's flat top. Use your own product as a stranger would, today.",
+  "takeaways": [
+    "Audit your current PRD for utility-curve overshoot — features adding the 12th detail to a user flow whose first three already work. Cut at least one.",
+    "When you catch yourself building the meeting / dashboard / spec that won't change any decision, name it: hyper-realistic work-like activity. Stop and pick known-valuable work instead.",
+    "Use your own product end-to-end this week as if you were a new user with no context. The owner's delusion only breaks when you simulate the stranger's view.",
+    "Replace one feature description in your next pitch with the experience the user actually wants. 'We don't sell saddles' is a writing prompt, not a slogan."
+  ],
+  "source": {
+    "filename": "podcasts/stewart-butterfield.md",
+    "title": "Slack founder: Mental models for building products people love ft. Stewart Butterfield",
+    "byline": "Stewart Butterfield",
+    "type": "podcast",
+    "date": "2025-11-20",
+    "source_url": "https://www.youtube.com/watch?v=kLe-zy5r0Mk",
+    "search_url": "https://www.lennyspodcast.com/?q=Stewart+Butterfield+mental+models"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "utility-curve",
+      "archetype": "diagnose",
+      "scenario_md": "You're a PM on a workflow tool. Your team has spent the last five sprints adding the 14th customization to your already-extensive filter UI. Power users report 'love the granularity.' New-user activation is unchanged. Your designer privately tells you the filter screen is now intimidating to first-timers. You're about to greenlight customization #15 because it's on the roadmap.\n\nPer Butterfield's utility-curve framing, the most accurate read is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "You're past the flat top of the curve for power users; further filter detail won't move value. Reallocate the sprint elsewhere.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Power-user love is signal — keep shipping until activation drops measurably.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "First-timer intimidation means you should ship a beginner-mode toggle alongside customization #15.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Build a customer-research study to quantify whether filter granularity drives retention before deciding.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Butterfield's utility curve flattens once the steep value gain is captured. Power-user love past that point is comfort, not lift. The PM-agency move is to redirect engineering effort to a curve that is still steep — like first-time activation — not to research or hedge.",
+      "pm_takeaway": "This week, look at your roadmap and find one feature where you're past the flat top of the curve. Cut it before next sprint planning.",
+      "citation": {
+        "filename": "podcasts/stewart-butterfield.md",
+        "title": "Slack founder: Mental models for building products people love ft. Stewart Butterfield",
+        "byline": "Stewart Butterfield",
+        "type": "podcast",
+        "date": "2025-11-20",
+        "source_url": "https://www.youtube.com/watch?v=kLe-zy5r0Mk",
+        "search_url": "https://www.lennyspodcast.com/?q=Stewart+Butterfield+mental+models",
+        "quote_excerpt": "people who are obsessed with this one little thing and keep on adding more and more detailed improvements beyond the point where it makes much of a difference"
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "owners-delusion",
+      "archetype": "apply",
+      "scenario_md": "You PM the marketing site for a small B2B SaaS. The current homepage opens with an autoplay product video, three rotating taglines, and a sticky banner about your Series B. Sales tells you prospects often ask basic questions like 'what does it actually do' and 'what does it cost.' You have one designer-day to spend this week.\n\nApplying Butterfield's owner's-delusion lesson, the first edit you make is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "A/B test a new tagline against the rotating three; pick the highest-converting one.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Surface the 3-4 things prospects actually came for — what it does, who it's for, what it costs, how to start — above the fold.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Replace the autoplay video with a static hero image to reduce load time.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Add a chatbot so prospects can ask 'what does it do' directly.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Butterfield's owner's delusion is the gap between what owners build (Ken Burns hero image, music) and what users actually came for (address, hours, phone, menu). The fix is to put the small set of things users actually want in front of them, not to A/B-test the misdirected ones.",
+      "pm_takeaway": "Tomorrow, list the top 3 things a stranger would want from your product's front door. If they aren't above the fold, that's your week.",
+      "citation": {
+        "filename": "podcasts/stewart-butterfield.md",
+        "title": "Slack founder: Mental models for building products people love ft. Stewart Butterfield",
+        "byline": "Stewart Butterfield",
+        "type": "podcast",
+        "date": "2025-11-20",
+        "source_url": "https://www.youtube.com/watch?v=kLe-zy5r0Mk",
+        "search_url": "https://www.lennyspodcast.com/?q=Stewart+Butterfield+mental+models",
+        "quote_excerpt": "There's five things you could possibly want when you go to a restaurant's website and it's their street address, their phone number, the menu, the hours of operation ... Oh my God, I'm forgetting the fifth thing. Oh, and making a reservation"
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "hyperrealistic-work-like-activities",
+      "archetype": "spot",
+      "scenario_md": "Your PM-peer proposes a 90-minute weekly meeting with a custom dashboard tracking the experiment funnel for a feature already shipped, instrumentation work owned by two engineers for three weeks. The result will be reviewed quarterly by leadership, who hasn't asked for it. You're the senior PM in the room.\n\nPer Butterfield, the missing question to put on the table is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Whose decision will be different next week because of this meeting? If none, this is hyper-realistic work-like activity.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Can the dashboard scope be reduced to one engineer-week to make it more efficient?",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "Should we request leadership formally sponsor the meeting first?",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Can we automate the dashboard so the meeting is shorter?",
+          "role": "mistake"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Butterfield's diagnostic for hyper-realistic work-like activity is whether the activity will change any decision. If not, the instrumentation, the meeting, and the dashboard are theater — the answer is to redirect the team to known-valuable work, not optimize the theater.",
+      "pm_takeaway": "Before any new recurring meeting or dashboard you propose this week, write the decision it will change. If you can't name one, kill the proposal.",
+      "citation": {
+        "filename": "podcasts/stewart-butterfield.md",
+        "title": "Slack founder: Mental models for building products people love ft. Stewart Butterfield",
+        "byline": "Stewart Butterfield",
+        "type": "podcast",
+        "date": "2025-11-20",
+        "source_url": "https://www.youtube.com/watch?v=kLe-zy5r0Mk",
+        "search_url": "https://www.lennyspodcast.com/?q=Stewart+Butterfield+mental+models",
+        "quote_excerpt": "people will just perform enormous amounts of hyper-realistic work-like activities, and have no idea that that's what they're doing"
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "we-dont-sell-saddles",
+      "archetype": "translate",
+      "scenario_md": "You're writing the launch announcement for a new AI summarization feature on your team's product. Your draft opens: 'Now powered by GPT-class models, our new summarization engine supports 14 languages, custom prompts, and PDF input.' Your manager asks for one revision pass before it ships Friday.\n\nThe revision that best translates Butterfield's 'we don't sell saddles' framing is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rewrite the lede to describe what the user can now do — finishing the report in 20 minutes instead of two hours — and let the spec follow.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Add a quote from a beta customer to humanize the feature spec.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "Keep the lede; lead with capability so the engineering team feels recognized.",
+          "role": "mistake"
+        },
+        {
+          "key": "D",
+          "text": "Replace the lede with the feature's positioning statement against competing tools.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Butterfield's saddle metaphor: don't sell the saddle, sell the horseback ride. Capability lists are saddles; the user's experience is the ride. The PM lever in launch copy is to start with what the user gets to do, not what the system can.",
+      "pm_takeaway": "Find one feature description you're shipping this week and rewrite the lede as 'now you can ___' — the experience first, the spec second.",
+      "citation": {
+        "filename": "podcasts/stewart-butterfield.md",
+        "title": "Slack founder: Mental models for building products people love ft. Stewart Butterfield",
+        "byline": "Stewart Butterfield",
+        "type": "podcast",
+        "date": "2025-11-20",
+        "source_url": "https://www.youtube.com/watch?v=kLe-zy5r0Mk",
+        "search_url": "https://www.lennyspodcast.com/?q=Stewart+Butterfield+mental+models",
+        "quote_excerpt": "instead of, \"Hey, look at this amazing saddle we've bought,\" which you want to communicate as, \"Here, go horseback riding. Look at this incredible experience you can have.\""
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "limitless-opportunities-shame",
+      "archetype": "pick",
+      "scenario_md": "Your PM colleague returns from a customer-advisory dinner glowing: customers said the product is 'in a great place.' Your VP forwards the praise. You read it Friday afternoon. Four ways to spend the next hour:\n\n1. Reply-all thanking the customers and posting the praise to #wins.\n2. Open the product fresh as a brand-new user and write down five things that embarrass you.\n3. Schedule a team retro to celebrate.\n4. Update your roadmap deck with the customer quote.\n\nPer Butterfield's framing on craft, the highest-leverage move is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Option 1 — reinforce wins; positive feedback is rare and worth amplifying.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Option 4 — get the quote into stakeholder materials while it's fresh.",
+          "role": "adjacent"
+        },
+        {
+          "key": "C",
+          "text": "Option 2 — open the product fresh and list five things that embarrass you.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "Option 3 — protect team morale with a celebration; momentum compounds.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Butterfield's bar: if you can't see almost limitless opportunities to improve, you shouldn't be designing the product. Customer praise is comfortable; the senior PM move is to deliberately surface what's still embarrassing while everyone else is celebrating.",
+      "pm_takeaway": "This week, set 30 minutes to use your own product as a stranger and write five embarrassing things. Bring them to your next 1:1.",
+      "citation": {
+        "filename": "podcasts/stewart-butterfield.md",
+        "title": "Slack founder: Mental models for building products people love ft. Stewart Butterfield",
+        "byline": "Stewart Butterfield",
+        "type": "podcast",
+        "date": "2025-11-20",
+        "source_url": "https://www.youtube.com/watch?v=kLe-zy5r0Mk",
+        "search_url": "https://www.lennyspodcast.com/?q=Stewart+Butterfield+mental+models",
+        "quote_excerpt": "If you can't see almost limitless opportunities to improve, then you shouldn't be designing the product."
+      }
+    }
+  ]
+}

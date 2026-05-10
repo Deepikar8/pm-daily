@@ -1,0 +1,228 @@
+{
+  "date": "2026-05-21",
+  "headline": "25 tactics for AI adoption: stop sending memos, start showing your team how you do it",
+  "theme_pillar": "ai-product",
+  "digest_md": "Lenny Rachitsky synthesizes interviews with leaders at six AI-forward companies — Shopify, Duolingo, Zapier, Whoop, Ramp, Intercom, and Roblox — into one blunt diagnosis: *'The biggest barrier to AI adoption isn't technology; it's organizational change.'* At most companies, employees are stuck on vague AI mandates, procurement bottlenecks, and no idea which use cases to start with.\n\nThe five recurring moves AI-forward orgs make:\n\n1. **Explain the *how*.** \"We are AI-first\" is a slogan. Tobi Lütke's Shopify memo named specific tactics (AI prototyping in the GSD process). Wade Foster declared a code-red moment at Zapier and gave employees a week off to work through a shared playbook.\n2. **Track and reward adoption.** Shopify made AI use part of peer reviews. Ramp publishes weekly power-user counts by team. Intercom uses merged PRs as a productivity proxy. The point is to create an explicit link between using AI and what the company rewards.\n3. **Cut the red tape.** Approve multiple tools (Shopify lists Claude, Cursor, Copilot, Perplexity, Cohere, Gemini, Claude Code), let employees nominate new ones, and shorten procurement.\n4. **Turn enthusiasts into teachers.** Duolingo runs Friday two-hour AI blocks and AI Show & Tell at all-hands. Zapier hosts weekly demos that draw 60+ employees. Whoop's Hilary Gridley, when a PM brings her a problem, says: *'Want me to show you how I solve this with AI?'* and shares her workflow live.\n5. **Prioritize the high-impact tasks.** *'Most companies fail at AI adoption because they try to do everything at once.'* Find the high-volume, repetitive tasks consuming the most employee time and ship those first.\n\nFor a mid-level PM, the leverage is *not* writing the memo. It's running the demo, championing the tool, choosing the high-volume task, and being the person whose AI workflow other people copy.",
+  "takeaways": [
+    "If your team's AI strategy is a slogan, it isn't a strategy. Push for two or three concrete tactics employees are expected to adopt this quarter.",
+    "Don't wait for a procurement decision to use AI. Champion a tool you already love and demo it to your team this week — bottom-up adoption is in your job description now.",
+    "Replace 'send a memo' with 'show me your screen.' Hilary Gridley's move — 'Want me to show you how I solve this with AI?' — is a PM-level lever, not an executive one.",
+    "Pick one repetitive, high-volume task on your team and apply AI to it before adding any new initiative. Most adoption efforts fail by trying everything at once."
+  ],
+  "source": {
+    "filename": "newsletters/25-proven-tactics-to-accelerate-ai-adoption-at-your-company.md",
+    "title": "25 proven tactics to accelerate AI adoption at your company",
+    "byline": "Lenny Rachitsky",
+    "type": "newsletter",
+    "date": "2025-08-05",
+    "source_url": "https://www.lennysnewsletter.com/p/25-proven-tactics-to-accelerate-ai-adoption-at-your-company",
+    "search_url": "https://www.lennysnewsletter.com/?q=25+proven+tactics+to+accelerate+AI+adoption+at+your+company"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "explain-the-how",
+      "archetype": "spot",
+      "scenario_md": "Your VP sends an all-hands message: 'Going forward, we are an AI-first product team. I expect everyone to embrace AI.' That is the entire message. Two weeks later you notice your peers are quietly continuing exactly as before; one even joked 'I'll wait for the actual rollout.' You're a senior PM and your skip-level asks what's missing.\n\nThe most accurate diagnosis per the AI-forward playbook is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tooling lag — the team is waiting for procurement to finish approving the tool stack.",
+          "role": "adjacent"
+        },
+        {
+          "key": "B",
+          "text": "Awareness gap — schedule a follow-up email reinforcing the AI-first message with leadership tone.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "The mandate didn't explain the *how* — no concrete tactics were named for what AI-first looks like in daily work.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "Mostly fine — adoption takes a quarter, the message will compound once early adopters get visible wins.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "The newsletter's first lesson: 'we are AI-first' means nothing if employees don't know what that means for their day-to-day work. Successful companies pair the mandate with specific tactics — like AI prototyping in the GSD process at Shopify — not with a follow-up reminder email.",
+      "pm_takeaway": "Tomorrow, write three concrete AI tactics you expect on your team — e.g., 'every PRD prototyped in Cursor first' — and bring them to your skip-level instead of waiting for the org-wide playbook.",
+      "citation": {
+        "filename": "newsletters/25-proven-tactics-to-accelerate-ai-adoption-at-your-company.md",
+        "title": "25 proven tactics to accelerate AI adoption at your company",
+        "byline": "Lenny Rachitsky",
+        "type": "newsletter",
+        "date": "2025-08-05",
+        "source_url": "https://www.lennysnewsletter.com/p/25-proven-tactics-to-accelerate-ai-adoption-at-your-company",
+        "search_url": "https://www.lennysnewsletter.com/?q=25+proven+tactics+to+accelerate+AI+adoption+at+your+company",
+        "quote_excerpt": "Saying “we are AI-first” means nothing if employees don’t know what that actually means for their day-to-day work."
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "lead-by-example-real-time",
+      "archetype": "translate",
+      "scenario_md": "An APM on your team Slacks you: 'I'm stuck synthesizing 40 user-research transcripts before Friday — any tips?' You happen to have a Claude workflow you use weekly for exactly this and could share it.\n\nThe response that best translates the newsletter's 'lead by example' lever into your week is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "DM her your prompt template and a link to the Anthropic prompt library.",
+          "role": "half_truth"
+        },
+        {
+          "key": "B",
+          "text": "Ask if she's tried any AI yet; suggest she start with ChatGPT and read a few prompting guides.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "Forward the request to your team's AI champion so the right person handles training.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Reply: 'Want me to show you how I do this with AI?' — book 20 minutes and share the workflow live, screen-share.",
+          "role": "correct"
+        }
+      ],
+      "correct_key": "D",
+      "explanation_md": "The newsletter highlights Hilary Gridley's move at Whoop — when a PM brings her a problem, she offers to show how she solves it with AI live. The PM-level lever is real-time demonstration of an actual workflow, not links, prompt libraries, or routing to someone else.",
+      "pm_takeaway": "When a teammate brings you a problem this week that you'd handle with AI, screen-share your workflow instead of describing it. One demo beats five DMs.",
+      "citation": {
+        "filename": "newsletters/25-proven-tactics-to-accelerate-ai-adoption-at-your-company.md",
+        "title": "25 proven tactics to accelerate AI adoption at your company",
+        "byline": "Lenny Rachitsky",
+        "type": "newsletter",
+        "date": "2025-08-05",
+        "source_url": "https://www.lennysnewsletter.com/p/25-proven-tactics-to-accelerate-ai-adoption-at-your-company",
+        "search_url": "https://www.lennysnewsletter.com/?q=25+proven+tactics+to+accelerate+AI+adoption+at+your+company",
+        "quote_excerpt": "When a PM brings a problem to Hilary Gridley, Whoop’s Head of Product, she’ll say, “Want me to show you how I solve this with AI?” Then she shares her workflows live."
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "prioritize-high-impact",
+      "archetype": "pick",
+      "scenario_md": "You're the PM on a 12-person growth team. The team has carved out 4 hours each next week for an 'AI sprint.' Four candidate tasks are on the wall:\n\n1. Automate the weekly support-ticket triage your team currently does by hand (5+ hours / week across team).\n2. Build an AI image generator for a v0 marketing campaign.\n3. Add an AI chatbot to the help center as a quarterly experiment.\n4. Draft an internal AI policy doc.\n\nPer the newsletter, the right pick is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Option 2 — the marketing image generator has visible upside and is fun for the team.",
+          "role": "adjacent"
+        },
+        {
+          "key": "B",
+          "text": "Option 1 — high-volume, repetitive task already consuming team hours; this is what AI-forward companies streamline first.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Option 4 — an internal policy unblocks the rest of the experiments.",
+          "role": "mistake"
+        },
+        {
+          "key": "D",
+          "text": "Option 3 — the chatbot has the broadest user surface and the most learnings.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "The newsletter is explicit that 'most companies fail at AI adoption because they try to do everything at once.' The first move is the high-volume, repetitive task already consuming the team's time — visible time savings drive belief faster than a flashy or strategic experiment.",
+      "pm_takeaway": "Before next sprint, list the top 3 repetitive things your team does manually and pick one to automate with AI this week — kill any newer AI initiatives until that one ships.",
+      "citation": {
+        "filename": "newsletters/25-proven-tactics-to-accelerate-ai-adoption-at-your-company.md",
+        "title": "25 proven tactics to accelerate AI adoption at your company",
+        "byline": "Lenny Rachitsky",
+        "type": "newsletter",
+        "date": "2025-08-05",
+        "source_url": "https://www.lennysnewsletter.com/p/25-proven-tactics-to-accelerate-ai-adoption-at-your-company",
+        "search_url": "https://www.lennysnewsletter.com/?q=25+proven+tactics+to+accelerate+AI+adoption+at+your+company",
+        "quote_excerpt": "Most companies fail at AI adoption because they try to do everything at once. Instead, find the high-volume and repetitive tasks that are taking up the most employee time and streamline those first with AI."
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "cut-the-red-tape",
+      "archetype": "apply",
+      "scenario_md": "You found Cursor genuinely 2-3x's your workflow but your company hasn't approved it. The procurement queue is backed up six weeks. You're not on the procurement committee. Per the newsletter's 'cut the red tape' framing applied to your role, the right move this week is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Wait for the official approval; using unapproved tools risks security review.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Champion the tool now — write a one-pager on the workflow win, demo it to peers, and lobby procurement to fast-track Cursor.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Quietly use Cursor on a personal account; share results once procurement clears it.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Propose a company-wide AI-tool RFP to standardize selection across teams.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "The newsletter is explicit that employees should champion their favorite AI tools even if they don't own procurement — the AI-forward orgs let internal enthusiasm drive the toolset (Whoop nominations, Shopify's broad list). The PM lever is the one-pager and demo, not patience or workarounds.",
+      "pm_takeaway": "This week, write a 10-line note on the AI tool that has saved you the most time, attach a 60-second screen recording, and send it to procurement and your manager.",
+      "citation": {
+        "filename": "newsletters/25-proven-tactics-to-accelerate-ai-adoption-at-your-company.md",
+        "title": "25 proven tactics to accelerate AI adoption at your company",
+        "byline": "Lenny Rachitsky",
+        "type": "newsletter",
+        "date": "2025-08-05",
+        "source_url": "https://www.lennysnewsletter.com/p/25-proven-tactics-to-accelerate-ai-adoption-at-your-company",
+        "search_url": "https://www.lennysnewsletter.com/?q=25+proven+tactics+to+accelerate+AI+adoption+at+your+company",
+        "quote_excerpt": "As an employee, don’t be afraid to champion your favorite AI tools even if you’re not responsible for procurement."
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "track-and-reward",
+      "archetype": "diagnose",
+      "scenario_md": "Your team's AI usage looks like this: two engineers are heavy Cursor users, one PM (you) uses Claude daily, and the other six teammates use AI a few times a month at most. Your manager asks why adoption is uneven. The team has had an AI training, a Slack channel, and a list of approved tools for three months.\n\nPer the newsletter, the underlying gap is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "More training is needed — schedule a refresher session for the six lighter users.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Wrong tools — the existing approved list isn't matching the team's actual workflows.",
+          "role": "adjacent"
+        },
+        {
+          "key": "C",
+          "text": "There's no link between AI use and what the team is rewarded on; the heavy users are intrinsically motivated, the rest aren't.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "The Slack channel needs more activity — pin a weekly tip and tag laggards.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "The newsletter is direct: people will change their behavior with the right incentives. AI-forward companies make AI use part of performance reviews (Shopify), publish power-user counts (Ramp), and reward streaks (Whoop). Without that, adoption stays uneven regardless of training.",
+      "pm_takeaway": "In your next 1:1 with your manager, propose making 'reflexive use of AI tools to improve work' an explicit performance dimension on your team — and write the rubric this week.",
+      "citation": {
+        "filename": "newsletters/25-proven-tactics-to-accelerate-ai-adoption-at-your-company.md",
+        "title": "25 proven tactics to accelerate AI adoption at your company",
+        "byline": "Lenny Rachitsky",
+        "type": "newsletter",
+        "date": "2025-08-05",
+        "source_url": "https://www.lennysnewsletter.com/p/25-proven-tactics-to-accelerate-ai-adoption-at-your-company",
+        "search_url": "https://www.lennysnewsletter.com/?q=25+proven+tactics+to+accelerate+AI+adoption+at+your+company",
+        "quote_excerpt": "Shopify asks employees to rate colleagues on a 1-to-5 scale for how well they “reflexively use AI tools for improving and amplifying work outputs.”"
+      }
+    }
+  ]
+}

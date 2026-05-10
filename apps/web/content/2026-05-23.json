@@ -1,0 +1,228 @@
+{
+  "date": "2026-05-23",
+  "headline": "AI products need a different lifecycle: deploy is not a finish line, agency is earned over time",
+  "theme_pillar": "ai-product",
+  "digest_md": "Aishwarya Reganti and Kiriti Badam — having shipped AI features at OpenAI, Google, Amazon, Databricks, and Kumo, and consulted with 50+ companies — argue that PMs are dragging traditional-software muscle into a domain where it breaks. Their framework: **Continuous Calibration / Continuous Development (CC/CD).**\n\nThe two assumptions that trip up most teams:\n\n1. **AI products are inherently non-deterministic.** *'AI models are trained to generate plausible responses based on patterns, not to follow fixed rules. The same request can produce different results depending on phrasing, context, or even a different model.'* You're no longer designing predictable user flows; you're designing for *likely* behavior.\n2. **Every AI product negotiates a tradeoff between agency and control.** Too much agency too fast erodes trust; too much control kills the magic. *'Every new capability shifts control further away from humans.'*\n\nThe loop:\n\n- **Development (CD)** — scope the problem, design architecture, set up evaluations to keep non-determinism in check. *'Start with features that are low-agency and high-control, then gradually move up as the system proves it can handle more.'*\n- **Deploy** — not a finish line. A transition.\n- **Calibration (CC)** — observe real behavior, figure out what broke, ship targeted fixes. Every cycle earns the system a bit more agency.\n\nThe failure mode they keep seeing: a great demo, glowing early reviews, then *'a system that can't scale or sustain'* — and user trust quietly erodes before the team realizes it's happening.\n\nFor a mid-level PM, the practical translation: stop writing PRDs that end at launch, start with the smallest agency surface you can defend, build evals before shipping, and treat post-launch calibration as the actual job, not a bug-fix backlog.",
+  "takeaways": [
+    "Your next AI PRD should include evaluations alongside scope and architecture. If you're shipping without evals, you're shipping without a way to catch the regressions you can't predict.",
+    "Pick the lowest-agency version of your AI feature for v1. Earn agency cycle by cycle as the system proves it. The 'human-in-the-loop' version isn't a stepping stone; it's the right v1.",
+    "Replace 'launch readiness' with 'calibration plan.' Deploy is the start of work, not the end. Block calendar time for the first 4 weeks post-launch to observe real behavior.",
+    "If your AI feature looks great in demo but is wobbling in production, you have a non-determinism problem, not a bug. Treat the demo-to-production gap as predictable, not embarrassing."
+  ],
+  "source": {
+    "filename": "newsletters/why-your-ai-product-needs-a-different-development-lifecycle.md",
+    "title": "Why your AI product needs a different development lifecycle",
+    "byline": "Aishwarya Reganti & Kiriti Badam",
+    "type": "newsletter",
+    "date": "2025-08-19",
+    "source_url": "https://www.lennysnewsletter.com/p/why-your-ai-product-needs-a-different-development-lifecycle",
+    "search_url": "https://www.lennysnewsletter.com/?q=Why+your+AI+product+needs+a+different+development+lifecycle"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "demo-to-production-trap",
+      "archetype": "diagnose",
+      "scenario_md": "Your AI summarization feature demoed beautifully two months ago — execs were impressed, you got the green light. Now in production: a third of users report 'inconsistent' results, your support queue is filling, and your engineer says nothing is broken. Your VP asks for a status read.\n\nPer the CC/CD framing, the most accurate diagnosis is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Engineering quality issue — schedule a code review and ticket the inconsistencies as bugs.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "User-education issue — write better in-product copy explaining how to phrase prompts.",
+          "role": "adjacent"
+        },
+        {
+          "key": "C",
+          "text": "Predictable demo-to-production drift from non-determinism; the missing piece is a calibration loop, not a bug fix.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "Model regression — escalate to your foundation-model vendor.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "The CC/CD framework calls this the predictable failure mode: an impressive demo gives way to a system that can't scale, and user trust erodes quietly. The fix is not bug-triage — it's standing up a calibration loop that observes real behavior and ships targeted improvements.",
+      "pm_takeaway": "This week, set up a weekly calibration review for your AI feature: real outputs vs. expected, ship one targeted fix per cycle. Treat it as the work, not the cleanup.",
+      "citation": {
+        "filename": "newsletters/why-your-ai-product-needs-a-different-development-lifecycle.md",
+        "title": "Why your AI product needs a different development lifecycle",
+        "byline": "Aishwarya Reganti & Kiriti Badam",
+        "type": "newsletter",
+        "date": "2025-08-19",
+        "source_url": "https://www.lennysnewsletter.com/p/why-your-ai-product-needs-a-different-development-lifecycle",
+        "search_url": "https://www.lennysnewsletter.com/?q=Why+your+AI+product+needs+a+different+development+lifecycle",
+        "quote_excerpt": "We’ve seen so many teams experience the painful shift from an impressive demo to a system that can’t scale or sustain. And along the way, user trust in the product quietly erodes."
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "agency-earned",
+      "archetype": "pick",
+      "scenario_md": "You're scoping v1 of an AI inbox-triage feature. Four candidate behaviors are on the table:\n\n1. Auto-reply, auto-send, auto-archive — fully autonomous.\n2. Suggest a draft reply, surface in a sidebar; user clicks send.\n3. Classify only — label emails by intent; user takes action.\n4. Do nothing user-visible; just train on user actions for a future model.\n\nPer the CC/CD framework, the v1 you ship is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Option 1 — full autonomy maximizes the AI's value proposition.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Option 4 — collect data first, ship behavior later when the model is mature.",
+          "role": "adjacent"
+        },
+        {
+          "key": "C",
+          "text": "Option 2 — suggested drafts are the standard AI-assistant pattern.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Option 3 — low-agency, high-control surface; earn agency by proving the labels are reliable before adding actions.",
+          "role": "correct"
+        }
+      ],
+      "correct_key": "D",
+      "explanation_md": "The framework's principle: agency must be earned over time, not granted all at once, because every new capability shifts control further away from humans. The right v1 is the lowest-agency surface that still teaches you what works — classification before suggestion, suggestion before action.",
+      "pm_takeaway": "For your next AI feature, write down the agency ladder explicitly: v1 (lowest), v2, v3 — and ship v1, not v2 or v3, this quarter.",
+      "citation": {
+        "filename": "newsletters/why-your-ai-product-needs-a-different-development-lifecycle.md",
+        "title": "Why your AI product needs a different development lifecycle",
+        "byline": "Aishwarya Reganti & Kiriti Badam",
+        "type": "newsletter",
+        "date": "2025-08-19",
+        "source_url": "https://www.lennysnewsletter.com/p/why-your-ai-product-needs-a-different-development-lifecycle",
+        "search_url": "https://www.lennysnewsletter.com/?q=Why+your+AI+product+needs+a+different+development+lifecycle",
+        "quote_excerpt": "Ensuring that agency is earned over time, not granted all at once, because every new capability shifts control further away from humans"
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "non-determinism",
+      "archetype": "spot",
+      "scenario_md": "An engineer on your team writes a unit-test plan for the AI feature you're shipping: 50 prompts, expected exact-match outputs, fail the build if any output drifts. They want to lock the test-suite in CI before launch. You're the PM and they ask if you're aligned.\n\nPer the CC/CD framing, the missing step in their plan is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Increase the test count to 500 prompts to reduce false negatives.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Add an evaluation regime that scores *likely* behavior across a distribution, not exact-match outputs — and define what 'good enough' looks like.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Move the test suite to a nightly run instead of CI to reduce build time.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Keep the test plan but allow a 5% mismatch tolerance to account for stochastic outputs.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "AI outputs are non-deterministic — the same request can produce different results based on phrasing, context, or model version. Exact-match unit tests fail this reality. The framework's answer is evaluations that score against a distribution of likely behavior, with explicit thresholds for 'good enough.'",
+      "pm_takeaway": "Before your next AI launch, write the eval rubric with your engineer: what's measured, what threshold means ship-ready, what means stop. No eval rubric = no launch.",
+      "citation": {
+        "filename": "newsletters/why-your-ai-product-needs-a-different-development-lifecycle.md",
+        "title": "Why your AI product needs a different development lifecycle",
+        "byline": "Aishwarya Reganti & Kiriti Badam",
+        "type": "newsletter",
+        "date": "2025-08-19",
+        "source_url": "https://www.lennysnewsletter.com/p/why-your-ai-product-needs-a-different-development-lifecycle",
+        "search_url": "https://www.lennysnewsletter.com/?q=Why+your+AI+product+needs+a+different+development+lifecycle",
+        "quote_excerpt": "AI models are trained to generate plausible responses based on patterns, not to follow fixed rules. The same request can produce different results depending on phrasing, context, or even a different model."
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "cc-cd-loop",
+      "archetype": "translate",
+      "scenario_md": "Your team's PRD template ends with a section called 'Launch Readiness Checklist.' You're rewriting the template for an AI feature shipping next month. You have one revision pass.\n\nThe revision that best translates the CC/CD framework to your PRD template is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Replace it with a 'Calibration Plan' section: weekly observation cadence, eval thresholds, who ships fixes, when agency expands.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "Rename the section to 'Launch + Day-One Bug Triage'.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "Add an 'AI Risks' section listing hallucination scenarios for legal and security review.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Remove the Launch Readiness section entirely; AI features should ship continuously without checkpoints.",
+          "role": "mistake"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "The CC/CD framework treats deploy as a transition, not a finish line. The PRD-template translation is to replace 'launch readiness' with a structured calibration plan that defines what observation, what eval thresholds, and what agency progression look like post-launch.",
+      "pm_takeaway": "Edit your PRD template this week to add a Calibration Plan section. Use it on your next AI feature. Keep the agency progression explicit.",
+      "citation": {
+        "filename": "newsletters/why-your-ai-product-needs-a-different-development-lifecycle.md",
+        "title": "Why your AI product needs a different development lifecycle",
+        "byline": "Aishwarya Reganti & Kiriti Badam",
+        "type": "newsletter",
+        "date": "2025-08-19",
+        "source_url": "https://www.lennysnewsletter.com/p/why-your-ai-product-needs-a-different-development-lifecycle",
+        "search_url": "https://www.lennysnewsletter.com/?q=Why+your+AI+product+needs+a+different+development+lifecycle",
+        "quote_excerpt": "Then you deploy, not as a finish line but as a transition into the next phase. Once you’ve deployed, you enter the calibration loop, where you observe real behavior, figure out what broke, and make targeted improvements."
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "agency-control-tradeoff",
+      "archetype": "apply",
+      "scenario_md": "Your CEO Slacks: 'Make the AI agent fully autonomous — competitors are shipping autonomous mode.' You're the PM. Your current product surfaces AI suggestions that the user accepts or rejects. Your support data shows users sometimes mis-accept suggestions, but rarely catastrophically.\n\nApplying the agency-control tradeoff, the response you ship is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ship full autonomy this quarter; competitors are setting the bar.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "Reply: agency is earned, not granted. Propose an explicit ladder — current suggest-mode → batch-confirm → fully autonomous — gated by calibration metrics.",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "Build full autonomy behind a feature flag for power users only.",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "Push back; the current product is fine and competitor moves are noise.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "The framework's central tradeoff: every new capability shifts control away from humans, and giving agency too fast is how trust erodes. The PM-agency move is to write the explicit ladder with calibration gates — not to capitulate, hide it behind a flag, or refuse outright.",
+      "pm_takeaway": "Tomorrow, draft the agency ladder for your AI feature with named calibration thresholds for each step, and bring it to your next CEO check-in.",
+      "citation": {
+        "filename": "newsletters/why-your-ai-product-needs-a-different-development-lifecycle.md",
+        "title": "Why your AI product needs a different development lifecycle",
+        "byline": "Aishwarya Reganti & Kiriti Badam",
+        "type": "newsletter",
+        "date": "2025-08-19",
+        "source_url": "https://www.lennysnewsletter.com/p/why-your-ai-product-needs-a-different-development-lifecycle",
+        "search_url": "https://www.lennysnewsletter.com/?q=Why+your+AI+product+needs+a+different+development+lifecycle",
+        "quote_excerpt": "Every AI product must negotiate a tradeoff between *agency* and *control*"
+      }
+    }
+  ]
+}

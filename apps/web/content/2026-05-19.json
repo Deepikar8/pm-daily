@@ -1,0 +1,228 @@
+{
+  "date": "2026-05-19",
+  "headline": "Jack Cohen's GAIN framework: feedback fails when it doesn't tell people what they stand to gain",
+  "theme_pillar": "leadership",
+  "digest_md": "Coach Jack Cohen has spent 11 years working with founders, executives, and managers — and the single most universal challenge across all of them is giving feedback. Most people self-describe as 'conflict-averse' and dread direct conversations. The rest are *fed up with failed attempts to get people to change their behavior*, often complaining: 'I keep giving them the same feedback, and they never change. Maybe they just don't want to.' Cohen's response: those givers are missing their own power to catalyze change by shifting how they frame the feedback.\n\nHis evidence-based framework, **GAIN**, names the four elements that effective feedback must include:\n\n- **G — Goal**: what both parties ultimately care about\n- **A — Actions**: what needs to change to get there\n- **I — Impacts**: why it matters\n- **N — Next actions**: *who* will do *what* by *when*\n\nThe central philosophical move embedded in the acronym: tell the recipient what *they* stand to **gain** from the feedback. When that's clear, feedback stops feeling like a confrontation and starts feeling like a gift. Conversely, when the giver leads with their own frustration or skips to actions without anchoring on a shared goal, they unintentionally elicit defensiveness — and then mistake that defensiveness for the recipient's stubbornness.\n\nCohen's case study with 'Laura,' a VP-BD reporting to a micromanaging founder, illustrates the framing flexibility: Laura led with the founder's actions and impacts (because that's what the founder cared about most in the moment), then bridged to a goal both shared, then closed on concrete next actions. The order of GAIN elements isn't fixed; the requirement is that *all four show up*. Skipping any of them is what most failed feedback attempts share in common.",
+  "takeaways": [
+    "If you've been thinking 'I keep giving them the same feedback and they don't change,' the framing — not the recipient — is the variable to test next.",
+    "Effective feedback must include all four GAIN elements: Goal (shared), Actions (what to change), Impacts (why), Next actions (who/what/when). Skipping any one is the most common failure mode.",
+    "Feedback feels like a gift when the recipient understands what *they* gain. Lead with their stake, not yours.",
+    "Order is flexible. You can lead with actions/impacts (as Laura did with her founder) — but the goal must surface in the conversation, not later."
+  ],
+  "source": {
+    "filename": "newsletters/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving.md",
+    "title": "Introducing the GAIN framework for feedback: an evidence-based approach to giving feedback that people love, appreciate, and act on",
+    "byline": "Jack Cohen",
+    "type": "newsletter",
+    "date": "2025-09-30",
+    "source_url": "https://www.lennysnewsletter.com/p/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving",
+    "search_url": "https://www.lennysnewsletter.com/?q=Jack+Cohen+GAIN+feedback"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "all-four-elements",
+      "archetype": "spot",
+      "scenario_md": "You're a PM. Your tech lead missed two design reviews this sprint. You're prepping for your 1:1 tomorrow. Your draft script in your notes:\n\n*'Hey, you missed the last two design reviews. The team felt unsupported and the design pass had gaps. Please show up to the next one.'*\n\nPer GAIN, the most important element your script is missing is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "More empathy in the opener — soften before stating the issue.",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "A second example to strengthen the pattern claim.",
+          "role": "half_truth"
+        },
+        {
+          "key": "C",
+          "text": "A shared Goal — what both you and the tech lead ultimately care about, beyond the specific behavior.",
+          "role": "correct"
+        },
+        {
+          "key": "D",
+          "text": "A check on whether the tech lead has too much on their plate.",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Cohen's framework requires all four GAIN elements; the script has Actions (show up), Impacts (team unsupported, gaps), and an implicit Next action — but no shared Goal anchoring why this conversation serves both of them. Without the G, the feedback reads as a complaint, not a gift.",
+      "pm_takeaway": "Before your next feedback 1:1, write the *shared* goal in one sentence — something both of you want — at the top of your notes. If you can't, you're not ready to give the feedback yet.",
+      "citation": {
+        "filename": "newsletters/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving.md",
+        "title": "Introducing the GAIN framework for feedback: an evidence-based approach to giving feedback that people love, appreciate, and act on",
+        "byline": "Jack Cohen",
+        "type": "newsletter",
+        "date": "2025-09-30",
+        "source_url": "https://www.lennysnewsletter.com/p/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jack+Cohen+GAIN+feedback",
+        "quote_excerpt": "That form must include:  - What both parties ultimately care about (the **G**oal) - What needs to change to get there (the **A**ctions) - Why (the **I**mpacts) - *Who* will do *what* by *when* to start making progress (**N**ext actions)"
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "framing-not-recipient",
+      "archetype": "diagnose",
+      "scenario_md": "You've raised the same concern with a designer on your team three times in the last month: their wireframes consistently arrive without state coverage (loading, empty, error). Each time, they nod, agree, and the next wireframe still misses states. You catch yourself thinking, 'Maybe they just don't care about edge cases.'\n\nPer Cohen, the most accurate diagnosis is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Your framing is the variable to test next — repeat-feedback-without-change usually means a missing GAIN element on the giver's side.",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "The designer needs a formal performance plan to make the consequence clearer.",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "Move the conversation to writing — Slack messages create a better paper trail.",
+          "role": "adjacent"
+        },
+        {
+          "key": "D",
+          "text": "Pair them with a senior designer who can model edge-case thinking.",
+          "role": "half_truth"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Cohen explicitly names the irony: people who 'keep giving the same feedback' and conclude the recipient just doesn't care are missing their own power to shift the framing. Repeat ineffectiveness is data about the giver's approach, not the recipient's stubbornness.",
+      "pm_takeaway": "Tomorrow, before re-raising the wireframe issue, audit your previous attempts against GAIN. Identify which element you've been skipping, then run the next conversation differently.",
+      "citation": {
+        "filename": "newsletters/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving.md",
+        "title": "Introducing the GAIN framework for feedback: an evidence-based approach to giving feedback that people love, appreciate, and act on",
+        "byline": "Jack Cohen",
+        "type": "newsletter",
+        "date": "2025-09-30",
+        "source_url": "https://www.lennysnewsletter.com/p/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jack+Cohen+GAIN+feedback",
+        "quote_excerpt": "A good number arrive fed up with failed attempts to get people to change their behavior, with many missing the irony as they bemoan, \"I keep giving them the same feedback, and *they* never change. Maybe they just don't want to.\""
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "what-they-gain",
+      "archetype": "apply",
+      "scenario_md": "You're about to give a sharp engineer on your team feedback that they've been dominating standups, leaving less-senior teammates without space to speak. Your draft opener:\n\n*'I've noticed you take up a lot of airtime in standup, which makes it harder for others to contribute.'*\n\nThe most GAIN-aligned rewrite of the opener is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "*'You're hurting team dynamics in standup — I need you to step back next week.'*",
+          "role": "mistake"
+        },
+        {
+          "key": "B",
+          "text": "*'I want you to keep being a strong technical voice and also unlock what your teammates bring — let's adjust standup together.'*",
+          "role": "correct"
+        },
+        {
+          "key": "C",
+          "text": "*'Some of the team has shared concerns about standup dynamics they'd like me to raise.'*",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "*'Let's pair on a new standup format — I think the current one isn't working for the group.'*",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Cohen's central philosophical move: tell people what *they* stand to **gain** from the feedback. Option B leads with the engineer's stake (continuing to be a strong voice + unlocking what teammates contribute) and frames the issue as a shared adjustment, which makes the feedback feel like a gift rather than a complaint.",
+      "pm_takeaway": "Before your next hard feedback conversation, write one sentence that names what the *recipient* stands to gain — and use that as your opener.",
+      "citation": {
+        "filename": "newsletters/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving.md",
+        "title": "Introducing the GAIN framework for feedback: an evidence-based approach to giving feedback that people love, appreciate, and act on",
+        "byline": "Jack Cohen",
+        "type": "newsletter",
+        "date": "2025-09-30",
+        "source_url": "https://www.lennysnewsletter.com/p/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jack+Cohen+GAIN+feedback",
+        "quote_excerpt": "When you tell people what theystand to gain from the feedback, it suddenly starts feeling like a gift again."
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "order-is-flexible",
+      "archetype": "translate",
+      "scenario_md": "Your skip-level manager (a director) has been routing decisions back through you that should be made directly with engineering — slowing things down. You want to give feedback. The standard advice is to lead with the shared goal.\n\nBased on Laura's case in the article, the most aligned move when the director is mid-complaint about the slow pace of decisions is —",
+      "options": [
+        {
+          "key": "A",
+          "text": "Wait for a calmer 1:1 next week and lead with the shared goal first, exactly as written.",
+          "role": "half_truth"
+        },
+        {
+          "key": "B",
+          "text": "Send a written follow-up after the meeting since live conflict produces worse outcomes.",
+          "role": "adjacent"
+        },
+        {
+          "key": "C",
+          "text": "Acknowledge the director's frustration and defer the feedback to your manager.",
+          "role": "mistake"
+        },
+        {
+          "key": "D",
+          "text": "Seize the moment: name the actions and impacts that matter to *the director*, then bridge to a shared goal — order is flexible.",
+          "role": "correct"
+        }
+      ],
+      "correct_key": "D",
+      "explanation_md": "Cohen explicitly notes the order isn't fixed — Laura led with her founder's actions and impacts because that's what the founder cared about *in the moment*, then bridged to the shared goal. The requirement is that all four GAIN elements appear; the order should follow the conversational opening the recipient gives you.",
+      "pm_takeaway": "Stop waiting for the 'right' setup. The next time someone's mid-complaint about a problem you've been wanting to give feedback on, use it — but make sure the goal surfaces before you close.",
+      "citation": {
+        "filename": "newsletters/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving.md",
+        "title": "Introducing the GAIN framework for feedback: an evidence-based approach to giving feedback that people love, appreciate, and act on",
+        "byline": "Jack Cohen",
+        "type": "newsletter",
+        "date": "2025-09-30",
+        "source_url": "https://www.lennysnewsletter.com/p/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jack+Cohen+GAIN+feedback",
+        "quote_excerpt": "When she began the conversation, she named the founder's **actions** and the **impacts** that mattered *to the founder*, and empathized with her on those points. Then, instead of dwelling on the founder's pain or going into her own, Laura turned toward the possible **goal**"
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "next-actions-specificity",
+      "archetype": "pick",
+      "scenario_md": "You've delivered the goal, actions, and impacts cleanly to a teammate. They're nodding and engaged. You only have 4 minutes left. Which closing best satisfies the **N — Next actions** element of GAIN?",
+      "options": [
+        {
+          "key": "A",
+          "text": "*'You'll send wireframes 24 hours before review with the three states drafted; I'll flag if any are missing — starting Tuesday.'*",
+          "role": "correct"
+        },
+        {
+          "key": "B",
+          "text": "*'Let's both think about it and circle back next week.'*",
+          "role": "mistake"
+        },
+        {
+          "key": "C",
+          "text": "*'I'll let you sit with this and you can take whatever next steps feel right.'*",
+          "role": "half_truth"
+        },
+        {
+          "key": "D",
+          "text": "*'I'll send a written summary of what we just discussed within an hour.'*",
+          "role": "adjacent"
+        }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Cohen's N is precise: *who* will do *what* by *when*. Vague commitments and 'circle back later' close the conversation without producing the change the feedback was supposed to drive. Option D names two parties, two specific behaviors, and a start date.",
+      "pm_takeaway": "Don't let any feedback conversation end without a who-what-when sentence — out loud, agreed by both parties, and short enough to remember.",
+      "citation": {
+        "filename": "newsletters/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving.md",
+        "title": "Introducing the GAIN framework for feedback: an evidence-based approach to giving feedback that people love, appreciate, and act on",
+        "byline": "Jack Cohen",
+        "type": "newsletter",
+        "date": "2025-09-30",
+        "source_url": "https://www.lennysnewsletter.com/p/introducing-the-gain-framework-for-feedback-an-evidence-based-approach-to-giving",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jack+Cohen+GAIN+feedback",
+        "quote_excerpt": "*Who* will do *what* by *when* to start making progress (**N**ext actions)"
+      }
+    }
+  ]
+}
