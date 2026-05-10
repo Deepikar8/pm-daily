@@ -124,7 +124,7 @@
     <!-- Progress + timer header -->
     <div class="flex justify-between items-center mb-2">
       <span class="sans text-xs font-bold tracking-widest uppercase text-ink-mute">
-        Call {currentIndex + 1} of {questions.length}
+        Decision {currentIndex + 1} of {questions.length}
       </span>
       <span class="flex items-center gap-1.5 text-ink-soft">
         <Clock size={14} />
@@ -211,7 +211,7 @@
         disabled={!selected || pending}
         class="sans btn-press w-full bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[16px] font-bold shadow-brut-lg flex items-center justify-center gap-2 disabled:opacity-50"
       >
-        {pending ? "Checking…" : "Submit call"} <ArrowRight size={16} />
+        {pending ? "Checking…" : "Submit decision"} <ArrowRight size={16} />
       </button>
     {:else if revealData}
       <ResultPanel
@@ -229,7 +229,7 @@
         {pending
           ? "Saving…"
           : currentIndex < questions.length - 1
-            ? "Next call"
+            ? "Next decision"
             : "See your result"}
         <ArrowRight size={16} />
       </button>

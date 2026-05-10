@@ -31,7 +31,7 @@
       {#if scope === "allTime"}
         The compounders.
       {:else}
-        Same five calls. <em class="italic font-bold text-accent">Different times.</em>
+        Same five decisions. <em class="italic font-bold text-accent">Different times.</em>
       {/if}
     </h1>
     <p class="sans text-[13px] text-ink-soft mt-2">

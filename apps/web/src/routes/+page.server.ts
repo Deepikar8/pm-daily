@@ -1,4 +1,3 @@
-import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { isGoogleAuthEnabled } from "$lib/server/auth/config";
 import * as kvKeys from "$lib/server/kv/keys";
@@ -19,8 +18,7 @@ const fallbackPreviewQuestion = {
 
 const launchProof = "A daily product judgment rep sourced from expert product conversations.";
 
-export const load: PageServerLoad = async ({ locals, platform }) => {
-  if (locals.user) throw redirect(302, "/today");
+export const load: PageServerLoad = async ({ platform }) => {
   if (!platform?.env) {
     return {
       previewQuestion: fallbackPreviewQuestion,

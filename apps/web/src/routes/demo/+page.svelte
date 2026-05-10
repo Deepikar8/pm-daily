@@ -39,7 +39,7 @@
   <div class="flex items-end justify-between gap-4 mb-6">
     <div class="min-w-0">
       <h1 class="serif text-[34px] sm:text-[44px] font-extrabold leading-[1.03] tracking-tight mb-3">
-        Make the call.
+        Make the decision.
       </h1>
       <p class="serif italic text-lg text-ink-soft">
         One product judgment rep. No account needed.
@@ -121,7 +121,7 @@
         disabled={!selectedKey}
         class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center justify-center gap-2 disabled:opacity-45 disabled:cursor-not-allowed"
       >
-        Check my call <ArrowRight size={16} />
+        Check my decision <ArrowRight size={16} />
       </button>
       {#if selectedOption}
         <p class="sans text-sm text-ink-soft self-center">

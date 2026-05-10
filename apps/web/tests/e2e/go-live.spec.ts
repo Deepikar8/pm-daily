@@ -13,7 +13,7 @@ test("public users can try one sample rep before sign-in", async ({ page }) => {
 
   await expect(page).toHaveURL(/\/demo/);
   await expect(page.getByText("Sample rep", { exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Make the call/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Make the decision/i })).toBeVisible();
 });
 
 test("public users can read today's lesson before sign-in", async ({ page }) => {
