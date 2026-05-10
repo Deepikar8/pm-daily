@@ -77,6 +77,10 @@
   </div>
 
   <div class="flex flex-col gap-3 mb-5">
+    <a href="/demo"
+       class="sans btn-press w-full bg-paper-warm text-ink border-2 border-ink rounded-2xl py-4 text-[15px] font-bold shadow-brut-lg flex items-center justify-center gap-2 no-underline">
+      <Sparkles size={16} /> {brandCopy.demoCta}
+    </a>
     {#if data.googleEnabled}
       <button onclick={signInWithGoogle} disabled={pendingGoogle}
          class="sans btn-press w-full bg-white text-ink border-2 border-ink rounded-2xl py-4 text-[15px] font-bold shadow-brut flex items-center justify-center gap-3 disabled:opacity-50">

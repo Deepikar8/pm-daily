@@ -83,6 +83,17 @@
       Skip to today’s rep →
     </a>
 
+    <!-- CTA strip -->
+    <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap mb-6">
+      <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
+        <div class="serif text-xl font-bold leading-tight text-ink">Apply this today.</div>
+        <div class="sans text-[13px] text-ink-soft mt-0.5">Five calls. One attempt.</div>
+      </div>
+      <a href="/quiz" class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
+        {brandCopy.takeRepCta} <ArrowRight size={16} />
+      </a>
+    </div>
+
     {#if pullQuoteText}
       <blockquote class="serif text-[21px] sm:text-[26px] italic leading-[1.28] text-ink my-6 sm:my-7 pl-5 border-l-[3px] border-accent font-medium tracking-tight">
         &ldquo;{pullQuoteText}&rdquo;
@@ -138,16 +149,6 @@
       </div>
     </div>
 
-    <!-- CTA strip -->
-    <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap">
-      <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
-        <div class="serif text-xl font-bold leading-tight text-ink">Apply this today.</div>
-        <div class="sans text-[13px] text-ink-soft mt-0.5">Five calls. One attempt.</div>
-      </div>
-      <a href="/quiz" class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
-        {brandCopy.takeRepCta} <ArrowRight size={16} />
-      </a>
-    </div>
   </main>
 {/if}
 
