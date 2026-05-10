@@ -40,7 +40,7 @@
         class="serif w-full px-3.5 py-3 border-2 border-ink rounded-lg text-base bg-paper outline-none"
       />
       <p class="sans text-[11px] text-ink-mute mt-1.5">
-        Shown on the leaderboard. You can change it anytime.
+        Shown in the Arena. You can change it after launch.
       </p>
     </div>
 

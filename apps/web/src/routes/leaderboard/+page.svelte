@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Trophy, Crown, TrendingUp, Users, ArrowRight } from "lucide-svelte";
+  import { brandCopy } from "$lib/brand/product-gym";
   import { getLeaderboardDisplay, type LeaderboardScope } from "$lib/leaderboard/view";
   let { data } = $props();
   let scope = $state<LeaderboardScope>("weekly");
@@ -18,26 +19,26 @@
   }
 </script>
 
-<svelte:head><title>Leaderboard — PM Daily</title></svelte:head>
+<svelte:head><title>{brandCopy.leaderboardName} — {brandCopy.appName}</title></svelte:head>
 
 <main class="max-w-2xl mx-auto px-6 py-10">
   <!-- Header -->
   <div class="mb-5">
     <p class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-accent mb-1.5">
-      {scope === "allTime" ? "All-time leaders" : `Standings · Week ${data.weekKey || "—"}`}
+      {scope === "allTime" ? "All-time Arena" : `Arena · Week ${data.weekKey || "—"}`}
     </p>
     <h1 class="serif text-4xl font-extrabold leading-[1.05] tracking-tight m-0">
       {#if scope === "allTime"}
         The compounders.
       {:else}
-        Same five questions. <em class="italic font-bold text-accent">Different times.</em>
+        Same five calls. <em class="italic font-bold text-accent">Different times.</em>
       {/if}
     </h1>
     <p class="sans text-[13px] text-ink-soft mt-2">
       {#if scope === "allTime"}
-        Ranked by total points. Streak shown as tie-break — consistency beats intensity.
+        Ranked by total points. Training streak shown as tie-break — consistency beats intensity.
       {:else}
-        Ranked by weekly points. Resets Monday at 00:00 UTC.
+        Ranked by weekly points. The Arena resets Monday at 00:00 UTC.
       {/if}
     </p>
   </div>
@@ -147,13 +148,13 @@
       <div class="px-5 py-10 text-center">
         <Trophy size={32} class="text-secondary mx-auto mb-3" />
         <p class="serif italic text-ink-soft mb-4">
-          No standings yet — be the first to play today.
+          No Arena standings yet — be the first to train today.
         </p>
         <a
           href="/quiz"
           class="sans btn-press inline-flex items-center justify-center gap-2 bg-accent text-paper border-2 border-ink rounded-2xl px-5 py-3 text-[14px] font-bold shadow-brut no-underline"
         >
-          Take today's quiz <ArrowRight size={15} />
+          {brandCopy.takeRepCta} <ArrowRight size={15} />
         </a>
       </div>
     {/if}

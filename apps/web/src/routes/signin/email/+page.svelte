@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Calendar, ArrowRight } from "lucide-svelte";
+  import { brandCopy } from "$lib/brand/product-gym";
   let email = $state("");
   let submitted = $state(false);
   let pending = $state(false);
@@ -26,7 +27,7 @@
   }
 </script>
 
-<svelte:head><title>Sign in — PM Daily</title></svelte:head>
+<svelte:head><title>Sign in — {brandCopy.appName}</title></svelte:head>
 
 <main class="max-w-md mx-auto px-6 py-16">
   <h1 class="serif text-3xl font-extrabold mb-3">Sign in.</h1>

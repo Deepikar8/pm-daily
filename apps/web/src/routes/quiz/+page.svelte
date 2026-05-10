@@ -2,6 +2,7 @@
   import { goto } from "$app/navigation";
   import { Headphones, Clock, ArrowRight, Check, X as XIcon } from "lucide-svelte";
   import ResultPanel from "$lib/components/ResultPanel.svelte";
+  import { brandCopy } from "$lib/brand/product-gym";
 
   let { data } = $props();
 
@@ -102,11 +103,11 @@
   }
 </script>
 
-<svelte:head><title>Today's quiz — PM Daily</title></svelte:head>
+<svelte:head><title>{brandCopy.todayRep} — {brandCopy.appName}</title></svelte:head>
 
 {#if data.missing || !questions.length}
   <main class="max-w-2xl mx-auto px-6 py-16 text-center">
-    <h1 class="serif text-3xl font-bold">No quiz today.</h1>
+    <h1 class="serif text-3xl font-bold">No rep today.</h1>
     <p class="serif italic text-lg text-ink-soft mt-3">
       Check back tomorrow at 8am your local time.
     </p>
@@ -123,7 +124,7 @@
     <!-- Progress + timer header -->
     <div class="flex justify-between items-center mb-2">
       <span class="sans text-xs font-bold tracking-widest uppercase text-ink-mute">
-        Question {currentIndex + 1} of {questions.length}
+        Call {currentIndex + 1} of {questions.length}
       </span>
       <span class="flex items-center gap-1.5 text-ink-soft">
         <Clock size={14} />
@@ -210,7 +211,7 @@
         disabled={!selected || pending}
         class="sans btn-press w-full bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[16px] font-bold shadow-brut-lg flex items-center justify-center gap-2 disabled:opacity-50"
       >
-        {pending ? "Checking…" : "Submit answer"} <ArrowRight size={16} />
+        {pending ? "Checking…" : "Submit call"} <ArrowRight size={16} />
       </button>
     {:else if revealData}
       <ResultPanel
@@ -228,7 +229,7 @@
         {pending
           ? "Saving…"
           : currentIndex < questions.length - 1
-            ? "Next question"
+            ? "Next call"
             : "See your result"}
         <ArrowRight size={16} />
       </button>

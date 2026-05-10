@@ -1,6 +1,7 @@
 <script lang="ts">
   import { marked } from "marked";
   import { Sparkles, Headphones, Clock, Play, BookOpen, ArrowRight } from "lucide-svelte";
+  import { brandCopy } from "$lib/brand/product-gym";
 
   let { data } = $props();
 
@@ -42,14 +43,14 @@
 </script>
 
 <svelte:head>
-  <title>{data.content?.headline ?? "Today"} — PM Daily</title>
+  <title>{data.content?.headline ?? "Today"} — {brandCopy.appName}</title>
 </svelte:head>
 
 {#if data.missing}
   <main class="max-w-2xl mx-auto px-6 py-16 text-center">
     <h1 class="serif text-3xl font-bold">Tomorrow.</h1>
     <p class="serif italic text-lg text-ink-soft mt-3">
-      Today's session isn't published yet. Try again in a few minutes.
+      Today’s rep isn’t published yet. Try again in a few minutes.
     </p>
   </main>
 {:else if data.content}
@@ -79,7 +80,7 @@
 
     <a href="/quiz"
        class="sans block text-center text-[12px] font-semibold text-accent underline underline-offset-4 mb-5 sm:hidden">
-      Skip to today's quiz →
+      Skip to today’s rep →
     </a>
 
     {#if pullQuoteText}
@@ -141,10 +142,10 @@
     <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap">
       <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
         <div class="serif text-xl font-bold leading-tight text-ink">Apply this today.</div>
-        <div class="sans text-[13px] text-ink-soft mt-0.5">Five questions. One attempt.</div>
+        <div class="sans text-[13px] text-ink-soft mt-0.5">Five calls. One attempt.</div>
       </div>
       <a href="/quiz" class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
-        Take today's quiz <ArrowRight size={16} />
+        {brandCopy.takeRepCta} <ArrowRight size={16} />
       </a>
     </div>
   </main>

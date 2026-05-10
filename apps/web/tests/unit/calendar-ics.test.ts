@@ -7,7 +7,7 @@ describe("buildICS", () => {
     expect(ics).toContain("BEGIN:VCALENDAR");
     expect(ics).toContain("BEGIN:VEVENT");
     expect(ics).toContain("RRULE:FREQ=DAILY");
-    expect(ics).toContain("SUMMARY:PM Daily — 5 min");
+    expect(ics).toContain("SUMMARY:Product Gym — 5 min");
     expect(ics).toContain("URL:https://pmdaily.app/today");
     expect(ics).toContain("TZID=America/Los_Angeles");
   });

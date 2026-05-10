@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Calendar } from "lucide-svelte";
+  import { brandCopy } from "$lib/brand/product-gym";
   let { data } = $props();
   function fmtTime(s: number) { return `${Math.floor(s/60)}:${(s%60).toString().padStart(2,"0")}`; }
   function fmtDate(iso: string) {
@@ -13,7 +14,7 @@
   }
 </script>
 
-<svelte:head><title>You — PM Daily</title></svelte:head>
+<svelte:head><title>{brandCopy.profileName} — {brandCopy.appName}</title></svelte:head>
 
 <main class="max-w-2xl mx-auto px-6 py-10">
   <!-- Header -->
@@ -38,10 +39,10 @@
     <div class="relative flex items-center gap-4.5" style="gap: 18px;">
       <span class="animate-flame" style="font-size: 54px; line-height: 1;">🔥</span>
       <div class="flex-1">
-        <div class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-paper-cream mb-1">Current streak</div>
+        <div class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-paper-cream mb-1">{brandCopy.streakName}</div>
         <div class="serif text-[40px] font-extrabold leading-none mono">{data.stats.currentStreak} {data.stats.currentStreak === 1 ? "day" : "days"}</div>
         <div class="sans text-xs text-paper-cream mt-1">
-          Best ever: <strong class="mono">{data.stats.bestStreak} days</strong> · Tomorrow's session at <strong class="mono">08:00</strong> your time
+          Best ever: <strong class="mono">{data.stats.bestStreak} days</strong> · Tomorrow’s rep at <strong class="mono">08:00</strong> your time
         </div>
       </div>
     </div>

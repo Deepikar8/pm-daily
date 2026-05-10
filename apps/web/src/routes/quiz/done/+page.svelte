@@ -8,6 +8,7 @@
     Check,
     X as XIcon,
   } from "lucide-svelte";
+  import { brandCopy } from "$lib/brand/product-gym";
   let { data } = $props();
   function fmtTime(s: number) {
     return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
@@ -20,17 +21,17 @@
         : data.attempt.totalCorrect === 3
           ? "Decent."
           : data.attempt.totalCorrect >= 1
-            ? "Tomorrow's another set."
+            ? "Tomorrow’s another rep."
             : "Rough one.",
   );
   let scoreSub = $derived(
     data.attempt.totalCorrect === 5
-      ? "You absorbed today's playbook."
+      ? "You absorbed today’s playbook."
       : "Every miss is a thing you now know.",
   );
 </script>
 
-<svelte:head><title>Done — PM Daily</title></svelte:head>
+<svelte:head><title>Done — {brandCopy.appName}</title></svelte:head>
 
 <main class="max-w-2xl mx-auto px-6 py-10">
   <!-- Score headline -->
@@ -91,7 +92,7 @@
         {data.streak.current === 1 ? "day" : "days"}
       </div>
       <div class="sans text-xs text-paper-cream mt-0.5">
-        Best: <strong>{data.streak.best}</strong> · Tomorrow's session at 8am your local time.
+        Best: <strong>{data.streak.best}</strong> · Tomorrow’s rep opens at 8am your local time.
       </div>
     </div>
   </div>
@@ -137,7 +138,7 @@
   <!-- Question recap with takeaways -->
   <div class="bg-white rounded-2xl border-2 border-ink p-4 mb-4">
     <div class="sans text-[11px] font-bold tracking-widest uppercase text-ink-mute mb-3">
-      Five takeaways from today
+      Five takeaways from today’s rep
     </div>
     <ol class="list-none p-0 m-0 flex flex-col gap-2">
       {#each data.questions as q}
@@ -172,7 +173,7 @@
       href="/leaderboard"
       class="sans btn-press flex-1 bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline"
     >
-      <Trophy size={15} /> See leaderboard
+      <Trophy size={15} /> See Arena
     </a>
     <button
       class="sans btn-press bg-white text-ink border-2 border-ink rounded-2xl px-5 py-4 text-[14px] font-bold shadow-brut flex items-center gap-2"

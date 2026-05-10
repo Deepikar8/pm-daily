@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Sparkles, Calendar, Users } from "lucide-svelte";
+  import { brandCopy } from "$lib/brand/product-gym";
   let { data } = $props();
   const preview = $derived(data.previewQuestion);
   let pendingGoogle = $state(false);
@@ -34,26 +35,26 @@
 </script>
 
 <svelte:head>
-  <title>PM Daily — five questions a day for product managers</title>
+  <title>{brandCopy.appName} — {brandCopy.tagline}</title>
 </svelte:head>
 
 <main class="max-w-xl mx-auto px-6 py-12">
   <div class="text-center mb-7">
     <p class="sans inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-accent bg-paper-cream border-2 border-accent rounded-full px-3.5 py-1.5 mb-3.5">
-      <Sparkles size={12} /> A daily ritual for PMs
+      <Sparkles size={12} /> {brandCopy.tagline}
     </p>
     <h1 class="serif text-[44px] font-extrabold leading-[1] tracking-tight mt-3 mb-3">
-      Five questions a day, sourced from <em class="text-accent italic font-bold">Lenny's Podcast</em>.
+      Train your product judgment with one daily rep.
     </h1>
     <p class="serif italic text-lg text-ink-soft">
-      Three minutes. One operator. One leaderboard.
+      Make the call. Learn the lesson. Climb the Arena.
     </p>
   </div>
 
   <div class="bg-white rounded-2xl border-2 border-ink shadow-brut-accent-lg overflow-hidden mb-6">
     <div class="px-5 py-3.5 bg-paper-warm border-b-2 border-ink flex items-center justify-between">
       <span class="sans text-[11px] font-bold tracking-[0.12em] uppercase text-ink-soft">
-        {data.isFallback ? "Sample question · what to expect" : "Today's question · preview"}
+        {data.isFallback ? "Sample rep · what to expect" : "Today's rep · preview"}
       </span>
       <span class="sans text-[11px] text-ink-mute mono">1 of 5</span>
     </div>
@@ -69,7 +70,7 @@
           </div>
         {/each}
         <div class="sans px-3.5 py-2.5 text-center text-ink-mute text-xs italic">
-          +2 more options · sign in to submit
+          +2 more options · sign in to save your streak
         </div>
       </div>
     </div>

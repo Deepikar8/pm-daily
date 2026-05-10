@@ -1,26 +1,27 @@
 <script lang="ts">
   import { page } from "$app/state";
   import { Calendar, Trophy, Users, Coffee } from "lucide-svelte";
+  import { brandCopy, navLabels } from "$lib/brand/product-gym";
 
   type Tab = { href: string; label: string; matches: (path: string) => boolean };
 
   const tabs: { href: string; label: string; Icon: typeof Calendar; matches: (path: string) => boolean }[] = [
     {
       href: "/today",
-      label: "Today",
+      label: navLabels.today,
       Icon: Calendar,
       // /today is also active during the quiz flow (which lives under /quiz)
       matches: (p) => p === "/today" || p.startsWith("/quiz"),
     },
     {
       href: "/leaderboard",
-      label: "Leaderboard",
+      label: navLabels.arena,
       Icon: Trophy,
       matches: (p) => p === "/leaderboard" || p.startsWith("/leaderboard/"),
     },
     {
       href: "/me",
-      label: "You",
+      label: navLabels.trainingLog,
       Icon: Users,
       matches: (p) => p === "/me" || p.startsWith("/me/"),
     },
@@ -37,8 +38,8 @@
         <Coffee size={18} class="text-paper" />
       </span>
       <span class="leading-tight">
-        <span class="block serif text-lg font-extrabold leading-none tracking-tight text-ink">PM Daily</span>
-        <span class="block sans text-[9px] text-ink-mute uppercase tracking-[0.14em] mt-0.5">Sourced from Lenny's</span>
+        <span class="block serif text-lg font-extrabold leading-none tracking-tight text-ink">{brandCopy.appName}</span>
+        <span class="block sans text-[9px] text-ink-mute uppercase tracking-[0.14em] mt-0.5">Daily product reps</span>
       </span>
     </a>
   </div>

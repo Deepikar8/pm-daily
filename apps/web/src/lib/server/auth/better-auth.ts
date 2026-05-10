@@ -104,9 +104,9 @@ export function createAuth(args: AuthArgs) {
             return;
           }
           await resend.emails.send({
-            from: args.emailFrom || "PM Daily <onboarding@resend.dev>",
+            from: args.emailFrom || "Product Gym <onboarding@resend.dev>",
             to: email,
-            subject: "Sign in to PM Daily",
+            subject: "Sign in to Product Gym",
             html: `<p>Click to sign in: <a href="${url}">${url}</a></p>
                    <p>Magic link only - we email you only for sign-in.
                    Daily reminders happen via your calendar.</p>`,
