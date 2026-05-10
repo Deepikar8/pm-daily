@@ -42,17 +42,23 @@
 
 <main class="max-w-xl mx-auto px-6 py-12">
   <div class="text-center mb-7">
-    <p class="sans inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-accent bg-paper-cream border-2 border-accent rounded-full px-3.5 py-1.5 mb-3.5">
-      <Sparkles size={12} /> {brandCopy.tagline}
-    </p>
-    <h1 class="serif text-[44px] font-extrabold leading-[1] tracking-tight mt-3 mb-3">
-      Train your product judgment with one daily rep.
-    </h1>
-    <div class="flex items-center justify-center gap-3">
-      <p class="serif italic text-lg text-ink-soft">
-        Make the call. Learn the lesson. Climb the Arena.
-      </p>
+    <div class="flex items-center justify-center gap-3 mb-4">
       <MascotCoach size="sm" />
+      <p class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-accent">
+        Daily product training
+      </p>
+    </div>
+    <h1 class="serif text-[52px] font-extrabold leading-[0.96] tracking-tight mt-3 mb-3">
+      {brandCopy.appName}
+    </h1>
+    <p class="serif italic text-xl text-ink-soft leading-tight">
+      {brandCopy.tagline}
+    </p>
+    <div class="mt-3 flex items-center justify-center gap-2">
+      <Sparkles size={14} class="text-accent" />
+      <p class="sans text-[14px] text-ink-soft leading-relaxed">
+        {brandCopy.landingSupport}
+      </p>
     </div>
   </div>
 

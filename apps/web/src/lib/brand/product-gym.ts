@@ -1,6 +1,7 @@
 export const brandCopy = {
   appName: "Product Gym",
-  tagline: "Daily reps for sharper product judgment.",
+  tagline: "One daily challenge to sharpen your product instincts.",
+  landingSupport: "Learn from top operators. Take the daily challenge. Climb the leaderboard.",
   sourceLine: "Sourced from expert product conversations.",
   todayRep: "Today’s Rep",
   takeRepCta: "Take today’s rep",
@@ -13,6 +14,6 @@ export const brandCopy = {
 export const navLabels = {
   today: "Today",
   rep: "Rep",
-  arena: "Arena",
-  trainingLog: "Log",
+  arena: "Leaderboard",
+  trainingLog: "You",
 } as const;
