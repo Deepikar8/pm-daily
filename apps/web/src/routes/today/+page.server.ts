@@ -11,24 +11,30 @@ function todayInTZ(tz: string) {
 }
 
 export const load: PageServerLoad = async ({ locals, platform }) => {
-  if (!locals.user) throw redirect(302, "/");
   if (!platform?.env) throw redirect(302, "/");
 
   const db = getDb(platform.env.DB);
   const env = platform.env;
 
-  // Confirm onboarding completed; otherwise → /onboarding
-  const userRow = await db
-    .select({
-      termsAcceptedAt: users.termsAcceptedAt,
-      timezone: users.timezone,
-    })
-    .from(users)
-    .where(eq(users.id, locals.user.id))
-    .get();
-  if (!userRow?.termsAcceptedAt) throw redirect(302, "/onboarding");
+  let userRow:
+    | {
+        termsAcceptedAt: number | null;
+        timezone: string;
+      }
+    | undefined;
 
-  const tz = userRow.timezone ?? locals.user.timezone ?? "UTC";
+  if (locals.user) {
+    userRow = await db
+      .select({
+        termsAcceptedAt: users.termsAcceptedAt,
+        timezone: users.timezone,
+      })
+      .from(users)
+      .where(eq(users.id, locals.user.id))
+      .get();
+  }
+
+  const tz = userRow?.timezone ?? locals.user?.timezone ?? "UTC";
   const date = todayInTZ(tz);
 
   // Try KV first (hot path)
