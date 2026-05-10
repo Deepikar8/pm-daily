@@ -9,9 +9,34 @@
     X as XIcon,
   } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
+  import { resultShareText } from "$lib/brand/share";
   let { data } = $props();
+  let shareState = $state<"idle" | "copied" | "error">("idle");
+
   function fmtTime(s: number) {
     return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
+  }
+  async function shareResult() {
+    const text = resultShareText({
+      correct: data.attempt.totalCorrect,
+      date: data.date,
+      rank: data.rank,
+    });
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: `${brandCopy.appName} result`,
+          text,
+          url: data.shareUrl,
+        });
+        return;
+      }
+      await navigator.clipboard.writeText(`${text} ${data.shareUrl}`);
+      shareState = "copied";
+    } catch {
+      shareState = "error";
+    }
   }
   let scoreHeadline = $derived(
     data.attempt.totalCorrect === 5
@@ -176,11 +201,18 @@
       <Trophy size={15} /> See Arena
     </a>
     <button
+      type="button"
+      onclick={shareResult}
       class="sans btn-press bg-white text-ink border-2 border-ink rounded-2xl px-5 py-4 text-[14px] font-bold shadow-brut flex items-center gap-2"
     >
-      <Share2 size={15} /> Share
+      <Share2 size={15} /> {shareState === "copied" ? "Copied" : "Share"}
     </button>
   </div>
+  {#if shareState === "error"}
+    <p class="sans text-xs text-wrong text-center mt-3">
+      Couldn’t open sharing. Copy this page URL instead.
+    </p>
+  {/if}
 </main>
 
 <style>

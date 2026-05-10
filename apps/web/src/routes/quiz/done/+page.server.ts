@@ -6,7 +6,7 @@ import { and, eq } from "drizzle-orm";
 import { localDate } from "$lib/server/timezone/helpers";
 import { readLeaderboards } from "$lib/server/leaderboard/read";
 
-export const load: PageServerLoad = async ({ locals, platform }) => {
+export const load: PageServerLoad = async ({ locals, platform, url }) => {
   if (!locals.user) throw redirect(302, "/");
   if (!platform?.env) throw redirect(302, "/");
   const env = platform.env;
@@ -59,11 +59,13 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
   return {
     date,
     attempt: {
+      id: attempt.id,
       totalCorrect: attempt.totalCorrect ?? 0,
       totalSeconds: attempt.totalSeconds ?? 0,
       totalPoints: attempt.totalPoints ?? 0,
       streakMultiplier: attempt.streakMultiplier ?? 1,
     },
+    shareUrl: `${url.origin}/share/${attempt.id}`,
     streak: {
       current: stats?.currentStreak ?? 0,
       best: stats?.bestStreak ?? 0,
