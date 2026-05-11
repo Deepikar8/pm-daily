@@ -113,7 +113,7 @@
 <main class="max-w-xl mx-auto px-6 py-12">
   <div class="text-center mb-7">
     <div class="flex items-center justify-center gap-3 mb-4">
-      <MascotCoach size="sm" />
+      <MascotCoach size="sm" mood="wave" />
       <p class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-accent">
         Daily product training
       </p>
@@ -152,6 +152,9 @@
         {/if}
       </div>
     </div>
+    <p class="sans text-[12px] text-ink-soft leading-relaxed mt-3">
+      Today’s quiz asks you to apply what {todayContent.source.byline} discussed to a realistic product decision.
+    </p>
     <a
       href={todayContent.source.source_url ?? todayContent.source.search_url}
       target="_blank"
@@ -214,6 +217,13 @@
         {/if}
       {:else}
         <div class="mt-5 border-2 border-ink rounded-2xl bg-paper-warm px-4 py-4">
+          <div class="mb-3">
+            <MascotCoach
+              size="sm"
+              mood={isCorrect ? "celebrate" : "coach"}
+              label={isCorrect ? "Nice lift. Now add four more plates." : "Form check. The insight was heavier than it looked."}
+            />
+          </div>
           <p class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-accent mb-2">
             {revealing ? "Checking decision" : isCorrect ? "Good decision" : "Training note"}
           </p>

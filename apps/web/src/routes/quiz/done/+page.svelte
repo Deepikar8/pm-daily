@@ -12,6 +12,7 @@
   import { brandCopy } from "$lib/brand/product-gym";
   import { resultShareText } from "$lib/brand/share";
   import { track } from "$lib/analytics/client";
+  import MascotCoach from "$lib/components/MascotCoach.svelte";
   let { data }: { data: any } = $props();
   let shareState = $state<"idle" | "copied" | "error">("idle");
 
@@ -66,6 +67,15 @@
 <main class="max-w-2xl mx-auto px-6 py-10">
   <!-- Score headline -->
   <div class="text-center mb-6">
+    <div class="flex justify-center mb-3">
+      <MascotCoach
+        size="md"
+        mood={data.attempt.totalCorrect >= 4 ? "celebrate" : "coach"}
+        label={data.attempt.totalCorrect >= 4
+          ? "That one belongs on the highlight reel."
+          : "Not a miss. A very expensive warm-up."}
+      />
+    </div>
     <p class="sans text-[12px] font-bold tracking-[0.12em] uppercase text-accent mb-2">
       {data.date} · Done
     </p>

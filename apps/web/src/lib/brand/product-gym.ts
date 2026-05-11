@@ -1,7 +1,7 @@
 export const brandCopy = {
   appName: "Product Gym",
   tagline: "One daily challenge to sharpen your product instincts.",
-  landingSupport: "Learn from top operators. Take the daily challenge. Climb the leaderboard.",
+  landingSupport: "Turn operator interviews into product decisions.",
   sourceLine: "Sourced from expert product conversations.",
   todayRep: "Today’s Rep",
   takeRepCta: "Start today’s challenge",

@@ -8,15 +8,12 @@
 
 	let { data, children } = $props();
 
-	// Show Nav only on authenticated app routes. Hide on public landing,
-	// signin, onboarding, auth handlers, terms/privacy. The Nav links to
-	// /today /leaderboard /me — all of which require sign-in.
+	// Show Nav on app surfaces. Landing/auth/legal pages stay focused.
 	const HIDDEN_PREFIXES = ["/", "/signin", "/onboarding", "/auth", "/terms", "/privacy"];
 	let showNav = $derived(
-		!!data.user &&
-			!HIDDEN_PREFIXES.some((p) =>
-				p === "/" ? page.url.pathname === "/" : page.url.pathname.startsWith(p),
-			),
+		!HIDDEN_PREFIXES.some((p) =>
+			p === "/" ? page.url.pathname === "/" : page.url.pathname.startsWith(p),
+		),
 	);
 </script>
 
@@ -26,7 +23,7 @@
 
 <div class="min-h-screen flex flex-col">
 	{#if showNav}
-		<Nav />
+		<Nav user={data.user} />
 	{/if}
 	<div class="flex-1">
 		{@render children?.()}

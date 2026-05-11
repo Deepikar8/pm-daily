@@ -3,9 +3,9 @@
   import { Calendar, Trophy, Users } from "lucide-svelte";
   import { brandCopy, navLabels } from "$lib/brand/product-gym";
 
-  type Tab = { href: string; label: string; matches: (path: string) => boolean };
+  let { user = null }: { user?: unknown | null } = $props();
 
-  const tabs: { href: string; label: string; Icon: typeof Calendar; matches: (path: string) => boolean }[] = [
+  const tabs: { href: string; label: string; Icon: typeof Calendar; matches: (path: string) => boolean }[] = $derived([
     {
       href: "/today",
       label: navLabels.today,
@@ -20,12 +20,12 @@
       matches: (p) => p === "/leaderboard" || p.startsWith("/leaderboard/"),
     },
     {
-      href: "/me",
+      href: user ? "/me" : "/signin/email",
       label: navLabels.trainingLog,
       Icon: Users,
       matches: (p) => p === "/me" || p.startsWith("/me/"),
     },
-  ];
+  ]);
 </script>
 
 <header class="sticky top-0 z-40 bg-paper border-b-2 border-ink">

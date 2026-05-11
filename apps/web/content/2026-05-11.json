@@ -1,0 +1,153 @@
+{
+  "date": "2026-05-11",
+  "headline": "Jessica Fain on influence: if leaders don't buy your idea, that's not their failure — it's yours",
+  "theme_pillar": "communication",
+  "digest_md": "Jessica Fain, product leader at Webflow and ex-chief of staff to two Slack CPOs, argues that influence is the single highest-leverage skill for product managers — and that AI is only making it more important, not less. Most PMs do amazing work and then quietly run into a wall: their best ideas die on the vine. Fain's diagnosis is uncomfortable. When leaders don't buy in, the PM blames the leader. The right framing, borrowed from her first manager Annie Pearl, is: *\"It's not my fault, but it is my problem.\"*\n\nHer central observation from years sitting next to executives: PMs apply curiosity and empathy to their users, then forget those exact skills the moment they walk into an exec review. Instead of researching their executive, they show up centered on their own slide deck. Fain wants PMs to treat execs the way they treat users — with research. Ask the exec's chief of staff what's been on their plate. Ask the exec directly: *\"Tell me what the board is pushing you on.\"* Skip the \"what's top of mind\" question, which surfaces nothing real.\n\nShe also reframes how exec calendars feel from the other side. A PM has been prepping for the product review for six weeks; the exec has been in a strobe light of finance, legal, hiring, and people problems and hasn't thought about the PM since. The single highest-leverage move is taking 30 seconds at the top to reset: *why are we here, why does it matter to you, what happened last time.*\n\nThe most counterintuitive lesson is on building trust: PMs build it by killing things, not by asking for more resources. Deprioritizing your own project signals you share the executive's incentives — company outcome, user outcome — not just your own headcount. That, Fain says, is what a CPO mindset looks like at any level.",
+  "takeaways": [
+    "If leaders didn't buy in, that's your influence problem to solve — not their judgment problem. Apply user-research curiosity to your execs, not just your users.",
+    "Spend 30 seconds at the top of every exec meeting resetting context: why are we here, what matters to you, what happened last time. They have not thought about your problem since.",
+    "Stop asking 'what's top of mind?' Ask the harder questions: what is the board pushing you on, what are you scared of messing up, what pressures are you facing right now.",
+    "The fastest way to build trust with an exec is to kill or deprioritize one of your own projects this quarter. It signals you share their incentives, not just yours."
+  ],
+  "source": {
+    "filename": "podcasts/jessica-fain.md",
+    "title": "The art of influence: The single most important skill that AI can't replace",
+    "byline": "Jessica Fain",
+    "type": "podcast",
+    "date": "2026-03-22",
+    "source_url": "https://www.lennysnewsletter.com/p/the-art-of-influence-jessica-fain",
+    "search_url": "https://www.lennysnewsletter.com/?q=Jessica+Fain+influence"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "influence-is-your-job",
+      "archetype": "diagnose",
+      "scenario_md": "You're a senior PM at a 400-person SaaS company. You spent six weeks building a research-backed case to invest in a new onboarding flow. The CPO sat through your review, asked a few questions, and greenlit a competing initiative from another PM instead. Walking back to your desk, your default reaction is, \"He just doesn't see it.\"\n\nPer Jessica Fain's framing, the most aligned reframe is —",
+      "options": [
+        { "key": "A", "text": "He may be wrong, but it's still your problem — you didn't influence him; treat the gap as research before the next ask.", "role": "correct" },
+        { "key": "B", "text": "Escalate to the CEO with a one-pager showing why the CPO's pick is the weaker bet.", "role": "mistake" },
+        { "key": "C", "text": "Accept that great PM work eventually speaks for itself; double down on quality and let outcomes argue for you next quarter.", "role": "half_truth" },
+        { "key": "D", "text": "Build a coalition of peer PMs who agree with you so the next pitch has more social proof in the room.", "role": "adjacent" }
+      ],
+      "correct_key": "A",
+      "explanation_md": "Fain quotes her first PM manager: \"It's not my fault, but it is my problem.\" When a leader doesn't buy in, the PM owns the influence gap — they didn't surface the right research about the exec, didn't connect to the exec's incentives, didn't help them see it. Blaming the leader is the trap she names directly.",
+      "pm_takeaway": "Next time a leader passes on your idea, write down what you didn't know about their pressures before the meeting — that gap is your homework, not theirs.",
+      "citation": {
+        "filename": "podcasts/jessica-fain.md",
+        "title": "The art of influence: The single most important skill that AI can't replace",
+        "byline": "Jessica Fain",
+        "type": "podcast",
+        "date": "2026-03-22",
+        "source_url": "https://www.lennysnewsletter.com/p/the-art-of-influence-jessica-fain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jessica+Fain+influence",
+        "quote_excerpt": "She always said to me, \"It's not my fault, but it is my problem.\" And I think that that's the vantage point that a product leader has to have, especially if they're trying to put themselves in the shoes of an executive.",
+        "timestamp": "00:10:48"
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "apply-user-research-to-execs",
+      "archetype": "pick",
+      "scenario_md": "You have a 25-minute 1:1 with your VP of Product on Friday and want to pre-wire support for a project you'll formally pitch in two weeks. You've been told you have three minutes for a check-in question before you switch to status updates.\n\nFollowing Jessica Fain's framing, the question most likely to surface useful intel is —",
+      "options": [
+        { "key": "A", "text": "\"What's top of mind for you right now?\"", "role": "mistake" },
+        { "key": "B", "text": "\"Tell me what the board is pushing you on — what's the most urgent priority you're scared about messing up?\"", "role": "correct" },
+        { "key": "C", "text": "\"Do you have any concerns I should know about before I pitch the project in two weeks?\"", "role": "half_truth" },
+        { "key": "D", "text": "\"What feedback have you been getting on our team's roadmap lately?\"", "role": "adjacent" }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Fain explicitly names \"what's top of mind\" as a hot-take bad question — it surfaces rehearsed priorities. She recommends the same kind of question PMs use in user research: ask about pressures, fears, what they could mess up. That gets you the real input you can align your pitch to.",
+      "pm_takeaway": "Before your next exec 1:1, rewrite your check-in question from 'what's top of mind' to 'what is the board pushing you on, and what are you scared of getting wrong?'",
+      "citation": {
+        "filename": "podcasts/jessica-fain.md",
+        "title": "The art of influence: The single most important skill that AI can't replace",
+        "byline": "Jessica Fain",
+        "type": "podcast",
+        "date": "2026-03-22",
+        "source_url": "https://www.lennysnewsletter.com/p/the-art-of-influence-jessica-fain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jessica+Fain+influence",
+        "quote_excerpt": "I am not a big fan of the what's top of mind for you question. This is a hot take because I think that what often people do is they think through their top priorities, their top experiences.",
+        "timestamp": "00:29:22"
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "exec-as-strobe-light",
+      "archetype": "apply",
+      "scenario_md": "You have a 30-minute product review with the CPO at 2pm. You've been preparing for three weeks. The CPO's morning, per her assistant, was a budget escalation, an executive candidate panel, and a customer churn fire drill. Your slides open with a recap of the experiment results.\n\nPer Jessica Fain's framing, the highest-leverage thing you can do in the first 60 seconds is —",
+      "options": [
+        { "key": "A", "text": "Jump straight to the experiment results — you only have 30 minutes and she's seen the background before.", "role": "mistake" },
+        { "key": "B", "text": "Open by asking her how her morning has been so she feels heard before you dive in.", "role": "half_truth" },
+        { "key": "C", "text": "Take 30 seconds to reset: why we're here, what happened last time we spoke, why this matters to her goals — then move into results.", "role": "correct" },
+        { "key": "D", "text": "Send her a Slack pre-read 15 minutes before so she walks in already aligned on context.", "role": "adjacent" }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Fain calls the exec calendar a strobe light — the CPO hasn't thought about your problem since you last spoke and just context-switched from three unrelated emergencies. A 30-second reset at the top is her named highest-leverage tactic; it shifts the meeting from cold-start to engaged.",
+      "pm_takeaway": "Before your next exec meeting, write three sentences on a sticky note: why we're here, what happened last time, why this matters to them. Read it aloud in the first 30 seconds.",
+      "citation": {
+        "filename": "podcasts/jessica-fain.md",
+        "title": "The art of influence: The single most important skill that AI can't replace",
+        "byline": "Jessica Fain",
+        "type": "podcast",
+        "date": "2026-03-22",
+        "source_url": "https://www.lennysnewsletter.com/p/the-art-of-influence-jessica-fain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jessica+Fain+influence",
+        "quote_excerpt": "So one of the biggest tactics I think is so important is, just take 30 seconds at the top of a meeting. Why are we here? What happened the last time we talked? Why is this important to you? Why is this meaningful?",
+        "timestamp": "00:08:33"
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "kill-things-build-trust",
+      "archetype": "spot",
+      "scenario_md": "You're a PM with three active initiatives. One — a redesigned settings panel — has shipped and is showing flat engagement after six weeks. You spent a quarter pitching it; the engineering manager is your friend. Your next quarterly review with the CPO is Monday. You're planning to ask for two more engineers to expand your team.\n\nPer Jessica Fain's framing, the missing move in your plan is —",
+      "options": [
+        { "key": "A", "text": "Add a stronger metrics story to the settings-panel section so the flat engagement reads less harshly.", "role": "mistake" },
+        { "key": "B", "text": "Propose killing or deprioritizing the settings panel and reallocating your team — separately from any ask for more engineers.", "role": "correct" },
+        { "key": "C", "text": "Add a follow-up A/B test on the settings panel before declaring it a failure; ask for the two engineers to run it.", "role": "half_truth" },
+        { "key": "D", "text": "Reframe the settings panel as 'foundational infrastructure' so its flat metrics matter less to the headcount ask.", "role": "adjacent" }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Fain's most counterintuitive trust-building move: kill or deprioritize your own work. Most PMs accumulate; senior PMs prune. Proactively killing a flat-performing project signals you share the executive's incentives (company outcome, not your headcount) and earns far more trust than asking for more resources.",
+      "pm_takeaway": "Walk your portfolio this week. Pick the one project that's flat or underperforming and bring a proposal to kill or pause it to your next 1:1 — before anyone else flags it.",
+      "citation": {
+        "filename": "podcasts/jessica-fain.md",
+        "title": "The art of influence: The single most important skill that AI can't replace",
+        "byline": "Jessica Fain",
+        "type": "podcast",
+        "date": "2026-03-22",
+        "source_url": "https://www.lennysnewsletter.com/p/the-art-of-influence-jessica-fain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jessica+Fain+influence",
+        "quote_excerpt": "I think one of the biggest things you can do to build trust is kill things, deprioritize things. That is a very, very senior way of thinking, and it shows that you have the same aligned incentives as the executive",
+        "timestamp": "01:00:53"
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "simulate-exec-with-ai",
+      "archetype": "translate",
+      "scenario_md": "You're a PM at a 1,500-person company prepping a strategy pitch for the CPO next Thursday. You don't have a chief of staff to consult. You do have: a year of the CPO's public Slack posts, three past product review recordings, and her board update doc from last quarter.\n\nPer Jessica Fain's framing, the highest-leverage prep move with those materials is —",
+      "options": [
+        { "key": "A", "text": "Read everything yourself, take notes, and try to memorize her likely objections so you can answer them live.", "role": "mistake" },
+        { "key": "B", "text": "Skip the prep — the materials are too dated and her real concerns will be whatever's urgent that week.", "role": "adjacent" },
+        { "key": "C", "text": "Train a Claude or GPT project on those materials, role-play her, and push your pitch through to surface weaknesses before Thursday.", "role": "correct" },
+        { "key": "D", "text": "Forward the materials to a senior peer and ask them to red-team your pitch as if they were the CPO.", "role": "half_truth" }
+      ],
+      "correct_key": "C",
+      "explanation_md": "Fain describes a peer who trained GPT on past product-review transcripts so PMs could pre-run their pitches and surface what the exec would push back on. AI lets any PM do the chief-of-staff prep at scale — anticipate weaknesses and shore them up before the meeting, not in it.",
+      "pm_takeaway": "Before your next major exec pitch, paste their last three big communications into a Claude or GPT project and ask it to role-play them tearing your pitch apart. Fix the weakest answer.",
+      "citation": {
+        "filename": "podcasts/jessica-fain.md",
+        "title": "The art of influence: The single most important skill that AI can't replace",
+        "byline": "Jessica Fain",
+        "type": "podcast",
+        "date": "2026-03-22",
+        "source_url": "https://www.lennysnewsletter.com/p/the-art-of-influence-jessica-fain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Jessica+Fain+influence",
+        "quote_excerpt": "A colleague of mine, a peer on our product leadership team, trained at GPT on a bunch of transcripts from past product reviews that are all publicly available, and we expect that our PMs are running their PRDs or their pitches through that",
+        "timestamp": "00:20:06"
+      }
+    }
+  ]
+}

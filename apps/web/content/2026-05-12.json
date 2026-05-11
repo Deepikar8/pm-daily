@@ -1,0 +1,149 @@
+{
+  "date": "2026-05-12",
+  "headline": "Amir Klein on building your PM second brain: stop carrying the basket; offload context, keep judgment",
+  "theme_pillar": "ai-pm-workflow",
+  "digest_md": "Amir Klein (PM at monday.com) argues that the PM job is collapsing under the weight of context. Every initiative requires you to assemble fragments from Slack, Notion, decks, dashboards, CSVs, customer interviews, and your own memory of what's already been decided. Klein's metaphor: you're carrying a giant basket of eggs, watermelons, and toy cars, and you're on the move. The synthesis is the job — but doing the synthesis in your head, over and over, is what burns you out.\n\nHis answer is a *second brain*: a ChatGPT (or Claude, or Gemini) Project that you build around one initiative, fed with everything that lives in your head and in your tabs. Crucially, Klein insists the second brain doesn't dull your role — it sharpens it. Reasoning, product sense, taste, and judgment stay yours. The Project just clears the path from your insight to the output.\n\nKlein's workflow has three steps. First, define the *personality* of the Project — explicitly ask it to push back, challenge weak ideas, and not always agree. Second, dump every artifact you can — and his \"whoa\" moment is realizing that *everything* is essentially text: decks become PDFs, dashboards become PDFs, Slack channels become PDFs. Third, let it cook: lean on it for sign-up form copy, Lovable prototype prompts, and — most powerfully — *tailored communications* (the marketing blurb, the QBR sentence, the sales enablement deck, the user-testing script). The reload cost between audiences is what eats half your day; the second brain eliminates that cost while leaving the calls in your hands.\n\nThe living-thing piece matters: feed the artifacts you create back into the Project so it stays current. Treat it as a companion that grows with you, not a one-time setup.",
+  "takeaways": [
+    "The PM job has become an exercise in carrying scattered context. Offload the storage and synthesis to a Project; keep judgment, taste, and the calls.",
+    "Build the Project's personality before feeding it files. Explicitly tell it to push back and not always agree — or you'll get a yes-machine, not a thought partner.",
+    "Everything PMs work with is text. Export your decks, Slack channels, and dashboards to PDFs and drop them in. The 'whoa' moment is realizing how much context you've been holding in your head.",
+    "The highest-leverage use case isn't writing PRDs — it's tailored communications. Same initiative, different audiences (marketing blurb, QBR sentence, sales deck, user-testing script) in seconds.",
+    "Feed your own outputs back into the Project so it grows with the work. Each thread should know what you decided last Thursday."
+  ],
+  "source": {
+    "filename": "newsletters/how-to-build-your-pm-second-brain-with-chatgpt.md",
+    "title": "How to build your PM second brain with ChatGPT",
+    "byline": "Amir Klein",
+    "type": "newsletter",
+    "date": "2025-12-16",
+    "source_url": "https://www.lennysnewsletter.com/p/how-to-build-your-pm-second-brain",
+    "search_url": "https://www.lennysnewsletter.com/?q=Amir+Klein+second+brain+ChatGPT"
+  },
+  "questions": [
+    {
+      "position": 1,
+      "idea_id": "offload-context-not-judgment",
+      "archetype": "diagnose",
+      "scenario_md": "You're a senior PM rolling onto a new agent product mid-quarter. You spend your first three days asking ChatGPT to *decide* the roadmap priorities based on the docs you uploaded. The output reads polished, but it's all over the place and your gut tells you something is off about the recommended Q3 bet.\n\nPer Amir Klein's framing, the most likely diagnosis is —",
+      "options": [
+        { "key": "A", "text": "Upload more docs and run the question again — the issue is incomplete context, not the use case.", "role": "mistake" },
+        { "key": "B", "text": "You're asking the second brain to do what only you can do — make the call. Use it to surface synthesis; keep judgment.", "role": "correct" },
+        { "key": "C", "text": "Switch to Claude or Gemini — ChatGPT's reasoning on roadmaps is weaker than other models for this use case.", "role": "adjacent" },
+        { "key": "D", "text": "Generate three roadmap options instead of one and pick the strongest — the issue is asking for a single answer.", "role": "half_truth" }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Klein's central frame: the second brain stores and synthesizes; you still own judgment and creativity. Outsourcing the *decision* to ChatGPT is the misuse case — it amplifies your reasoning, it doesn't replace it. The role of the tool is to clear the path between your insight and the output, not to produce the insight.",
+      "pm_takeaway": "Before your next big call, write down the decision you're about to make in one sentence. Then ask the second brain to pressure-test it — not to make it for you.",
+      "citation": {
+        "filename": "newsletters/how-to-build-your-pm-second-brain-with-chatgpt.md",
+        "title": "How to build your PM second brain with ChatGPT",
+        "byline": "Amir Klein",
+        "type": "newsletter",
+        "date": "2025-12-16",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-build-your-pm-second-brain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Amir+Klein+second+brain+ChatGPT",
+        "quote_excerpt": "It’s important to say: using a second brain doesn’t dull your role but actually sharpens it. Your reasoning, product sense, knowledge, and taste are still doing the real work; AI just amplifies them. You can’t outsource judgment or creativity."
+      }
+    },
+    {
+      "position": 2,
+      "idea_id": "build-the-personality-first",
+      "archetype": "spot",
+      "scenario_md": "You just created a fresh ChatGPT Project for your authentication redesign. You skipped the instructions field — it felt like setup tax — and dumped 40 PDFs in. Your first three threads have all returned enthusiastic, very long agreement with whatever you propose. You're starting to find the outputs slightly suspicious.\n\nPer Amir Klein's framing, the missing step in your setup is —",
+      "options": [
+        { "key": "A", "text": "Add more critical files (post-mortems, failed-A/B docs) so the model has counterexamples to push back with.", "role": "half_truth" },
+        { "key": "B", "text": "Go back to the instructions field and define the Project's personality — sharp, pushes back on weak areas, doesn't always agree.", "role": "correct" },
+        { "key": "C", "text": "Switch to Claude — it's known to be less sycophantic out of the box.", "role": "adjacent" },
+        { "key": "D", "text": "Ask better questions in the thread itself: 'tell me what's weak about this idea' should fix it.", "role": "mistake" }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Klein treats the instructions field as the foundational step — not setup tax. Defining the Project's personality (sharp, challenges weak ideas, doesn't always agree) is what turns it from a yes-machine into a thought partner. Files come second.",
+      "pm_takeaway": "Open your current Project today. If the instructions field is empty or generic, paste in: 'sharp, smart, challenges me, pushes back on weak areas, doesn't always agree.' That's the difference.",
+      "citation": {
+        "filename": "newsletters/how-to-build-your-pm-second-brain-with-chatgpt.md",
+        "title": "How to build your PM second brain with ChatGPT",
+        "byline": "Amir Klein",
+        "type": "newsletter",
+        "date": "2025-12-16",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-build-your-pm-second-brain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Amir+Klein+second+brain+ChatGPT",
+        "quote_excerpt": "if you approach Projects like a second brain that you’re growing, you want to first make sure it thinks in the way you think. In other words, you need to build its personality. Each Project has an instructions section where you can first define this “personality”"
+      }
+    },
+    {
+      "position": 3,
+      "idea_id": "everything-is-text",
+      "archetype": "apply",
+      "scenario_md": "You're building a second brain for a B2B billing overhaul. Your inputs include: a Looker dashboard the finance team built, a #billing-rebuild Slack channel with 1,400 messages, a Figma file with 22 frames, a competitor research deck, and a four-page sales script. You've uploaded the deck and the script.\n\nPer Amir Klein's framing, the next-most-important inputs to add are —",
+      "options": [
+        { "key": "A", "text": "Wait — only PRDs and product docs should go in a PM second brain; dashboards and Slack belong elsewhere.", "role": "mistake" },
+        { "key": "B", "text": "Export the Slack channel and the Looker dashboard to PDFs and drop them in; Figma frames as screenshots.", "role": "correct" },
+        { "key": "C", "text": "Add only the Slack channel — dashboards refresh nightly, so the export would be stale within a day.", "role": "half_truth" },
+        { "key": "D", "text": "Skip the artifacts and write a fresh summary doc of each input — the model handles summaries better than raw exports.", "role": "adjacent" }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Klein's \"whoa\" moment is realizing that everything PMs work with is text — decks, websites, Excel/CSV sheets, dashboards, Slack channels — and that PDF-export is the universal bridge. Filtering to only PRDs leaves most of the context on the floor.",
+      "pm_takeaway": "Pick the one initiative eating most of your context today. List every input (Slack channels, Figma, dashboards, decks) and export the top three to PDF this afternoon. Drop them in.",
+      "citation": {
+        "filename": "newsletters/how-to-build-your-pm-second-brain-with-chatgpt.md",
+        "title": "How to build your PM second brain with ChatGPT",
+        "byline": "Amir Klein",
+        "type": "newsletter",
+        "date": "2025-12-16",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-build-your-pm-second-brain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Amir+Klein+second+brain+ChatGPT",
+        "quote_excerpt": "I think the biggest “whoa” moment for me is realizing that *everything* is essentially text. The classics, like PRDs and docs, are a given, but decks, websites, Excel/CSV sheets, dashboards, and Slack channels all contain text too."
+      }
+    },
+    {
+      "position": 4,
+      "idea_id": "context-reload-cost",
+      "archetype": "pick",
+      "scenario_md": "It's Wednesday morning. Your AI-search feature ships in eight days. Your inbox has four asks: marketing wants a 50-word launch blurb by EOD, the CRO wants three sentences for Friday's board QBR, sales enablement wants a 5-slide deck by Monday, and the design lead wants a user-testing script for tomorrow. You have one Project loaded with the initiative's full context.\n\nFollowing Klein, the highest-leverage move with these four asks is —",
+      "options": [
+        { "key": "A", "text": "Write the most urgent (marketing blurb) yourself; queue the others for the team's tech writer.", "role": "mistake" },
+        { "key": "B", "text": "Word-dump everything important per audience into the Project and have it return four tailored versions; you edit and send.", "role": "correct" },
+        { "key": "C", "text": "Ask the Project for one master narrative and copy/paste it across all four asks to ensure consistency.", "role": "half_truth" },
+        { "key": "D", "text": "Send the same one-pager to all four stakeholders and tell them to pull what they need.", "role": "adjacent" }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Klein's most concrete leverage point: PM work is full of moments where the same initiative needs to be communicated to four different audiences. The cost isn't the writing — it's the context reload. A loaded Project returns tailored versions in seconds while you stay the editor.",
+      "pm_takeaway": "Walk your inbox right now. Find every multi-audience comms request still open and route them through your Project today, not next week. That's the workflow change.",
+      "citation": {
+        "filename": "newsletters/how-to-build-your-pm-second-brain-with-chatgpt.md",
+        "title": "How to build your PM second brain with ChatGPT",
+        "byline": "Amir Klein",
+        "type": "newsletter",
+        "date": "2025-12-16",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-build-your-pm-second-brain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Amir+Klein+second+brain+ChatGPT",
+        "quote_excerpt": "None of these tasks are hard because of the writing itself. They’re hard because you have to mentally reload the context, remember what matters to each audience, and then translate the same initiative in so many different ways. That reload cost is enormous!"
+      }
+    },
+    {
+      "position": 5,
+      "idea_id": "feed-the-living-thing",
+      "archetype": "translate",
+      "scenario_md": "You set up a Project six weeks ago for your onboarding redesign. You loaded 30 source files on day one. Since then you've shipped a PRD, a launch plan, two exec updates, and decisions from twelve threads — none of which has gone back into the Project. Today a new thread suggests an approach you already ruled out three weeks ago.\n\nPer Amir Klein's framing, the missing habit is —",
+      "options": [
+        { "key": "A", "text": "Start a fresh Project for each new sprint so old decisions don't muddy the new context.", "role": "mistake" },
+        { "key": "B", "text": "Save the artifacts you create (PRDs, exec updates, decision threads) back into the Project so the next thread is current.", "role": "correct" },
+        { "key": "C", "text": "Add a manual 'decisions log' file you update weekly by hand outside the Project.", "role": "half_truth" },
+        { "key": "D", "text": "Switch tools — ChatGPT Projects don't retain context well across threads.", "role": "adjacent" }
+      ],
+      "correct_key": "B",
+      "explanation_md": "Klein insists the Project is a *living thing*: every artifact you create — PRDs, overview docs, strategy decks — should be downloaded and fed back in so the next thread starts from current state. Without that loop, the Project drifts from your work and you re-litigate old calls.",
+      "pm_takeaway": "Pick the two biggest artifacts you shipped this month from your active initiative. Save them as PDFs and upload them to the Project today.",
+      "citation": {
+        "filename": "newsletters/how-to-build-your-pm-second-brain-with-chatgpt.md",
+        "title": "How to build your PM second brain with ChatGPT",
+        "byline": "Amir Klein",
+        "type": "newsletter",
+        "date": "2025-12-16",
+        "source_url": "https://www.lennysnewsletter.com/p/how-to-build-your-pm-second-brain",
+        "search_url": "https://www.lennysnewsletter.com/?q=Amir+Klein+second+brain+ChatGPT",
+        "quote_excerpt": "The beauty of Projects is that you’ll start creating new artifacts from it. Whatever it is you’re creating—whether it be PRDs, overview docs, or strategy decks—once finished, you can take those, put them in a doc, download them, and feed them back into your second brain."
+      }
+    }
+  ]
+}

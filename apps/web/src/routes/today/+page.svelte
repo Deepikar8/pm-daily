@@ -72,9 +72,10 @@
 
     <!-- CTA strip -->
     <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap mb-6">
+      <MascotCoach size="sm" mood="coach" label="Warm up your judgment. No chalk required." />
       <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
-        <div class="serif text-xl font-bold leading-tight text-ink">Ready for today’s challenge?</div>
-        <div class="sans text-[13px] text-ink-soft mt-0.5">Five decisions. One attempt.</div>
+        <div class="serif text-xl font-bold leading-tight text-ink">Ready to apply today’s operator insight?</div>
+        <div class="sans text-[13px] text-ink-soft mt-0.5">Five decisions based on what {c.source.byline} discussed.</div>
       </div>
       <a href="/quiz" onclick={() => track("today_start", { source: "today_top_cta" })} class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
         {brandCopy.takeRepCta} <ArrowRight size={16} />
@@ -103,7 +104,7 @@
             {c.source.title}
           </h2>
           <p class="sans text-[13px] leading-[1.5] text-ink-soft mt-2">
-            Today’s challenge is based on Lenny’s conversation with {c.source.byline}. Start from the original episode or newsletter, then use the takeaways below to make the decision.
+            Today’s challenge asks you to apply {c.source.byline}’s product judgment from this podcast to realistic PM decisions. Start from the original episode or newsletter, then use the takeaways below to make the decision.
           </p>
         </div>
       </div>
@@ -145,9 +146,10 @@
 
     <!-- Bottom CTA strip -->
     <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap">
+      <MascotCoach size="sm" mood="think" label="This is where the reps count." />
       <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
-        <div class="serif text-xl font-bold leading-tight text-ink">Make the decision now</div>
-        <div class="sans text-[13px] text-ink-soft mt-0.5">Answer today’s product challenge and see where you land on the leaderboard.</div>
+        <div class="serif text-xl font-bold leading-tight text-ink">Apply the insight now</div>
+        <div class="sans text-[13px] text-ink-soft mt-0.5">Turn the operator’s lesson into your product decision and see where you land on the leaderboard.</div>
       </div>
       <a href="/quiz" onclick={() => track("today_start", { source: "today_bottom_cta" })} class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
         {brandCopy.takeRepCta} <ArrowRight size={16} />
