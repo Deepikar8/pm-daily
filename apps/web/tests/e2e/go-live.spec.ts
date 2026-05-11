@@ -27,7 +27,7 @@ test("public users can read today's lesson before sign-in", async ({ page }) => 
 
   await expect(page).toHaveURL(/\/today/);
   await expect(page.getByText(/sign in/i)).toHaveCount(0);
-  await expect(page.getByRole("heading")).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Cat Wu on shipping speed/i })).toBeVisible();
 });
 
 test("landing page stays accessible", async ({ page }) => {

@@ -3,12 +3,32 @@ import type { PageServerLoad } from "./$types";
 import * as kvKeys from "$lib/server/kv/keys";
 import { getDb } from "$lib/server/db/client";
 import { dailySessions, users } from "$lib/server/db/schema";
-import { eq } from "drizzle-orm";
+import { desc, eq, lte } from "drizzle-orm";
 import { formatInTimeZone } from "date-fns-tz";
 
 function todayInTZ(tz: string) {
   return formatInTimeZone(new Date(), tz, "yyyy-MM-dd");
 }
+
+const fallbackContent = {
+  date: "2026-05-10",
+  headline: "Cat Wu on shipping speed: how Anthropic compresses six-month timelines to a week",
+  digest_md:
+    "Cat Wu, Head of Product for Claude Code, argues the PM role is being rewritten in real time by AI-native engineering velocity. Six-month feature timelines have dropped to one week — sometimes one day. The traditional PM toolkit is now the bottleneck, not the cure.\n\nHer response: build small product surfaces where one engineer can ship end-to-end weekly, and hire engineers with strong product taste rather than adding PM process.",
+  takeaways: [
+    "Build for the model you have, not the model you'll have. Six-week plans beat nine-month roadmaps.",
+    "If your team can't start work without a detailed PRD from you, you are the bottleneck.",
+    "Product taste is built by using products, not reading frameworks. One hour a day, every day.",
+  ],
+  source: {
+    title: "How Anthropic's product team moves faster than anyone else",
+    byline: "Cat Wu",
+    type: "podcast",
+    date: "2026-04-23",
+    search_url: "https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves",
+    source_url: "https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves",
+  },
+};
 
 export const load: PageServerLoad = async ({ locals, platform }) => {
   if (!platform?.env) throw redirect(302, "/");
@@ -41,22 +61,34 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
   let cached = await env.KV.get(kvKeys.todayDigest(date));
   if (!cached) {
     // Fallback: D1 → cache
-    const row = await db
+    let row = await db
       .select()
       .from(dailySessions)
       .where(eq(dailySessions.date, date))
       .get();
+
+    row ??= await db
+      .select()
+      .from(dailySessions)
+      .where(lte(dailySessions.date, date))
+      .orderBy(desc(dailySessions.date))
+      .get();
+
     if (!row) {
-      return { date, missing: true as const, content: null };
+      return { date: fallbackContent.date, missing: false as const, content: fallbackContent };
     }
+    const contentDate = row.date;
     cached = JSON.stringify({
-      date: row.date,
+      date: contentDate,
       headline: row.headline,
       digest_md: row.digestMd,
       takeaways: JSON.parse(row.takeawaysJson),
       source: JSON.parse(row.sourceJson),
     });
-    await env.KV.put(kvKeys.todayDigest(date), cached);
+    if (contentDate === date) {
+      await env.KV.put(kvKeys.todayDigest(date), cached);
+    }
+    return { date: contentDate, missing: false as const, content: JSON.parse(cached) };
   }
 
   return { date, missing: false as const, content: JSON.parse(cached) };
