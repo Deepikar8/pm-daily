@@ -150,7 +150,7 @@
       "options": [
         {
           "key": "A",
-          "text": "Rewrite the lede to describe what the user can now do — finishing the report in 20 minutes instead of two hours — and let the spec follow.",
+          "text": "Rewrite the lede as 'now you can finish the report in 20 minutes instead of two hours' — let the spec follow.",
           "role": "correct"
         },
         {

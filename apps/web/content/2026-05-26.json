@@ -130,7 +130,7 @@
       ],
       "correct_key": "B",
       "explanation_md": "Grosser's litmus test: an AE in front of 10 engineers should take them 10 minutes to figure out the AE isn't a PM. A consumer-SaaS AE handling a CTO discovery is a staffing mismatch the PM should escalate, not paper over with a one-night brief.",
-      "pm_takeaway": "Before your next technical discovery call, assess if your sales partner passes the 10-minute test. If not, flag it to your sales leader before the call — staffing is their decision, not yours, but the signal is yours to give.",
+      "pm_takeaway": "Before your next technical discovery call, run the 10-minute test on your AE. If they'd fail, flag it to sales leadership before the call — the signal is yours; the staffing call is theirs.",
       "citation": {
         "filename": "podcasts/jeanne-grosser.md",
         "title": "What world-class GTM looks like in 2026 | Jeanne DeWitt Grosser (Vercel, Stripe, Google)",
@@ -221,7 +221,7 @@
         "date": "2025-11-30",
         "source_url": "https://www.youtube.com/watch?v=RmnWHz8HD74",
         "search_url": "https://www.lennysnewsletter.com/podcast",
-        "quote_excerpt": "for the 20 years I've been in sales, it's always been somewhere around 30% to 40%. So the minority of time is actually talking to other humans and I think we're getting to a point where with layering in agents, ideally we finally get salespeople to a point where they're actually spending 70% of their time interacting with humans"
+        "quote_excerpt": "we're getting to a point where with layering in agents, ideally we finally get salespeople to a point where they're actually spending 70% of their time interacting with humans"
       }
     }
   ]
