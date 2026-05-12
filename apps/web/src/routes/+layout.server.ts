@@ -6,6 +6,12 @@ import type { LayoutServerLoad } from "./$types";
  * (or null) lets `+layout.svelte` and any descendant page access it via
  * `data.user`.
  */
-export const load: LayoutServerLoad = async ({ locals }) => {
-  return { user: locals.user };
+export const load: LayoutServerLoad = async ({ locals, platform }) => {
+  return {
+    user: locals.user,
+    analytics: {
+      posthogKey: platform?.env?.PUBLIC_POSTHOG_KEY || "",
+      posthogHost: platform?.env?.PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
+    },
+  };
 };

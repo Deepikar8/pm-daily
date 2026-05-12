@@ -5,6 +5,7 @@
 	import CookieBanner from "$lib/components/CookieBanner.svelte";
 	import Nav from "$lib/components/Nav.svelte";
 	import { page } from "$app/state";
+	import { identify, initAnalytics, track } from "$lib/analytics/client";
 
 	let { data, children } = $props();
 
@@ -15,6 +16,18 @@
 			p === "/" ? page.url.pathname === "/" : page.url.pathname.startsWith(p),
 		),
 	);
+
+	$effect(() => {
+		initAnalytics(data.analytics);
+		identify(data.user);
+	});
+
+	$effect(() => {
+		track("page_view", {
+			search: page.url.search,
+			title: document.title,
+		});
+	});
 </script>
 
 <svelte:head>

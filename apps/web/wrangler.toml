@@ -3,6 +3,9 @@ main = ".svelte-kit/cloudflare/_worker.js"
 compatibility_date = "2026-05-01"
 compatibility_flags = ["nodejs_compat"]
 
+[vars]
+PUBLIC_POSTHOG_HOST = "https://us.i.posthog.com"
+
 # Static assets served directly by the runtime
 [assets]
 directory = ".svelte-kit/cloudflare"

@@ -3,13 +3,13 @@
 Daily learning sessions + applied quiz + leaderboard for product managers,
 distilled from Lenny Rachitsky's podcast and newsletter archive.
 
-**Live:** https://pm-daily.avalanche05.workers.dev
+**Live:** https://daily.deepikamurthy.com
 
 ## Demo
 
 ![60-second demo](docs/demo.gif)
 
-Full-quality MP4: [`docs/demo.mp4`](docs/demo.mp4) · Live app: https://pm-daily.avalanche05.workers.dev
+Full-quality MP4: [`docs/demo.mp4`](docs/demo.mp4) · Live app: https://daily.deepikamurthy.com
 
 ## Screens
 
@@ -105,5 +105,21 @@ pnpm build && pnpm exec wrangler deploy
 
 Worker secrets (set via `wrangler secret put`):
 `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `GOOGLE_CLIENT_ID`,
-`GOOGLE_CLIENT_SECRET`, `RESEND_API_KEY`.
+`GOOGLE_CLIENT_SECRET`, `RESEND_API_KEY`, `PUBLIC_POSTHOG_KEY`.
+
+Production auth/domain configuration:
+
+- Canonical app URL: `https://daily.deepikamurthy.com`
+- Better Auth fallback URL: set `BETTER_AUTH_URL` to `https://daily.deepikamurthy.com`
+- Google OAuth authorized origin: `https://daily.deepikamurthy.com`
+- Google OAuth redirect URI: `https://daily.deepikamurthy.com/auth/callback/google`
+
+Keep the Workers preview URL (`https://pm-daily.avalanche05.workers.dev`) in
+Google OAuth only if that domain should continue to support sign-in directly.
+
+Analytics:
+
+- Product analytics are sent to PostHog when `PUBLIC_POSTHOG_KEY` is set.
+- `PUBLIC_POSTHOG_HOST` defaults to `https://us.i.posthog.com` in `wrangler.toml`.
+- The app still posts events to `/api/analytics` for Worker log debugging.
 </content>

@@ -4,6 +4,7 @@ import { analyticsEvents, isAnalyticsEventName } from "../../src/lib/analytics/e
 describe("analytics events", () => {
   it("tracks the launch-critical funnel events", () => {
     expect(analyticsEvents).toEqual([
+      "page_view",
       "demo_start",
       "demo_submit",
       "landing_question_submit",

@@ -1,4 +1,5 @@
 export const analyticsEvents = [
+  "page_view",
   "demo_start",
   "demo_submit",
   "landing_question_submit",
