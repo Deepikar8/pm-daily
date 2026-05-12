@@ -14,6 +14,7 @@
     cc.run({
       categories: {
         necessary: { readOnly: true, enabled: true },
+        analytics: { enabled: true },
       },
       language: {
         default: "en",
@@ -21,17 +22,26 @@
           en: {
             consentModal: {
               title: "Cookies",
-              description: "We use a cookie to keep you signed in. Nothing else.",
-              acceptAllBtn: "Got it",
+              description: "We use required cookies for sign-in and PostHog analytics to understand product usage.",
+              acceptAllBtn: "Accept all",
+              acceptNecessaryBtn: "Necessary only",
+              showPreferencesBtn: "Manage",
             },
             preferencesModal: {
               title: "Preferences",
-              acceptAllBtn: "OK",
+              acceptAllBtn: "Accept all",
+              acceptNecessaryBtn: "Necessary only",
+              savePreferencesBtn: "Save choices",
               sections: [
                 {
                   title: "Necessary",
                   description: "Required for sign-in. Cannot be disabled.",
                   linkedCategory: "necessary",
+                },
+                {
+                  title: "Analytics",
+                  description: "PostHog helps us understand page views, quiz starts, answer submits, and shares so we can improve Product Gym.",
+                  linkedCategory: "analytics",
                 },
               ],
             },

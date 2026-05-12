@@ -8,7 +8,7 @@
     <div class="flex gap-4 items-center">
       <a href="/terms" class="text-ink-soft underline">Terms</a>
       <a href="/privacy" class="text-ink-soft underline">Privacy</a>
-      <a href="mailto:hello@pmdaily.app" class="text-ink-soft underline">Contact</a>
+      <a href="https://www.linkedin.com/in/deepika-rudra-murthy/" target="_blank" rel="noreferrer" class="text-ink-soft underline">Contact</a>
     </div>
   </div>
 </footer>

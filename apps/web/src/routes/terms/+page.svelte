@@ -10,6 +10,7 @@
   <article class="serif text-[16px] leading-relaxed text-ink-soft mt-8 space-y-4">
     <p>By using Product Gym you agree to use it lawfully and to receive sign-in emails containing magic links. We do not send marketing emails; daily reminders happen via your calendar invite.</p>
     <p>Your account, sessions, and rep history are stored on our infrastructure (Cloudflare D1, KV). You may export or delete your account at any time from your training log.</p>
+    <p>We use PostHog product analytics to understand app usage and improve the experience. Analytics events may include page views, quiz starts, answer submits, shares, and similar product interactions.</p>
     <p>The content shown each day is summarized from third-party sources (Lenny Rachitsky's archive). Original sources retain their rights; quotations and summaries are provided for educational use under fair use.</p>
     <p>This service is provided "as is" without warranty.</p>
   </article>
