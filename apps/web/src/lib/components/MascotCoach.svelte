@@ -9,12 +9,19 @@
     label?: string;
   } = $props();
 
-  const sizeClass = $derived(size === "sm" ? "size-sm" : size === "lg" ? "size-lg" : "size-md");
+  const sizeClass = $derived(
+    size === "sm" ? "w-14 h-14" : size === "lg" ? "w-28 h-28" : "w-20 h-20",
+  );
 </script>
 
 <div class="flex items-center gap-2.5">
   <div class={["mascot-wrap relative flex items-center justify-center flex-shrink-0", sizeClass, `mood-${mood}`]}>
-    <div class="mascot-sprite" role="img" aria-label="Kettlebell Coach"></div>
+    <img
+      src="/mascots/kettlebell-coach.png"
+      alt="Kettlebell Coach"
+      class="mascot-img w-full h-full object-contain drop-shadow-[3px_3px_0_#241812]"
+      loading="lazy"
+    />
   </div>
 {#if label}
   <div class="sans text-[11px] leading-tight text-ink-soft bg-white border-2 border-ink rounded-xl px-3 py-2 shadow-brut-sm max-w-[190px]">
@@ -24,82 +31,58 @@
 </div>
 
 <style>
-  .mascot-wrap {
-    filter: drop-shadow(3px 3px 0 #241812);
-  }
-
-  .size-sm {
-    width: 3.5rem;
-    height: 3.8rem;
-  }
-
-  .size-md {
-    width: 5rem;
-    height: 5.42rem;
-  }
-
-  .size-lg {
-    width: 7rem;
-    height: 7.58rem;
-  }
-
-  .mascot-sprite {
-    width: 100%;
-    height: 100%;
-    background-image: url("/mascots/kettlebell-coach-spritesheet.webp");
-    background-repeat: no-repeat;
-    background-size: 800% 900%;
-    image-rendering: auto;
+  .mascot-img {
     transform-origin: 50% 78%;
   }
 
-  .mood-idle .mascot-sprite {
-    animation: sprite-idle 1.2s steps(6) infinite;
+  .mood-idle .mascot-img {
+    animation: coach-idle 4.8s ease-in-out infinite;
   }
 
-  .mood-wave .mascot-sprite {
-    animation: sprite-wave 0.9s steps(4) infinite;
+  .mood-wave .mascot-img {
+    animation: coach-wave 3.4s ease-in-out infinite;
   }
 
-  .mood-think .mascot-sprite {
-    animation: sprite-think 1.15s steps(6) infinite;
+  .mood-think .mascot-img {
+    animation: coach-think 4s ease-in-out infinite;
   }
 
-  .mood-celebrate .mascot-sprite {
-    animation: sprite-celebrate 0.85s steps(5) infinite;
+  .mood-celebrate .mascot-img {
+    animation: coach-celebrate 1.8s ease-out 2;
   }
 
-  .mood-coach .mascot-sprite {
-    animation: sprite-coach 1.2s steps(6) infinite;
+  .mood-coach .mascot-img {
+    animation: coach-pulse 3.2s ease-in-out infinite;
   }
 
-  @keyframes sprite-idle {
-    from { background-position: 0% 0%; }
-    to { background-position: 71.4286% 0%; }
+  @keyframes coach-idle {
+    0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+    50% { transform: translateY(-2px) rotate(0.5deg); }
   }
 
-  @keyframes sprite-wave {
-    from { background-position: 0% 37.5%; }
-    to { background-position: 42.8571% 37.5%; }
+  @keyframes coach-wave {
+    0%, 100% { transform: rotate(-2deg) translateY(0); }
+    42% { transform: rotate(3deg) translateY(-3px); }
+    72% { transform: rotate(-1deg) translateY(0); }
   }
 
-  @keyframes sprite-think {
-    from { background-position: 0% 100%; }
-    to { background-position: 71.4286% 100%; }
+  @keyframes coach-think {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(-2deg) scale(0.99); }
   }
 
-  @keyframes sprite-celebrate {
-    from { background-position: 0% 50%; }
-    to { background-position: 57.1429% 50%; }
+  @keyframes coach-celebrate {
+    0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
+    45% { transform: translateY(-5px) rotate(3deg) scale(1.03); }
   }
 
-  @keyframes sprite-coach {
-    from { background-position: 0% 75%; }
-    to { background-position: 71.4286% 75%; }
+  @keyframes coach-pulse {
+    0%, 100% { transform: scale(1) rotate(-0.5deg); }
+    50% { transform: scale(1.025) rotate(1deg); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .mascot-sprite {
+    .mascot-img {
       animation: none !important;
     }
   }
