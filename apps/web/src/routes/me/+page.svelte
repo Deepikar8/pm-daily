@@ -114,6 +114,9 @@
           {/each}
         </div>
         <div class="sans text-xs text-ink-soft mono min-w-9 text-right">{fmtTime(r.totalSeconds)}</div>
+        <span class="sans flex-shrink-0 bg-transparent border-[1.5px] border-ink rounded-lg px-3 py-1.5 text-xs font-bold text-ink">
+          Review
+        </span>
       </a>
     {/each}
     {#if data.recent.length === 0}
