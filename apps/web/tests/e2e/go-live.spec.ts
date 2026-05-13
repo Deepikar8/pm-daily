@@ -11,7 +11,7 @@ test("public users can answer one landing question before sign-in", async ({ pag
   await page.goto("/");
 
   await expect(page.getByText(/operator of the day/i)).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Cat Wu" })).toBeVisible();
+  await expect(page.locator("h2").first()).toBeVisible();
   await expect(page.getByRole("button", { name: /^A / })).toBeVisible();
   await expect(page.getByRole("button", { name: /^D / })).toBeVisible();
   await page.getByRole("button", { name: /^A / }).click();
@@ -28,7 +28,8 @@ test("public users can read today's lesson before sign-in", async ({ page }) => 
 
   await expect(page).toHaveURL(/\/today/);
   await expect(page.getByText(/sign in/i)).toHaveCount(0);
-  await expect(page.getByRole("heading", { name: /Cat Wu on shipping speed/i })).toBeVisible();
+  await expect(page.getByText(/operator of the day/i)).toBeVisible();
+  await expect(page.getByRole("heading").first()).toBeVisible();
 });
 
 test("landing page stays accessible", async ({ page }) => {

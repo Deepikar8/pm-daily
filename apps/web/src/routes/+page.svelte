@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Sparkles, Calendar, Users, CheckCircle2, XCircle, ArrowRight } from "lucide-svelte";
+  import { Sparkles, Calendar, Users, Check, X as XIcon, ArrowRight } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
   import MascotCoach from "$lib/components/MascotCoach.svelte";
   import { track } from "$lib/analytics/client";
@@ -149,27 +149,40 @@
       </h2>
       <div class="flex flex-col gap-2.5">
         {#each preview.options as opt}
-          {@const active = selectedKey === opt.key}
-          {@const correct = submitted && opt.key === reveal.correct_key}
-          {@const wrong = submitted && active && !correct}
+          {@const isSelected = selectedKey === opt.key}
+          {@const isCorrectKey = reveal.correct_key === opt.key}
+          {@const showCorrect = submitted && isCorrectKey}
+          {@const showWrong = submitted && isSelected && !isCorrectKey}
           <button
             type="button"
             onclick={() => choose(opt.key)}
-            class={[
-              "sans text-left px-3.5 py-3 border-2 border-ink rounded-xl text-sm text-ink flex gap-3 items-center bg-white transition",
-              submitted ? "cursor-default" : "btn-press cursor-pointer",
-              active && !submitted ? "shadow-brut bg-paper-cream" : "",
-              correct ? "bg-correct/10 border-correct" : "",
-              wrong ? "bg-wrong/10 border-wrong" : "",
-            ]}
+            disabled={submitted}
+            class="sans btn-press text-left rounded-2xl px-4 py-4 text-[15px] font-medium leading-snug border-2 flex items-center gap-3.5 transition-all
+              {showCorrect
+              ? 'bg-[#E8F0DC] border-ok'
+              : showWrong
+                ? 'bg-[#F8DDD3] border-wrong'
+                : submitted
+                  ? 'border-paper-fill text-ink-mute'
+                  : isSelected
+                    ? 'bg-paper-cream border-accent'
+                    : 'bg-white border-ink shadow-brut'}"
           >
-            <span class="serif font-bold text-ink-mute min-w-[18px]">{opt.key}</span>
+            <span
+              class="w-7 h-7 rounded-full border-2 flex items-center justify-center flex-shrink-0 serif text-[13px] font-bold
+                {showCorrect
+                ? 'border-ok bg-ok text-paper'
+                : showWrong
+                  ? 'border-wrong bg-wrong text-paper'
+                  : isSelected
+                    ? 'border-accent bg-accent text-paper'
+                    : 'border-ink bg-transparent text-ink'}"
+            >
+              {#if showCorrect}<Check size={16} stroke-width={3} />
+              {:else if showWrong}<XIcon size={16} stroke-width={3} />
+              {:else}{opt.key}{/if}
+            </span>
             <span class="flex-1">{opt.text}</span>
-            {#if correct}
-              <CheckCircle2 size={17} class="text-correct flex-shrink-0" />
-            {:else if wrong}
-              <XCircle size={17} class="text-wrong flex-shrink-0" />
-            {/if}
           </button>
         {/each}
       </div>
@@ -184,7 +197,9 @@
           Check my decision <ArrowRight size={16} />
         </button>
         {#if selectedOption}
-          <p class="sans text-xs text-ink-mute text-center mt-2">Selected {selectedOption.key}</p>
+          <p class="sans text-xs font-bold text-accent text-center mt-2">
+            Selected {selectedOption.key}
+          </p>
         {/if}
       {:else}
         <div class="mt-5 border-2 border-ink rounded-2xl bg-paper-warm px-4 py-4">
@@ -233,7 +248,7 @@
   <div class="flex flex-col gap-3 mb-5">
     {#if !submitted}
       <p class="sans text-center text-[12px] text-ink-mute leading-relaxed">
-        Answer one decision here, then finish all 5 before sign-in.
+        Try today’s challenge. Answer all 5, see your score, then sign in to save progress for the week and compete.
       </p>
     {/if}
     <a href="/api/calendar.ics"
