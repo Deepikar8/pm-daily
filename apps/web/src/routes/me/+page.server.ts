@@ -57,8 +57,10 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
 
   // Last 5 attempts overall (not just last 14d)
   const recent = await db.select({
+    id: quizAttempts.id,
     date: quizAttempts.date,
     totalCorrect: quizAttempts.totalCorrect,
+    totalPoints: quizAttempts.totalPoints,
     totalSeconds: quizAttempts.totalSeconds,
     headline: dailySessions.headline,
     sourceJson: dailySessions.sourceJson,
@@ -95,11 +97,21 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
     },
     heatmap,
     recent: recent.map((r) => ({
+      id: r.id,
       date: r.date,
       totalCorrect: r.totalCorrect ?? 0,
+      totalPoints: r.totalPoints ?? 0,
       totalSeconds: r.totalSeconds ?? 0,
       headline: r.headline ?? "",
       byline: r.sourceJson ? (JSON.parse(r.sourceJson).byline ?? "") : "",
     })),
+    shareResult: recent[0]
+      ? {
+          url: `/share/${recent[0].id}`,
+          date: recent[0].date,
+          totalCorrect: recent[0].totalCorrect ?? 0,
+          rank: myRank >= 0 ? myRank + 1 : null,
+        }
+      : null,
   };
 };

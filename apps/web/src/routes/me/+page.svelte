@@ -1,7 +1,10 @@
 <script lang="ts">
-  import { Calendar } from "lucide-svelte";
+  import { Calendar, Share2 } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
+  import { resultShareText } from "$lib/brand/share";
+  import { track } from "$lib/analytics/client";
   let { data } = $props();
+  let shareState = $state<"idle" | "copied" | "error">("idle");
   function fmtTime(s: number) { return `${Math.floor(s/60)}:${(s%60).toString().padStart(2,"0")}`; }
   function fmtDate(iso: string) {
     return new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric" });
@@ -11,6 +14,27 @@
   function heatColor(score: number | null): string {
     if (score === null) return heatColors[0];
     return heatColors[Math.min(Math.max(score, 1), 5)];
+  }
+  async function challengeFriends() {
+    if (!data.shareResult) return;
+    const url = new URL(data.shareResult.url, window.location.origin).toString();
+    const text = resultShareText({
+      correct: data.shareResult.totalCorrect,
+      date: data.shareResult.date,
+      rank: data.shareResult.rank,
+    });
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: `${brandCopy.appName} challenge`, text, url });
+        track("result_share", { source: "profile", method: "native" });
+        return;
+      }
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      shareState = "copied";
+      track("result_share", { source: "profile", method: "clipboard" });
+    } catch {
+      shareState = "error";
+    }
   }
 </script>
 
@@ -62,6 +86,27 @@
       </div>
     {/each}
   </div>
+
+  {#if data.shareResult}
+    <div class="bg-paper-cream rounded-xl border-2 border-ink px-4 py-4 mb-3.5 flex items-center justify-between gap-3">
+      <div class="min-w-0">
+        <div class="sans text-[11px] font-bold tracking-widest uppercase text-accent mb-1">Challenge friends</div>
+        <div class="serif text-sm font-bold text-ink leading-tight">
+          Share your latest {data.shareResult.totalCorrect}/5 and ask someone to beat it.
+        </div>
+        {#if shareState === "error"}
+          <div class="sans text-[11px] text-wrong mt-1">Couldn’t open sharing. Copy your result page URL instead.</div>
+        {/if}
+      </div>
+      <button
+        type="button"
+        onclick={challengeFriends}
+        class="sans btn-press flex-shrink-0 bg-accent text-paper border-2 border-ink rounded-xl px-3 py-2 text-xs font-bold shadow-brut flex items-center gap-1.5"
+      >
+        <Share2 size={14} /> {shareState === "copied" ? "Copied" : "Share"}
+      </button>
+    </div>
+  {/if}
 
   <!-- 14-day heatmap -->
   <div class="bg-white rounded-xl border-2 border-ink p-4 mb-3.5">

@@ -99,10 +99,10 @@
 
   <div class="flex flex-col sm:flex-row gap-3">
     <a
-      href="/demo"
+      href="/"
       class="sans btn-press flex-1 bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline"
     >
-      Try a sample rep
+      Beat this score
     </a>
     <button
       type="button"

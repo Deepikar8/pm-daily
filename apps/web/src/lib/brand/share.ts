@@ -9,6 +9,6 @@ export type ShareResult = {
 
 export function resultShareText(result: ShareResult) {
   const total = result.total ?? 5;
-  const rankText = result.rank ? ` Rank #${result.rank}.` : "";
-  return `${brandCopy.appName}: ${result.correct}/${total} on ${result.date}.${rankText} ${brandCopy.tagline}`;
+  const rankText = result.rank ? ` and ranked #${result.rank}` : "";
+  return `I scored ${result.correct}/${total} in ${brandCopy.appName} on ${result.date}${rankText}. Think you can beat me?`;
 }

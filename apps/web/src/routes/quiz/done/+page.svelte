@@ -358,7 +358,7 @@
         onclick={shareResult}
         class="sans btn-press bg-white text-ink border-2 border-ink rounded-2xl px-5 py-4 text-[14px] font-bold shadow-brut flex items-center gap-2"
       >
-        <Share2 size={15} /> {shareState === "copied" ? "Copied" : "Share"}
+        <Share2 size={15} /> {shareState === "copied" ? "Copied" : "Challenge a friend"}
       </button>
     {/if}
   </div>

@@ -1,10 +1,13 @@
 <script lang="ts">
-  import { Trophy, Crown, TrendingUp, Users, ArrowRight, LockKeyhole } from "lucide-svelte";
+  import { Trophy, Crown, TrendingUp, Users, ArrowRight, LockKeyhole, Share2 } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
+  import { resultShareText } from "$lib/brand/share";
+  import { track } from "$lib/analytics/client";
   import { LEADERBOARD_LIMIT } from "$lib/leaderboard/config";
   import { getLeaderboardDisplay, type LeaderboardScope } from "$lib/leaderboard/view";
   let { data } = $props();
   let scope = $state<LeaderboardScope>("weekly");
+  let shareState = $state<"idle" | "copied" | "error">("idle");
   let activeBoard = $derived(scope === "weekly" ? data.weekly.rows : data.allTime.rows);
   let display = $derived(
     getLeaderboardDisplay({
@@ -17,6 +20,28 @@
   function avatarBg(i: number) {
     const palette = ["#2F6F73", "#8B4513", "#5A8A3A", "#A0522D", "#17484B", "#8B7355"];
     return palette[i % palette.length];
+  }
+
+  async function challengeFriends() {
+    if (!data.shareResult) return;
+    const url = new URL(data.shareResult.url, window.location.origin).toString();
+    const text = resultShareText({
+      correct: data.shareResult.totalCorrect,
+      date: data.shareResult.date,
+      rank: data.shareResult.rank,
+    });
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: `${brandCopy.appName} challenge`, text, url });
+        track("result_share", { source: "leaderboard", method: "native" });
+        return;
+      }
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      shareState = "copied";
+      track("result_share", { source: "leaderboard", method: "clipboard" });
+    } catch {
+      shareState = "error";
+    }
   }
 </script>
 
@@ -42,6 +67,18 @@
         Top {LEADERBOARD_LIMIT} by weekly points. The Arena resets Monday at 00:00 UTC.
       {/if}
     </p>
+    {#if data.shareResult}
+      <button
+        type="button"
+        onclick={challengeFriends}
+        class="sans btn-press mt-4 inline-flex items-center justify-center gap-2 bg-accent text-paper border-2 border-ink rounded-2xl px-4 py-3 text-[13px] font-bold shadow-brut"
+      >
+        <Share2 size={15} /> {shareState === "copied" ? "Copied" : "Challenge friends"}
+      </button>
+      {#if shareState === "error"}
+        <p class="sans text-xs text-wrong mt-2">Couldn’t open sharing. Copy your result page URL instead.</p>
+      {/if}
+    {/if}
   </div>
 
   {#if data.pendingPreview}
