@@ -56,7 +56,12 @@ SvelteKit 2 (Svelte 5 runes mode) · Tailwind v3 · Drizzle ORM · Better Auth (
 
 ## License + source material
 
-Code in this repository is MIT-licensed — see [`LICENSE`](LICENSE).
+This repository is open source. Code is MIT-licensed — see
+[`LICENSE`](LICENSE).
+
+Maintainer intent: Product Gym is a free learning project. I do not plan to
+monetize the hosted app; the goal is to help PMs and builders practice product
+judgment from great operator conversations.
 
 Quiz questions, digests, and takeaways are derivative summaries
 generated from Lenny Rachitsky's archive (podcasts and newsletter
