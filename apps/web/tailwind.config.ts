@@ -4,22 +4,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: { DEFAULT: "#FBF7F0", warm: "#FBF1DC", fill: "#F0E8D4", cream: "#FFE8C2" },
-        ink:   { DEFAULT: "#2A1810", soft: "#5C4634", mute: "#8B7355" },
-        accent:{ DEFAULT: "#D2691E", deep: "#8B4513", tertiary: "#A0522D" },
+        paper: { DEFAULT: "#FFF8EC", warm: "#FFECCF", fill: "#F4E6CF", cream: "#FFF0D6" },
+        ink:   { DEFAULT: "#2A1810", soft: "#6B5442", mute: "#9A7F63" },
+        accent:{ DEFAULT: "#D86F24", deep: "#9A4E16", tertiary: "#B85E20" },
         secondary: {
-          DEFAULT: "#2F6F73",
-          soft: "#5E8F92",
-          fill: "#DDEDEC",
-          deep: "#17484B",
+          DEFAULT: "#2F8F83",
+          soft: "#68AFA6",
+          fill: "#DFF2EF",
+          deep: "#1F625C",
         },
         neutral: {
-          line: "#D8CEC0",
-          panel: "#F7F2EA",
+          line: "#E2D3BE",
+          panel: "#FFF4E3",
         },
         ok:    "#5A8A3A",
         wrong: "#B84A2A",
-        gold:  "#E8B04B",
+        gold:  "#F7C37A",
       },
       fontFamily: {
         serif: ['"Fraunces"', "Georgia", "serif"],
@@ -30,9 +30,9 @@ export default {
         "brut":    "4px 4px 0 #2A1810",
         "brut-lg": "5px 5px 0 #2A1810",
         "brut-xl": "6px 6px 0 #2A1810",
-        "brut-accent":     "5px 5px 0 #D2691E",
-        "brut-accent-lg":  "6px 6px 0 #D2691E",
-        "brut-deep":       "5px 5px 0 #8B4513",
+        "brut-accent":     "5px 5px 0 #D86F24",
+        "brut-accent-lg":  "6px 6px 0 #D86F24",
+        "brut-deep":       "5px 5px 0 #9A4E16",
       },
       keyframes: {
         flame:        { "0%,100%": { transform: "rotate(-3deg) scale(1)" },     "50%": { transform: "rotate(3deg) scale(1.08)" } },

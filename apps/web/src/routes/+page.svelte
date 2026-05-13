@@ -79,6 +79,20 @@
 
 <svelte:head>
   <title>{brandCopy.appName} — {brandCopy.tagline}</title>
+  <meta name="description" content={`${brandCopy.tagline} Try one daily product judgment challenge based on top operator conversations.`} />
+  <meta property="og:title" content={brandCopy.appName} />
+  <meta property="og:description" content={`${brandCopy.tagline} Try one daily product judgment challenge based on top operator conversations.`} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://daily.deepikamurthy.com/" />
+  <meta property="og:image" content="https://daily.deepikamurthy.com/social/product-gym-share-v2.png" />
+  <meta property="og:image:secure_url" content="https://daily.deepikamurthy.com/social/product-gym-share-v2.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={brandCopy.appName} />
+  <meta name="twitter:description" content={`${brandCopy.tagline} Try one daily product judgment challenge based on top operator conversations.`} />
+  <meta name="twitter:image" content="https://daily.deepikamurthy.com/social/product-gym-share-v2.png" />
 </svelte:head>
 
 <main class="max-w-xl mx-auto px-6 py-12">
@@ -92,7 +106,7 @@
     <h1 class="serif text-[52px] font-extrabold leading-[0.96] tracking-tight mt-3 mb-3">
       {brandCopy.appName}
     </h1>
-    <p class="serif italic text-xl text-ink-soft leading-tight">
+    <p class="sans text-xl font-semibold text-ink-soft leading-tight">
       {brandCopy.tagline}
     </p>
     <div class="mt-3 flex items-center justify-center gap-2">

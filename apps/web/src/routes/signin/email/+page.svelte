@@ -63,7 +63,7 @@
 
 <main class="max-w-md mx-auto px-6 py-16">
   <h1 class="serif text-3xl font-extrabold mb-3">Sign in.</h1>
-  <p class="serif italic text-ink-soft mb-7">
+  <p class="sans text-[15px] font-medium text-ink-soft mb-7">
     Enter your email — we'll send a one-tap link.
   </p>
 

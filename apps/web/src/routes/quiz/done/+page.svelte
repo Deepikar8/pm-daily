@@ -83,7 +83,7 @@
     <h1 class="serif text-5xl font-extrabold leading-[1] tracking-tight mb-2">
       {scoreHeadline}
     </h1>
-    <p class="serif italic text-lg text-ink-soft m-0">{scoreSub}</p>
+    <p class="sans text-lg font-medium text-ink-soft m-0">{scoreSub}</p>
   </div>
 
   <!-- 3-column score panel -->

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Product Gym">
+  <rect width="64" height="64" rx="14" fill="#FBF7F0"/>
+  <rect x="14" y="15" width="40" height="40" rx="10" fill="#2A1810"/>
+  <rect x="10" y="10" width="40" height="40" rx="10" fill="#D2691E" stroke="#2A1810" stroke-width="4"/>
+  <text x="30" y="36" text-anchor="middle" dominant-baseline="middle" fill="#FBF7F0" font-family="Georgia, serif" font-size="17" font-weight="700">PG</text>
+</svg>

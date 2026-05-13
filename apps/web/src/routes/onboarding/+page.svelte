@@ -18,7 +18,7 @@
     <h1 class="serif text-4xl font-extrabold leading-[1.05] tracking-tight mt-3">
       Set up your daily.
     </h1>
-    <p class="serif italic text-lg text-ink-soft mt-2">
+    <p class="sans text-lg font-medium text-ink-soft mt-2">
       Two fields you have to fill. Two you can skip.
     </p>
   </div>

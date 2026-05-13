@@ -46,7 +46,7 @@
 {#if data.missing}
   <main class="max-w-2xl mx-auto px-6 py-16 text-center">
     <h1 class="serif text-3xl font-bold">Tomorrow.</h1>
-    <p class="serif italic text-lg text-ink-soft mt-3">
+    <p class="sans text-lg font-medium text-ink-soft mt-3">
       Today’s rep isn’t published yet. Try again in a few minutes.
     </p>
   </main>
@@ -54,7 +54,7 @@
   {@const c = data.content}
   <main class="max-w-2xl mx-auto px-6 py-7 sm:py-10">
     <div class="text-center mb-5">
-      <p class="serif italic text-xl sm:text-2xl text-ink-soft leading-tight">
+      <p class="sans text-xl sm:text-2xl font-semibold text-ink-soft leading-tight">
         {brandCopy.tagline}
       </p>
     </div>

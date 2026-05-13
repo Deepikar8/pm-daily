@@ -41,7 +41,7 @@
       <h1 class="serif text-[34px] sm:text-[44px] font-extrabold leading-[1.03] tracking-tight mb-3">
         Make the decision.
       </h1>
-      <p class="serif italic text-lg text-ink-soft">
+      <p class="sans text-lg font-medium text-ink-soft">
         One product judgment rep. No account needed.
       </p>
     </div>
