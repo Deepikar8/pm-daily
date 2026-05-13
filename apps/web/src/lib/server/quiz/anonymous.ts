@@ -7,7 +7,7 @@ const cookieOptions = {
   path: "/",
   httpOnly: true,
   sameSite: "lax" as const,
-  secure: true,
+  secure: process.env.NODE_ENV === "production",
   maxAge: 60 * 60 * 24 * 14,
 };
 
@@ -46,4 +46,3 @@ export function getPendingQuizClaim(cookies: Cookies): { anonId: string; date: s
 export function clearPendingQuizClaim(cookies: Cookies) {
   cookies.delete(PENDING_QUIZ_COOKIE, { path: "/" });
 }
-

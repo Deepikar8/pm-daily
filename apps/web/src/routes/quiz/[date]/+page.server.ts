@@ -3,11 +3,12 @@ import type { PageServerLoad } from "./$types";
 import * as kvKeys from "$lib/server/kv/keys";
 import { localDate } from "$lib/server/timezone/helpers";
 import { getDb } from "$lib/server/db/client";
-import { quizAttempts, users } from "$lib/server/db/schema";
+import { dailyQuestions, quizAttempts, users } from "$lib/server/db/schema";
 import { and, eq } from "drizzle-orm";
 import { compareIsoDate, isIsoDate } from "$lib/server/quiz/date";
 import { anonymousUserId, getOrCreateAnonymousQuizId } from "$lib/server/quiz/anonymous";
 import { getQuizSessionStub } from "$lib/server/quiz/runtime-session";
+import type { QuizState } from "$lib/durable-objects/quiz-session";
 
 export const load: PageServerLoad = async ({ locals, platform, params, url, cookies }) => {
   if (!platform?.env) throw redirect(302, "/");
@@ -62,11 +63,28 @@ export const load: PageServerLoad = async ({ locals, platform, params, url, cook
   if (!initRes.ok) {
     return { date, missing: true as const, mode, sessionId };
   }
-  const state = (await initRes.json()) as {
-    currentIndex?: number;
-    startedAt?: number;
-    [k: string]: unknown;
-  };
+  const state = (await initRes.json()) as QuizState;
+  const answers = Array.isArray(state.answers) ? state.answers : [];
+  const correctRows = answers.length
+    ? await db
+        .select({ position: dailyQuestions.position, correctKey: dailyQuestions.correctKey })
+        .from(dailyQuestions)
+        .where(eq(dailyQuestions.date, date))
+    : [];
+  const correctByPosition = new Map(correctRows.map((row) => [row.position, row.correctKey]));
+  const answersLog = answers.map((answer) => ({
+    position: answer.position,
+    correct: correctByPosition.get(answer.position) === answer.selectedKey,
+  }));
 
-  return { date, missing: false as const, questions, state, mode, sessionId, isAnonymous: !locals.user };
+  return {
+    date,
+    missing: false as const,
+    questions,
+    state,
+    answersLog,
+    mode,
+    sessionId,
+    isAnonymous: !locals.user,
+  };
 };

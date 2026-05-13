@@ -237,9 +237,9 @@
         Answer all 5 now. You can save your score and join the leaderboard after you see your result.
       </p>
       <div class="flex flex-col gap-3">
-        <a href="/quiz"
+        <a href={`/quiz/${data.todayDate}`}
            class="sans btn-press w-full bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[15px] font-bold shadow-brut-accent-lg flex items-center justify-center gap-2 no-underline">
-          Start the full challenge <ArrowRight size={16} />
+          Continue to decision 2 <ArrowRight size={16} />
         </a>
       </div>
     </div>

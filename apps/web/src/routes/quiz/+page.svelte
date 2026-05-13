@@ -35,7 +35,7 @@
   let pending = $state(false);
   let elapsed = $state(0);
   let startedAt = $state<number>(data.state?.startedAt ?? Date.now());
-  let answersLog = $state<Array<{ position: number; correct: boolean }>>([]);
+  let answersLog = $state<Array<{ position: number; correct: boolean }>>(data.answersLog ?? []);
 
   // Tick timer
   $effect(() => {
