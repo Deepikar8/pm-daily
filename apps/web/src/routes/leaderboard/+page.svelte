@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Trophy, Crown, TrendingUp, Users, ArrowRight } from "lucide-svelte";
+  import { Trophy, Crown, TrendingUp, Users, ArrowRight, LockKeyhole } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
+  import { LEADERBOARD_LIMIT } from "$lib/leaderboard/config";
   import { getLeaderboardDisplay, type LeaderboardScope } from "$lib/leaderboard/view";
   let { data } = $props();
   let scope = $state<LeaderboardScope>("weekly");
@@ -36,12 +37,42 @@
     </h1>
     <p class="sans text-[13px] text-ink-soft mt-2">
       {#if scope === "allTime"}
-        Ranked by total points. Training streak shown as tie-break — consistency beats intensity.
+        Top {LEADERBOARD_LIMIT} by total points. Training streak shown as tie-break — consistency beats intensity.
       {:else}
-        Ranked by weekly points. The Arena resets Monday at 00:00 UTC.
+        Top {LEADERBOARD_LIMIT} by weekly points. The Arena resets Monday at 00:00 UTC.
       {/if}
     </p>
   </div>
+
+  {#if data.pendingPreview}
+    <div class="bg-accent text-paper rounded-2xl p-4 mb-4 border-2 border-ink shadow-brut-accent-lg">
+      <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-xl bg-paper text-accent border-2 border-ink flex items-center justify-center flex-shrink-0">
+          <LockKeyhole size={18} />
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="sans text-[11px] font-bold tracking-widest uppercase text-paper-cream mb-1">
+            Unsaved preview score
+          </div>
+          <div class="serif text-[20px] font-extrabold leading-tight">
+            {data.pendingPreview.totalCorrect}/5 · {data.pendingPreview.totalPoints} pts
+            {#if data.pendingPreview.rank}
+              · preview rank #{data.pendingPreview.rank}
+            {/if}
+          </div>
+          <p class="sans text-[13px] text-paper-cream mt-1.5 mb-3">
+            You are not on the leaderboard yet. Sign in to save this score and claim your rank.
+          </p>
+          <a
+            href={data.pendingPreview.claimUrl}
+            class="sans btn-press inline-flex items-center justify-center gap-2 bg-paper text-ink border-2 border-ink rounded-xl px-4 py-2.5 text-[13px] font-bold shadow-brut no-underline"
+          >
+            Save score and join <ArrowRight size={14} />
+          </a>
+        </div>
+      </div>
+    </div>
+  {/if}
 
   <!-- Toggle -->
   <div class="flex gap-1.5 mb-4 bg-paper-fill p-1 rounded-xl border-2 border-ink">

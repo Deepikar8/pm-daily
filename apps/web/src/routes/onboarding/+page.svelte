@@ -28,6 +28,7 @@
     use:enhance
     class="bg-white border-2 border-ink rounded-2xl shadow-brut-accent-lg p-6 mb-4"
   >
+    <input type="hidden" name="next" value={data.next ?? "/today"} />
     <div class="mb-5">
       <label class="sans block text-xs font-bold text-ink mb-1.5 tracking-wide">
         Display name <span class="text-accent">*</span>

@@ -2,13 +2,17 @@ import type { RequestHandler } from "./$types";
 import { getDb } from "$lib/server/db/client";
 import * as schema from "$lib/server/db/schema";
 import { and, eq } from "drizzle-orm";
-import { score } from "$lib/server/scoring/score";
-import { applyAttemptToStats } from "$lib/server/scoring/streaks";
-import { recomputeLeaderboard } from "$lib/server/leaderboard/recompute";
 import { localDate } from "$lib/server/timezone/helpers";
 import { compareIsoDate } from "$lib/server/quiz/date";
-import { quizSessionName } from "$lib/server/quiz/session";
-import { ulid } from "ulid";
+import {
+  anonymousUserId,
+  getOrCreateAnonymousQuizId,
+  setPendingQuizClaim,
+} from "$lib/server/quiz/anonymous";
+import { getQuizSessionStub } from "$lib/server/quiz/runtime-session";
+import { persistQuizAttempt, scoreQuizState } from "$lib/server/quiz/attempt";
+import { readLeaderboards } from "$lib/server/leaderboard/read";
+import { previewWeeklyRank } from "$lib/server/leaderboard/rank-preview";
 
 /**
  * Finalize the user's quiz for the day:
@@ -22,8 +26,7 @@ import { ulid } from "ulid";
  * we just return its existing summary — re-pressing "Finish" never
  * double-counts points.
  */
-export const POST: RequestHandler = async ({ request, locals, platform }) => {
-  if (!locals.user) return new Response("unauth", { status: 401 });
+export const POST: RequestHandler = async ({ request, locals, platform, cookies }) => {
   if (!platform?.env) return new Response("platform unavailable", { status: 500 });
   const env = platform.env;
   const body = (await request.json().catch(() => ({}))) as {
@@ -31,17 +34,15 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
     mode?: "scored_today" | "late" | "practice";
     sessionId?: string;
   };
-  const tz = locals.user.timezone ?? "UTC";
+  const tz = locals.user?.timezone ?? "UTC";
   const today = localDate(tz);
   const date = body.date ?? today;
   const mode = body.mode ?? (compareIsoDate(date, today) < 0 ? "late" : "scored_today");
+  const anonId = locals.user ? null : getOrCreateAnonymousQuizId(cookies);
+  const quizUserId = locals.user?.id ?? anonymousUserId(anonId!);
 
   // Finalize the DO
-  const stub = env.QUIZ_SESSION.get(
-    env.QUIZ_SESSION.idFromName(
-      quizSessionName({ userId: locals.user.id, date, sessionId: body.sessionId }),
-    ),
-  );
+  const stub = getQuizSessionStub(env, { userId: quizUserId, date, sessionId: body.sessionId });
   const finalRes = await stub.fetch("https://do/finalize", { method: "POST" });
   if (!finalRes.ok) {
     return new Response("could not finalize quiz", { status: 400 });
@@ -55,6 +56,41 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
   };
 
   const db = getDb(env.DB);
+
+  const stats = locals.user
+    ? await db.select().from(schema.userStats).where(eq(schema.userStats.userId, locals.user.id)).get()
+    : null;
+  const currentStreak = stats?.currentStreak ?? 0;
+
+  const scored = await scoreQuizState({
+    db,
+    state,
+    date,
+    streak: currentStreak,
+    mode,
+  });
+
+  if (!locals.user) {
+    setPendingQuizClaim(cookies, { anonId: anonId!, date });
+    const lb = await readLeaderboards(env);
+    const previewRank =
+      mode === "scored_today" && compareIsoDate(date, today) === 0
+        ? previewWeeklyRank(lb.weekly.rows, scored.totalPoints)
+        : null;
+    return Response.json({
+      attemptId: null,
+      date,
+      mode: "preview",
+      totalCorrect: scored.totalCorrect,
+      totalSeconds: scored.totalSeconds,
+      totalPoints: scored.totalPoints,
+      basePoints: scored.basePoints,
+      speedBonus: scored.speedBonus,
+      streakMultiplier: scored.streakMultiplier,
+      leaderboardEligible: false,
+      previewRank,
+    });
+  }
 
   // Idempotent: if attempt already exists, return its summary instead of re-writing
   const existing = await db
@@ -74,107 +110,43 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
     });
   }
 
-  // Load today's questions (with correct keys)
-  const todaysQs = await db
-    .select()
-    .from(schema.dailyQuestions)
-    .where(eq(schema.dailyQuestions.date, date))
-    .all();
-  const byPos = new Map(todaysQs.map((q) => [q.position, q]));
-
-  let totalCorrect = 0;
-  for (const a of state.answers) {
-    const q = byPos.get(a.position);
-    if (q && q.correctKey === a.selectedKey) totalCorrect++;
-  }
-  const totalSeconds = Math.max(0, Math.floor((Date.now() - state.startedAt) / 1000));
-
-  // Look up current streak for the multiplier
-  const stats = await db
-    .select()
-    .from(schema.userStats)
-    .where(eq(schema.userStats.userId, locals.user.id))
-    .get();
-  const currentStreak = stats?.currentStreak ?? 0;
-
-  const { basePoints, speedBonus, streakMultiplier, totalPoints } = score({
-    correctCount: totalCorrect,
-    seconds: totalSeconds,
-    streak: mode === "practice" ? 0 : currentStreak,
-  });
-
   if (mode === "practice") {
     return Response.json({
       attemptId: null,
       date,
       mode,
-      totalCorrect,
-      totalSeconds,
+      totalCorrect: scored.totalCorrect,
+      totalSeconds: scored.totalSeconds,
       totalPoints: 0,
-      basePoints,
-      speedBonus,
+      basePoints: scored.basePoints,
+      speedBonus: scored.speedBonus,
       streakMultiplier: 1,
       leaderboardEligible: false,
     });
   }
 
-  const attemptId = state.attemptId ?? ulid();
-  await db
-    .insert(schema.quizAttempts)
-    .values({
-      id: attemptId,
-      userId: locals.user.id,
-      date,
-      startedAt: state.startedAt,
-      submittedAt: Date.now(),
-      totalCorrect,
-      totalSeconds,
-      basePoints,
-      speedBonus,
-      streakMultiplier,
-      totalPoints,
-    })
-    .onConflictDoNothing()
-    .run();
-
-  for (const a of state.answers) {
-    const q = byPos.get(a.position);
-    if (!q) continue;
-    await db
-      .insert(schema.quizAnswers)
-      .values({
-        attemptId,
-        questionId: q.id,
-        selectedKey: a.selectedKey,
-        isCorrect: q.correctKey === a.selectedKey ? 1 : 0,
-        answeredAt: a.answeredAt,
-      })
-      .onConflictDoNothing()
-      .run();
-  }
-
-  const leaderboardEligible = mode === "scored_today" && compareIsoDate(date, today) === 0;
-  if (leaderboardEligible) {
-    await applyAttemptToStats({
-      db,
-      userId: locals.user.id,
-      date,
-      points: totalPoints,
-      timezone: tz,
-    });
-    await recomputeLeaderboard(env);
-  }
-
-  return Response.json({
-    attemptId,
+  const persisted = await persistQuizAttempt({
+    db,
+    env,
+    state,
+    userId: locals.user.id,
     date,
     mode,
-    totalCorrect,
-    totalSeconds,
-    totalPoints,
-    basePoints,
-    speedBonus,
-    streakMultiplier,
-    leaderboardEligible,
+    timezone: tz,
+    today,
+    scored,
+  });
+
+  return Response.json({
+    attemptId: persisted.attemptId,
+    date,
+    mode,
+    totalCorrect: persisted.totalCorrect,
+    totalSeconds: persisted.totalSeconds,
+    totalPoints: persisted.totalPoints,
+    basePoints: persisted.basePoints,
+    speedBonus: persisted.speedBonus,
+    streakMultiplier: persisted.streakMultiplier,
+    leaderboardEligible: persisted.leaderboardEligible,
   });
 };

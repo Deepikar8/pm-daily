@@ -5,17 +5,20 @@ import * as schema from "$lib/server/db/schema";
 import { and, eq } from "drizzle-orm";
 import { localDate } from "$lib/server/timezone/helpers";
 import { readLeaderboards } from "$lib/server/leaderboard/read";
+import { previewWeeklyRank } from "$lib/server/leaderboard/rank-preview";
 import { compareIsoDate, isIsoDate } from "$lib/server/quiz/date";
-import { quizSessionName } from "$lib/server/quiz/session";
 import { score } from "$lib/server/scoring/score";
+import { anonymousUserId, getPendingQuizClaim } from "$lib/server/quiz/anonymous";
+import { scoreQuizState } from "$lib/server/quiz/attempt";
+import { isGoogleAuthEnabled } from "$lib/server/auth/config";
+import { getQuizSessionStub } from "$lib/server/quiz/runtime-session";
 
-export const load: PageServerLoad = async ({ locals, platform, params, url }) => {
-  if (!locals.user) throw redirect(302, "/");
+export const load: PageServerLoad = async ({ locals, platform, params, url, cookies }) => {
   if (!platform?.env) throw redirect(302, "/");
   if (!isIsoDate(params.date)) throw redirect(302, "/today");
 
   const env = platform.env;
-  const tz = locals.user.timezone ?? "UTC";
+  const tz = locals.user?.timezone ?? "UTC";
   const today = localDate(tz);
   const date = params.date;
   if (compareIsoDate(date, today) > 0) throw redirect(302, "/today");
@@ -38,16 +41,74 @@ export const load: PageServerLoad = async ({ locals, platform, params, url }) =>
     .get();
   const source = session ? JSON.parse(session.sourceJson) : null;
 
-  const stats = await db
-    .select()
-    .from(schema.userStats)
-    .where(eq(schema.userStats.userId, locals.user.id))
-    .get();
+  const stats = locals.user
+    ? await db.select().from(schema.userStats).where(eq(schema.userStats.userId, locals.user.id)).get()
+    : null;
+
+  if (!locals.user) {
+    const pending = getPendingQuizClaim(cookies);
+    if (!pending || pending.date !== date) throw redirect(302, "/");
+
+    const stub = getQuizSessionStub(env, {
+      userId: anonymousUserId(pending.anonId),
+      date,
+      sessionId: "default",
+    });
+    const stateRes = await stub.fetch("https://do/state");
+    const state = (await stateRes.json()) as
+      | { uninitialized: true }
+      | {
+          startedAt: number;
+          answers: Array<{ position: number; selectedKey: string; answeredAt: number }>;
+        };
+    if ("uninitialized" in state) throw redirect(302, `/quiz/${date}`);
+
+    const scored = await scoreQuizState({
+      db,
+      state: { ...state, userId: anonymousUserId(pending.anonId), date },
+      date,
+      streak: 0,
+      mode: "scored_today",
+    });
+    const lb = await readLeaderboards(env);
+    const rank = previewWeeklyRank(lb.weekly.rows, scored.totalPoints);
+
+    return {
+      date,
+      mode: "preview",
+      preview: true,
+      attempt: {
+        id: null,
+        totalCorrect: scored.totalCorrect,
+        totalSeconds: scored.totalSeconds,
+        totalPoints: scored.totalPoints,
+        streakMultiplier: scored.streakMultiplier,
+      },
+      scoreBreakdown: {
+        basePoints: scored.basePoints,
+        speedBonus: scored.speedBonus,
+        streakMultiplier: scored.streakMultiplier,
+        totalPoints: scored.totalPoints,
+        leaderboardEligible: false,
+      },
+      shareUrl: `${url.origin}/quiz/${date}/done`,
+      streak: { current: 0, best: 0 },
+      rank,
+      claimUrl: `/quiz/claim?date=${encodeURIComponent(date)}`,
+      googleEnabled: isGoogleAuthEnabled(env.GOOGLE_CLIENT_ID, env.GOOGLE_CLIENT_SECRET),
+      questions: questions.map((q) => ({
+        position: q.position,
+        archetype: q.archetype,
+        scenarioMd: q.scenarioMd,
+        pmTakeaway: q.pmTakeaway,
+        correct: scored.correctnessByPosition.get(q.position) === true,
+      })),
+      source,
+    };
+  }
 
   if (mode === "practice") {
-    const stub = env.QUIZ_SESSION.get(
-      env.QUIZ_SESSION.idFromName(quizSessionName({ userId: locals.user.id, date, sessionId })),
-    );
+    const stub = getQuizSessionStub(env, { userId: locals.user.id, date, sessionId });
     const stateRes = await stub.fetch("https://do/state");
     const state = (await stateRes.json()) as
       | { uninitialized: true }
@@ -152,4 +213,3 @@ export const load: PageServerLoad = async ({ locals, platform, params, url }) =>
     source,
   };
 };
-

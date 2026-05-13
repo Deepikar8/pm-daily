@@ -13,7 +13,7 @@ test("cold visitor understands the product before auth", async ({ page }) => {
   await expect(page.getByRole("link", { name: /add the daily reminder/i })).toBeVisible();
 });
 
-test("cold visitor can answer Q1 before the auth gate", async ({ page }) => {
+test("cold visitor can answer Q1 before continuing to the full challenge", async ({ page }) => {
   await page.goto("/");
 
   await page.getByRole("button", { name: /^A / }).click();
@@ -21,9 +21,9 @@ test("cold visitor can answer Q1 before the auth gate", async ({ page }) => {
   await page.getByRole("button", { name: /check my decision/i }).click();
 
   await expect(page.getByText(/training note|good decision/i)).toBeVisible();
-  await expect(page.getByText(/want the full challenge/i)).toBeVisible();
-  await expect(page.getByText(/sign in to answer all 5/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /email me a magic link/i })).toBeVisible();
+  await expect(page.getByText(/ready for the full challenge/i)).toBeVisible();
+  await expect(page.getByText(/answer all 5 now/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /start the full challenge/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /add the daily reminder/i })).toBeVisible();
 });
 
@@ -38,8 +38,8 @@ test("public today page teaches first and keeps challenge CTAs clear", async ({ 
   await expect(page.getByText(/sign in/i)).toHaveCount(0);
 });
 
-test("logged-out protected routes recover to landing", async ({ page }) => {
-  for (const path of ["/quiz", "/quiz/2026-05-10", "/me", "/onboarding"]) {
+test("logged-out protected account routes recover to landing", async ({ page }) => {
+  for (const path of ["/me", "/onboarding"]) {
     await page.goto(path);
     await expect(page).toHaveURL(/\/$/);
     await expect(page.getByRole("heading", { name: "Product Gym" })).toBeVisible();

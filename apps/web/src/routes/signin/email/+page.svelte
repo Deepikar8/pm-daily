@@ -1,10 +1,42 @@
 <script lang="ts">
-  import { Calendar, ArrowRight } from "lucide-svelte";
+  import { ArrowRight } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
+  import { page } from "$app/state";
+  let { data } = $props();
   let email = $state("");
   let submitted = $state(false);
   let pending = $state(false);
+  let pendingGoogle = $state(false);
   let error = $state<string | null>(null);
+  let googleError = $state<string | null>(null);
+  let callbackURL = $derived(page.url.searchParams.get("callbackURL") ?? "/onboarding");
+
+  async function signInWithGoogle() {
+    pendingGoogle = true;
+    googleError = null;
+    try {
+      const res = await fetch("/auth/sign-in/social", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ provider: "google", callbackURL }),
+      });
+      if (!res.ok) {
+        googleError = "Couldn't start Google sign-in. Try email instead.";
+        pendingGoogle = false;
+        return;
+      }
+      const json = (await res.json()) as { url?: string };
+      if (json.url) {
+        window.location.href = json.url;
+      } else {
+        googleError = "Sign-in didn't return a redirect URL.";
+        pendingGoogle = false;
+      }
+    } catch {
+      googleError = "Network error. Try again.";
+      pendingGoogle = false;
+    }
+  }
 
   async function submit(e: SubmitEvent) {
     e.preventDefault();
@@ -14,7 +46,7 @@
       const res = await fetch("/auth/sign-in/magic-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, callbackURL: "/onboarding" }),
+        body: JSON.stringify({ email, callbackURL }),
       });
       if (!res.ok) {
         error = "Couldn't send the magic link. Try again in a moment.";
@@ -47,6 +79,20 @@
     </div>
   {:else}
     <form onsubmit={submit} class="bg-white rounded-2xl border-2 border-ink shadow-brut-accent-lg p-6">
+      {#if data.googleEnabled}
+        <button
+          type="button"
+          onclick={signInWithGoogle}
+          disabled={pendingGoogle}
+          class="sans btn-press w-full bg-accent text-paper border-2 border-ink rounded-2xl py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center justify-center gap-2 disabled:opacity-50 mb-4"
+        >
+          {pendingGoogle ? "Redirecting..." : "Continue with Google"} <ArrowRight size={16} />
+        </button>
+        {#if googleError}<p class="sans text-xs text-wrong mb-3">{googleError}</p>{/if}
+        <div class="sans text-[11px] font-bold tracking-widest uppercase text-ink-mute text-center mb-4">
+          Or use email
+        </div>
+      {/if}
       <label class="sans block text-xs font-bold text-ink mb-1.5 tracking-wide">
         Email
       </label>

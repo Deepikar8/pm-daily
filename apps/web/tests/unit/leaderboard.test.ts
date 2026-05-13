@@ -5,6 +5,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import * as schema from "../../src/lib/server/db/schema";
 import { recomputeLeaderboard, _resetDebounce } from "../../src/lib/server/leaderboard/recompute";
+import { readLeaderboards } from "../../src/lib/server/leaderboard/read";
 import * as kvKeys from "../../src/lib/server/kv/keys";
 import { isoWeekKey } from "../../src/lib/server/timezone/helpers";
 
@@ -78,6 +79,51 @@ describe("recomputeLeaderboard", () => {
     await recomputeLeaderboard({ DB: db as any, KV: kv } as any, { force: true });
     const weeklyJson = JSON.parse(kv.store.get(kvKeys.leaderboardWeekly(isoWeekKey("UTC")))!);
     expect(weeklyJson.rows.map((r: any) => r.userId)).toEqual(["u1"]);
+  });
+
+  it("limits leaderboard storage and reads to the top 50", async () => {
+    _resetDebounce();
+    const db = setup();
+    const kv = new FakeKV();
+    await seedUserStats(
+      db,
+      Array.from({ length: 55 }, (_, index) => {
+        const rank = index + 1;
+        return {
+          id: `u${rank}`,
+          displayName: `User ${rank}`,
+          weekly: 1000 - index,
+          total: 2000 - index,
+          streak: rank,
+        };
+      }),
+    );
+
+    await recomputeLeaderboard({ DB: db as any, KV: kv } as any, { force: true });
+
+    const week = isoWeekKey("UTC");
+    const weeklyJson = JSON.parse(kv.store.get(kvKeys.leaderboardWeekly(week))!);
+    const allTimeJson = JSON.parse(kv.store.get(kvKeys.leaderboardAllTime())!);
+    expect(weeklyJson.rows).toHaveLength(50);
+    expect(allTimeJson.rows).toHaveLength(50);
+    expect(weeklyJson.rows.at(-1).userId).toBe("u50");
+
+    kv.store.set(
+      kvKeys.leaderboardWeekly(week),
+      JSON.stringify({
+        rows: Array.from({ length: 55 }, (_, index) => ({
+          userId: `cached${index + 1}`,
+          displayName: `Cached ${index + 1}`,
+          weeklyPoints: 1000 - index,
+          currentStreak: 1,
+          totalAttempts: 1,
+        })),
+      }),
+    );
+
+    const read = await readLeaderboards({ KV: kv });
+    expect(read.weekly.rows).toHaveLength(50);
+    expect(read.weekly.rows[49]?.userId).toBe("cached50");
   });
 
   it("debounces back-to-back calls (no force)", async () => {

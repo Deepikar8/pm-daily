@@ -4,7 +4,12 @@ import { getDb } from "$lib/server/db/client";
 import { users } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 
-export const load: PageServerLoad = async ({ locals, platform }) => {
+function safeNext(value: string | null): string {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) return "/today";
+  return value;
+}
+
+export const load: PageServerLoad = async ({ locals, platform, url }) => {
   if (!locals.user) throw redirect(302, "/");
   if (!platform?.env) throw redirect(302, "/");
 
@@ -20,11 +25,12 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
     .get();
 
   if (row?.termsAcceptedAt && row.displayName) {
-    throw redirect(302, "/today");
+    throw redirect(302, safeNext(url.searchParams.get("next")));
   }
 
   return {
     suggestedDisplayName: row?.displayName ?? "",
+    next: safeNext(url.searchParams.get("next")),
   };
 };
 
@@ -38,6 +44,7 @@ export const actions: Actions = {
     const company = String(data.get("company") ?? "").trim() || null;
     const role = String(data.get("role") ?? "").trim() || null;
     const accept = data.get("acceptTerms") === "on";
+    const next = safeNext(String(data.get("next") ?? ""));
     const values = { displayName, timezone, company, role };
 
     if (!platform?.env)
@@ -68,6 +75,6 @@ export const actions: Actions = {
       .where(eq(users.id, locals.user.id))
       .run();
 
-    throw redirect(302, "/today");
+    throw redirect(302, next);
   },
 };

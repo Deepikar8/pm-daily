@@ -1,5 +1,6 @@
 import * as kvKeys from "../kv/keys";
 import { isoWeekKey } from "../timezone/helpers";
+import { LEADERBOARD_LIMIT } from "$lib/leaderboard/config";
 
 type KVGet = { get(key: string): Promise<string | null> };
 type Env = { KV: KVGet };
@@ -23,9 +24,12 @@ export async function readLeaderboards(env: Env): Promise<{
     env.KV.get(kvKeys.leaderboardWeekly(week)),
     env.KV.get(kvKeys.leaderboardAllTime()),
   ]);
+  const weekly = weeklyRaw ? JSON.parse(weeklyRaw) : { rows: [] };
+  const allTime = allTimeRaw ? JSON.parse(allTimeRaw) : { rows: [] };
+
   return {
     weekKey: week,
-    weekly: weeklyRaw ? JSON.parse(weeklyRaw) : { rows: [] },
-    allTime: allTimeRaw ? JSON.parse(allTimeRaw) : { rows: [] },
+    weekly: { ...weekly, rows: weekly.rows.slice(0, LEADERBOARD_LIMIT) },
+    allTime: { ...allTime, rows: allTime.rows.slice(0, LEADERBOARD_LIMIT) },
   };
 }

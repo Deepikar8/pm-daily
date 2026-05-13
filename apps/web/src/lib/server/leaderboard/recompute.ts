@@ -3,6 +3,7 @@ import { getDb, type DB } from "../db/client";
 import { users, userStats } from "../db/schema";
 import * as kvKeys from "../kv/keys";
 import { isoWeekKey } from "../timezone/helpers";
+import { LEADERBOARD_LIMIT } from "$lib/leaderboard/config";
 
 let _lastRunAt = 0;
 
@@ -39,7 +40,7 @@ export async function recomputeLeaderboard(env: Env, opts?: { force?: boolean })
     .innerJoin(userStats, eq(userStats.userId, users.id))
     .where(isNull(users.deletedAt))
     .orderBy(desc(userStats.weeklyPoints))
-    .limit(50)
+    .limit(LEADERBOARD_LIMIT)
     .all();
 
   const allTime = await db
@@ -53,7 +54,7 @@ export async function recomputeLeaderboard(env: Env, opts?: { force?: boolean })
     .innerJoin(userStats, eq(userStats.userId, users.id))
     .where(isNull(users.deletedAt))
     .orderBy(desc(userStats.totalPoints))
-    .limit(50)
+    .limit(LEADERBOARD_LIMIT)
     .all();
 
   await env.KV.put(

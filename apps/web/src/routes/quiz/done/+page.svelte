@@ -15,12 +15,15 @@
   import MascotCoach from "$lib/components/MascotCoach.svelte";
   let { data }: { data: any } = $props();
   let shareState = $state<"idle" | "copied" | "error">("idle");
+  let pendingGoogle = $state(false);
+  let googleError = $state<string | null>(null);
+  let claimUrl = $derived(data.claimUrl ?? `/quiz/claim?date=${encodeURIComponent(data.date)}`);
 
   function fmtTime(s: number) {
     return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
   }
   async function shareResult() {
-    if (data.mode === "practice") return;
+    if (data.mode === "practice" || data.preview) return;
     const text = resultShareText({
       correct: data.attempt.totalCorrect,
       date: data.date,
@@ -42,6 +45,32 @@
       track("result_share", { source: "quiz_done", method: "clipboard" });
     } catch {
       shareState = "error";
+    }
+  }
+  async function signInWithGoogle() {
+    pendingGoogle = true;
+    googleError = null;
+    try {
+      const res = await fetch("/auth/sign-in/social", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ provider: "google", callbackURL: claimUrl }),
+      });
+      if (!res.ok) {
+        googleError = "Couldn't start Google sign-in. Try email instead.";
+        pendingGoogle = false;
+        return;
+      }
+      const json = (await res.json()) as { url?: string };
+      if (json.url) {
+        window.location.href = json.url;
+      } else {
+        googleError = "Sign-in didn't return a redirect URL.";
+        pendingGoogle = false;
+      }
+    } catch {
+      googleError = "Network error. Try again.";
+      pendingGoogle = false;
     }
   }
   let scoreHeadline = $derived(
@@ -77,7 +106,7 @@
       />
     </div>
     <p class="sans text-[12px] font-bold tracking-[0.12em] uppercase text-accent mb-2">
-      {data.date} · Done
+      {data.date} · {data.preview ? "Preview result" : "Done"}
     </p>
     <h1 class="serif text-5xl font-extrabold leading-[1] tracking-tight mb-2">
       {scoreHeadline}
@@ -109,7 +138,7 @@
       </div>
       <div>
         <div class="sans text-[11px] font-bold tracking-widest uppercase text-gold mb-1.5">
-          Rank
+          {data.preview ? "Projected" : "Rank"}
         </div>
         <div class="serif text-[40px] font-extrabold leading-none">
           {data.rank ? `#${data.rank}` : "—"}
@@ -136,6 +165,15 @@
         Practice replays do not change your score, streak, or leaderboard rank.
       </p>
     </div>
+  {:else if data.preview}
+    <div class="bg-paper-cream border-2 border-ink rounded-2xl p-4 mb-4">
+      <div class="sans text-[11px] font-bold tracking-widest uppercase text-accent mb-1">
+        Preview score
+      </div>
+      <p class="sans text-[13px] text-ink-soft m-0">
+        This score is not saved yet. Sign in to claim it, join the leaderboard, and continue your weekly streak.
+      </p>
+    </div>
   {/if}
 
   <div class="bg-white rounded-2xl border-2 border-ink p-4 mb-4">
@@ -151,10 +189,44 @@
       <div class="text-right mono">{data.scoreBreakdown.streakMultiplier.toFixed(2)}x</div>
       <div class="font-bold">Total</div>
       <div class="text-right mono font-bold">
-        {data.scoreBreakdown.leaderboardEligible ? `${data.scoreBreakdown.totalPoints} pts` : "No leaderboard points"}
+        {data.preview
+          ? `${data.scoreBreakdown.totalPoints} pts preview`
+          : data.scoreBreakdown.leaderboardEligible ? `${data.scoreBreakdown.totalPoints} pts` : "No leaderboard points"}
       </div>
     </div>
   </div>
+
+  {#if data.preview}
+    <div class="bg-accent text-paper rounded-2xl p-5 mb-4 border-2 border-ink shadow-brut-accent-lg">
+      <div class="serif text-[24px] font-extrabold leading-tight">
+        Your score is not saved yet.
+      </div>
+      <p class="sans text-[13px] text-paper-cream mt-1.5 mb-4">
+        Sign in to save this result, claim your leaderboard rank, and continue your weekly streak. We’ll automatically claim it after sign-in — no retake needed.
+      </p>
+      <div class="flex flex-col gap-2.5">
+        {#if data.googleEnabled}
+          <button
+            type="button"
+            onclick={signInWithGoogle}
+            disabled={pendingGoogle}
+            class="sans btn-press w-full bg-paper text-ink border-2 border-ink rounded-2xl py-3.5 text-[15px] font-bold shadow-brut flex items-center justify-center gap-3 disabled:opacity-50"
+          >
+            {pendingGoogle ? "Redirecting..." : "Continue with Google"}
+          </button>
+        {/if}
+        {#if googleError}
+          <p class="sans text-xs text-paper text-center">{googleError}</p>
+        {/if}
+        <a
+          href={`/signin/email?callbackURL=${encodeURIComponent(claimUrl)}`}
+          class="sans btn-press w-full bg-transparent text-paper border-2 border-paper rounded-2xl py-3.5 text-[15px] font-bold flex items-center justify-center gap-2 no-underline"
+        >
+          Email me a magic link
+        </a>
+      </div>
+    </div>
+  {/if}
 
   <a
     href="/api/calendar.ics"
@@ -174,9 +246,10 @@
   </a>
 
   <!-- Streak card -->
-  <div
-    class="bg-accent text-paper rounded-2xl p-4 mb-4 border-2 border-ink shadow-brut flex items-center gap-3.5 relative overflow-hidden"
-  >
+  {#if !data.preview}
+    <div
+      class="bg-accent text-paper rounded-2xl p-4 mb-4 border-2 border-ink shadow-brut flex items-center gap-3.5 relative overflow-hidden"
+    >
     <div class="grain absolute inset-0 opacity-20"></div>
     <span class="text-[36px] relative" style="animation: flame 1.6s ease-in-out infinite;"
       >🔥</span
@@ -190,7 +263,8 @@
         Best: <strong>{data.streak.best}</strong> · Tomorrow’s rep opens at 8am your local time.
       </div>
     </div>
-  </div>
+    </div>
+  {/if}
 
   <!-- Now go deeper -->
   {#if data.source}
@@ -264,19 +338,21 @@
 
   <!-- CTA row -->
   <div class="flex gap-2.5">
-    <a
-      href={`/quiz/${data.date}?mode=practice`}
-      class="sans btn-press flex-1 bg-paper-warm text-ink border-2 border-ink rounded-2xl py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline"
-    >
-      Replay as practice
-    </a>
+    {#if !data.preview}
+      <a
+        href={`/quiz/${data.date}?mode=practice`}
+        class="sans btn-press flex-1 bg-paper-warm text-ink border-2 border-ink rounded-2xl py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline"
+      >
+        Replay as practice
+      </a>
+    {/if}
     <a
       href="/leaderboard"
       class="sans btn-press flex-1 bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline"
     >
       <Trophy size={15} /> See Leaderboard
     </a>
-    {#if data.mode !== "practice"}
+    {#if data.mode !== "practice" && !data.preview}
       <button
         type="button"
         onclick={shareResult}

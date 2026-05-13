@@ -6,8 +6,11 @@ import { users } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 
 export const load: PageServerLoad = async ({ locals, platform }) => {
-  if (!locals.user) throw redirect(302, "/");
   if (!platform?.env) throw redirect(302, "/");
+  if (!locals.user) {
+    const date = localDate("UTC");
+    throw redirect(302, `/quiz/${date}`);
+  }
 
   const env = platform.env;
   const db = getDb(env.DB);

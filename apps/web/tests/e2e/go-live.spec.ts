@@ -18,8 +18,9 @@ test("public users can answer one landing question before sign-in", async ({ pag
   await page.getByRole("button", { name: /check my decision/i }).click();
 
   await expect(page.getByText(/training note|good decision/i)).toBeVisible();
-  await expect(page.getByText(/want the full challenge/i)).toBeVisible();
-  await expect(page.getByText(/sign in to answer all 5/i)).toBeVisible();
+  await expect(page.getByText(/ready for the full challenge/i)).toBeVisible();
+  await expect(page.getByText(/answer all 5 now/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /start the full challenge/i })).toBeVisible();
 });
 
 test("public users can read today's lesson before sign-in", async ({ page }) => {

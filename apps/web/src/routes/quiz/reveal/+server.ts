@@ -3,7 +3,8 @@ import { getDb } from "$lib/server/db/client";
 import { dailyQuestions } from "$lib/server/db/schema";
 import { and, eq } from "drizzle-orm";
 import { localDate } from "$lib/server/timezone/helpers";
-import { quizSessionName } from "$lib/server/quiz/session";
+import { anonymousUserId, getOrCreateAnonymousQuizId } from "$lib/server/quiz/anonymous";
+import { getQuizSessionStub } from "$lib/server/quiz/runtime-session";
 
 /**
  * Returns correct_key + explanation + takeaway + quote_excerpt for a single
@@ -11,19 +12,17 @@ import { quizSessionName } from "$lib/server/quiz/session";
  * position to the DO. The KV-cached questions strip these fields specifically
  * so they never leak to a client that hasn't committed an answer.
  */
-export const GET: RequestHandler = async ({ url, locals, platform }) => {
-  if (!locals.user) return new Response("unauth", { status: 401 });
+export const GET: RequestHandler = async ({ url, locals, platform, cookies }) => {
   if (!platform?.env) return new Response("platform unavailable", { status: 500 });
   const env = platform.env;
-  const date = url.searchParams.get("date") ?? localDate(locals.user.timezone ?? "UTC");
+  const date = url.searchParams.get("date") ?? localDate(locals.user?.timezone ?? "UTC");
   const sessionId = url.searchParams.get("sessionId") ?? "default";
   const position = parseInt(url.searchParams.get("position") ?? "0", 10);
   if (!position || !date) return new Response("bad request", { status: 400 });
 
   // Verify the user has submitted this position via the DO
-  const stub = env.QUIZ_SESSION.get(
-    env.QUIZ_SESSION.idFromName(quizSessionName({ userId: locals.user.id, date, sessionId })),
-  );
+  const quizUserId = locals.user?.id ?? anonymousUserId(getOrCreateAnonymousQuizId(cookies));
+  const stub = getQuizSessionStub(env, { userId: quizUserId, date, sessionId });
   const stateRes = await stub.fetch("https://do/state");
   const state = (await stateRes.json()) as
     | { uninitialized: true }
