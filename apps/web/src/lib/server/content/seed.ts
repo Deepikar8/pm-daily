@@ -3,6 +3,7 @@ import type { DB } from "../db/client";
 import { DailyContent } from "./types";
 import * as schema from "../db/schema";
 import * as kvKeys from "../kv/keys";
+import { normalizeContentSourceLinks } from "./source-links";
 
 // Minimal subset of the KV binding we need (Workers KV exposes more).
 type KV = {
@@ -14,7 +15,7 @@ export async function seedDay(args: {
   kv: KV;
   contentJson: unknown;
 }): Promise<{ date: string; questionIds: string[] }> {
-  const c = DailyContent.parse(args.contentJson);
+  const c = normalizeContentSourceLinks(DailyContent.parse(args.contentJson));
   const now = Date.now();
 
   await args.db.insert(schema.dailySessions).values({

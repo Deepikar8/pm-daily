@@ -32,6 +32,11 @@
   let sourceHref = $derived(
     data.content?.source?.source_url || data.content?.source?.search_url || ""
   );
+  let hasDistinctLennySearch = $derived(
+    !!data.content?.source?.source_url &&
+      !!data.content?.source?.search_url &&
+      data.content.source.search_url !== sourceHref
+  );
 </script>
 
 <svelte:head>
@@ -91,7 +96,7 @@
         </div>
         <div class="flex-1 min-w-0">
           <div class="sans text-[10px] font-bold tracking-[0.14em] uppercase text-accent mb-1">
-            Podcast recap
+            Based on Lenny’s
           </div>
           <div class="sans text-[10px] font-bold tracking-[0.16em] uppercase text-ink-mute mb-2 flex flex-wrap gap-2 items-center">
             <span>{c.source.type === "podcast" ? "Interview" : "Newsletter"}</span>
@@ -104,21 +109,26 @@
             {c.source.title}
           </h2>
           <p class="sans text-[13px] leading-[1.5] text-ink-soft mt-2">
-            Today’s challenge asks you to apply {c.source.byline}’s product judgment from this podcast to realistic PM decisions. Start from the original episode or newsletter, then use the takeaways below to make the decision.
+            Today’s challenge asks you to apply {c.source.byline}’s product judgment to realistic PM decisions. Start from the original episode or newsletter, then use the takeaways below to make the decision.
           </p>
         </div>
       </div>
       <div class="px-5 py-3 border-t border-paper-fill flex gap-2 flex-wrap" style="padding: 12px 20px;">
         <a href={sourceHref}
            class="sans inline-flex items-center gap-1.5 bg-ink text-paper rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline">
-          <Play size={12} fill="currentColor" /> Listen to podcast
+          <Play size={12} fill="currentColor" /> {c.source.type === "podcast" ? "Open episode" : "Read on Lenny’s"}
         </a>
-        <a href={c.source.search_url}
-           class="sans inline-flex items-center gap-1.5 bg-transparent text-ink border border-ink rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline">
-          Read newsletter
-        </a>
+        {#if hasDistinctLennySearch}
+          <a href={c.source.search_url}
+             class="sans inline-flex items-center gap-1.5 bg-transparent text-ink border border-ink rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline">
+            Search on Lenny’s
+          </a>
+        {/if}
       </div>
     </section>
+    <p class="sans text-center text-[11px] text-ink-mute leading-relaxed -mt-5 mb-8 px-2">
+      {brandCopy.sourceLine}
+    </p>
 
     <!-- Takeaways -->
     <div class="mt-9 mb-7">
@@ -149,7 +159,7 @@
       <MascotCoach size="sm" mood="think" label="This is where the reps count." />
       <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
         <div class="serif text-xl font-bold leading-tight text-ink">Apply the insight now</div>
-        <div class="sans text-[13px] text-ink-soft mt-0.5">Turn the operator’s lesson into your product decision and see where you land on the leaderboard.</div>
+        <div class="sans text-[13px] text-ink-soft mt-0.5">Turn the operator summary into your product decision and see where you land on the leaderboard.</div>
       </div>
       <a href="/quiz" onclick={() => track("today_start", { source: "today_bottom_cta" })} class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
         {brandCopy.takeRepCta} <ArrowRight size={16} />

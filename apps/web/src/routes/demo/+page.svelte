@@ -112,7 +112,7 @@
       </a>
       <a href="/today"
          class="sans btn-press bg-white text-ink border-2 border-ink rounded-2xl px-5 py-3.5 text-[15px] font-bold shadow-brut flex items-center justify-center no-underline">
-        Read today’s lesson
+        Read today’s operator summary
       </a>
     {:else}
       <button

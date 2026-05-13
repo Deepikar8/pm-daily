@@ -24,7 +24,7 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={`${data.player.displayName} scored ${data.result.totalCorrect}/5 in Product Gym`} />
-  <meta name="twitter:description" content="One daily product judgment challenge based on lessons from top operators." />
+  <meta name="twitter:description" content="One daily product judgment challenge based on top operator conversations." />
   <meta name="twitter:image" content={data.imageUrl} />
 </svelte:head>
 

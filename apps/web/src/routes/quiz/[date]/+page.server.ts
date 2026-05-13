@@ -9,6 +9,7 @@ import { compareIsoDate, isIsoDate } from "$lib/server/quiz/date";
 import { anonymousUserId, getOrCreateAnonymousQuizId } from "$lib/server/quiz/anonymous";
 import { getQuizSessionStub } from "$lib/server/quiz/runtime-session";
 import type { QuizState } from "$lib/durable-objects/quiz-session";
+import { normalizeSourceLinks } from "$lib/server/content/source-links";
 
 export const load: PageServerLoad = async ({ locals, platform, params, url, cookies }) => {
   if (!platform?.env) throw redirect(302, "/");
@@ -53,7 +54,10 @@ export const load: PageServerLoad = async ({ locals, platform, params, url, cook
   const cachedQ = await env.KV.get(kvKeys.todayQuestions(date));
   if (!cachedQ) return { date, missing: true as const, mode, sessionId };
 
-  const questions = JSON.parse(cachedQ);
+  const questions = (JSON.parse(cachedQ) as Array<any>).map((q) => ({
+    ...q,
+    citation: normalizeSourceLinks(q.citation),
+  }));
 
   const stub = getQuizSessionStub(env, { userId: quizUserId, date, sessionId });
   const initRes = await stub.fetch("https://do/init", {

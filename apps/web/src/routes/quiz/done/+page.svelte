@@ -250,7 +250,7 @@
         </div>
         <div class="flex-1 min-w-0">
           <div class="sans text-[10px] font-bold tracking-widest uppercase text-accent mb-0.5">
-            Now go deeper
+            Based on Lenny’s
           </div>
           <div class="serif text-[15px] font-bold leading-tight">{data.source.title}</div>
           <div class="sans text-xs text-ink-mute mt-0.5">with {data.source.byline}</div>
@@ -262,18 +262,21 @@
           class="sans inline-flex items-center gap-1.5 bg-ink text-paper rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline"
         >
           <Play size={12} fill="currentColor" />
-          {data.source.type === "podcast" ? "Listen" : "Read"}
+          {data.source.type === "podcast" ? "Open episode" : "Read on Lenny’s"}
         </a>
-        {#if data.source.type === "podcast"}
+        {#if data.source.source_url && data.source.search_url && data.source.search_url !== data.source.source_url}
           <a
             href={data.source.search_url}
             class="sans inline-flex items-center gap-1.5 bg-transparent text-ink border border-ink rounded-full px-3.5 py-1.5 text-[12px] font-semibold no-underline"
           >
-            <BookOpen size={12} /> Transcript
+            <BookOpen size={12} /> Search on Lenny’s
           </a>
         {/if}
       </div>
     </div>
+    <p class="sans text-center text-[11px] text-ink-mute leading-relaxed -mt-1 mb-4 px-2">
+      {brandCopy.sourceLine}
+    </p>
   {/if}
 
   <!-- Question recap with takeaways -->

@@ -2,6 +2,7 @@ import type { PageServerLoad } from "./$types";
 import { isGoogleAuthEnabled } from "$lib/server/auth/config";
 import * as kvKeys from "$lib/server/kv/keys";
 import { formatInTimeZone } from "date-fns-tz";
+import { normalizeSourceLinks } from "$lib/server/content/source-links";
 
 const fallbackPreviewQuestion = {
   position: 1,
@@ -53,7 +54,10 @@ export const load: PageServerLoad = async ({ platform }) => {
     platform.env.KV.get(kvKeys.todayQuestions(date)),
     platform.env.KV.get(kvKeys.todayDigest(date)),
   ]);
-  const todayContent = digest ? JSON.parse(digest) : fallbackTodayContent;
+  const parsedDigest = digest ? JSON.parse(digest) : null;
+  const todayContent = parsedDigest
+    ? { ...parsedDigest, source: normalizeSourceLinks(parsedDigest.source) }
+    : fallbackTodayContent;
   if (!cached) {
     return {
       previewQuestion: fallbackPreviewQuestion,

@@ -1,5 +1,6 @@
 import type { RequestHandler } from "./$types";
 import * as kvKeys from "$lib/server/kv/keys";
+import { normalizeSourceLinks } from "$lib/server/content/source-links";
 
 export const GET: RequestHandler = async ({ params, platform }) => {
   if (!platform?.env) return new Response("platform unavailable", { status: 500 });
@@ -13,6 +14,7 @@ export const GET: RequestHandler = async ({ params, platform }) => {
   if (!Array.isArray(qs) || qs.length === 0) {
     return new Response("not found", { status: 404 });
   }
-  const q = qs[Math.floor(Math.random() * qs.length)];
+  const q = qs[Math.floor(Math.random() * qs.length)] as any;
+  q.citation = normalizeSourceLinks(q.citation);
   return Response.json({ question: q });
 };

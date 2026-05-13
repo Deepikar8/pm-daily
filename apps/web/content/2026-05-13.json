@@ -15,7 +15,7 @@
     "byline": "Hamel Husain & Shreya Shankar",
     "type": "newsletter",
     "date": "2025-09-09",
-    "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+    "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve",
     "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals"
   },
   "questions": [
@@ -55,7 +55,7 @@
         "byline": "Hamel Husain & Shreya Shankar",
         "type": "newsletter",
         "date": "2025-09-09",
-        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve",
         "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
         "quote_excerpt": "fashionable metrics like “hallucination” or “toxicity.” This approach often leads to tracking scores that don’t correlate with the actual problems your users face with your product. You cannot know what to measure until you systematically find out how your product fails"
       }
@@ -96,7 +96,7 @@
         "byline": "Hamel Husain & Shreya Shankar",
         "type": "newsletter",
         "date": "2025-09-09",
-        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve",
         "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
         "quote_excerpt": "Appointing a single expert, sometimes called a “benevolent dictator,” provides a consistent and deeply informed signal, which eliminates annotation conflicts and prevents the paralysis that can come from having too many cooks in the kitchen."
       }
@@ -137,7 +137,7 @@
         "byline": "Hamel Husain & Shreya Shankar",
         "type": "newsletter",
         "date": "2025-09-09",
-        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve",
         "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
         "quote_excerpt": "**As a heuristic, the critique should be detailed enough** for a brand-new employee at your company to understand it. Or, if this is more helpful, **so that you can use it in a few-shot prompt for an LLM judge**.Being too terse is a common mistake."
       }
@@ -178,7 +178,7 @@
         "byline": "Hamel Husain & Shreya Shankar",
         "type": "newsletter",
         "date": "2025-09-09",
-        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve",
         "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
         "quote_excerpt": "For objective failures, use **code-based evaluators**. These are simple checks written as code, like assertions in a unit test. They are fast, cheap, and deterministic, making them perfect for verifying things like whether an output is valid JSON"
       }
@@ -219,7 +219,7 @@
         "byline": "Hamel Husain & Shreya Shankar",
         "type": "newsletter",
         "date": "2025-09-09",
-        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve-your-ai-product",
+        "source_url": "https://www.lennysnewsletter.com/p/building-eval-systems-that-improve",
         "search_url": "https://www.lennysnewsletter.com/?q=Hamel+Husain+Shreya+Shankar+evals",
         "quote_excerpt": "Having a suite of trusted evaluators is a major milestone, but it is not the end goal. An evaluator is a tool; a system of evaluation is a process. The final phase is to build a process that creates a flywheel, using your evals to drive continuous product improvement."
       }

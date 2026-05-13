@@ -126,15 +126,26 @@
     <p class="sans text-[12px] text-ink-soft leading-relaxed mt-3">
       Today’s quiz asks you to apply what {todayContent.source.byline} discussed to a realistic product decision.
     </p>
-    <a
-      href={todayContent.source.source_url ?? todayContent.source.search_url}
-      target="_blank"
-      rel="noreferrer"
-      class="sans inline-flex text-[12px] font-bold text-ink underline mt-3"
-    >
-      Listen to the source
-    </a>
+    <div class="flex flex-wrap gap-3 mt-3">
+      <a
+        href="/today"
+        class="sans inline-flex text-[12px] font-bold text-accent underline underline-offset-4"
+      >
+        Read today’s operator summary
+      </a>
+      <a
+        href={todayContent.source.source_url ?? todayContent.source.search_url}
+        target="_blank"
+        rel="noreferrer"
+        class="sans inline-flex text-[12px] font-bold text-ink underline underline-offset-4"
+      >
+        Open Lenny’s original source
+      </a>
+    </div>
   </div>
+  <p class="sans text-center text-[11px] text-ink-mute leading-relaxed -mt-2 mb-5 px-2">
+    {brandCopy.sourceLine}
+  </p>
 
   <div class="bg-white rounded-2xl border-2 border-ink shadow-brut-accent-lg overflow-hidden mb-6">
     <div class="px-5 py-3.5 bg-paper-warm border-b-2 border-ink flex items-center justify-between">
@@ -240,6 +251,10 @@
         <a href={`/quiz/${data.todayDate}`}
            class="sans btn-press w-full bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[15px] font-bold shadow-brut-accent-lg flex items-center justify-center gap-2 no-underline">
           Continue to decision 2 <ArrowRight size={16} />
+        </a>
+        <a href="/today"
+           class="sans btn-press w-full bg-white text-ink border-2 border-ink rounded-2xl py-3.5 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline">
+          Read the operator summary first
         </a>
       </div>
     </div>

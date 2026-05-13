@@ -33,5 +33,5 @@ export function resultShareHeadline(result: ShareResult) {
 export function resultShareText(result: ShareResult) {
   return `${resultShareHeadline(result)}
 
-${brandCopy.appName} is one daily product judgment challenge based on lessons from top operators.`;
+${brandCopy.appName} is one daily product judgment challenge based on top operator conversations.`;
 }

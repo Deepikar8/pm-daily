@@ -5,6 +5,7 @@ import { getDb } from "$lib/server/db/client";
 import { dailySessions, users } from "$lib/server/db/schema";
 import { desc, eq, lte } from "drizzle-orm";
 import { formatInTimeZone } from "date-fns-tz";
+import { normalizeSourceLinks } from "$lib/server/content/source-links";
 
 function todayInTZ(tz: string) {
   return formatInTimeZone(new Date(), tz, "yyyy-MM-dd");
@@ -83,7 +84,7 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
       headline: row.headline,
       digest_md: row.digestMd,
       takeaways: JSON.parse(row.takeawaysJson),
-      source: JSON.parse(row.sourceJson),
+      source: normalizeSourceLinks(JSON.parse(row.sourceJson)),
     });
     if (contentDate === date) {
       await env.KV.put(kvKeys.todayDigest(date), cached);
@@ -91,5 +92,7 @@ export const load: PageServerLoad = async ({ locals, platform }) => {
     return { date: contentDate, missing: false as const, content: JSON.parse(cached) };
   }
 
-  return { date, missing: false as const, content: JSON.parse(cached) };
+  const content = JSON.parse(cached);
+  content.source = normalizeSourceLinks(content.source);
+  return { date, missing: false as const, content };
 };

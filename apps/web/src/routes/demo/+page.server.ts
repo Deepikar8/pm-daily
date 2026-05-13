@@ -1,6 +1,7 @@
 import type { PageServerLoad } from "./$types";
 import * as kvKeys from "$lib/server/kv/keys";
 import { formatInTimeZone } from "date-fns-tz";
+import { normalizeSourceLinks } from "$lib/server/content/source-links";
 
 const fallbackQuestion = {
   position: 1,
@@ -26,5 +27,9 @@ export const load: PageServerLoad = async ({ platform }) => {
   const cached = await platform.env.KV.get(kvKeys.todayQuestions(date));
   const questions = cached ? JSON.parse(cached) : [];
 
-  return { question: questions[0] ?? fallbackQuestion, isFallback: questions.length === 0 };
+  const question = questions[0]
+    ? { ...questions[0], citation: normalizeSourceLinks(questions[0].citation) }
+    : fallbackQuestion;
+
+  return { question, isFallback: questions.length === 0 };
 };

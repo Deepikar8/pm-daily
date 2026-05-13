@@ -12,6 +12,7 @@ import { anonymousUserId, getPendingQuizClaim } from "$lib/server/quiz/anonymous
 import { scoreQuizState } from "$lib/server/quiz/attempt";
 import { isGoogleAuthEnabled } from "$lib/server/auth/config";
 import { getQuizSessionStub } from "$lib/server/quiz/runtime-session";
+import { normalizeSourceLinks } from "$lib/server/content/source-links";
 
 export const load: PageServerLoad = async ({ locals, platform, params, url, cookies }) => {
   if (!platform?.env) throw redirect(302, "/");
@@ -39,7 +40,7 @@ export const load: PageServerLoad = async ({ locals, platform, params, url, cook
     .from(schema.dailySessions)
     .where(eq(schema.dailySessions.date, date))
     .get();
-  const source = session ? JSON.parse(session.sourceJson) : null;
+  const source = session ? normalizeSourceLinks(JSON.parse(session.sourceJson)) : null;
 
   const stats = locals.user
     ? await db.select().from(schema.userStats).where(eq(schema.userStats.userId, locals.user.id)).get()
