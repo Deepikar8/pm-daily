@@ -136,8 +136,6 @@
         </div>
         {#if s.label === "Daily reminder"}
           <a href="/api/calendar.ics" download class="sans bg-transparent border-[1.5px] border-ink rounded-lg px-3 py-1.5 text-xs font-bold text-ink no-underline">{s.action}</a>
-        {:else}
-          <span class="sans text-[11px] text-ink-mute">Editable after launch</span>
         {/if}
       </div>
     {/each}
