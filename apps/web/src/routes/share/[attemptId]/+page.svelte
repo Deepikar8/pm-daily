@@ -1,30 +1,21 @@
 <script lang="ts">
-  import { Check, Dumbbell, Share2, Trophy, X as XIcon } from "lucide-svelte";
+  import { Check, Dumbbell, Trophy, X as XIcon } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
-  import { resultShareText } from "$lib/brand/share";
-  import { track } from "$lib/analytics/client";
+  import ShareChallengeActions from "$lib/components/ShareChallengeActions.svelte";
 
   let { data } = $props();
-  let copied = $state(false);
 
   function fmtTime(s: number) {
     return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
-  }
-
-  async function copyShare() {
-    const text = resultShareText({
-      correct: data.result.totalCorrect,
-      date: data.date,
-    });
-    await navigator.clipboard.writeText(`${text} ${window.location.href}`);
-    copied = true;
-    track("result_share", { source: "public_share_page", method: "clipboard" });
   }
 </script>
 
 <svelte:head>
   <title>{data.player.displayName} scored {data.result.totalCorrect}/5 — {brandCopy.appName}</title>
   <meta name="description" content={`${data.player.displayName} scored ${data.result.totalCorrect}/5 in Product Gym.`} />
+  <meta property="og:title" content={`${data.player.displayName} scored ${data.result.totalCorrect}/5 in Product Gym`} />
+  <meta property="og:description" content={`Think you can beat ${data.player.displayName}'s score? Try today's Product Gym challenge.`} />
+  <meta property="og:type" content="website" />
 </svelte:head>
 
 <main class="max-w-2xl mx-auto px-6 py-9 sm:py-12">
@@ -97,19 +88,18 @@
     </ol>
   </section>
 
-  <div class="flex flex-col sm:flex-row gap-3">
+  <div class="flex flex-col gap-3">
     <a
       href="/"
       class="sans btn-press flex-1 bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline"
     >
       Beat this score
     </a>
-    <button
-      type="button"
-      onclick={copyShare}
-      class="sans btn-press bg-white text-ink border-2 border-ink rounded-2xl px-5 py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2"
-    >
-      <Share2 size={15} /> {copied ? "Copied" : "Share"}
-    </button>
+    <ShareChallengeActions
+      correct={data.result.totalCorrect}
+      date={data.date}
+      url={data.url}
+      source="public_share_page"
+    />
   </div>
 </main>

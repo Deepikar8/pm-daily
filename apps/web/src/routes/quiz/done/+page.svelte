@@ -1,7 +1,6 @@
 <script lang="ts">
   import {
     Trophy,
-    Share2,
     Headphones,
     Play,
     BookOpen,
@@ -10,42 +9,15 @@
     Calendar,
   } from "lucide-svelte";
   import { brandCopy } from "$lib/brand/product-gym";
-  import { resultShareText } from "$lib/brand/share";
-  import { track } from "$lib/analytics/client";
   import MascotCoach from "$lib/components/MascotCoach.svelte";
+  import ShareChallengeActions from "$lib/components/ShareChallengeActions.svelte";
   let { data }: { data: any } = $props();
-  let shareState = $state<"idle" | "copied" | "error">("idle");
   let pendingGoogle = $state(false);
   let googleError = $state<string | null>(null);
   let claimUrl = $derived(data.claimUrl ?? `/quiz/claim?date=${encodeURIComponent(data.date)}`);
 
   function fmtTime(s: number) {
     return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
-  }
-  async function shareResult() {
-    if (data.mode === "practice" || data.preview) return;
-    const text = resultShareText({
-      correct: data.attempt.totalCorrect,
-      date: data.date,
-      rank: data.rank,
-    });
-
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: `${brandCopy.appName} result`,
-          text,
-          url: data.shareUrl,
-        });
-        track("result_share", { source: "quiz_done", method: "native" });
-        return;
-      }
-      await navigator.clipboard.writeText(`${text} ${data.shareUrl}`);
-      shareState = "copied";
-      track("result_share", { source: "quiz_done", method: "clipboard" });
-    } catch {
-      shareState = "error";
-    }
   }
   async function signInWithGoogle() {
     pendingGoogle = true;
@@ -352,20 +324,23 @@
     >
       <Trophy size={15} /> See Leaderboard
     </a>
-    {#if data.mode !== "practice" && !data.preview}
-      <button
-        type="button"
-        onclick={shareResult}
-        class="sans btn-press bg-white text-ink border-2 border-ink rounded-2xl px-5 py-4 text-[14px] font-bold shadow-brut flex items-center gap-2"
-      >
-        <Share2 size={15} /> {shareState === "copied" ? "Copied" : "Challenge a friend"}
-      </button>
-    {/if}
   </div>
-  {#if shareState === "error"}
-    <p class="sans text-xs text-wrong text-center mt-3">
-      Couldn’t open sharing. Copy this page URL instead.
-    </p>
+  {#if data.mode !== "practice" && !data.preview}
+    <section class="bg-paper-cream border-2 border-ink rounded-2xl p-4 mt-3">
+      <div class="sans text-[11px] font-bold tracking-widest uppercase text-accent mb-1">
+        Challenge a friend
+      </div>
+      <p class="serif text-sm font-bold text-ink leading-tight mb-3">
+        Share your score and ask someone to beat it.
+      </p>
+      <ShareChallengeActions
+        correct={data.attempt.totalCorrect}
+        date={data.date}
+        rank={data.rank}
+        url={data.shareUrl}
+        source="quiz_done"
+      />
+    </section>
   {/if}
 </main>
 

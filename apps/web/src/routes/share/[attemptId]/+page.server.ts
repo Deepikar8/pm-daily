@@ -42,6 +42,7 @@ export const load: PageServerLoad = async ({ params, platform }) => {
 
   return {
     date: attempt.date,
+    url: `/share/${attempt.id}`,
     player: {
       displayName: user && !user.deletedAt ? user.displayName : "Product Gym athlete",
       role: user && !user.deletedAt ? user.role : null,
