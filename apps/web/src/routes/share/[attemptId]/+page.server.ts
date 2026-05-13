@@ -4,7 +4,7 @@ import { getDb } from "$lib/server/db/client";
 import * as schema from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 
-export const load: PageServerLoad = async ({ params, platform }) => {
+export const load: PageServerLoad = async ({ params, platform, url }) => {
   if (!platform?.env) throw error(500, "platform unavailable");
 
   const db = getDb(platform.env.DB);
@@ -43,6 +43,8 @@ export const load: PageServerLoad = async ({ params, platform }) => {
   return {
     date: attempt.date,
     url: `/share/${attempt.id}`,
+    absoluteUrl: `${url.origin}/share/${attempt.id}`,
+    imageUrl: `${url.origin}/share/${attempt.id}/card.svg`,
     player: {
       displayName: user && !user.deletedAt ? user.displayName : "Product Gym athlete",
       role: user && !user.deletedAt ? user.role : null,

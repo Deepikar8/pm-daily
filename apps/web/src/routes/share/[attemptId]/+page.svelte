@@ -16,6 +16,15 @@
   <meta property="og:title" content={`${data.player.displayName} scored ${data.result.totalCorrect}/5 in Product Gym`} />
   <meta property="og:description" content={`Think you can beat ${data.player.displayName}'s score? Try today's Product Gym challenge.`} />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content={data.absoluteUrl} />
+  <meta property="og:image" content={data.imageUrl} />
+  <meta property="og:image:type" content="image/svg+xml" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={`${data.player.displayName} scored ${data.result.totalCorrect}/5 in Product Gym`} />
+  <meta name="twitter:description" content="One daily product judgment challenge based on lessons from top operators." />
+  <meta name="twitter:image" content={data.imageUrl} />
 </svelte:head>
 
 <main class="max-w-2xl mx-auto px-6 py-9 sm:py-12">
@@ -98,7 +107,7 @@
     <ShareChallengeActions
       correct={data.result.totalCorrect}
       date={data.date}
-      url={data.url}
+      url={data.absoluteUrl}
       source="public_share_page"
     />
   </div>
