@@ -1,14 +1,14 @@
 export const brandCopy = {
   appName: "Product Gym",
-  tagline: "One daily challenge to sharpen your product instincts.",
-  landingSupport: "Turn operator interviews into product decisions.",
+  tagline: "Practice applying the best ideas from Lenny’s Podcast and Newsletter.",
+  landingSupport: "Get the 3-minute operator summary, then make five product decisions so the ideas stick.",
   sourceLine: "Product Gym is an independent training tool based on Lenny’s Podcast and Newsletter.",
-  todayRep: "Today’s Rep",
-  takeRepCta: "Start today’s challenge",
-  demoCta: "Try today’s sample",
+  todayRep: "Today’s Practice",
+  takeRepCta: "Practice today’s insight",
+  demoCta: "Try one application rep",
   leaderboardName: "Arena",
-  profileName: "Training Log",
-  streakName: "Training Streak",
+  profileName: "Practice Log",
+  streakName: "Practice Streak",
 } as const;
 
 export const navLabels = {

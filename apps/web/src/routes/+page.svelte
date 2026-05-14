@@ -100,7 +100,7 @@
     <div class="flex items-center justify-center gap-3 mb-4">
       <MascotCoach size="sm" mood="wave" />
       <p class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-accent">
-        Daily product training
+        Applied learning for product operators
       </p>
     </div>
     <h1 class="serif text-[52px] font-extrabold leading-[0.96] tracking-tight mt-3 mb-3">
@@ -119,7 +119,7 @@
 
   <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-4 mb-5 shadow-brut">
     <p class="sans text-[11px] font-bold tracking-[0.12em] uppercase text-accent mb-2">
-      Operator of the day
+      Today’s source
     </p>
     <div class="flex items-start justify-between gap-4">
       <div>
@@ -138,14 +138,14 @@
       </div>
     </div>
     <p class="sans text-[12px] text-ink-soft leading-relaxed mt-3">
-      Today’s quiz asks you to apply what {todayContent.source.byline} discussed to a realistic product decision.
+      Start with the core idea from {todayContent.source.byline}, then apply it to realistic product decisions.
     </p>
     <div class="flex flex-wrap gap-3 mt-3">
       <a
         href="/today"
         class="sans inline-flex text-[12px] font-bold text-accent underline underline-offset-4"
       >
-        Read today’s operator summary
+        Read the 3-minute summary
       </a>
       <a
         href={todayContent.source.source_url ?? todayContent.source.search_url}
@@ -164,7 +164,7 @@
   <div class="bg-white rounded-2xl border-2 border-ink shadow-brut-accent-lg overflow-hidden mb-6">
     <div class="px-5 py-3.5 bg-paper-warm border-b-2 border-ink flex items-center justify-between">
       <span class="sans text-[11px] font-bold tracking-[0.12em] uppercase text-ink-soft">
-        {data.isFallback ? "Sample decision · what to expect" : "Today’s first decision"}
+        {data.isFallback ? "Sample application rep · what to expect" : "Try one application rep"}
       </span>
       <span class="sans text-[11px] text-ink-mute mono">1 of 5</span>
     </div>
@@ -219,7 +219,7 @@
           disabled={!selectedKey}
           class="sans btn-press w-full mt-4 bg-accent text-paper border-2 border-ink rounded-2xl py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center justify-center gap-2 disabled:opacity-45 disabled:cursor-not-allowed"
         >
-          Check my decision <ArrowRight size={16} />
+          Check my application <ArrowRight size={16} />
         </button>
         {#if selectedOption}
           <p class="sans text-xs font-bold text-accent text-center mt-2">
@@ -236,7 +236,7 @@
             />
           </div>
           <p class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-accent mb-2">
-            {revealing ? "Checking decision" : isCorrect ? "Good decision" : "Training note"}
+            {revealing ? "Checking application" : isCorrect ? "Strong application" : "Practice note"}
           </p>
           {#if revealing}
             <p class="serif text-[17px] leading-[1.45] text-ink">Loading your coaching note...</p>
@@ -257,18 +257,18 @@
 
   {#if submitted}
     <div class="bg-paper-cream border-2 border-ink rounded-2xl px-5 py-5 mb-5">
-      <div class="serif text-xl font-bold leading-tight text-ink">Ready for the full challenge?</div>
+      <div class="serif text-xl font-bold leading-tight text-ink">Keep practicing this idea</div>
       <p class="sans text-[13px] text-ink-soft mt-1.5 mb-4">
-        Answer all 5 now. You can save your score and join the leaderboard after you see your result.
+        Finish four more application reps, see what stuck, then sign in only if you want to save progress and compete.
       </p>
       <div class="flex flex-col gap-3">
         <a href={`/quiz/${data.todayDate}`}
            class="sans btn-press w-full bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[15px] font-bold shadow-brut-accent-lg flex items-center justify-center gap-2 no-underline">
-          Continue to decision 2 <ArrowRight size={16} />
+          Continue to rep 2 <ArrowRight size={16} />
         </a>
         <a href="/today"
            class="sans btn-press w-full bg-white text-ink border-2 border-ink rounded-2xl py-3.5 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline">
-          Read the operator summary first
+          Read the 3-minute summary first
         </a>
       </div>
     </div>
@@ -277,7 +277,7 @@
   <div class="flex flex-col gap-3 mb-5">
     {#if !submitted}
       <p class="sans text-center text-[12px] text-ink-mute leading-relaxed">
-        Try today’s challenge. Answer all 5, see your score, then sign in to save progress for the week and compete.
+        Try one rep now. Finish all five to see what stuck; sign in only to save progress and compete.
       </p>
     {/if}
     <a href="/api/calendar.ics"

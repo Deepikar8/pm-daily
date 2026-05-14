@@ -61,12 +61,15 @@
       ? "You absorbed today’s playbook."
       : "Every miss is a thing you now know.",
   );
+  let learningTakeaway = $derived(
+    (data.questions.find((q: { correct: boolean }) => !q.correct) ?? data.questions[0])?.pmTakeaway ?? "",
+  );
 </script>
 
 <svelte:head><title>Done — {brandCopy.appName}</title></svelte:head>
 
 <main class="max-w-2xl mx-auto px-6 py-10">
-  <!-- Score headline -->
+  <!-- Learning headline -->
   <div class="text-center mb-6">
     <div class="flex justify-center mb-3">
       <MascotCoach
@@ -81,9 +84,23 @@
       {data.date} · {data.preview ? "Preview result" : "Done"}
     </p>
     <h1 class="serif text-5xl font-extrabold leading-[1] tracking-tight mb-2">
-      {scoreHeadline}
+      What stuck today?
     </h1>
-    <p class="sans text-lg font-medium text-ink-soft m-0">{scoreSub}</p>
+    <p class="sans text-lg font-medium text-ink-soft m-0">
+      You applied {data.source?.byline ?? "today’s operator insight"} through five product decisions.
+    </p>
+  </div>
+
+  <div class="bg-white rounded-2xl border-2 border-ink p-5 mb-4 shadow-brut-deep">
+    <div class="sans text-[11px] font-bold tracking-widest uppercase text-accent mb-2">
+      Remember this
+    </div>
+    <p class="serif text-[22px] italic font-bold leading-snug text-ink mb-3">
+      {learningTakeaway}
+    </p>
+    <p class="sans text-[13px] text-ink-soft m-0">
+      {scoreSub} The score below is feedback; the useful part is the product judgment you can reuse.
+    </p>
   </div>
 
   <!-- 3-column score panel -->
@@ -110,7 +127,7 @@
       </div>
       <div>
         <div class="sans text-[11px] font-bold tracking-widest uppercase text-gold mb-1.5">
-          {data.preview ? "Projected" : "Rank"}
+          {data.preview ? "Preview" : "Rank"}
         </div>
         <div class="serif text-[40px] font-extrabold leading-none">
           {data.rank ? `#${data.rank}` : "—"}
@@ -150,7 +167,7 @@
 
   <div class="bg-white rounded-2xl border-2 border-ink p-4 mb-4">
     <div class="sans text-[11px] font-bold tracking-widest uppercase text-ink-mute mb-3">
-      How your score was calculated
+      Score details
     </div>
     <div class="grid grid-cols-2 gap-2 sans text-sm">
       <div>Correct</div>
@@ -282,7 +299,7 @@
   <!-- Question recap with takeaways -->
   <div class="bg-white rounded-2xl border-2 border-ink p-4 mb-4">
     <div class="sans text-[11px] font-bold tracking-widest uppercase text-ink-mute mb-3">
-      Five takeaways from today’s rep
+      What stuck from today’s reps
     </div>
     <ol class="list-none p-0 m-0 flex flex-col gap-2">
       {#each data.questions as q}
@@ -331,10 +348,10 @@
   {#if data.mode !== "practice" && !data.preview}
     <section class="bg-paper-cream border-2 border-ink rounded-2xl p-4 mt-3">
       <div class="sans text-[11px] font-bold tracking-widest uppercase text-accent mb-1">
-        Challenge a friend
+        Share the insight
       </div>
       <p class="serif text-sm font-bold text-ink leading-tight mb-3">
-        Share your score and ask someone to beat it.
+        Send today’s applied practice to someone who would benefit from the idea.
       </p>
       <ShareChallengeActions
         correct={data.attempt.totalCorrect}

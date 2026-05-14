@@ -26,12 +26,12 @@ export function formatShareDate(date: string) {
 
 export function resultShareHeadline(result: ShareResult) {
   const total = result.total ?? 5;
-  const rankText = result.rank ? ` and ranked #${result.rank}` : "";
-  return `I scored ${result.correct}/${total} in ${brandCopy.appName} on ${formatShareDate(result.date)}${rankText}. Think you can beat me?`;
+  const rankText = result.rank ? ` and preview rank #${result.rank}` : "";
+  return `I practiced today’s ${brandCopy.appName} rep on ${formatShareDate(result.date)} and scored ${result.correct}/${total}.${rankText}`;
 }
 
 export function resultShareText(result: ShareResult) {
   return `${resultShareHeadline(result)}
 
-${brandCopy.appName} is one daily product judgment challenge based on top operator conversations.`;
+${brandCopy.appName} turns long-form operator ideas from Lenny’s Podcast and Newsletter into applied product decisions so they stick.`;
 }

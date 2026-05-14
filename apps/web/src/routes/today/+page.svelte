@@ -62,7 +62,7 @@
     <!-- Operator-of-the-day pill -->
     <div class="sans inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-accent bg-paper-cream border-2 border-accent rounded-full px-3.5 py-1.5 mb-4">
       <Sparkles size={12} />
-      Operator of the day &nbsp;·&nbsp; {formattedDate}
+      Today’s operator summary &nbsp;·&nbsp; {formattedDate}
     </div>
 
     <!-- Headline + italic angle (single line until v1.5 adds an angle field) -->
@@ -72,15 +72,15 @@
 
     <a href="/quiz"
        class="sans block text-center text-[12px] font-semibold text-accent underline underline-offset-4 my-5 sm:hidden">
-      Skip to today’s challenge →
+      Skip to today’s practice →
     </a>
 
     <!-- CTA strip -->
     <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap mb-6">
       <MascotCoach size="sm" mood="coach" label="Warm up your judgment. No chalk required." />
       <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
-        <div class="serif text-xl font-bold leading-tight text-ink">Ready to apply today’s operator insight?</div>
-        <div class="sans text-[13px] text-ink-soft mt-0.5">Five decisions based on what {c.source.byline} discussed.</div>
+        <div class="serif text-xl font-bold leading-tight text-ink">Ready to apply this idea?</div>
+        <div class="sans text-[13px] text-ink-soft mt-0.5">Five application reps based on what {c.source.byline} discussed.</div>
       </div>
       <a href="/quiz" onclick={() => track("today_start", { source: "today_top_cta" })} class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
         {brandCopy.takeRepCta} <ArrowRight size={16} />
@@ -109,7 +109,7 @@
             {c.source.title}
           </h2>
           <p class="sans text-[13px] leading-[1.5] text-ink-soft mt-2">
-            Today’s challenge asks you to apply {c.source.byline}’s product judgment to realistic PM decisions. Start from the original episode or newsletter, then use the takeaways below to make the decision.
+            Today’s practice helps you turn {c.source.byline}’s product judgment into realistic PM decisions. Start from the original episode or newsletter, then use the ideas below in the reps.
           </p>
         </div>
       </div>
@@ -133,7 +133,7 @@
     <!-- Takeaways -->
     <div class="mt-9 mb-7">
       <p class="sans text-[11px] font-bold tracking-[0.14em] uppercase text-accent mb-3.5">
-        Takeaways
+        Key ideas to remember
       </p>
       <ol class="list-none p-0 m-0 flex flex-col gap-3.5">
         {#each c.takeaways as takeaway, i}
@@ -147,7 +147,7 @@
 
     <details class="bg-paper-cream border-2 border-ink rounded-2xl px-5 py-4 mb-6">
       <summary class="sans cursor-pointer text-[12px] font-bold tracking-[0.12em] uppercase text-accent">
-        Quick summary
+        3-minute summary
       </summary>
       <article class="serif text-[16px] leading-[1.58] text-ink mt-4 prose-pmd">
         {@html marked(c.digest_md ?? "")}
@@ -158,8 +158,8 @@
     <div class="bg-paper-warm border-2 border-ink rounded-2xl px-5 py-5 flex items-center justify-between gap-3.5 flex-wrap">
       <MascotCoach size="sm" mood="think" label="This is where the reps count." />
       <div class="flex-1 min-w-0" style="flex: 1 1 220px;">
-        <div class="serif text-xl font-bold leading-tight text-ink">Apply the insight now</div>
-        <div class="sans text-[13px] text-ink-soft mt-0.5">Turn the operator summary into your product decision and see where you land on the leaderboard.</div>
+        <div class="serif text-xl font-bold leading-tight text-ink">Practice the insight now</div>
+        <div class="sans text-[13px] text-ink-soft mt-0.5">Turn the operator summary into five product decisions, then save your result if you want to compete.</div>
       </div>
       <a href="/quiz" onclick={() => track("today_start", { source: "today_bottom_cta" })} class="sans btn-press bg-accent text-paper border-2 border-ink rounded-2xl px-5.5 py-3.5 text-[15px] font-bold shadow-brut-lg flex items-center gap-2 flex-shrink-0 no-underline" style="padding: 14px 22px;">
         {brandCopy.takeRepCta} <ArrowRight size={16} />

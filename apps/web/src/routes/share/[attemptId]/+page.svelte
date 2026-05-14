@@ -11,10 +11,10 @@
 </script>
 
 <svelte:head>
-  <title>{data.player.displayName} scored {data.result.totalCorrect}/5 — {brandCopy.appName}</title>
-  <meta name="description" content={`${data.player.displayName} scored ${data.result.totalCorrect}/5 in Product Gym.`} />
-  <meta property="og:title" content={`${data.player.displayName} scored ${data.result.totalCorrect}/5 in Product Gym`} />
-  <meta property="og:description" content={`Think you can beat ${data.player.displayName}'s score? Try today's Product Gym challenge.`} />
+  <title>{data.player.displayName} practiced today’s insight — {brandCopy.appName}</title>
+  <meta name="description" content={`${data.player.displayName} practiced a Product Gym rep based on Lenny’s Podcast and Newsletter.`} />
+  <meta property="og:title" content={`${data.player.displayName} practiced today’s Product Gym rep`} />
+  <meta property="og:description" content="A daily application rep that turns long-form operator ideas into product judgment." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={data.absoluteUrl} />
   <meta property="og:image" content={data.imageUrl} />
@@ -23,8 +23,8 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={`${data.player.displayName} scored ${data.result.totalCorrect}/5 in Product Gym`} />
-  <meta name="twitter:description" content="One daily product judgment challenge based on top operator conversations." />
+  <meta name="twitter:title" content={`${data.player.displayName} practiced today’s Product Gym rep`} />
+  <meta name="twitter:description" content="A daily application rep that turns long-form operator ideas into product judgment." />
   <meta name="twitter:image" content={data.imageUrl} />
 </svelte:head>
 
@@ -39,7 +39,7 @@
       <div class="flex items-start justify-between gap-4 mb-5">
         <div class="min-w-0">
           <h1 class="serif text-[34px] sm:text-[44px] font-extrabold leading-[1.03] tracking-tight mb-2">
-            {data.player.displayName} hit {data.result.totalCorrect}/5.
+            {data.player.displayName} practiced today’s insight.
           </h1>
           <p class="serif italic text-lg text-ink-soft">
             {data.session.headline}
@@ -69,7 +69,7 @@
 
   <section class="bg-white rounded-2xl border-2 border-ink p-4 mb-5">
     <div class="sans text-[11px] font-bold tracking-widest uppercase text-ink-mute mb-3">
-      Takeaways
+      What this rep helps you remember
     </div>
     <ol class="list-none p-0 m-0 flex flex-col gap-2">
       {#each data.questions as q}
@@ -103,7 +103,7 @@
       href="/"
       class="sans btn-press flex-1 bg-accent text-paper border-2 border-ink rounded-2xl py-4 text-[14px] font-bold shadow-brut flex items-center justify-center gap-2 no-underline"
     >
-      Beat this score
+      Practice this insight
     </a>
     <ShareChallengeActions
       correct={data.result.totalCorrect}
