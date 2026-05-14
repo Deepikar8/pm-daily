@@ -3,6 +3,7 @@
   import { brandCopy } from "$lib/brand/product-gym";
   import MascotCoach from "$lib/components/MascotCoach.svelte";
   import { track } from "$lib/analytics/client";
+  import { revealLandingDecision } from "$lib/quiz/landing-reveal";
   let { data } = $props();
   const preview = $derived(data.previewQuestion);
   const todayContent = $derived(data.todayContent);
@@ -41,32 +42,19 @@
     submitted = true;
     revealError = null;
 
-    if (preview.correct_key) {
-      revealData = {
-        correct_key: preview.correct_key,
-        explanation_md: preview.explanation_md,
-        pm_takeaway: preview.pm_takeaway,
-      };
-      track("landing_question_submit", { selectedKey, correct: selectedKey === preview.correct_key });
-      return;
-    }
-
     revealing = true;
     try {
-      const res = await fetch("/api/landing/reveal", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          date: data.todayDate,
-          position: preview.position ?? 1,
-          selectedKey,
-        }),
+      const result = await revealLandingDecision({
+        date: data.todayDate,
+        preview,
+        selectedKey,
+        fetcher: fetch,
       });
-      if (!res.ok) throw new Error("reveal failed");
-      revealData = await res.json();
+      revealData = result.reveal;
       track("landing_question_submit", {
         selectedKey,
         correct: selectedKey === revealData?.correct_key,
+        persisted: result.persisted,
       });
     } catch {
       revealError = "Couldn't load the coaching note. You can still continue to the full challenge.";
