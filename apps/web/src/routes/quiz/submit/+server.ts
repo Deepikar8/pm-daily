@@ -20,6 +20,10 @@ export const POST: RequestHandler = async ({ request, locals, platform, cookies 
   const date = body.date ?? localDate(locals.user?.timezone ?? "UTC");
   const quizUserId = locals.user?.id ?? anonymousUserId(getOrCreateAnonymousQuizId(cookies));
   const stub = getQuizSessionStub(env, { userId: quizUserId, date, sessionId: body.sessionId });
+  await stub.fetch("https://do/init", {
+    method: "POST",
+    body: JSON.stringify({ userId: quizUserId, date }),
+  });
   const res = await stub.fetch("https://do/answer", {
     method: "POST",
     body: JSON.stringify({ position: body.position, selectedKey: body.selectedKey }),

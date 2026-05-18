@@ -33,6 +33,7 @@
   let revealed = $state(false);
   let revealData = $state<Reveal | null>(null);
   let pending = $state(false);
+  let submitError = $state<string | null>(null);
   let elapsed = $state(0);
   let startedAt = $state<number>(data.state?.startedAt ?? Date.now());
   let answersLog = $state<Array<{ position: number; correct: boolean }>>(data.answersLog ?? []);
@@ -52,6 +53,7 @@
   async function submitAnswer() {
     if (!selected || pending) return;
     pending = true;
+    submitError = null;
     const q = questions[currentIndex];
     try {
       const res = await fetch("/quiz/submit", {
@@ -64,18 +66,19 @@
           sessionId: data.sessionId,
         }),
       });
-      if (!res.ok) throw new Error("submit failed");
+      if (!res.ok) throw new Error(await res.text() || "submit failed");
       // Reveal: ask the server for the correct key + explanation for THIS question
       const rev = await fetch(
         `/quiz/reveal?date=${encodeURIComponent(data.date)}&position=${q.position}&sessionId=${encodeURIComponent(data.sessionId ?? "default")}`,
       );
-      if (!rev.ok) throw new Error("reveal failed");
+      if (!rev.ok) throw new Error(await rev.text() || "reveal failed");
       const r = (await rev.json()) as Reveal;
       revealData = r;
       revealed = true;
       answersLog.push({ position: q.position, correct: r.correct_key === selected });
     } catch (e) {
       console.error(e);
+      submitError = "We could not save that decision. Please try again.";
       pending = false;
       return;
     }
@@ -85,6 +88,7 @@
   async function next() {
     revealed = false;
     revealData = null;
+    submitError = null;
     selected = null;
     if (currentIndex < questions.length - 1) {
       currentIndex += 1;
@@ -226,6 +230,11 @@
     </div>
 
     {#if !revealed}
+      {#if submitError}
+        <p class="sans text-sm font-bold text-wrong text-center mb-3">
+          {submitError}
+        </p>
+      {/if}
       <button
         onclick={submitAnswer}
         disabled={!selected || pending}

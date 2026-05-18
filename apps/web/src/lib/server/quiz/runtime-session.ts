@@ -34,7 +34,7 @@ function localQuizSession(name: string) {
         if (!state || state.submitted) return new Response("invalid state", { status: 400 });
         const body = (await request.json()) as { position: number; selectedKey: string };
         if (state.answers.find((answer) => answer.position === body.position)) {
-          return new Response("already answered", { status: 400 });
+          return Response.json(state);
         }
         state.answers.push({ ...body, answeredAt: Date.now() });
         state.currentIndex = Math.min(state.currentIndex + 1, 5);
@@ -69,4 +69,3 @@ export function getQuizSessionStub(
 
   return env.QUIZ_SESSION.get(env.QUIZ_SESSION.idFromName(name));
 }
-

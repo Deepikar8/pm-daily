@@ -67,7 +67,7 @@ export class QuizSession {
       if (!s || s.submitted) return new Response("invalid state", { status: 400 });
       const body = (await req.json()) as { position: number; selectedKey: string };
       if (s.answers.find((a) => a.position === body.position)) {
-        return new Response("already answered", { status: 400 });
+        return Response.json(s);
       }
       s.answers.push({ ...body, answeredAt: Date.now() });
       s.currentIndex = Math.min(s.currentIndex + 1, 5);
