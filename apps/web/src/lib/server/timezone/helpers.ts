@@ -1,11 +1,25 @@
 import { formatInTimeZone } from "date-fns-tz";
 
+export function normalizeTimezone(timezone: string | null | undefined): string {
+  const candidate = timezone?.trim() || "UTC";
+  try {
+    Intl.DateTimeFormat("en-US", { timeZone: candidate }).format(new Date());
+    return candidate;
+  } catch {
+    return "UTC";
+  }
+}
+
+export function isValidTimezone(timezone: string | null | undefined): boolean {
+  return normalizeTimezone(timezone) === timezone?.trim();
+}
+
 export function localDate(timezone: string, instant: Date = new Date()): string {
-  return formatInTimeZone(instant, timezone, "yyyy-MM-dd");
+  return formatInTimeZone(instant, normalizeTimezone(timezone), "yyyy-MM-dd");
 }
 
 export function isoWeekKey(timezone: string, instant: Date = new Date()): string {
-  return formatInTimeZone(instant, timezone, "RRRR-'W'II");
+  return formatInTimeZone(instant, normalizeTimezone(timezone), "RRRR-'W'II");
 }
 
 export function daysBetween(a: string, b: string): number {

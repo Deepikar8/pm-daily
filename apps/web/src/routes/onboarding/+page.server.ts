@@ -3,6 +3,7 @@ import type { Actions, PageServerLoad } from "./$types";
 import { getDb } from "$lib/server/db/client";
 import { users } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
+import { isValidTimezone } from "$lib/server/timezone/helpers";
 
 function safeNext(value: string | null): string {
   if (!value || !value.startsWith("/") || value.startsWith("//")) return "/today";
@@ -57,6 +58,11 @@ export const actions: Actions = {
     if (!accept)
       return fail(400, {
         error: "You must agree to the Terms and Privacy Policy.",
+        values,
+      });
+    if (!isValidTimezone(timezone))
+      return fail(400, {
+        error: "Use a valid timezone like Asia/Kolkata, America/New_York, or Europe/London.",
         values,
       });
 
