@@ -10,14 +10,17 @@ The lennysdata MCP archive (the upstream of record) does not itself carry Lenny 
 
 ## Scope
 
-Four files under `apps/web/content/`:
+Five files under `apps/web/content/`:
 
-| File | Guest | Current `source_url` |
-|---|---|---|
-| `2026-05-20.json` | Elena Verna (4.0) | *(missing)* |
-| `2026-05-22.json` | Stewart Butterfield | `youtube.com/watch?v=kLe-zy5r0Mk` |
-| `2026-05-24.json` | Molly Graham | `youtube.com/watch?v=twzLDx9iers` |
-| `2026-05-26.json` | Jeanne DeWitt Grosser | `youtube.com/watch?v=RmnWHz8HD74` |
+| File | Guest | Current `source_url` | Status |
+|---|---|---|---|
+| `2026-05-16.json` | Jason Cohen | `youtube.com/watch?v=8xLquwfx6p0` | Past — already shipped, visible today |
+| `2026-05-20.json` | Elena Verna (4.0) | *(missing)* | Future |
+| `2026-05-22.json` | Stewart Butterfield | `youtube.com/watch?v=kLe-zy5r0Mk` | Future |
+| `2026-05-24.json` | Molly Graham | `youtube.com/watch?v=twzLDx9iers` | Future |
+| `2026-05-26.json` | Jeanne DeWitt Grosser | `youtube.com/watch?v=RmnWHz8HD74` | Future |
+
+`2026-05-08.json` (Madhavan Ramanujam) uses `lennyspodcast.com/<slug>` — a valid hosted-podcast page on a separate Lenny-owned domain. Not in scope: it works as a source link. The two valid host patterns are `lennysnewsletter.com/p/<slug>` and `lennyspodcast.com/<slug>`; both are acceptable destinations for the fix.
 
 For each file, two locations must be updated:
 
@@ -30,10 +33,12 @@ Additionally, `search_url` is currently the generic `lennysnewsletter.com/podcas
 
 For each guest:
 
-1. WebFetch `https://www.lennysnewsletter.com/podcast` and search the page text for the guest's name to find the episode entry.
-2. If the listing page link does not resolve directly, derive a slug candidate from the episode title in the JSON file (e.g. "Slack founder: Mental models for building products people love ft. Stewart Butterfield" → `slack-founder-mental-models-for-building-products-people-love`) and fetch `https://www.lennysnewsletter.com/p/<slug>`. Lenny's published slugs are often truncated, so try the first 6-8 hyphenated tokens of the title before falling back.
-3. Verify the resolved URL with an HTTP HEAD or equivalent — must return 200.
-4. Update both `source.source_url` and every `questions[*].citation.source_url` in the file to the verified URL. Also update both `search_url` fields to the same canonical URL.
+1. WebFetch `https://www.lennysnewsletter.com/podcast` and `https://www.lennyspodcast.com/` and search the returned page text for the guest's name to find the episode entry. Also try `https://www.lennyspodcast.com/<guest-slug>` (the guest-name slug pattern used by `2026-05-08.json`).
+2. If the listing page does not yield a direct link, derive a slug candidate from the episode title in the JSON file (e.g. "Slack founder: Mental models for building products people love ft. Stewart Butterfield" → `slack-founder-mental-models-for-building-products-people-love`) and try `https://www.lennysnewsletter.com/p/<slug>`. Lenny's published slugs are often truncated; try the first 6-8 hyphenated tokens of the title before falling back.
+3. Verify the resolved URL in two steps, both required:
+   - `curl -sI -o /dev/null -w "%{http_code}\n" <url>` returns `200` (or `301`/`302` followed to a `200` via `-L`).
+   - A second WebFetch on the resolved URL is asked: "Does this page describe a Lenny's Newsletter or Lenny's Podcast episode featuring `<guest name>`?" The answer must be yes. A 200 alone is not sufficient — the slug heuristic can return a real but wrong page.
+4. Update `source.source_url`, every `questions[*].citation.source_url`, and both `search_url` fields in the file to the verified URL.
 
 ## Fallback
 

@@ -94,7 +94,7 @@ At each stage gate, the implementation plan presents the diff against v1.0, the 
 
 ## Risks
 
-- **Validator failure rate may rise.** Stricter rules → more candidates rejected in Pass 2 → more Pass-3 retries → longer and more expensive nightly runs. Accept up to ~2× cost. If a stage breaches that, dial back the strictest rule of that stage (most likely Rule 2's ±5-word parity).
+- **Validator failure rate may rise.** Stricter rules → more candidates rejected in Pass 2 → more Pass-3 retries → longer and more expensive nightly runs. Cost and retry-rate thresholds are owned by Spec C's gate table — see there for the actual numbers and stage-by-stage applicability. If a stage breaches those thresholds, dial back the strictest rule of that stage (most likely Rule 2's ±5-word parity).
 - **Subjectivity of "defensibly close."** Rule 3 is judgment-heavy. Mitigation: Pass-2 must articulate the framework reason a distractor is wrong; if it cannot, the distractor is not yet doing its job. This shifts the subjectivity from a binary call to a written-justification gate.
 - **Second-order questions invite trick perception.** Rule 4 is the riskiest for fairness. Mitigation: the explanation must clearly state how literal application would have misled, so a reader who got it wrong learns the distinction and does not feel tricked.
 
