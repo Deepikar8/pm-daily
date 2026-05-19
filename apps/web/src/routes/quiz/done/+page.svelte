@@ -356,7 +356,11 @@
       <ShareChallengeActions
         correct={data.attempt.totalCorrect}
         date={data.date}
+        points={data.scoreBreakdown.totalPoints}
         rank={data.rank}
+        lessonTitle={data.source?.title ?? data.source?.headline ?? ""}
+        operatorName={data.source?.byline ?? ""}
+        sourceLabel={data.source?.type === "podcast" ? "Lenny's Podcast" : "Lenny's Newsletter"}
         url={data.shareUrl}
         source="quiz_done"
       />

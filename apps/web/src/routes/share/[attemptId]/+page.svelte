@@ -106,10 +106,15 @@
       Practice this insight
     </a>
     <ShareChallengeActions
-      correct={data.result.totalCorrect}
-      date={data.date}
-      url={data.absoluteUrl}
-      source="public_share_page"
+        correct={data.result.totalCorrect}
+        date={data.date}
+        points={data.result.totalPoints}
+        rank={data.result.rank}
+        lessonTitle={data.session.headline}
+        operatorName={data.session.sourceByline}
+        sourceLabel={data.session.sourceType === "podcast" ? "Lenny's Podcast" : "Lenny's Newsletter"}
+        url={data.absoluteUrl}
+        source="public_share_page"
     />
   </div>
 </main>

@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { formatShareDate, resultShareHeadline, resultShareText } from "../../src/lib/brand/share";
+import {
+  formatShareDate,
+  normalizeShareTakeaway,
+  resultShareHeadline,
+  resultShareText,
+} from "../../src/lib/brand/share";
 
 describe("result sharing copy", () => {
   it("frames sharing as practice first and includes the score", () => {
@@ -10,8 +15,38 @@ describe("result sharing copy", () => {
 
   it("includes rank when present", () => {
     expect(resultShareHeadline({ correct: 5, date: "2026-05-13", rank: 2 })).toContain(
-      "preview rank #2",
+      "#2 this week",
     );
+  });
+
+  it("includes lesson and operator when available", () => {
+    const copy = resultShareText({
+      correct: 4,
+      date: "2026-05-19",
+      lessonTitle: "Introducing the GAIN Framework for feedback",
+      operatorName: "Jack Cohen",
+      sourceLabel: "Lenny's Newsletter",
+    });
+
+    expect(copy).toContain("Today’s lesson: Introducing the GAIN Framework for feedback");
+    expect(copy).toContain("Operator: Jack Cohen via Lenny's Newsletter");
+  });
+
+  it("omits takeaway text when no takeaway is shared", () => {
+    expect(resultShareText({ correct: 4, date: "2026-05-19" })).not.toContain("My takeaway");
+  });
+
+  it("includes takeaway only when the user shares one", () => {
+    expect(
+      resultShareText({ correct: 4, date: "2026-05-19", takeaway: "Anchor feedback in a shared goal." }),
+    ).toContain("My takeaway: Anchor feedback in a shared goal.");
+  });
+
+  it("normalizes shared takeaway text for URLs and cards", () => {
+    expect(normalizeShareTakeaway("  Anchor\nfeedback\tin a shared goal.  ")).toBe(
+      "Anchor feedback in a shared goal.",
+    );
+    expect(normalizeShareTakeaway("x".repeat(200))).toHaveLength(160);
   });
 
   it("explains what Product Gym is", () => {

@@ -1,19 +1,27 @@
 <script lang="ts">
   import { browser } from "$app/environment";
   import { Copy, MessageCircle, Share2 } from "lucide-svelte";
-  import { resultShareText } from "$lib/brand/share";
+  import { normalizeShareTakeaway, resultShareText } from "$lib/brand/share";
   import { track } from "$lib/analytics/client";
 
   let {
     correct,
     date,
     rank = null,
+    points = null,
+    lessonTitle = "",
+    operatorName = "",
+    sourceLabel = "",
     url,
     source,
   }: {
     correct: number;
     date: string;
     rank?: number | null;
+    points?: number | null;
+    lessonTitle?: string | null;
+    operatorName?: string | null;
+    sourceLabel?: string | null;
     url: string;
     source: string;
   } = $props();
@@ -21,13 +29,32 @@
   let copied = $state(false);
   let failed = $state(false);
   let absoluteUrl = $state("");
+  let takeawayDraft = $state("");
 
   $effect(() => {
     if (browser) absoluteUrl = new URL(url, window.location.origin).toString();
   });
 
-  const shareUrl = $derived(absoluteUrl || url);
-  const text = $derived(resultShareText({ correct, date, rank }));
+  const sharedTakeaway = $derived(normalizeShareTakeaway(takeawayDraft));
+  const shareUrl = $derived.by(() => {
+    const base = absoluteUrl || url;
+    if (!browser || !sharedTakeaway) return base;
+    const withTakeaway = new URL(base, window.location.origin);
+    withTakeaway.searchParams.set("takeaway", sharedTakeaway);
+    return withTakeaway.toString();
+  });
+  const text = $derived(
+    resultShareText({
+      correct,
+      date,
+      rank,
+      points,
+      lessonTitle,
+      operatorName,
+      sourceLabel,
+      takeaway: sharedTakeaway,
+    }),
+  );
   const invite = $derived(`${text}\n${shareUrl}`);
   const linkedInUrl = $derived(
     `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
@@ -52,6 +79,17 @@
 </script>
 
 <div class="flex flex-col gap-2">
+  <label for="share-takeaway" class="sans text-[11px] font-bold tracking-widest uppercase text-ink-mute">
+    Add your takeaway
+  </label>
+  <textarea
+    id="share-takeaway"
+    bind:value={takeawayDraft}
+    maxlength="160"
+    rows="2"
+    placeholder="Optional: what are you taking back to work?"
+    class="sans w-full resize-none bg-white text-ink border-2 border-ink rounded-xl px-3 py-2.5 text-[13px] leading-snug outline-none focus:border-accent"
+  ></textarea>
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
     <button
       type="button"

@@ -13,6 +13,9 @@ declare global {
     interface Platform {
       env: {
         DB: D1Database;
+        ASSETS: {
+          fetch(request: Request | string): Promise<Response>;
+        };
         KV: KVNamespace;
         VECTORIZE: VectorizeIndex;
         QUIZ_SESSION: DurableObjectNamespace;

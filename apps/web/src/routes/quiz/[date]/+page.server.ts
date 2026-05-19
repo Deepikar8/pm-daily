@@ -68,6 +68,9 @@ export const load: PageServerLoad = async ({ locals, platform, params, url, cook
     return { date, missing: true as const, mode, sessionId };
   }
   const state = (await initRes.json()) as QuizState;
+  if (state.submitted && mode !== "practice") {
+    throw redirect(302, `/quiz/${date}/done`);
+  }
   const answers = Array.isArray(state.answers) ? state.answers : [];
   const correctRows = answers.length
     ? await db
