@@ -76,23 +76,17 @@ Each stage is its own commit.
 
 ## Validation gate between stages
 
-For each version, run the prompt against a fixed golden source — suggest the Cat Wu episode, since `docs/pipeline-demo/cat-wu-2026-04-23/` already contains the full v1.0 pipeline trace including a final `99-final-content.json` to diff against.
+Each stage is gated by the eval harness defined in `2026-05-19-quiz-generation-evals-design.md` (Spec C), which scores six fixed sources across mechanical, LLM-judge, and cost/latency layers.
 
-A stage passes the gate when all four of these hold:
+For each version, run:
 
-1. The new rule's outputs are present (rule-specific check below).
-2. Pass-2 validator-failure count is no more than 2× the v1.0 baseline on the same source.
-3. Pass-3 retry count is no more than 1.5× the v1.0 baseline on the same source.
-4. Spot-read of the five final questions: they feel harder to a human PM than the v1.0 output.
+```bash
+pnpm eval --version=vX.Y
+```
 
-Rule-specific checks:
+The run writes `eval-runs/<timestamp>-vX.Y/summary.md` with a per-threshold go/no-go verdict. A stage advances only when every threshold defined in Spec C's "Gate thresholds per Spec B stage" table passes for that version. A human spot-read of one or two generated quizzes per stage stays in the loop as a sanity check, but the harness is what decides the gate.
 
-- v1.1: zero scenario stems name a framework element (grep each stem for any element name from the Pass-0 thesis brief).
-- v1.2: for every question, the word count of the correct option is less than or equal to the maximum word count among the three distractors.
-- v1.3: every question's `self_review_concerns` includes a sentence identifying which distractor is "defensibly close" and stating the framework-based reason it is wrong.
-- v1.4: at least one of the five final questions has a `self_review_concerns` entry beginning with `"second-order:"`.
-
-If any check fails at a stage, fix that stage only. Do not advance to the next rule until the current stage is green.
+If any threshold fails at a stage, fix that stage only — do not advance to the next rule until the current stage is green. If the failure is a borderline judge-score (within 0.2 of threshold), re-run once before treating it as a fail, per Spec C's variance handling.
 
 ## Decision authority
 
